@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="header.thyme::head">
+    <title>Asiel's Blog</title>
+</head>
+<body onload="prettyPrint()">
+
+<div id="wrap">
+    <div th:replace="menu.thyme::menu"></div>
+
+    <div class="container">
+        <div class="mt-4 text-center">
+            <h1>
+                Cool things are coming soon
+            </h1>
+            <h1>
+                Stay tuned for more!
+            </h1>
+        </div>
+
+        <p class="mt-3">
+            <img class="faded img-fluid rounded mx-auto d-block"
+                 style="max-height: 30rem;"
+                 src="/img/sketch_madrid.jpg"
+                 alt="Sketch of Madrid">
+        </p>
+    </div>
+</div>
+
+<div th:replace="footer.thyme::footer"></div>
+</body>
+</html>
