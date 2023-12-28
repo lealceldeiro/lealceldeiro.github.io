@@ -1,0 +1,89 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div th:fragment="footer">
+    <div id="push"></div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <span class="mb-3 mb-md-0 text-muted">Asiel Leal Celdeiro &copy; <span
+                        th:text='${#dates.format(published_date,"yyyy")}'></span></span>
+                <span class="mb-3 mb-md-0 text-muted">
+                    &nbsp;| <a class="text-muted link-underline link-underline-opacity-0" href="/legal.html">Legal</a>
+                </span>
+                <span class="mb-3 mb-md-0 text-muted">
+                    &nbsp;| <a class="text-muted link-underline link-underline-opacity-0" href="/privacy.html">Privacy</a>
+                </span>
+                <span class="mb-3 mb-md-0 text-muted">
+                    &nbsp;| <a class="text-muted link-underline link-underline-opacity-0" href="/terms.html">Terms</a>
+                </span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="text-muted" href="mailto:asielpro@pm.me" target="_blank">
+                        <i class="bi bi-envelope-at-fill"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://linkedin.com/in/lealceldeiro" target="_blank">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted"  href="https://github.com/lealceldeiro" target="_blank">
+                        <i class="bi bi-github"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://twitter.com/lealceldeiro" target="_blank">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://www.youtube.com/@AsielLealCeldeiro" target="_blank">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://www.facebook.com/lealceldeiro/" target="_blank">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://www.instagram.com/lealceldeiro/" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://www.threads.net/@lealceldeiro" target="_blank">
+                        <i class="bi bi-threads"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"
+            integrity="sha512-SFaNb3xC08k/Wf6CRM1J+O/vv4YWyrPBSdy0o+1nqKzf+uLrIBnaeo8aYoAAOd31nMNHwX8zwVwTMbbCJjA8Kg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+            integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"
+            integrity="sha512-/9uQgrROuVyGVQMh4f61rF2MTLjDVN+tFGn20kq66J+kTZu/q83X8oJ6i4I9MCl3psbB5ByQfIwtZcHDHc2ngQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+</div>
+</body>
+</html>
