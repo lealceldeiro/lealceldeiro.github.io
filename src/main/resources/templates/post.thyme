@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="header.thyme::head"></head>
+<body onload="prettyPrint()">
+<div id="wrap">
+    <div th:replace="menu.thyme::menu"></div>
+    <div class="container">
+
+        <div class="page-header mt-4">
+            <h1 th:text='${content.title}'></h1>
+        </div>
+
+        <p><em th:text='${#dates.format(content.date,"dd MMMM yyyy")}'></em></p>
+
+        <p class="mt-3" th:utext='${content.body}'></p>
+
+        <th:block th:with="postTags = ${#strings.arraySplit(content.tags,',')}">
+            <div th:if="*{#arrays.length(postTags) > 0}">
+
+                <th:block th:each="pTag, itStat : *{postTags}">
+                    <th:block th:with="tagVal = (*{itStat.first} ? *{#strings.trim(#strings.substring(pTag, 1))}
+                                                                 : (*{!itStat.last} ? *{#strings.trim(pTag)}
+                                                                    : *{#strings.trim(#strings.substring(pTag, 0, #strings.length(pTag) - 1))}))">
+                        <a class="btn btn-light"
+                           th:href="*{content.rootpath + 'tags/' + #strings.trim(tagVal) + '.html'}">
+                            <i class="bi bi-tag-fill"></i>
+                            <span th:text="*{#strings.trim(tagVal)}"></span>
+                        </a>
+                    </th:block>
+                </th:block>
+
+            </div>
+        </th:block>
+
+    </div>
+
+</div>
+<div th:replace="footer.thyme::footer"></div>
+</body>
+</html>
