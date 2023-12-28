@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="header.thyme::head"></head>
+	<body onload="prettyPrint()">
+
+	<div id="wrap">
+		<div th:replace="menu.thyme::menu"></div>
+
+		<div class="container">
+	
+			<div class="page-header mt-4">
+				<h1 th:text='${content.title}'>title</h1>
+			</div>
+		
+			<p class="mt-3" th:utext='${content.body}'>body</p>
+		</div>
+	</div>
+
+	<div th:replace="footer.thyme::footer"></div>
+    </body>
+</html>
