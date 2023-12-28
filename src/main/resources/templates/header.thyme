@@ -1,0 +1,92 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-transitional-thymeleaf-4.dtd">
+<html lang="en">
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <title th:with="title=(${content.title != null} ? ${content.title} : 'Asiel\'s Blog')" th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Asiel's Blog"/>
+    <meta name="author" content="Asiel Leal Celdeiro"/>
+    <meta name="keywords" content="blog java software engineer"/>
+    <meta name="generator" content="JBake"/>
+
+    <!-- Le styles -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.css"
+          integrity="sha512-2NanebgvwysfKr2dGfxf2PZg6hSkvRfyjlNzvyiJve04/zEfjWVI8F2mOLlLIOkcQUwHmoDu2G2wFi53JJQ4ww=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+          integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"
+          integrity="sha512-PW9BfYtoXV6XYb/4FTkBoJEBM92TrGk7N324cCmF5i2dY02YvBg6ZPEAnSOZ5i2/nGPbsYFQwVzDxVVoWEKWww=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
+
+    <!-- last to be included to override defaults -->
+    <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath}+'css/base.css'"
+          rel="stylesheet"/>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"
+            integrity="sha512-UDJtJXfzfsiPPgnI5S1000FPLBHMhvzAMX15I+qG2E2OAzC9P1JzUwJOfnypXiOH7MRPaqzhPbBGDNNj7zBfoA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon" sizes="57x57"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-57x57.png'">
+    <link rel="apple-touch-icon" sizes="60x60"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-60x60.png'">
+    <link rel="apple-touch-icon" sizes="72x72"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-72x72.png'">
+    <link rel="apple-touch-icon" sizes="76x76"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-76x76.png'">
+    <link rel="apple-touch-icon" sizes="114x114"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-114x114.png'">
+    <link rel="apple-touch-icon" sizes="120x120"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-120x120.png'">
+    <link rel="apple-touch-icon" sizes="144x144"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-144x144.png'">
+    <link rel="apple-touch-icon" sizes="152x152"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-152x152.png'">
+    <link rel="apple-touch-icon" sizes="180x180"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/apple-icon-180x180.png'">
+    <link rel="icon" type="image/png" sizes="192x192"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/android-icon-192x192.png'">
+    <link rel="icon" type="image/png" sizes="32x32"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/favicon-32x32.png'">
+    <link rel="icon" type="image/png" sizes="96x96"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/favicon-96x96.png'">
+    <link rel="icon" type="image/png" sizes="16x16"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/favicon-16x16.png'">
+    <link rel="manifest"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + '/img/fav/manifest.json'">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+</html>
