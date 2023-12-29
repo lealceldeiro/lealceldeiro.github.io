@@ -34,6 +34,10 @@
           th:href="${rootpath}+'css/base.css'"
           rel="stylesheet"/>
 
+    <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath}+'css/timeline.css'"
+          rel="stylesheet"/>
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"
