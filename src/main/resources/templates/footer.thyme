@@ -38,6 +38,11 @@
                     </a>
                 </li>
                 <li class="ms-3">
+                    <a class="text-muted"  href="http://stackoverflow.com/users/5640649/lealceldeiro" target="_blank">
+                        <i class="bi bi-stack-overflow"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
                     <a class="text-muted" href="https://twitter.com/lealceldeiro" target="_blank">
                         <i class="bi bi-twitter-x"></i>
                     </a>
