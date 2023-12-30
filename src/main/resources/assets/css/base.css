@@ -22,8 +22,3 @@ body {
 .container .credit {
   margin: 20px 0;
 }
-
-img.faded {
-  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-}
