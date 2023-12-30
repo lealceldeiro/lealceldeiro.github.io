@@ -1,0 +1,16 @@
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/" # Location of the pom.xml file
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "buid (Maven)"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "buid (github-actions)"
