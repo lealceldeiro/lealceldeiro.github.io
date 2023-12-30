@@ -10,21 +10,159 @@
     <div th:replace="menu.thyme::menu"></div>
 
     <div class="container">
-        <div class="mt-4 text-center">
-            <h1>
-                Cool things are coming soon
-            </h1>
-            <h1>
-                Stay tuned for more!
-            </h1>
-        </div>
+        <main>
+            <div class="position-relative overflow-hidden p-3 text-center">
+                <div class="col-md-6 p-lg-5 mx-auto">
+                    <h3 class="display-3 text-muted fw-medium">Let's talk</h3>
+                    <h2 class="display-4 fw-bold">Software Development</h2>
+                    <h3 class="fw-normal text-muted mb-3">Technical knowledge, personal experiences, and more</h3>
+                    <div class="d-flex gap-3 justify-content-center lead fw-normal">
+                        <span>
+                            <i class="bi bi-box-arrow-in-down-right"></i>
+                            <a class="icon-link text-muted link-underline link-underline-opacity-0"
+                               href="/articles.html">
+                            Articles
+                        </a>
+                        </span>
+                        <span>
+                            <i class="bi bi-person-fill-add"></i>
+                            <a class="icon-link text-muted link-underline link-underline-opacity-0"
+                               href="/about.html">
+                            About me
+                        </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="product-device shadow-sm d-none d-md-block"></div>
+                <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+            </div>
+        </main>
 
-        <p class="mt-3">
-            <img class="faded img-fluid rounded mx-auto d-block"
-                 style="max-height: 30rem;"
-                 src="/img/sketch_madrid.jpg"
-                 alt="Sketch of Madrid">
-        </p>
+        <div class="container px-4 py-3 mb-4" id="icon-grid">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-envelope-at-fill text-muted" style="font-size:1.3rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="mailto:asielpro@pm.me"
+                               target="_blank">
+                                asielpro@pm.me
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-linkedin text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://linkedin.com/in/lealceldeiro"
+                               target="_blank">
+                                LinkedIn
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-github text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://github.com/lealceldeiro"
+                               target="_blank">
+                                GitHub
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-stack-overflow text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="http://stackoverflow.com/users/5640649/lealceldeiro"
+                               target="_blank">
+                                StackOverflow
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-twitter-x text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://twitter.com/lealceldeiro"
+                               target="_blank">
+                                (Twitter)
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-youtube text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://www.youtube.com/@AsielLealCeldeiro"
+                               target="_blank">
+                                YouTube
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-facebook text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://www.facebook.com/lealceldeiro/"
+                               target="_blank">
+                                Facebook
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-instagram text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://www.instagram.com/lealceldeiro/"
+                               target="_blank">
+                                Instagram
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-threads text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://www.threads.net/@lealceldeiro"
+                               target="_blank">
+                                Threads
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-lightbulb text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <div>
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                            <a class="text-muted link-underline link-underline-opacity-0"
+                               href="https://software.codidact.com/users/53229"
+                               target="_blank">
+                                Codidact
+                            </a>
+                        </h3>
+                        <!--<p>A paragraph could be placed here</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
