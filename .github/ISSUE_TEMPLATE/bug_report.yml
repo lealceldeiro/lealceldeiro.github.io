@@ -1,0 +1,43 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug] "
+labels: [ "bug" ]
+assignees:
+  - lealceldeiro
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: (optional) ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-is-the-bug
+    attributes:
+      label: What's the bug?
+      description: A clear and concise description of what the bug is.
+      placeholder: (required) ex. In the post "Running a Java program the third command line argument is wrong..."
+    validations:
+      required: true
+  - type: input
+    id: post-url
+    attributes:
+      label: Post URL
+      description: The post URL that contains the content showing this bug
+      placeholder: (optional) ex. https://lealceldeiro.github.io/blog/2024/how-to-run-a-java-program.html
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/lealceldeiro/lealceldeiro.github.io/blob/main/CODE_OF_CONDUCT.md)
+      options:
+      - label: I agree to follow this project's Code of Conduct
+        required: true
