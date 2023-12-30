@@ -67,6 +67,11 @@
                         <i class="bi bi-threads"></i>
                     </a>
                 </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://software.codidact.com/users/53229" target="_blank">
+                        <i class="bi bi-lightbulb"></i>
+                    </a>
+                </li>
             </ul>
         </footer>
     </div>
