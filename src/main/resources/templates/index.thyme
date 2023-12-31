@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="header.thyme::head">
-    <title>Asiel's Blog</title>
+    <title>Let's talk about Software Development</title>
 </head>
 <body onload="prettyPrint()">
 
@@ -14,7 +14,7 @@
             <div class="position-relative overflow-hidden p-3 text-center">
                 <div class="col-md-6 p-lg-5 mx-auto">
                     <h3 class="display-3 text-muted fw-medium">Let's talk</h3>
-                    <h2 class="display-4 fw-bold">Software Development</h2>
+                    <h1 class="display-4 fw-bold">Software Development</h1>
                     <h3 class="fw-normal text-muted mb-3">Technical knowledge, personal experiences, and more</h3>
                     <div class="d-flex gap-3 justify-content-center lead fw-normal">
                         <span>
