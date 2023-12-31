@@ -18,7 +18,7 @@
                     <h3 class="fw-normal text-muted mb-3">Technical knowledge, personal experiences, and more</h3>
                     <div class="d-flex gap-3 justify-content-center lead fw-normal">
                         <span>
-                            <i class="bi bi-box-arrow-in-down-right"></i>
+                            <i class="bi bi-book"></i>
                             <a class="icon-link text-muted link-underline link-underline-opacity-0"
                                href="/articles.html">
                             Articles
@@ -47,13 +47,13 @@
                             <a class="text-muted link-underline link-underline-opacity-0"
                                href="mailto:asielpro@pm.me"
                                target="_blank">
-                                asielpro@pm.me
+                                Email
                             </a>
                         </h3>
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-linkedin text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-linkedin text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-github text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-github text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-stack-overflow text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-stack-overflow text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-twitter-x text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-twitter-x text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-youtube text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-youtube text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-facebook text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-facebook text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-instagram text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-instagram text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-threads text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-threads text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-lightbulb text-muted" style="font-size:1.2rem;"></i>&nbsp;
+                    <i class="bi bi-lightbulb text-muted c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-muted link-underline link-underline-opacity-0"

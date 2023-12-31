@@ -22,3 +22,7 @@ body {
 .container .credit {
   margin: 20px 0;
 }
+
+.c-icon {
+  font-size: 1.2rem;
+}
