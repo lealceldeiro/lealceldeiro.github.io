@@ -31,3 +31,13 @@ body {
   max-width: 3.5rem;
   max-height: 2rem;
 }
+
+.stack-img-wider {
+  max-width: 3.5rem;
+  max-height: 2.5rem;
+}
+
+.stack-img-shorter {
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+}
