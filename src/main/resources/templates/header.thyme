@@ -10,7 +10,11 @@
     <meta name="keywords" th:content="${content.ogKeyworkds} ?: 'blog java software engineer software development'"/>
     <meta name="generator" content="JBake"/>
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" th:content="${content.ogType} ?: 'website'" />
+    <meta property="og:article:published_time" th:if="${content.ogArticlePublishedTime} != null" th:content="${content.ogArticlePublishedTime}" />
+    <meta property="og:article:modified_time" th:if="${content.ogArticleModifiedTime} != null" th:content="${content.ogArticleModifiedTime}" />
+    <meta property="og:article:author" th:if="${content.ogArticleAuthor} != null" th:content="${content.ogArticleAuthor}" />
+    <meta property="og:article:tag" th:if="${content.ogArticleTag} != null" th:content="${content.ogArticleTag}" />
     <meta property="og:locale" th:content="${content.ogLocale} ?: 'en_US'" />
     <meta property="og:url" th:content="${config.site_host} + (${content.uri} ?: '')">
     <meta property="og:image" th:content="${content.ogImg} ?: '/img/meta.jpg'">

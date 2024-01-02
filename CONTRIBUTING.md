@@ -51,3 +51,9 @@ As a standard, we're writing all posts files in HTML format (`.html`).
     + `ogKeyworkds` -> keywords
     + `ogLocale` -> locale
     + `ogImg` -> image
+    + `ogType` -> type (as a good practice this should be set to `article`)
+    + when `ogType` is set, then, these should be set too:
+      - `ogArticlePublishedTime` -> `article:published_time`
+      - `ogArticleModifiedTime` -> `article:modified_time`
+      - `ogArticleAuthor` -> `article:author`
+      - `ogArticleTag` -> `article:tag`
