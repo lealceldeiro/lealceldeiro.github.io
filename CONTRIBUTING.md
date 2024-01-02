@@ -46,12 +46,12 @@ As a standard, we're writing all posts files in HTML format (`.html`).
   * optionally, the `status` can be `draft` for work in progress
   * `summary`
   * optionally, you can define the following [Open Graph](https://ogp.me/) (_og_) _meta_ values
-    + `ogDesc` -> description (defaults to `summary`)
-    + `ogAuthor` -> author
-    + `ogKeyworkds` -> keywords
-    + `ogLocale` -> locale
-    + `ogImg` -> image
-    + `ogType` -> type (as a good practice this should be set to `article`)
+    + `ogDesc` -> `description` (defaults to `summary`)
+    + `ogAuthor` -> `author`
+    + `ogKeyworkds` -> `keywords`
+    + `ogLocale` -> `locale`
+    + `ogImg` -> `image`
+    + `ogType` -> `type` (as a good practice this should be set to `article`)
     + when `ogType` is set, then, these should be set too:
       - `ogArticlePublishedTime` -> `article:published_time`
       - `ogArticleModifiedTime` -> `article:modified_time`
