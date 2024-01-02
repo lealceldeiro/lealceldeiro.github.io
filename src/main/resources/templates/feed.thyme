@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:th="http://www.thymeleaf.org">
   <channel>
-    <title>Sodrid</title>
+    <title>Let's talk about Software Development</title>
     <link th:text='${config.site_host}'/>
     <atom:link th:href='${config.site_host+"/feed.xml"}' href="link" rel="self" type="application/rss+xml" />
-    <description>Sodrid latest content</description>
+    <description>Let's talk about Software Development - Latest content</description>
     <language>en-us</language>
     <pubDate th:text='${#dates.format(published_date,"EEE, d MMM yyyy HH:mm:ss Z")}'>pubdate</pubDate>
     <lastBuildDate th:text='${#dates.format(published_date,"EEE, d MMM yyyy HH:mm:ss Z")}'>lastbuilddate</lastBuildDate>
