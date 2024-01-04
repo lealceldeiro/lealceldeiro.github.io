@@ -75,46 +75,46 @@
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon" sizes="57x57"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-57x57.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-57x57.png'">
     <link rel="apple-touch-icon" sizes="60x60"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-60x60.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-60x60.png'">
     <link rel="apple-touch-icon" sizes="72x72"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-72x72.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-72x72.png'">
     <link rel="apple-touch-icon" sizes="76x76"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-76x76.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-76x76.png'">
     <link rel="apple-touch-icon" sizes="114x114"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-114x114.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-114x114.png'">
     <link rel="apple-touch-icon" sizes="120x120"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-120x120.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-120x120.png'">
     <link rel="apple-touch-icon" sizes="144x144"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-144x144.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-144x144.png'">
     <link rel="apple-touch-icon" sizes="152x152"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-152x152.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-152x152.png'">
     <link rel="apple-touch-icon" sizes="180x180"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/apple-icon-180x180.png'">
+          th:href="${rootpath} + 'img/fav/apple-icon-180x180.png'">
     <link rel="icon" type="image/png" sizes="192x192"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/android-icon-192x192.png'">
+          th:href="${rootpath} + 'img/fav/android-icon-192x192.png'">
     <link rel="icon" type="image/png" sizes="32x32"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/favicon-32x32.png'">
+          th:href="${rootpath} + 'img/fav/favicon-32x32.png'">
     <link rel="icon" type="image/png" sizes="96x96"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/favicon-96x96.png'">
+          th:href="${rootpath} + 'img/fav/favicon-96x96.png'">
     <link rel="icon" type="image/png" sizes="16x16"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/favicon-16x16.png'">
+          th:href="${rootpath} + 'img/fav/favicon-16x16.png'">
     <link rel="manifest"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + '/img/fav/manifest.json'">
+          th:href="${rootpath} + 'img/fav/manifest.json'">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
