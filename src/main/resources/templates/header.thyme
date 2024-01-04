@@ -9,7 +9,6 @@
           th:content="${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, market trends and more about software development. Its main author, Asiel Leal Celdeiro, is a seasoned Software Engineer with extensive experience in the IT industry and devoted to software development, new technologies and best practices.')"/>
     <meta name="author"
           th:content="${content.ogAuthor} ?: 'Asiel Leal Celdeiro'"/>
-    <!--TODO-->
     <meta name="keywords"
           th:content="${#strings.equals('post', content.type) && (content.ogArticleTags != null || content.tags != null)}
                       ? *{#strings.substring((content.ogArticleTags != null ? content.ogArticleTags : content.tags), 1,
