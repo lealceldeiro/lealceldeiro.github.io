@@ -6,7 +6,7 @@
     <title th:text="${content.title} ?: 'Let\'s talk about Software Development'"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description"
-          th:content="${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, market trends and more about software development. Its main author, Asiel Leal Celdeiro, is a seasoned Software Engineer with extensive experience in the IT industry and devoted to software development, new technologies and best practices.')"/>
+          th:content="${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, market trends and more about software development.')"/>
     <meta name="author"
           th:content="${content.ogAuthor} ?: 'Asiel Leal Celdeiro'"/>
     <meta name="keywords"
