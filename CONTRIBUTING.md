@@ -36,7 +36,7 @@ Example `./mvnw jbake:inline`
 
 As a standard, we're writing all posts files in HTML format (`.html`).
 
-- Create the year of the post under the `blog` directory (if not already crated)
+- Create the year of the post under the `articles` directory (if not already crated)
 - Name the file according to the post name. i.e.: for a post called "Why Java?", the file could be called `why-java.html`
 - Define:
   * `title`
