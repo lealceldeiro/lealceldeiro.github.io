@@ -1,0 +1,127 @@
+title=The JDK
+type=post
+tags=java, jdk
+status=published
+summary=The Java Development Kit (JDK) is a development environment for building applications and components using the Java programming language. It includes tools useful for developing, testing, and monitoring such programs written in Java and running on the Java platform.
+
+ogAuthor=Asiel Leal Celdeiro
+~~~~~~
+
+<p>
+    The Java Development Kit (JDK) is a development environment for building applications and components using the
+    <a href="https://docs.oracle.com/en/java/index.html" target="_blank">Java</a>
+    programming language. It includes tools useful for developing, testing, and monitoring such programs written in Java
+    and running on the Java platform.
+</p>
+
+<p>
+    The available versions of the JDK can be checked on the official
+    <a href="https://docs.oracle.com/en/java/javase/index.html" target="_blank">oracle website</a>, where there's
+    detailed information about each specific release, along with instruction for their installation, and its
+    <a href="https://www.oracle.com/java/technologies/downloads/" target="_blank">download url</a>. Speaking of
+    instructions for installation, there's some nice tutorials in
+    <a href="https://dev.java/learn/getting-started/" target="_blank">dev.java</a> that walk us through each specific
+    step we must follow from the very beginning to get our first program up and running.
+</p>
+
+<p>
+    When we download the JDK archive, we can find inside configuration files, <em>C</em> header files, compiled java
+    modules, copyright and license files and additional libraries.
+</p>
+
+<h4>Key commands</h4>
+
+<p>The JDK provides several commands to work with our java programs. Some of them are:</p>
+
+<h5><code>javac</code></h5>
+<p>This command converts .java source files into .class bytecode.</p>
+<p>Let's suppose we have the following java class inside a file called <em>MyClass.java</em>:</p>
+<pre>
+public class MyClass {
+}
+</pre>
+<p>
+    Now, if we run <code>javac MyClass.java</code>, in the command line (at the same level the .java file is located),
+    we'll see that a file <em>MyClass.class</em> is created.
+</p>
+
+<h5><code>java</code></h5>
+<p>This one is used to execute the java program we write.</p>
+<p>
+    Following along with the previous example, let's now add some code that prints "Hello world" in console and exits.
+    First, let's modify the class to look like this:
+</p>
+<pre>
+public class MyClass {
+    public static void main(String[] args) {
+        System.out.println("Hello world");
+    }
+}
+</pre>
+<p>Now let's re-compile it to get the new changes into the bytecode file (<code>javac MyClass.java</code>).</p>
+<p>
+    Now we're ready to run it. Let's execute <code>java MyClass.class</code> from the command line (notice we provided
+    the compiled file as the argument &mdash;the .class file&mdash;). You should see "Hello world" printed in console.
+</p>
+<p>
+    As a side note, starting with Java 11, Java applications can be run without going through the compilation step, as
+    long as the program is written in a single file. So in the previous example, this would have worked as well:
+    <code>java MyClass</code>.
+</p>
+
+<h5><code>jar</code></h5>
+<p>This one is used mainly to package files together.</p>
+<p>
+    In our example, we could use it to create an archive called <em>MyProgram.jar</em>, that contains one class file,
+    <em>MyClass.class</em>, and set <code>MyClass</code> as the entry point. Like this:
+</p>
+<pre>
+    jar --create --file MyProgram.jar --main-class MyClass MyClass.class
+</pre>
+
+<p>
+    If you feel curious, you can run the program, as a jar file now, with <code>java -jar MyProgram.jar</code> and you
+    should see the exact same "Hello world" printed in console.
+</p>
+
+<h5><code>javadoc</code></h5>
+<p>
+    This command is used to generate the API documentation from Java source files as HTML pages.
+</p>
+<p>If we add a documentation comment to our previous <code>main</code> method like this:</p>
+<pre>
+public class MyClass {
+    /**
+     * Entry point for our application.
+     *
+     * @param args Program arguments.
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello world");
+    }
+}
+</pre>
+<p>
+    And now run <code>javadoc MyClass.java</code>, we can see all the HTML files created by the tool to include
+    our documentation.
+</p>
+
+<hr/>
+
+<p>
+    All of these commands and more are documented in details in the official documentation website. You should
+    definitely check it to get to know all the details about how to use them in you program.
+</p>
+
+<h4>
+    What about the JRE?
+</h4>
+
+<p>
+    JRE stands for Java Runtime Environment. It is a subset of the JDK that is not distributed anymore (
+    <a href="https://www.oracle.com/java/technologies/javase/11-relnote-issues.html"
+       target="_blank">starting with Java11
+    </a>
+    ). It only
+    contained the tools needed to <em>run</em> a Java application.
+</p>
