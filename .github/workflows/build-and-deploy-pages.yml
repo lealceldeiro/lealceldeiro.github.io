@@ -25,6 +25,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') }}
 
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs
     outputs:
@@ -36,21 +37,10 @@ jobs:
         run: |
           echo Latest commit: "${{ github.event.head_commit.message }}"
 
-      # https://docs.github.com/en/actions/learn-github-actions/expressions#endswith
-      # https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-environment-variable
-      - name: Check whether build or not
-        id: checkIfBuild
-        if: ${{ endsWith(github.event.head_commit.message, '[skip-ci]') }}
-        run: |
-          echo CI skipped
-          echo "skipCi=true" >> $GITHUB_ENV
-
       - name: Checkout
-        if: ${{ !env.skipCi }}
         uses: actions/checkout@v4
 
       - name: Setup JDK
-        if: ${{ !env.skipCi }}
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -58,18 +48,16 @@ jobs:
           cache: maven
 
       - name: Build
-        if: ${{ !env.skipCi }}
         run: ./mvnw -B jbake:generate --file pom.xml
 
       - name: Upload artifact
-        if: ${{ !env.skipCi }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./target
 
   # Deployment job
   deploy:
-    if: ${{ !steps.build.outputs.skipCi }}
+    if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
