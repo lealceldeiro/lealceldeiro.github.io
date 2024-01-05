@@ -56,11 +56,12 @@
     <meta name="twitter:image" th:content="${content.ogImg} ?: '/img/meta.jpg'">
 
     <!-- Le styles -->
+    <!--https://cdnjs.com/-->
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.css"
-          integrity="sha512-2NanebgvwysfKr2dGfxf2PZg6hSkvRfyjlNzvyiJve04/zEfjWVI8F2mOLlLIOkcQUwHmoDu2G2wFi53JJQ4ww=="
+          href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.min.css"
+          integrity="sha512-lb4ZuGfCVoGO2zu/TMakNlBgRA6mPXZ0RamTYgluFxULAwOoNnBIZaNjsdfhnlKlIbENaQbEAYEWxtzjkB8wsQ=="
           crossorigin="anonymous"
-          referrerpolicy="no-referrer"/>
+          referrerpolicy="no-referrer" />
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
