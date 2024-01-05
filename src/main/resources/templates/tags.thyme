@@ -14,11 +14,11 @@
 
 				<div class="mt-5 text-center">
 					<h2>
+						<span>Articles tagged:</span>
 						<span class="btn btn-light">
 							<span th:text="${tag}"></span>
 							<i class="bi bi-tag-fill"></i>
 						</span>
-						<span>posts</span>
 					</h2>
 				</div>
 
