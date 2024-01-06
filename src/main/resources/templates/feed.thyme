@@ -4,12 +4,20 @@
 
     <title>Let's talk about Software Development</title>
     <link th:text='${config.site_host}'/>
-    <atom:link th:href='${config.site_host + "rss.xml"}' href="link" rel="self" type="application/rss+xml" />
+    <atom:link th:href='${config.site_host} + ${config.feed_file}' href="link" rel="self" type="application/rss+xml" />
 
+    <!--https://www.rssboard.org/rss-specification-->
     <description>Latest content in Software Development: technical content, professional experiences, and more.</description>
     <language>en-us</language>
     <pubDate th:text='${#dates.format(published_date,"EEE, d MMM yyyy HH:mm:ss Z")}'></pubDate>
     <lastBuildDate th:text='${#dates.format(published_date,"EEE, d MMM yyyy HH:mm:ss Z")}'></lastBuildDate>
+    <ttl>2880</ttl>
+    <generator>JBake</generator>
+    <image>
+      <url th:text="${rootpath} + 'img/meta.jpg'"></url>
+      <title>Software Development</title>
+      <link th:text="${config.site_host}"/>
+    </image>
 
     <item th:each="post: ${published_posts}">
 
@@ -18,6 +26,8 @@
       <pubDate th:text='${#dates.format(post.date,"EEE, d MMM yyyy HH:mm:ss Z")}'></pubDate>
       <guid th:text='${post.uri}' isPermaLink="false"></guid>
       <description th:text='${#strings.escapeXml(post.body)}'></description>
+      <author th:if="${post.ogAuthor} != null" th:text="${post.ogAuthor}"></author>
+      <source th:attr="url=${config.site_host}"></source>
 
     </item>
 
