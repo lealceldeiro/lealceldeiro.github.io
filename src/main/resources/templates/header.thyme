@@ -63,6 +63,8 @@
                                                : (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, and more about software development.'))">
     <meta name="twitter:image" th:content="${content.ogImg} ?: '/img/meta.jpg'">
 
+    <link th:href="${config.site_host} + '/' + ${config.feed_file}" rel="self" type="application/rss+xml" />
+
     <!-- Le styles -->
     <!--https://cdnjs.com/-->
     <link rel="stylesheet"
