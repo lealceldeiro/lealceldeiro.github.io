@@ -32,25 +32,29 @@ been configured.
 
 Example `./mvnw jbake:inline`
 
-## Creating a post
+## Creating an article
 
-As a standard, we're writing all posts files in HTML format (`.html`).
+As a standard, we're writing all articles files in HTML format (`.html`).
 
-- Create the year of the post under the `articles` directory (if not already crated)
-- Name the file according to the post name. i.e.: for a post called "Why Java?", the file could be called `why-java.html`
+- Create the year of the article under the `articles` directory (if not already crated)
+- Name the file according to the article name. i.e.: for an article called "Why Java?", the file could be
+  called `why-java.html`
 - Define:
-  * `title`
-  * `date` (it can be a future date to keep the post in draft mode, if `status` is not `published`)
-  * `type=post`
-  * `tags` (separated by comma -- `,`)
-  * optionally, the `status` can be `draft` for work in progress
-  * `summary`
-  * optionally, you can define the following [Open Graph](https://ogp.me/) (_og_) _meta_ values
-    + `ogDesc` -> `description` (defaults to `summary`)
-    + `ogAuthor` -> `author`
-    + `ogKeyworkds` -> `keywords` (defaults to the post tags)
-    + `ogLocale` -> `locale`
-    + `ogImg` -> `image`
-    + `ogArticleModifiedTime` -> `article:modified_time` (defaults to the post date)
-    + `ogArticleAuthor` -> `article:author`
-    + `ogArticleTags` -> `article:tag` (defaults to the post tags)
+    * `title`
+    * `date` (it can be a future date to keep the article in draft mode, if `status` is not `published`)
+    * `type=post`
+    * `tags` (separated by comma -- `,`)
+    * optionally, the `status` can be `draft` for work in progress
+    * `summary`
+    * optionally, you can define the following [Open Graph](https://ogp.me/) (_og_) _meta_ values
+        + `ogDesc` -> `description` (defaults to `summary`)
+        + `ogAuthor` -> `author`
+        + `ogKeyworkds` -> `keywords` (defaults to the article tags)
+        + `ogLocale` -> `locale`
+        + `ogImg` -> `image`
+        + `ogArticleModifiedTime` -> `article:modified_time` (defaults to the article date)
+        + `ogArticleAuthor` -> `article:author`
+        + `ogArticleTags` -> `article:tag` (defaults to the article tags)
+
+When creating an article, if it's a work in progress, yuo can skip the pages build by appending `[skip-ci]` to the end
+of the commit message.
