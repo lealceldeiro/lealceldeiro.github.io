@@ -72,9 +72,9 @@ class Animal {
 <h3>Structure</h3>
 
 <p>
-    Let's use the
+    Let's use the chapter about classes from the
     <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html" target="_blank">
-        chapter about classes from the JLS
+        Java Language Specification (JLS) for Java 21
     </a>
     to understand the anatomy of a class in Java.
     Notice you may want to check the
@@ -96,7 +96,8 @@ class Animal {
 
 <ul>
     <li>
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassModifier" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassModifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>{ClassModifier}</code>
         </a>
         is one of: <code>public</code>, <code>protected</code>, <code>private</code>, <code>abstract</code>,
@@ -106,7 +107,8 @@ class Animal {
     <li><code>class</code> is the Java keyword used to specify we're declaring a class.</li>
 
     <li>
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-TypeIdentifier" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-TypeIdentifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>TypeIdentifier</code>
         </a>
         is the name we want to give the class. In our previous example we used <code>Animal</code>.
@@ -114,37 +116,44 @@ class Animal {
 
     <li>
         <!--https://en.wikipedia.org/wiki/List_of_typographical_symbols_and_punctuation_marks-->
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-TypeParameters" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-TypeParameters" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>[TypeParameters]</code>
         </a>
-        is a collection of <em>types</em> (
+        is a collection of <em>types</em> (see
         <a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" target="_blank">
             <em>generics</em>
         </a>
-        ) we can define withing angle brackets (<code><></code>). For instance, <code>&lt;T&gt;</code>.
+        and
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.2" target="_blank">JLS</a>)
+        we can define withing angle brackets (<code>&lt;&gt;</code>). For instance, <code>&lt;T&gt;</code>.
     </li>
 
     <li>
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassExtends" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassExtends" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>[ClassExtends]</code>
         </a>
         is the portion of the class declaration where we can specify, after the keyword <code>extends</code>, the class
-        from which our class is a direct child (descendant, inheritor). For instance, <code>extends LivingBeing</code>.
+        (if any) from which our class is a direct child (descendant, inheritor). For instance,
+        <code>extends LivingBeing</code>.
     </li>
 
     <li>
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassImplements" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassImplements" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>[ClassImplements]</code>
         </a>
         is the portion of the class declaration where we can list, after the keyword <code>implements</code>, the
         <a href="https://docs.oracle.com/javase/tutorial/java/concepts/interface.html" target="_blank">
             interfaces
         </a>
-        whose behavior our class implements. For instance, <code>implements MovingBeing, Eater</code>.
+        (if any) whose behavior our class implements. For instance, <code>implements MovingBeing, Eater</code>.
     </li>
 
     <li>
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassPermits" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassPermits" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>[ClassPermits]</code>
         </a>
         is used when the <code>sealed</code> modifier is specified, and it indicates, after the keyword
@@ -154,11 +163,12 @@ class Animal {
 
     <li>
         and,
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassBody" target="_blank">
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassBody" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>ClassBody</code>
         </a>,
         <!--https://www.compart.com/en/unicode/U+007D-->
-        is the <em>body</em> of our class, within curly braces (&lcub;&rcub;)..
+        is the <em>body</em> of our class, within curly braces (&lcub;&rcub;).
     </li>
 </ul>
 
@@ -169,9 +179,14 @@ class Animal {
 
 <h4>Attributes</h4>
 
-<h4>Constructor</h4>
 
 <h4>Methods</h4>
+
+<h4>Constructors</h4>
+
+<h4>Nested classes</h4>
+
+<h4>Nested interfaces</h4>
 
 <h2>The <em>.java</em> file</h2>
 
