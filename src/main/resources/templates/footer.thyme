@@ -12,13 +12,13 @@
                     2023 - <span th:text='${#dates.format(published_date,"yyyy")}'></span>
                 </span>
                 <span class="mb-3 mb-md-0 text-muted">
-                    &nbsp;| <a class="text-muted link-underline link-underline-opacity-0" href="/legal.html">Legal</a>
+                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/legal.html">Legal</a>
                 </span>
                 <span class="mb-3 mb-md-0 text-muted">
-                    &nbsp;| <a class="text-muted link-underline link-underline-opacity-0" href="/privacy.html">Privacy</a>
+                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/privacy.html">Privacy</a>
                 </span>
                 <span class="mb-3 mb-md-0 text-muted">
-                    &nbsp;| <a class="text-muted link-underline link-underline-opacity-0" href="/terms.html">Terms</a>
+                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/terms.html">Terms</a>
                 </span>
             </div>
 
