@@ -1,0 +1,104 @@
+title=Java classes and objects
+type=post
+date=2024-01-12
+tags=java, java-classes, oop, objects
+status=draft
+summary=A class is a concept from Object-Oriented Programming (OOP) that allows us to represent real-world concept and entities in our programs.
+
+ogAuthor=Asiel Leal Celdeiro
+~~~~~~
+
+<h2>What are Java classes and objects?</h2>
+
+<p>
+    To put it simple, a <strong>Java class</strong> is a "form of classification". It is a concept from
+    <em>Object-Oriented Programming (OOP)</em> that allows us to "classify" (or group together) a type of
+    <em>object(s)</em> &mdash;another concept from OOP&mdash;. An <strong>object</strong> represents a specific instance
+    of a class. With classes and objects we can represent real-world concepts and entities in our programs as well as
+    the interactions among them.
+</p>
+
+<p>
+    For instance, in a program called <em>ZooManager</em> we could have the following classes: <code>Animal</code>,
+    <code>Cage</code>, <code>Food</code>, and <code>ZooKeeper</code>. Likewise, the specific animals, cages, food and
+    zookeeper <em>instances</em> that are present in the Zoo would be the objects instantiated during the execution of
+    the program. In this case, examples of instances would be <code>teo</code> (a tiger), <code>cage1</code> (a cage),
+    <code>meat</code> (food), and <code>john</code> (a zookeeper).
+</p>
+
+<h3>How do we decide what classes to define in our program?</h3>
+
+<p>
+    Classes define common <em>properties</em> and <em>behaviors</em> for the objects they represent. For example, the
+    <code>Animal</code> class would have the following properties:
+</p>
+<ul>
+    <li><code>name</code></li>
+    <li><code>age</code></li>
+    <li><code>motionType</code></li>
+</ul>
+
+<p>and the following behaviors</p>
+<ul>
+    <li><code>move</code></li>
+    <li><code>eat</code></li>
+</ul>
+
+<p>
+    So, when we identify a collection of objects in our business domain that share the same properties and behaviors,
+    we are usually in the presence of a class to be defined in our program. Sometimes it can be obvious, like
+    knowing we'll need a class called <code>Animal</code> in our ZooManager program, but sometimes it's more difficult
+    to identify when we would benefit from the definition of a class. As we gain experience throughout the years, as
+    developers, it becomes easier to identify each case.
+</p>
+
+<h3>Syntax</h3>
+
+<p>
+    The simplest form of a class definition you could find is this:
+</p>
+
+<pre>
+class Animal {
+}
+</pre>
+
+<p>
+    But that class isn't very useful, is it? So, let's analyze everything we have in our power to declare and define our
+    own classes.
+</p>
+
+<h3>Structure</h3>
+
+<p>
+    Let's use the
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html" target="_blank">
+        chapter about classes from the JLS
+    </a>
+    to understand the anatomy of a class in Java.
+    Notice you may want to check the
+    <a href="https://docs.oracle.com/javase/specs/" target="_blank">
+        JLS specific to your java version
+    </a>
+    .
+</p>
+
+<h4>Attributes</h4>
+
+<h4>Constructor</h4>
+
+<h4>Methods</h4>
+
+<h2>The <em>.java</em> file</h2>
+
+<h3>Putting it all together</h3>
+
+<p>Let's see an example where we apply all the knowledge we've learned.</p>
+
+<h3>Could we implement our programs entirely without classes?</h3>
+
+<p>
+    Certainly. We don't need, technically speaking, to create our own classes to implement a business logic. But by
+    creating classes...
+    TODO
+</p>
