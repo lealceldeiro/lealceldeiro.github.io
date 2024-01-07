@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /img/logo/
+Disallow: /img/meta.jpg
+Disallow: /img/fav/
+Allow: /
+
+Sitemap: https://lealceldeiro.github.io/sitemap.xml
