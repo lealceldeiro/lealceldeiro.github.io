@@ -15,12 +15,12 @@ ogAuthor=Asiel Leal Celdeiro
     <em>Object-Oriented Programming (OOP)</em> that allows us to "classify" (or group together) a type of
     <em>object(s)</em> &mdash;another concept from OOP&mdash;. An <strong>object</strong> represents a specific instance
     of a class. With classes and objects we can represent real-world concepts and entities in our programs as well as
-    the interactions among them.
+    their interactions.
 </p>
 
 <p>
     For instance, in a program called <em>ZooManager</em> we could have the following classes: <code>Animal</code>,
-    <code>Cage</code>, <code>Food</code>, and <code>ZooKeeper</code>. Likewise, the specific animals, cages, food and
+    <code>Cage</code>, <code>Food</code>, and <code>ZooKeeper</code>. Likewise, the specific animal, cage, food and
     zookeeper <em>instances</em> that are present in the Zoo would be the objects instantiated during the execution of
     the program. In this case, examples of instances would be <code>teo</code> (a tiger), <code>cage1</code> (a cage),
     <code>meat</code> (food), and <code>john</code> (a zookeeper).
@@ -55,7 +55,8 @@ ogAuthor=Asiel Leal Celdeiro
 <h3>Syntax</h3>
 
 <p>
-    The simplest form of a class definition you could find is this:
+    The simplest form of a class definition in Java you could find is this (<code>Animal</code> could have been any
+    other name we define):
 </p>
 
 <pre>
@@ -64,7 +65,7 @@ class Animal {
 </pre>
 
 <p>
-    But that class isn't very useful, is it? So, let's analyze everything we have in our power to declare and define our
+    But that class isn't very useful, is it? So, let's see everything we have in our power to declare and define our
     own classes.
 </p>
 
@@ -81,6 +82,89 @@ class Animal {
         JLS specific to your java version
     </a>
     .
+</p>
+
+<p>Formally, this is the structure of a Java class:</p>
+
+<pre>
+{ClassModifier} class TypeIdentifier [TypeParameters] [ClassExtends] [ClassImplements] [ClassPermits] ClassBody
+</pre>
+
+<p>
+    Where
+</p>
+
+<ul>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassModifier" target="_blank">
+            <code>{ClassModifier}</code>
+        </a>
+        is one of: <code>public</code>, <code>protected</code>, <code>private</code>, <code>abstract</code>,
+        <code>static</code>, <code>final</code>, <code>sealed</code>, <code>non-sealed</code>, <code>strictfp</code>.
+    </li>
+
+    <li><code>class</code> is the Java keyword used to specify we're declaring a class.</li>
+
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-TypeIdentifier" target="_blank">
+            <code>TypeIdentifier</code>
+        </a>
+        is the name we want to give the class. In our previous example we used <code>Animal</code>.
+    </li>
+
+    <li>
+        <!--https://en.wikipedia.org/wiki/List_of_typographical_symbols_and_punctuation_marks-->
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-TypeParameters" target="_blank">
+            <code>[TypeParameters]</code>
+        </a>
+        is a collection of <em>types</em> (
+        <a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" target="_blank">
+            <em>generics</em>
+        </a>
+        ) we can define withing angle brackets (<code><></code>). For instance, <code>&lt;T&gt;</code>.
+    </li>
+
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassExtends" target="_blank">
+            <code>[ClassExtends]</code>
+        </a>
+        is the portion of the class declaration where we can specify, after the keyword <code>extends</code>, the class
+        from which our class is a direct child (descendant, inheritor). For instance, <code>extends LivingBeing</code>.
+    </li>
+
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassImplements" target="_blank">
+            <code>[ClassImplements]</code>
+        </a>
+        is the portion of the class declaration where we can list, after the keyword <code>implements</code>, the
+        <a href="https://docs.oracle.com/javase/tutorial/java/concepts/interface.html" target="_blank">
+            interfaces
+        </a>
+        whose behavior our class implements. For instance, <code>implements MovingBeing, Eater</code>.
+    </li>
+
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassPermits" target="_blank">
+            <code>[ClassPermits]</code>
+        </a>
+        is used when the <code>sealed</code> modifier is specified, and it indicates, after the keyword
+        <code>permits</code>, the other classes (if any) that are allowed to extend our class. For example,
+        <code>permits Tiger, Ostrich, Bear</code>.
+    </li>
+
+    <li>
+        and,
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassBody" target="_blank">
+            <code>ClassBody</code>
+        </a>,
+        <!--https://www.compart.com/en/unicode/U+007D-->
+        is the <em>body</em> of our class, within curly braces (&lcub;&rcub;)..
+    </li>
+</ul>
+
+<p>
+    We'll see in the next section what we can specify in the body of the class along with some examples where we can
+    see in practice all the parts described here.
 </p>
 
 <h4>Attributes</h4>
