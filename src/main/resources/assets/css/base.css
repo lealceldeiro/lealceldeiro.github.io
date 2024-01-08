@@ -42,6 +42,6 @@ body {
   max-height: 1.5rem;
 }
 
-#wrap.article p {
+#wrap.content-justify p {
   text-align: justify!important;
 }
