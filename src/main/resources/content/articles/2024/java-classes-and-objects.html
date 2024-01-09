@@ -21,9 +21,9 @@ ogAuthor=Asiel Leal Celdeiro
 <p>
     For instance, in a program called <em>ZooManager</em> we could have the following classes: <code>Animal</code>,
     <code>Cage</code>, <code>Food</code>, and <code>ZooKeeper</code>. Likewise, the specific animal, cage, food and
-    zookeeper <em>instances</em> that are present in the Zoo would be the objects instantiated during the execution of
-    the program. In this case, examples of instances would be <code>teo</code> (a tiger), <code>cage1</code> (a cage),
-    <code>meat</code> (food), and <code>john</code> (a zookeeper).
+    zookeeper <em>instances</em> that are present in the Zoo we're managing would be the objects instantiated during
+    the execution of the program. In this case, examples of instances would be <code>teo</code> (a tiger),
+    <code>cage1</code> (a cage), <code>meat</code> (food), and <code>john</code> (a zookeeper).
 </p>
 
 <h3>How do we decide what classes to define in our program?</h3>
@@ -34,14 +34,17 @@ ogAuthor=Asiel Leal Celdeiro
 </p>
 <ul>
     <li><code>name</code></li>
-    <li><code>age</code></li>
-    <li><code>motionType</code></li>
+    <li><code>energy</code></li>
 </ul>
 
 <p>and the following behaviors</p>
 <ul>
-    <li><code>move</code></li>
-    <li><code>eat</code></li>
+    <li>
+        <code>move</code> (if an animal moves, it consumes energy, the <code>energy</code> property decreases)
+    </li>
+    <li>
+        <code>eat</code> (if an animal eats, it recovers energy, the <code>energy</code> property increases)
+    </li>
 </ul>
 
 <p>
@@ -49,7 +52,7 @@ ogAuthor=Asiel Leal Celdeiro
     we are usually in the presence of a class to be defined in our program. Sometimes it can be obvious, like
     knowing we'll need a class called <code>Animal</code> in our ZooManager program, but sometimes it's more difficult
     to identify when we would benefit from the definition of a class. As we gain experience throughout the years, as
-    developers, it becomes easier to identify each case.
+    developers/software engineers, it becomes easier to identify each case.
 </p>
 
 <h3>Syntax</h3>
@@ -120,13 +123,12 @@ class Animal {
            class="link-underline link-underline-opacity-0">
             <code>[TypeParameters]</code>
         </a>
-        is a collection of <em>types</em> (see
-        <a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" target="_blank">
-            <em>generics</em>
-        </a>
-        and
-        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.2" target="_blank">JLS</a>)
-        we can define withing angle brackets (<code>&lt;&gt;</code>). For instance, <code>&lt;T&gt;</code>.
+        is a collection of <em>types</em> we can define withing angle brackets (<code>&lt;&gt;</code>). For instance,
+        <code>&lt;T&gt;</code>. See
+        <a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html"
+           target="_blank"><em>generics</em></a>
+        and <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.2" target="_blank">JLS</a>
+        for more info about this.
     </li>
 
     <li>
@@ -167,26 +169,190 @@ class Animal {
            class="link-underline link-underline-opacity-0">
             <code>ClassBody</code>
         </a>,
-        <!--https://www.compart.com/en/unicode/U+007D-->
-        is the <em>body</em> of our class, within curly braces (&lcub;&rcub;).
+        <!--https://www.compart.com/en/unicode/html-->
+        is the <em>body</em> of our class, within curly braces (&lcub;&rcub;). See next section.
     </li>
 </ul>
 
+<h4>Class body</h4>
+
 <p>
-    We'll see in the next section what we can specify in the body of the class along with some examples where we can
-    see in practice all the parts described here.
+    In short, this is the structure of the class body (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassBodyDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>{ClassBodyDeclaration}</code>
+    </a>):
+</p>
+<pre>
+{
+    ClassMemberDeclaration
+    InstanceInitializer
+    StaticInitializer
+    ConstructorDeclaration
+}
+</pre>
+<p>
+    Let's see what these elements are, along with some examples.
 </p>
 
-<h4>Attributes</h4>
+<h5>Members</h5>
 
+<p>
+    With <em>members</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassMemberDeclaration"
+       target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>ClassMemberDeclaration</code>
+    </a>
+    ), we refer to <em>fields</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-FieldDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>FieldDeclaration</code>
+    </a>
+    ) and <em>methods</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-MethodDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>MethodDeclaration</code>
+    </a>
+    ). These are the respective <em>properties</em> and <em>behaviors</em> that we were referring to initially.
+</p>
 
-<h4>Methods</h4>
+<h6>Fields</h6>
 
-<h4>Constructors</h4>
+<p>
+    Fields are properties, attributes that characterize our classes, they hold the state of the objects created from
+    our classes and are useful for storing the objects information during runtime.
+</p>
+<p>
+    We saw already some examples of properties for our mentioned <code>Animal</code> class. Now, let's see how we can
+    actually write that in our code. Let's enhance our <code>Animal</code> class with some fields:
+</p>
 
-<h4>Nested classes</h4>
+<pre>
+class Animal {
+    String name;
+    int energy;
+}
+</pre>
 
-<h4>Nested interfaces</h4>
+<h6>Methods</h6>
+
+<p>
+    Methods define the behavior of the objects, they specify what "actions" the objects can do during the execution
+    of our program, they define the
+    <a href="https://en.wikipedia.org/wiki/API" target="_blank">
+        API
+    </a>
+    through which we (technically speaking, other objects) can interact with them. They can do two things: return
+    information about the object, and/or modify it, that's it, modify the internal state of the object.
+</p>
+
+<p>
+    Let's see how we can define the actions our <code>Animal</code> objects can do:
+</p>
+
+<pre>
+class Animal {
+    String name;
+    int energy;
+
+    void move() {
+        energy--;
+        System.out.println(name + " moved");
+    }
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+</pre>
+
+<p>
+    In this example, the method <code>move</code> decreases the <em>energy</em> value and prints the name of the animal
+    that moved (i.e.: <code>teo moved</code>).
+</p>
+
+<p>
+    The method <code>eat</code> does the opposite: it increases the <em>energy</em> value, and also prints the name of
+    the animal that ate (i.e.: <code>teo ate</code>).
+</p>
+
+<h5>Constructors</h5>
+
+<p>
+    So far, we've talked a lot about Java classes, but not so much about the objects.
+</p>
+<p>
+    Just to make sure we understand the concept of <em>object</em>, if we were to make an analogy, we could say that
+    <em>Woman</em> is a class, while <em>Ana</em> is an object. Similarly, <em>Man</em> is a class, and <em>John</em>
+    is an object.
+</p>
+<p>
+    Now, let's see how we can create objects in our programs. Java provides us with something called
+    <em>constructors</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ConstructorDeclaration"
+       target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>ConstructorDeclaration</code>
+    </a>
+    ). They are a special piece of code inside the body of our class that allow us to <em>instantiate</em>,
+    <em>create</em> objects from a class definition.
+</p>
+
+<p>
+    This is the structure of the constructor. Pay special attention; it looks similar to a method, but it lacks return
+    type:
+</p>
+<pre>
+    {ConstructorModifier} ConstructorDeclarator [Throws] ConstructorBody
+</pre>
+
+<p>
+    Let's see it in action in our <code>Animal</code> class.
+</p>
+<pre>
+class Animal {
+    String name;
+    int energy;
+
+    Animal(String name) {
+        this.name = name;
+        energy = 100;
+    }
+
+    void move() {
+        energy--;
+        System.out.println(name + " moved");
+    }
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+</pre>
+
+<blockquote>
+    Actually, there are other ways to create objects, but, to keep it simple, they're not covered here. If you feel
+    curious about it, you can read more about
+    <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)"
+       target="_blank" class="link-underline link-underline-opacity-0">
+        <code>Class.forName(String className)</code>
+    </a>, the
+    <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()"
+       target="_blank" class="link-underline link-underline-opacity-0">
+        <code>Object.clone()</code>
+    </a>, and
+    <a href="https://docs.oracle.com/javase/tutorial/jndi/objects/serial.html"
+       target="_blank" class="link-underline link-underline-opacity-0">
+        <em>Deserialization</em>
+    </a>
+</blockquote>
+
+<h5>Nested classes</h5>
+
+<h5>Nested interfaces</h5>
 
 <h2>The <em>.java</em> file</h2>
 
