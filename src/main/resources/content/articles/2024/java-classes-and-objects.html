@@ -82,7 +82,7 @@ class Animal {
     to understand the anatomy of a class in Java.
     Notice you may want to check the
     <a href="https://docs.oracle.com/javase/specs/" target="_blank">
-        JLS specific to your java version
+        JLS specific to your Java version
     </a>
     .
 </p>
@@ -296,7 +296,7 @@ class Animal {
        class="link-underline link-underline-opacity-0">
         <code>ConstructorDeclaration</code>
     </a>
-    ). They are a special piece of code inside the body of our class that allow us to <em>instantiate</em>,
+    ). They are a "special" piece of code inside the body of our class that allow us to <em>instantiate</em>,
     <em>create</em> objects from a class definition.
 </p>
 
@@ -309,14 +309,14 @@ class Animal {
 </pre>
 
 <p>
-    Let's see it in action in our <code>Animal</code> class.
+    But, it can be better understood with an example, so let's see it in action in our <code>Animal</code> class.
 </p>
 <pre>
 class Animal {
     String name;
     int energy;
 
-    Animal(String name) {
+    Animal(String name) {   // <--Constructor added
         this.name = name;
         energy = 100;
     }
@@ -333,13 +333,16 @@ class Animal {
 }
 </pre>
 
-<blockquote>
+Here we've created a constructor that accepts a <code>name</code> argument and assigns it to the <code>name</code>
+field. It also initializes the <code>energy</code> field with a value of <code>100</code>.
+
+<blockquote class="text-muted">
     Actually, there are other ways to create objects, but, to keep it simple, they're not covered here. If you feel
     curious about it, you can read more about
     <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)"
        target="_blank" class="link-underline link-underline-opacity-0">
         <code>Class.forName(String className)</code>
-    </a>, the
+    </a>,
     <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()"
        target="_blank" class="link-underline link-underline-opacity-0">
         <code>Object.clone()</code>
@@ -347,7 +350,7 @@ class Animal {
     <a href="https://docs.oracle.com/javase/tutorial/jndi/objects/serial.html"
        target="_blank" class="link-underline link-underline-opacity-0">
         <em>Deserialization</em>
-    </a>
+    </a>.
 </blockquote>
 
 <h5>Nested classes</h5>
