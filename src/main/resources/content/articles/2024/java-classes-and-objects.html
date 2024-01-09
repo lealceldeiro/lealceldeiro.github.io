@@ -17,7 +17,6 @@ ogAuthor=Asiel Leal Celdeiro
     of a class. With classes and objects we can represent real-world concepts and entities in our programs as well as
     their interactions.
 </p>
-
 <p>
     For instance, in a program called <em>ZooManager</em> we could have the following classes: <code>Animal</code>,
     <code>Cage</code>, <code>Food</code>, and <code>ZooKeeper</code>. Likewise, the specific animal, cage, food and
@@ -61,7 +60,6 @@ ogAuthor=Asiel Leal Celdeiro
     The simplest form of a class definition in Java you could find is this (<code>Animal</code> could have been any
     other name we define):
 </p>
-
 <pre>
 class Animal {
 }
@@ -88,15 +86,11 @@ class Animal {
 </p>
 
 <p>Formally, this is the structure of a Java class:</p>
-
 <pre>
 {ClassModifier} class TypeIdentifier [TypeParameters] [ClassExtends] [ClassImplements] [ClassPermits] ClassBody
 </pre>
 
-<p>
-    Where
-</p>
-
+<p>Where</p>
 <ul>
     <li>
         <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassModifier" target="_blank"
@@ -170,7 +164,7 @@ class Animal {
             <code>ClassBody</code>
         </a>,
         <!--https://www.compart.com/en/unicode/html-->
-        is the <em>body</em> of our class, within curly braces (&lcub;&rcub;). See next section.
+        is the <em>body</em> of our class, including the curly braces (&lcub;&rcub;). See next section.
     </li>
 </ul>
 
@@ -191,6 +185,7 @@ class Animal {
     ConstructorDeclaration
 }
 </pre>
+
 <p>
     Let's see what these elements are, along with some examples.
 </p>
@@ -209,13 +204,29 @@ class Animal {
        class="link-underline link-underline-opacity-0">
         <code>FieldDeclaration</code>
     </a>
-    ) and <em>methods</em> (
+    ), <em>methods</em> (
     <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-MethodDeclaration" target="_blank"
        class="link-underline link-underline-opacity-0">
         <code>MethodDeclaration</code>
     </a>
-    ). These are the respective <em>properties</em> and <em>behaviors</em> that we were referring to initially.
+    ), <em>nested classes</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>ClassDeclaration</code>
+    </a>
+    ), and <em>nested interfaces</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>InterfaceDeclaration</code>
+    </a>
+    ).
+    The first two are the respective <em>properties</em> and <em>behaviors</em> that we were referring to initially.
+    The other two are covered in next sections, along with <code>InstanceInitializer</code> and
+    <code>StaticInitializer</code>.
+
 </p>
+
+<p>Let's see fields and methods.</p>
 
 <h6>Fields</h6>
 
@@ -227,7 +238,6 @@ class Animal {
     We saw already some examples of properties for our mentioned <code>Animal</code> class. Now, let's see how we can
     actually write that in our code. Let's enhance our <code>Animal</code> class with some fields:
 </p>
-
 <pre>
 class Animal {
     String name;
@@ -250,7 +260,6 @@ class Animal {
 <p>
     Let's see how we can define the actions our <code>Animal</code> objects can do:
 </p>
-
 <pre>
 class Animal {
     String name;
@@ -272,7 +281,6 @@ class Animal {
     In this example, the method <code>move</code> decreases the <em>energy</em> value and prints the name of the animal
     that moved (i.e.: <code>teo moved</code>).
 </p>
-
 <p>
     The method <code>eat</code> does the opposite: it increases the <em>energy</em> value, and also prints the name of
     the animal that ate (i.e.: <code>teo ate</code>).
@@ -280,9 +288,7 @@ class Animal {
 
 <h5>Constructors</h5>
 
-<p>
-    So far, we've talked a lot about Java classes, but not so much about the objects.
-</p>
+<p>So far, we've talked a lot about Java classes, but not so much about the objects.</p>
 <p>
     Just to make sure we understand the concept of <em>object</em>, if we were to make an analogy, we could say that
     <em>Woman</em> is a class, while <em>Ana</em> is an object. Similarly, <em>Man</em> is a class, and <em>John</em>
@@ -316,25 +322,19 @@ class Animal {
     String name;
     int energy;
 
-    Animal(String name) {   // <--Constructor added
+    Animal(String name) {   // &lt;-- Constructor added
         this.name = name;
         energy = 100;
     }
 
-    void move() {
-        energy--;
-        System.out.println(name + " moved");
-    }
-
-    void eat() {
-        energy++;
-        System.out.println(name + " ate");
-    }
+    // rest of the code omitted for brevity...
 }
 </pre>
 
-Here we've created a constructor that accepts a <code>name</code> argument and assigns it to the <code>name</code>
-field. It also initializes the <code>energy</code> field with a value of <code>100</code>.
+<p>
+    Here we've created a constructor that accepts a <code>name</code> argument and assigns it to the <code>name</code>
+    field. It also initializes the <code>energy</code> field with a value of <code>100</code>.
+</p>
 
 <blockquote class="text-muted">
     Actually, there are other ways to create objects, but, to keep it simple, they're not covered here. If you feel
@@ -353,9 +353,197 @@ field. It also initializes the <code>energy</code> field with a value of <code>1
     </a>.
 </blockquote>
 
+<p>
+    Up to here, we've defined the means to create an object of type <code>Animal</code>, but, how do we actually
+    instantiate one?
+</p>
+<p>
+    Simple, we use the
+    <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/objectcreation.html"
+       class="link-underline link-underline-opacity-0">
+        <code>new</code>
+    </a>
+    keyword.
+</p>
+<pre>
+    Animal teo = new Animal("Teo");
+</pre>
+
 <h5>Nested classes</h5>
 
+<p>
+    We've mentioned earlier that we can have nested classes, also known as
+    <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank">
+        inner classes
+    </a>
+    as a members of another class. But how does that actually look like? Well, it's quite simple once we have understood
+    fields and methods because their declaration follow the same principle: it's a code structure that "belongs" to the
+    class where they're declared. Let's see an example.
+</p>
+
+<p>
+    Let's suppose we want to represent each part of the body of an animal with a class. And then each animal would
+    be formed by its parts &mdash;granted, this is a contrived example, just to make the point&mdash;
+</p>
+<p> At this point, we have two options:</p>
+<ol>
+    <li>
+        Create two independent classes, each in its own <code>.java</code> file (<code>Animal.java</code> and
+        <code>BodyPart.java</code>)
+    </li>
+    <li>
+        Create one top level class (<code>Animal</code>), and one inner class (<code>BodyPart</code>), both in one
+        <code>.java</code> file called <code>Animal.java</code>
+    </li>
+</ol>
+<p>
+    How do we decide which option is better? Obviously "better" always depends on your specific use case, but for this
+    example, let's say a <code>BodyPart</code> doesn't make any sense without an <code>Animal</code>, so it's better
+    to model the solution as if it's a member of <code>Animal</code>. In this case we declare another class "inside"
+    <code>Animal</code>, with all the same components we've discussed so far.
+</p>
+<pre>
+class Animal {
+    class BodyPart {      // &lt;-- inner class added
+        String partName;
+        double weight;
+    }
+
+    /**
+     * Holds the information for each body part of this animal.
+     */
+    Collection&lt;BodyPart&gt; bodyParts;
+
+    // rest of the code omitted for brevity...
+}
+</pre>
+
 <h5>Nested interfaces</h5>
+
+<p>
+    It's difficult to explain what a <em>nested interface is</em> without knowing what's a Java
+    <a href="https://docs.oracle.com/javase/tutorial/java/concepts/interface.html" target="_blank">
+        interface
+    </a>.
+    To keep it simple, and focus on classes, which is the topic of the article, I'll oversimplify it: it's basically
+    a group of related methods with empty bodies, and its declaration is quite similar to that of a class. For example,
+    this is an interface called <code>MovingBeing</code>:
+</p>
+<pre>
+interface MovingBeing {
+    void move();
+}
+</pre>
+
+<p>
+    Now, if we were to declare this interface as member of the <code>Animal</code> class, we just need to follow the
+    same logic we used to declare the inner class <code>BodyPart</code>:
+</p>
+<pre>
+class Animal {
+    interface MovingBeing {     // &lt;-- inner interface added, not very useful now
+        void move();
+    }
+
+    // rest of the code omitted for brevity...
+}
+</pre>
+
+<h5>Instance and static initializer</h5>
+
+<p>
+    There are two elements of the body of the class we haven't covered yet: instance initializers (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-InstanceInitializer" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>InstanceInitializer</code>
+    </a>
+    )
+    and static initializers (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-StaticInitializer" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>StaticInitializer</code>
+    </a>
+    ).
+</p>
+
+<p>
+    They both are a
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-Block" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        block
+    </a>
+    of code where some <em>initialization</em> happens. The only difference between them is that the instance
+    initializer is tied to the life-cycle of the object being created; hence, for each object created, the code block
+    is executed. The static initializer, on the other hand, is executed only once: when the class is loaded. This is
+    more related to the concept of
+    <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/classvars.html" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>static</code>
+    </a>
+    members.
+</p>
+<p>
+    Let's see them in an example.
+</p>
+
+<h6>Instance initializers</h6>
+
+<p>
+    Let's suppose we want to move the initialization of the field <code>energy</code> out of the constructor. We can do
+    it by placing the expression <code>energy = 100;</code> inside an instance initializer:
+</p>
+<pre>
+class Animal {
+    String name;
+    int energy;
+
+    {
+        energy = 100;       // &lt;-- initialization moved to this instance initializer
+    }
+
+    Animal(String name) {
+        this.name = name;
+    }
+
+    // rest of the code omitted for brevity...
+}
+</pre>
+
+<h6>Static initializers</h6>
+
+<p>
+    Now, let's suppose that we want to have a field inside the <code>Animal</code> class called
+    <code>perceivedTemperature</code>, which indicates the environment temperature perceived by the animals. In this
+    case we don't want to have a separate value for each animal, because we can say this temperature is the same
+    for every animal &mdash;again, this is a contrived example, for demonstration purposes&mdash;
+</p>
+<p>
+    To store such field we can not do it with an instance field, but with a static one. This way, when the field is
+    modified, we get the same value regardless of the <code>Animal</code> object the value is being accessed from. It
+    would look like this:
+</p>
+<pre>
+class Animal {
+    static double perceivedTemperature;
+
+    // rest of the code omitted for brevity...
+}
+</pre>
+
+<p>
+    Now, we would like to initialize it in an instance initializer block, how do we do it? Simple:
+</p>
+<pre>
+class Animal {
+    static double perceivedTemperature;
+
+    static {
+        perceivedTemperature = 32.4d;
+    }
+
+    // rest of the code omitted for brevity...
+}
+</pre>
 
 <h2>The <em>.java</em> file</h2>
 
