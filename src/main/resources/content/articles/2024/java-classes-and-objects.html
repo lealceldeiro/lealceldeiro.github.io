@@ -79,10 +79,7 @@ class Animal {
     </a>
     to understand the anatomy of a class in Java.
     Notice you may want to check the
-    <a href="https://docs.oracle.com/javase/specs/" target="_blank">
-        JLS specific to your Java version
-    </a>
-    .
+    <a href="https://docs.oracle.com/javase/specs/" target="_blank">JLS specific to your Java version</a>.
 </p>
 
 <p>Formally, this is the structure of a Java class:</p>
@@ -347,8 +344,7 @@ class Animal {
        target="_blank" class="link-underline link-underline-opacity-0">
         <code>Object.clone()</code>
     </a>, and
-    <a href="https://docs.oracle.com/javase/tutorial/jndi/objects/serial.html"
-       target="_blank" class="link-underline link-underline-opacity-0">
+    <a href="https://docs.oracle.com/javase/tutorial/jndi/objects/serial.html" target="_blank">
         <em>Deserialization</em>
     </a>.
 </blockquote>
@@ -359,7 +355,7 @@ class Animal {
 </p>
 <p>
     Simple, we use the
-    <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/objectcreation.html"
+    <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/objectcreation.html" target="_blank"
        class="link-underline link-underline-opacity-0">
         <code>new</code>
     </a>
@@ -436,7 +432,7 @@ interface MovingBeing {
 </pre>
 
 <p>
-    Now, if we were to declare this interface as member of the <code>Animal</code> class, we just need to follow the
+    Now, if we were to declare this interface as a member of the <code>Animal</code> class, we just need to follow the
     same logic we used to declare the inner class <code>BodyPart</code>:
 </p>
 <pre>
@@ -468,10 +464,7 @@ class Animal {
 
 <p>
     They both are a
-    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-Block" target="_blank"
-       class="link-underline link-underline-opacity-0">
-        block
-    </a>
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-Block" target="_blank">block</a>
     of code where some <em>initialization</em> happens. The only difference between them is that the instance
     initializer is tied to the life-cycle of the object being created; hence, the code block is executed once for each
     object created. The static initializer, on the other hand, is executed only when the class is loaded (usually only
@@ -481,8 +474,7 @@ class Animal {
         <code>static</code>
     </a>
     members (see
-    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1" target="_blank"
-       class="link-underline link-underline-opacity-0">JLS</a>).
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1" target="_blank">JLS</a>).
 </p>
 <p>
     Let's see them in an example.
@@ -521,7 +513,7 @@ class Animal {
 </p>
 <p>
     To store such field we should not do it with an instance field, but with a static one. This way, when the field is
-    modified, we get the same value regardless of the <code>Animal</code> object the value is being accessed from. It
+    modified, we get the same value, regardless of the <code>Animal</code> instance the value is being accessed from. It
     would look like this:
 </p>
 <pre>
@@ -552,7 +544,7 @@ class Animal {
 <p>Where do we write our classes? Inside <code>.java</code> files.</p>
 
 <p>
-    Most of the time, each class is defined in it own <code>.java</code> file. Such class is called a
+    Most of the time, each class is defined in its own <code>.java</code> file. Such class is called a
     <em>top level</em> class (type).
 </p>
 
@@ -573,7 +565,7 @@ class Animal {
 <p>We saw this one already, but for the sake of completeness, let's review it:</p>
 
 <pre>
-class Animal {
+public class Animal {
     String name;
     int energy;
 
