@@ -566,6 +566,81 @@ class Animal {
 
 <p>Let's see some examples where we apply all the knowledge we've learned.</p>
 
+<h4>Examples</h4>
+
+<h5>A public class with two fields, two methods, and one constructor</h5>
+
+<p>We saw this one already, but for the sake of completeness, let's review it:</p>
+
+<pre>
+class Animal {
+    String name;
+    int energy;
+
+    Animal(String name) {
+        this.name = name;
+        energy = 100;
+    }
+
+    void move() {
+        energy--;
+        System.out.println(name + " moved");
+    }
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+</pre>
+
+
+<h5>A protected class with two fields, one instance initializer, and one static initializer</h5>
+<pre>
+protected class Animal {
+    String name;
+    static double perceivedTemperature;
+
+    {
+        name = "Leo";
+    }
+    static {
+        perceivedTemperature = 32.4d;
+    }
+}
+</pre>
+
+<h5>A package-private class, one private static inner class, and one public static inner interface</h5>
+<blockquote>
+    Side note: interfaces are <code>static</code> by default, but I'm putting it here for demonstration purposes only.
+</blockquote>
+<pre>
+class Animal {
+    private static class BodyPart {
+        String partName;
+    }
+    public static interface MovingBeing {
+        void move();
+    }
+}
+</pre>
+
+<h5>A sealed class that permits another final class to extend it</h5>
+<pre>
+sealed class Animal permits Tiger {
+}
+final class Tiger extends Animal {
+}
+</pre>
+
+<h5>A sealed class that permits another non-sealed class to extend it</h5>
+<pre>
+sealed class Animal permits Tiger {
+}
+non-sealed class Tiger extends Animal {
+}
+</pre>
+
 <h2>Could we implement our programs entirely without classes?</h2>
 
 <p>
