@@ -13,7 +13,7 @@ ogAuthor=Asiel Leal Celdeiro
 <p>
     To put it simple, a <strong>Java class</strong> is a "form of classification". It is a concept from
     <em>Object-Oriented Programming (OOP)</em> that allows us to "classify" (or group together) a type of
-    <em>object(s)</em> &mdash;another concept from OOP&mdash;. An <strong>object</strong> represents a specific instance
+    <em>object(s)</em> &mdash;another concept from OOP&mdash; An <strong>object</strong> represents a specific instance
     of a class. With classes and objects we can represent real-world concepts and entities in our programs as well as
     their interactions.
 </p>
@@ -473,14 +473,16 @@ class Animal {
         block
     </a>
     of code where some <em>initialization</em> happens. The only difference between them is that the instance
-    initializer is tied to the life-cycle of the object being created; hence, for each object created, the code block
-    is executed. The static initializer, on the other hand, is executed only once: when the class is loaded. This is
-    more related to the concept of
+    initializer is tied to the life-cycle of the object being created; hence, the code block is executed once for each
+    object created. The static initializer, on the other hand, is executed only when the class is loaded (usually only
+    once during the program execution). This is more related to the concept of
     <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/classvars.html" target="_blank"
        class="link-underline link-underline-opacity-0">
         <code>static</code>
     </a>
-    members.
+    members (see
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1" target="_blank"
+       class="link-underline link-underline-opacity-0">JLS</a>).
 </p>
 <p>
     Let's see them in an example.
@@ -518,7 +520,7 @@ class Animal {
     for every animal &mdash;again, this is a contrived example, for demonstration purposes&mdash;
 </p>
 <p>
-    To store such field we can not do it with an instance field, but with a static one. This way, when the field is
+    To store such field we should not do it with an instance field, but with a static one. This way, when the field is
     modified, we get the same value regardless of the <code>Animal</code> object the value is being accessed from. It
     would look like this:
 </p>
@@ -551,10 +553,15 @@ class Animal {
 
 <p>Let's see an example where we apply all the knowledge we've learned.</p>
 
-<h3>Could we implement our programs entirely without classes?</h3>
+<h2>Could we implement our programs entirely without classes?</h2>
 
 <p>
     Certainly. We don't need, technically speaking, to create our own classes to implement a business logic. But by
     creating classes...
     TODO
+</p>
+
+<h2>Final thoughts</h2>
+<p>
+    there are much more details to learn about java classes, but hopefully, the content here is a good start
 </p>
