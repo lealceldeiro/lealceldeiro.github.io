@@ -38,6 +38,10 @@
                                        th:if="${post.summary == null}"
                                        th:utext="${post.body}">
                                     </p>
+                                    <p>
+                                        <a th:href="${post.uri} + '#disqus_thread'"
+                                          class="text-muted link-underline link-underline-opacity-0"></a>
+                                    </p>
                                     <a th:href='${post.uri}' class="btn btn-light">Read</a>
                                 </div>
                             </div>
@@ -69,5 +73,8 @@
 </div>
 
 <div th:replace="footer.thyme::footer"></div>
+
+<script id="dsq-count-scr" th:attr="src='//' + ${config.disqus_id} + '.disqus.com/count.js'" async></script>
+
 </body>
 </html>
