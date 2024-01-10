@@ -587,9 +587,15 @@ public class Animal {
 </pre>
 
 
-<h5>A public class with two fields, one instance initializer, and one static initializer</h5>
+<h5>
+    A public class with one protected static inner class, two fields, one instance initializer, and one
+    static initializer
+</h5>
 <pre>
 public class Animal {
+    protected static class BodyPart {
+    }
+
     String name;
     static double perceivedTemperature;
 
@@ -602,7 +608,7 @@ public class Animal {
 }
 </pre>
 
-<h5>A package-private class, one private static inner class, and one public static inner interface</h5>
+<h5>A package-private class with one private static inner class, and one public static inner interface</h5>
 <blockquote>
     Side note: interfaces are <code>static</code> by default, but I'm putting it here for demonstration purposes only.
 </blockquote>
