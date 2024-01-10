@@ -58,3 +58,7 @@ As a standard, we're writing all articles files in HTML format (`.html`).
 
 When creating an article, if it's a work in progress, yuo can skip the pages build by appending `[skip-ci]` to the end
 of the commit message.
+
+IMPORTANT: Once an article is published, if it has received any interactions through the Disqus integration, the
+article file name must NOT be updated, so the comments, reactions, etc. are not lost. This is because we're using the
+file name as the thread id.
