@@ -39,8 +39,9 @@
                                        th:utext="${post.body}">
                                     </p>
                                     <p>
-                                        <a th:href="${config.site_host} + '/' + ${post.uri} + '#disqus_thread'"
-                                          class="text-muted link-underline link-underline-opacity-0"></a>
+                                        <a th:if="*{#strings.startsWith(config.site_host, config.site_localhost)}"
+                                           th:href="${post.uri} + '#disqus_thread'"
+                                           class="text-muted link-underline link-underline-opacity-0"></a>
                                     </p>
                                     <a th:href='${post.uri}' class="btn btn-light">Read</a>
                                 </div>
