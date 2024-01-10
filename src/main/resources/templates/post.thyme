@@ -59,8 +59,8 @@
         <hr/>
 
         <!-- Comments -->
-        <div th:if="*{#strings.startsWith(config.site_host, config.site_localhost)}" id="disqus_thread"></div>
-        <script th:if="*{#strings.startsWith(config.site_host, config.site_localhost)}" th:inline="javascript">
+        <div th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}" id="disqus_thread"></div>
+        <script th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}" th:inline="javascript">
             /**
              *   https://disqus.com/admin/universalcode/#configuration-variables
              */
@@ -76,7 +76,7 @@
                 (d.head || d.body).appendChild(s);
             })();
         </script>
-        <noscript th:if="*{#strings.startsWith(config.site_host, config.site_localhost)}">
+        <noscript th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}">
             Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
             Disqus.</a>
         </noscript>
