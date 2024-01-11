@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <hr/>
+        <hr th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}"/>
 
         <!-- Comments -->
         <div th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}" id="disqus_thread"></div>
