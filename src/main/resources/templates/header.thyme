@@ -8,7 +8,7 @@
     <meta name="description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, and more about software development.'))"/>
+                                               : (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, and more about software development.'))"/>
     <meta name="author"
           th:content="${content.ogAuthor} ?: 'Asiel Leal Celdeiro'"/>
     <meta name="keywords"
