@@ -1,9 +1,9 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-transitional-thymeleaf-4.dtd">
 <html lang="en">
-<head th:fragment="head(fragmentOgDescription)">
+<head th:fragment="head(fragmentHeadTitle, fragmentOgDescription)">
     <!--ref: https://ogp.me/-->
     <meta charset="utf-8"/>
-    <title th:text="${content.title} ?: 'Let\'s talk about Software Development'"></title>
+    <title th:text="${fragmentHeadTitle} ?: (${content.title} ?: 'Let\'s talk about Software Development')"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description"
           th:content="${fragmentOgDescription} != null
