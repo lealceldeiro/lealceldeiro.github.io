@@ -374,7 +374,11 @@ class Animal {
     </a>
     as a members of another class. But how does that actually look like? Well, it's quite simple once we have understood
     fields and methods because their declaration follow the same principle: it's a code structure that "belongs" to the
-    class where they're declared. Let's see an example.
+    class where they're declared. More, formally: a <em>member class</em> is a class whose declaration is
+    <em>directly enclosed</em> in the body of another class or interface declaration (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.5" target="_blank">
+        JLS 8.5
+    </a>). Let's see an example.
 </p>
 
 <p>
@@ -444,6 +448,14 @@ class Animal {
     // rest of the code omitted for brevity...
 }
 </pre>
+
+<p>
+    More, formally: a <em>member interface</em> is an interface whose declaration is <em>directly enclosed</em> in the
+    body of another class or interface declaration (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.5" target="_blank">
+        JLS 8.5
+    </a>).
+</p>
 
 <h5>Instance and static initializer</h5>
 
