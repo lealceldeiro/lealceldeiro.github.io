@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="header.thyme::head(${'Articles tagged: ' + tag}, 'Explore all the articles published with this tag about software development, professional experiences and more, ordered by date, in descending order.')"></head>
+<head th:replace="header.thyme::head(${'Articles tagged: ' + tag}, ${'Explore \'' + tag + '\' articles about software development, professional experiences and more, ordered by date, in descending order.'})"></head>
 <body onload="prettyPrint()">
 
 <div id="wrap">
