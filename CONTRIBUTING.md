@@ -41,10 +41,11 @@ As a standard, we're writing all articles files in HTML format (`.html`).
   called `why-java.html`
 - Define:
     * `title`
-    * `date` (it can be a future date to keep the article in draft mode, if `status` is not `published`)
     * `type=post`
+    * `date` (it can be a future date to keep the article in draft mode, if `status` is not `published`)
     * `tags` (separated by comma -- `,`)
-    * optionally, the `status` can be `draft` for work in progress
+    * `status` (it can be `published`, `draft` for work in progress, or `published-date`.
+      See https://jbake.org/docs/2.6.7/#status)
     * `summary`
     * optionally, you can define the following [Open Graph](https://ogp.me/) (_og_) _meta_ values
         + `ogDesc` -> `description` (defaults to `summary`)
