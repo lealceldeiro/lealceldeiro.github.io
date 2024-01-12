@@ -39,7 +39,7 @@
                 <div class="col-4 text-end">
                     <a th:href="'https://github.com/lealceldeiro/lealceldeiro.github.io/issues/new?assignees=lealceldeiro&labels=bug&template=bug_report.yml&title=%5BBug%5D+&post-url=' + ${content.uri}"
                        target="_blank"
-                       class="text-muted link-underline link-underline-opacity-0">
+                       class="btn btn-light text-muted">
                         Report <i class="bi bi-bug-fill"></i>
                     </a>
                     &nbsp;
@@ -49,8 +49,18 @@
                                         + '/' + fSplit[#arrays.length(fSplit) - 1]}"
                        th:href="'https://github.com/lealceldeiro/lealceldeiro.github.io/edit/main/src/main/resources/content/' + *{fPath}"
                        target="_blank"
-                       class="text-muted link-underline link-underline-opacity-0">
+                       class="btn btn-light text-muted">
                         Improve <i class="bi bi-pencil-square"></i>
+                    </a>
+                    &nbsp;
+                    <a th:with="fSplit = ${#strings.arraySplit(content.uri, '/')},
+                                fPath = *{fSplit[#arrays.length(fSplit) - 3]
+                                        + '/' + fSplit[#arrays.length(fSplit) - 2]
+                                        + '/' + fSplit[#arrays.length(fSplit) - 1]}"
+                       th:href="'https://github.com/lealceldeiro/lealceldeiro.github.io/blame/main/src/main/resources/content/' + *{fPath}"
+                       target="_blank"
+                       class="btn btn-light text-muted">
+                        Revisions <i class="bi bi-arrow-counterclockwise"></i>
                     </a>
                 </div>
             </div>
