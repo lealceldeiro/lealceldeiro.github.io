@@ -114,7 +114,7 @@ class Animal {
            class="link-underline link-underline-opacity-0">
             <code>[TypeParameters]</code>
         </a>
-        is a collection of <em>types</em> we can define withing angle brackets (<code>&lt;&gt;</code>). For instance,
+        is a collection of <em>types</em> we can define within angle brackets (<code>&lt;&gt;</code>). For instance,
         <code>&lt;T&gt;</code>. See
         <a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html"
            target="_blank"><em>generics</em></a>
@@ -304,8 +304,7 @@ class Animal {
 </p>
 
 <p>
-    This is the structure of the constructor. Pay special attention; it looks similar to a method, but it lacks return
-    type:
+    This is the structure of the constructor. Look closely; it looks similar to a method, but it lacks a return type:
 </p>
 <pre>
     {ConstructorModifier} ConstructorDeclarator [Throws] ConstructorBody
@@ -373,7 +372,7 @@ class Animal {
         inner classes
     </a>
     as a members of another class. But how does that actually look like? Well, it's quite simple once we have understood
-    fields and methods because their declaration follow the same principle: it's a code structure that "belongs" to the
+    fields and methods because their declaration follows the same principle: it's a code structure that "belongs" to the
     class where they're declared. More, formally: a <em>member class</em> is a class whose declaration is
     <em>directly enclosed</em> in the body of another class or interface declaration (
     <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.5" target="_blank">
@@ -383,7 +382,7 @@ class Animal {
 
 <p>
     Let's suppose we want to represent each part of the body of an animal with a class. And then each animal would
-    be formed by its parts &mdash;granted, this is a contrived example, just to make the point&mdash;
+    be formed by its parts &mdash;granted, this is a contrived example, only for demonstration purposes&mdash;
 </p>
 <p> At this point, we have two options:</p>
 <ol>
@@ -563,7 +562,7 @@ class Animal {
 <p>
     But it's not mandatory to have only one top level type in a <code>.java</code> file. We can define several of them,
     as long as <em>at most one</em> of them is <code>public</code>. Put in another way: we can not declare more than
-    one top level type (meaning, they're <code>public</code>) in the same <code>.java</code> file.
+    one public top level type in the same <code>.java</code> file.
 </p>
 
 <h3>Putting it all together</h3>
