@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <div class="d-flex flex-row align-items-center mb-2"
-                                         th:if="${content.userGithubPublicToken != null && content.userGithubUsername}">
+                                         th:if="${content.userGithubUsername}">
                                         <a class="text-muted link-underline link-underline-opacity-0" target="_blank"
                                            th:href="${'https://github.com/' + content.userGithubUsername + '?tab=repositories'}">
                                             <ul class="text-muted mb-0 mx-3 list-unstyled d-flex flex-row">
@@ -193,13 +193,11 @@
 </span>
 <!-- Calendly badge widget end -->
 
-<script type="module" th:if="${content.userGithubPublicToken && content.userGithubUsername}" th:inline="javascript">
+<script type="module" th:if="${content.userGithubUsername}" th:inline="javascript">
     // https://github.com/octokit/core.js#readme
     import {Octokit} from "https://esm.sh/@octokit/core";
 
-    const octokit = new Octokit({
-        auth: [[${content.userGithubPublicToken}]]
-    })
+    const octokit = new Octokit()
 
     const req = "GET /users/" + [[${content.userGithubUsername}]];
     const GH_API_VERSION = [[${config.github_apiversion}]];
