@@ -35,7 +35,7 @@
                                         <a class="text-muted link-underline link-underline-opacity-0" target="_blank"
                                            th:href="${'https://github.com/' + content.userGithubUsername + '?tab=repositories'}">
                                             <ul class="text-muted mb-0 mx-3 list-unstyled d-flex flex-row">
-                                                <li>
+                                                <li class="d-none">
                                                     <i class="bi bi-file-code-fill"></i>
                                                     <span id="githubRepos"></span>
                                                 </li>
@@ -45,9 +45,9 @@
                                                     <span id="githubStars">3</span>
                                                 </li>
                                                 -->
-                                                <li class="mx-2">
+                                                <li class="d-none mx-2">
                                                     <i class="bi bi-people-fill"></i>
-                                                    <span id="githubFollowers">2</span>
+                                                    <span id="githubFollowers"></span>
                                                 </li>
                                             </ul>
                                         </a>
@@ -201,20 +201,20 @@
         auth: [[${content.userGithubPublicToken}]]
     })
 
-    const url = "GET /users/" + [[${content.userGithubUsername}]];
-    const response = await octokit.request(url, {
-        username: 'USERNAME',
-        headers: {
-            'X-GitHub-Api-Version': '2022-11-28'
-        }
-    });
-    const data = response.data;
+    const req = "GET /users/" + [[${content.userGithubUsername}]];
+    const GH_API_VERSION = [[${config.github_apiversion}]];
+    const res = await octokit.request(req, {username: 'USERNAME', headers: {'X-GitHub-Api-Version': GH_API_VERSION}});
+    const data = res.data;
 
     const followers = data.followers;
-    document.getElementById('githubFollowers').innerText = followers;
+    const followersElement = document.getElementById('githubFollowers');
+    followersElement.innerText = followers;
+    followersElement.parentElement.classList.remove("d-none");
 
     const code = data.public_repos + data.public_gists;
-    document.getElementById('githubRepos').innerText = code;
+    const repos = document.getElementById('githubRepos');
+    repos.innerText = code;
+    repos.parentElement.classList.remove("d-none");
 </script>
 
 </body>
