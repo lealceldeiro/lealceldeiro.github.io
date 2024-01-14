@@ -10,10 +10,10 @@
 		<div class="container">
 	
 			<div class="page-header mt-4">
-				<h1 th:text='${content.title}'>title</h1>
+				<h1 th:text='${content.title}'></h1>
 			</div>
 		
-			<p class="mt-3" th:utext='${content.body}'>body</p>
+			<p class="mt-3" th:utext='${content.body}'></p>
 		</div>
 	</div>
 
