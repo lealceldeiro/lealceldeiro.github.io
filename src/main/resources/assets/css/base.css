@@ -45,3 +45,7 @@ body {
 #wrap.content-justify p {
   text-align: justify!important;
 }
+
+img.gray-image {
+  filter: grayscale(1);
+}
