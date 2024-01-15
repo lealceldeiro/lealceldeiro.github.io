@@ -8,7 +8,7 @@ summary=Java classes and objects are cornerstones of the Object-Oriented Program
 ogAuthor=Asiel Leal Celdeiro
 ~~~~~~
 
-<h2>What are Java classes and objects?</h2>
+<h2 id="what-are-java-classes">What are Java classes and objects?</h2>
 
 <p>
     To put it simple, a <strong>Java class</strong> is a "form of classification". It is a concept from
@@ -25,7 +25,7 @@ ogAuthor=Asiel Leal Celdeiro
     <code>cage1</code> (a cage), <code>meat</code> (food), and <code>john</code> (a zookeeper).
 </p>
 
-<h3>How do we decide which classes to define in our program?</h3>
+<h3 id="how-to-decide-which-classes-to-define">How do we decide which classes to define in our program?</h3>
 
 <p>
     Classes define common <em>properties</em> and <em>behaviors</em> for the objects they represent. For example, the
@@ -54,7 +54,7 @@ ogAuthor=Asiel Leal Celdeiro
     developers/software engineers, it becomes easier to identify each case.
 </p>
 
-<h3>Syntax</h3>
+<h3 id="syntax">Syntax</h3>
 
 <p>
     The simplest form of a class definition in Java you could find is this (<code>Animal</code> could have been any
@@ -70,7 +70,7 @@ class Animal {
     own classes.
 </p>
 
-<h3>Structure</h3>
+<h3 id="structure">Structure</h3>
 
 <p>
     Let's use the chapter about classes from the
@@ -165,7 +165,7 @@ class Animal {
     </li>
 </ul>
 
-<h4>Class body</h4>
+<h4 id="class-body">Class body</h4>
 
 <p>
     In short, this is the structure of the class body (
@@ -187,7 +187,7 @@ class Animal {
     Let's see what these elements are, along with some examples.
 </p>
 
-<h5>Members</h5>
+<h5 id="members">Members</h5>
 
 <p>
     With <em>members</em> (
@@ -225,7 +225,7 @@ class Animal {
 
 <p>Let's see fields and methods.</p>
 
-<h6>Fields</h6>
+<h6 id="fields">Fields</h6>
 
 <p>
     Fields are properties, attributes that characterize our classes, they hold the state of the objects created from
@@ -242,7 +242,7 @@ class Animal {
 }
 </pre>
 
-<h6>Methods</h6>
+<h6 id="methods">Methods</h6>
 
 <p>
     Methods define the behavior of the objects, they specify what "actions" the objects can do during the execution
@@ -283,7 +283,7 @@ class Animal {
     the animal that ate (i.e.: <code>teo ate</code>).
 </p>
 
-<h5>Constructors</h5>
+<h5 id="constructors">Constructors</h5>
 
 <p>So far, we've talked a lot about Java classes, but not so much about the objects.</p>
 <p>
@@ -364,7 +364,7 @@ class Animal {
     Animal teo = new Animal("Teo");
 </pre>
 
-<h5>Nested classes</h5>
+<h5 id="nested-classes">Nested classes</h5>
 
 <p>
     We've mentioned earlier that we can have nested classes, also known as
@@ -417,7 +417,7 @@ class Animal {
 }
 </pre>
 
-<h5>Nested interfaces</h5>
+<h5 id="nested-interfaces">Nested interfaces</h5>
 
 <p>
     It's difficult to explain what a <em>nested interface is</em> without knowing what's a Java
@@ -456,7 +456,7 @@ class Animal {
     </a>).
 </p>
 
-<h5>Instance and static initializer</h5>
+<h5 id="instance-and-static-initializer">Instance and static initializer</h5>
 
 <p>
     There are two elements of the body of the class we haven't covered yet: instance initializers (
@@ -596,7 +596,6 @@ public class Animal {
     }
 }
 </pre>
-
 
 <h5>
     A public class with one protected static inner class, two fields, one instance initializer, and one
