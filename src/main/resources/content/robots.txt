@@ -1,7 +1,10 @@
+# https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt
+
 User-agent: *
 Disallow: /img/logo/
 Disallow: /img/meta.jpg
 Disallow: /img/fav/
+Disallow: /*-draft.html$
 Allow: /
 
 Sitemap: https://lealceldeiro.github.io/sitemap.xml
