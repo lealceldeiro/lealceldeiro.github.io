@@ -1,0 +1,121 @@
+title=Java interfaces (normal interfaces)
+type=post
+date=2024-01-17
+tags=java, java-interfaces, java-classes, oop
+status=draft
+summary=Interfaces in Java define behaviors, which are expressed as a group of methods in the body of the interface.
+
+ogAuthor=Asiel Leal Celdeiro
+~~~~~~
+
+<h2 id="what-s-a-java-interface">What's a Java interface?</h2>
+
+<p>
+    If you ask someone who's not a programmer, or software engineer, or the like, "what's an interface?", most probably
+    you'll get answers around "it's a boundary where two entities interact", "it's some sort of connection between two
+    things through which they interact with each other", or "it's the means through which two unrelated elements
+    interact with each other".
+</p>
+<p>Then, what's a Java interface?</p>
+<p>
+    Interfaces in Java define behaviors. These behaviors are expressed as a
+    <a href="https://docs.oracle.com/javase/tutorial/java/concepts/interface.html" target="_blank">group of methods</a>
+    in the body of the interface.
+</p>
+<p>
+    Then, some
+    <a href="https://lealceldeiro.github.io/articles/2024/java-oop-classes-and-objects.html" target="_blank">class</a>
+    can implement the interface methods as it sees fit, that's it, it defines how the behavior specified in the
+    interface is actually implemented. This class would be the first "entity" from our previous wider definition of
+    interface.
+</p>
+<p>
+    The second "entity", the one that would interact with the class implementation through the interface,
+    would be the caller: the one that <em>calls</em> the method.
+</p>
+<p>
+    If we were to create a simulation of a restaurant to illustrate the usage of an interface. We could have three
+    elements:
+</p>
+<ul>
+    <li>A customer</li>
+    <li>A waiter</li>
+    <li>The interface, through which the customer asks the waiter to bring some food</li>
+</ul>
+<p>
+    We could call these three elements like this, respectively:
+</p>
+<ul>
+    <li><code>Customer</code> (class)</li>
+    <li><code>Waiter</code> (another class)</li>
+    <li><code>OrderProcessor</code> (the interface)</li>
+</ul>
+
+<h2 id="interface-declaration-in-java">How does an interface declaration look like in Java?</h2>
+
+<p>Let's look at an example, by following our previous analogy of the restaurant:</p>
+<pre>
+// interface declaration
+interface OrderProcessor {
+    // here we declare only the method (behavior)
+    public void bringFood(String dishName);
+}
+
+// a class that implements the interface
+class Waiter implements OrderProcessor {
+    // the actual logic of the method (body of the method) is defined here
+  	public void bringFood(String dishName) {
+	    System.out.println("Brought " + dishName + " to customer");
+    }
+    // ... rest of the code omitted for brevity
+}
+
+// another class that can ask for food
+class Customer {
+    private String favoriteDish = "Fish and Vegetables";
+
+	// ... other code omitted for brevity
+
+    void askForFood(OrderProcessor orderProcessor) {
+	    // the customer interacts with the interface OrderProcessor
+        orderProcessor.bringFood(favoriteDish);
+    }
+}
+</pre>
+
+<p>
+    This interface is called <code>OrderProcessor</code> and it defines the "bring food" behavior, which is declared as
+    a method named: <code>bringFood</code>.
+</p>
+<p>This a very simple example; let's dive deeper into the intricacies of interfaces in Java.</p>
+
+<h2 id="diving-deeper-into-java-interfaces">Diving deeper into Java interfaces</h2>
+<h3 id="declaring-an-interface">Declaring an interface</h3>
+
+<p>There are two types of interface declarations:</p>
+<ul>
+    <li><em>Normal interface declarations</em></li>
+    <li><em>Annotation interface declarations</em></li>
+</ul>
+<p>
+    In this article only the normal interface declaration is covered. Annotation interface declaration will be covered
+    in a separate article.
+</p>
+<p>Let’s see the structure of an interface declaration:</p>
+<pre>
+{InterfaceModifier} interface TypeIdentifier [TypeParameters] [InterfaceExtends] [InterfacePermits] InterfaceBody
+</pre>
+<p>Where:</p>
+<ul>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceModifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>{InterfaceModifier}</code>
+        </a> is one of:
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-Annotation" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>Annotation</code>
+        </a>, <code>public</code>, <code>protected</code>, <code>private</code>, <code>abstract</code>,
+        <code>static</code>, <code>sealed</code>, <code>non-sealed</code>, <code>strictfp</code>
+    </li>
+</ul>
