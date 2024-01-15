@@ -54,6 +54,12 @@
                                     </div>
                                     <div>
                                         <ul class="nav mx-0 col-12 justify-content-start list-unstyled d-flex">
+                                            <li class="ms-3" th:if="${content.userCalendarLink != null}">
+                                                <a class="text-muted" target="_blank"
+                                                   th:href="${content.userCalendarLink}">
+                                                    <i class="bi bi-calendar3"></i>
+                                                </a>
+                                            </li>
                                             <li class="ms-3" th:if="${content.userPhone != null}">
                                                 <!-- full number including + sign -->
                                                 <a class="text-muted" target="_blank"
