@@ -1,9 +1,9 @@
-title=Java interfaces (normal interfaces)
+title=Java interfaces
 type=post
 date=2024-01-17
 tags=java, java-interfaces, java-classes, oop
 status=draft
-summary=Interfaces in Java define behaviors, which are expressed as a group of methods in the body of the interface.
+summary=Interfaces in Java define behaviors, which are expressed as a group of methods in their bodies. They establish a well-defined API contract between two parties and promote loose coupling.
 
 ogAuthor=Asiel Leal Celdeiro
 ~~~~~~
@@ -25,7 +25,7 @@ ogAuthor=Asiel Leal Celdeiro
 <p>
     Then, some
     <a href="https://lealceldeiro.github.io/articles/2024/java-oop-classes-and-objects.html" target="_blank">class</a>
-    can implement the interface methods as it sees it fit, that's it, it defines how the behaviors specified in the
+    can implement the interface methods as it sees fit, that's it, it defines how the behaviors specified in the
     interface are actually implemented. This class would be the first "entity" from our previous wider definition of
     interface.
 </p>
@@ -107,11 +107,11 @@ class Customer {
     In this article only the normal interface declaration is covered. Annotation interface declaration will be covered
     in a separate article.
 </p>
-<p>Let’s see the structure of an interface declaration:</p>
+<p>Let's see the structure of an interface declaration:</p>
 <pre><code class="language-java">
 {InterfaceModifier} interface TypeIdentifier [TypeParameters] [InterfaceExtends] [InterfacePermits] InterfaceBody
 </code></pre>
-<p>Where:</p>
+<p>Where</p>
 <ul>
     <li>
         <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceModifier" target="_blank"
@@ -122,6 +122,521 @@ class Customer {
            class="link-underline link-underline-opacity-0">
             <code>Annotation</code>
         </a>, <code>public</code>, <code>protected</code>, <code>private</code>, <code>abstract</code>,
-        <code>static</code>, <code>sealed</code>, <code>non-sealed</code>, <code>strictfp</code>
+        <code>static</code>, <code>sealed</code>, <code>non-sealed</code>, <code>strictfp</code>.
+    </li>
+    <li><code>interface</code> is the Java keyword used to specify we're declaring an interface.</li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-TypeIdentifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>TypeIdentifier</code>
+        </a> is the name we want to give the interface. In our previous example we used <code>OrderProcessor</code>.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-TypeParameters" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>[TypeParameters]</code>
+        </a> is a collection of <em>types</em> we can define within angle brackets (<code>&lt;&gt;</code>).
+        For instance,<code>&lt;T&gt;</code>. See
+        <a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" target="_blank">
+            generics
+        </a> and
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.2" target="_blank">
+            &sect;8.1.1
+        </a> for more info about this.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceExtends" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>[InterfaceExtends]</code>
+        </a> is the portion of the interface declaration where we can specify, after the keyword <code>extends</code>,
+        the interface (if any) from which our interface is a direct subinterface. For instance,
+        <code>extends Processor</code>.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfacePermits" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>[InterfacePermits]</code>
+        </a> is used when the <code>sealed</code> modifier is specified, and it indicates, after the keyword
+        <code>permits</code>, the other classes or interfaces (if any) that are allowed to implement/extend our
+        interface. For example, <code>permits OrderProcessor, SuperWaiter</code>.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceBody" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>InterfaceBody</code>
+        </a>
+        is the <code>body</code> of our interface, including the curly braces (<code>{}</code>). See next section.
     </li>
 </ul>
+
+<p>
+    It's important to note that unlike a class, an interface cannot be declared <code>final</code>. However, an
+    interface may be declared <code>sealed</code> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.1.4" target="_blank">
+        &sect;9.1.1.4
+    </a>) to limit its subclasses and subinterfaces.
+</p>
+
+<h4 id="interface-body">Interface body</h4>
+
+<p>
+    The structure of an interface body (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceMemberDeclaration"
+       target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>{InterfaceMemberDeclaration}</code>
+    </a>) is as follows:
+</p>
+<pre><code class="language-java">
+{
+    ConstantDeclaration
+	InterfaceMethodDeclaration
+	ClassDeclaration
+	InterfaceDeclaration
+}
+</code></pre>
+<p>Let's see what each of these elements are, and some examples of how they're used.</p>
+
+<h5 id="interface-constants">Constants</h5>
+
+<p>
+    Constants (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-ConstantDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>ConstantDeclaration</code>
+    </a>) can be referred to as interface attributes, properties, fields. They are similar to class fields, except they
+    can NOT be modified &mdash;they're final&mdash;, and their declaration is as follows:
+</p>
+<pre><code class="language-java">
+{ConstantModifier} UnannType VariableDeclaratorList;
+</code></pre>
+
+<p>In this case</p>
+<ul>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-ConstantModifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>ConstantModifier</code>
+        </a> can be any of the previously mentioned <code>Annotation</code>, <code>public</code>, <code>static</code>,
+        and/or <code>final</code>.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-UnannType" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>UnannType</code>
+        </a>, in short, refers to all the types we can use to declare what type the field is. For example,
+        <code>Integer</code>.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-VariableDeclaratorList"
+           target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>VariableDeclaratorList</code>
+        </a>, simply put, is the actual name of the field (variable) and, optionally, and initializer.
+    </li>
+</ul>
+
+<p>
+    Let's see an example of a constant in our <code>OrderProcessor</code> interface.
+</p>
+<pre><code class="language-java">
+interface OrderProcessor {
+    public int MAX_ORDERS_NUMBER = 1000;
+    // ... rest of the code omitted for brevity
+}
+</code></pre>
+
+<p>
+    Here, we declared a constant <code>MAX_ORDERS_NUMBER</code> of type <code>int</code> with a value of
+    <code>1000</code>. It is <code>public</code> (default in interfaces), so it's publicly accessible by anyone with
+    access to the interface.
+</p>
+
+<h5 id="interface-method-declarations">Method declarations</h5>
+<p>
+    Method declarations (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceMethodDeclaration"
+       target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>InterfaceMethodDeclaration</code>
+    </a>) are the declarations of the methods defined in the interface. They
+    are the methods that must be implemented by any class that implements the interface, unless the interface itself
+    provides a default implementation.
+</p>
+<p>
+    Default method implementations is a feature added in
+    <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/language/enhancements.html#javase8" target="_blank">
+        Java 8
+    </a> that allows us to define the method body (its actual implementation) in the interface itself, as opposite to
+    abstract methods, which require a concrete class to implement them.
+</p>
+<p>
+    More formally, a <em>default method</em> is an instance method declared in an interface with the
+    <code>default</code> modifier. Its body is always represented by a block, which provides a default implementation
+    for any class that implements the interface without overriding the method. These methods are distinct from concrete
+    methods, which are declared in classes, and from <code>private</code> interface methods, which are neither
+    inherited nor overridden (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4" target="_blank">
+        &sect;9.4
+    </a>).
+</p>
+<p>
+    Let's see now how to declare these methods in our <code>OrderProcessor</code> interface.
+</p>
+<pre><code class="language-java">
+interface OrderProcessor {
+    public int MAX_ORDERS_NUMBER = 1000;
+
+    // abstract method -- must be implemented by the concrete class
+    public void bringFood(String dishName);
+
+    // also, an abstract method -- must be implemented by the concrete class
+    public abstract void bringWater();
+
+    // any class implementing the interface will inherit this
+    // default method implementation, unless overridden
+    default String getType() {
+        return "Waiter";
+    }
+
+    // only available to be called within the interface itself
+    private int getMaxOrders() {
+        return MAX_ORDERS_NUMBER;
+    }
+}
+</code></pre>
+
+<h5 id="interface-nested-class-declaration">Class declaration</h5>
+<p>
+    Nested (or inner) class declarations (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>ClassDeclaration</code>
+    </a>) were covered in a previous post (
+    <a href="https://lealceldeiro.github.io/articles/2024/java-oop-classes-and-objects.html#nested-classes"
+       target="_blank">
+        Java classes and objects
+    </a>). Let's quickly review an example of how it would look like in the body of an interface:
+</p>
+<pre><code class="language-java">
+interface OrderProcessor {
+    // inner class declaration
+    class BillCalculator {
+    }
+    // ... rest of the code omitted for brevity
+}
+</code></pre>
+
+<h5 id="interface-inner-interface-declaration">Interface Declaration</h5>
+<p>
+    Nested (or inner) interface declarations (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceDeclaration" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>InterfaceDeclaration</code>
+    </a>) were also covered in
+    <a href="https://lealceldeiro.github.io/articles/2024/java-oop-classes-and-objects.html#nested-interfaces"
+       target="_blank">
+        that post
+    </a>. Let's see how to use it in our example.
+</p>
+<pre><code class="language-java">
+interface OrderProcessor {
+    interface Calculator {
+    }
+    // ... rest of the code omitted for brevity
+}
+</code></pre>
+
+<h3 id="implementing-an-interface">Implementing an interface</h3>
+<p>
+    An interface is not of much use without a concrete class that implements its methods. So, let's get into how a class
+    can implement the methods defined in the body of an interface.
+</p>
+<p>
+    A class can be declared to <em>directly implement</em> one or more interfaces (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html" target="_blank">&sect;9</a>,
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.5" target="_blank">
+        &sect;8.1.5
+    </a>). This means that any instance of that class implements all the <code>abstract</code> methods specified by
+    the interface.
+</p>
+<p>
+    A class necessarily implements all the interfaces that its direct superclasses and direct superinterfaces do. This
+    multiple interface inheritance allows objects to support multiple common behaviors without sharing a superclass
+    (<a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html" target="_blank">&sect;9</a>).
+</p>
+<p>Let's review again our previous example.</p>
+<pre><code class="language-java">
+interface OrderProcessor {
+    public void bringFood(String dishName);
+}
+
+class Waiter implements OrderProcessor {
+  	public void bringFood(String dishName) {
+        System.out.println("Brought " + dishName + " to customer");
+    }
+}
+</code></pre>
+<p>
+    Here, we specify after the keyword <code>implements</code> all the interfaces that the class implements. Notice that
+    it's mandatory for the <code>Waiter</code> class to implement the method <code>bringFood</code>, otherwise the
+    code won't compile.
+</p>
+<p>
+    Let's see how the <code>Waiter</code> class can implement another interface: <code>Serializable</code>, which
+    belongs to the <code>java.io</code> package.
+</p>
+<pre><code class="language-java">
+class Waiter implements OrderProcessor, Serializable {
+  	public void bringFood(String dishName) {
+	      System.out.println("Brought " + dishName + " to customer");
+    }
+}
+</code></pre>
+<p>
+    As you notice, we only need to add the new interface being implemented after a comma (<code>,</code>). This way we
+    can implement all the interfaces we want.
+</p>
+
+<h3 id="extending-an-interface">Extending an interface</h3>
+
+<p>
+    Sometimes there are interfaces that do not provide all the method declarations we need. In such cases, sometimes we
+    need to create an interface that "inherits" that other interface method declarations, and, on top of that, add our
+    own. This way any class implementing the new interface will inherit all the methods. This is a
+    <a href="https://dzone.com/articles/introduction-spring-data-jpa-inheritance-rest-app" target="_blank">
+        common pattern used
+    </a> when implementing our own
+    <a href="https://spring.io/projects/spring-data-jpa/" target="_blank">Spring Data JPA</a> Repositories.
+</p>
+<p>
+    An interface may be declared to be a <em>direct extension</em> of one or more other interfaces, meaning that it
+    inherits all the member classes and interfaces, instance methods, and <code>static</code> fields of the interfaces
+    it extends, except for any members that it may override or hide (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html" target="_blank">&sect;9</a>).
+</p>
+<p>Let's see in our example how would such extension look like.</p>
+<pre><code class="language-java">
+interface Processor&lt;T&gt; {                              // 1
+	public void process(T element);                   // 2
+}
+
+interface OrderProcessor extends Processor&lt;String&gt; {  // 3
+    public void bringFood(String dishName);
+
+	public default void process(String dishName) {    // 4
+	    bringFood(dishName);
+	}
+}
+</code></pre>
+<p>There are several things going on here, so let's review it, point by point from the previous commented lines:</p>
+
+<ol>
+    <li>
+        The <code>Processor</code> interface is declared as a generic interface that accepts a type <code>T</code>
+        (this is the type of the elements the interface will work with). See
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.2" target="_blank">
+            &sect;9.1.2
+        </a> for more information about this.
+    </li>
+    <li>
+        <code>Processor</code> declares an abstract method called <code>process</code>, which takes an argument of type
+        <code>T</code>.
+    </li>
+    <li>
+        <code>OrderProcessor</code> declares that it extends <code>Processor</code> and it specifies that the
+        elements it will work with are of type <code>String</code>.
+    </li>
+    <li>
+        <code>OrderProcessor</code> provides a default implementation for the <code>process</code> method, inherited
+        from <code>Processor</code>. The default implementation is actually just a call to the abstract method
+        <code>bringFood</code> and it will be inherited by any concrete class.
+    </li>
+</ol>
+<p>This example shows how versatile our implementations can be by combining different Java features.</p>
+
+<h3 id="evolving-interfaces">Evolving interfaces</h3>
+
+<p>
+    When an interface is defined and made available to client code (let it be our own code, library users, or third
+    party vendors who rely on our interfaces definitions), it's extremely important to be careful with how we evolve it
+    so we don't break existing code that use the current API contract defined by the interface.
+</p>
+<p>
+    While this is a topic for another whole article. There are some important points we should touch upon here. The
+    following points are an extract from
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.5" target="_blank">
+        &sect;13.5
+    </a>.
+</p>
+<ul>
+    <li>
+        If an interface that is declared <code>public</code> is changed to not be declared <code>public</code>, then
+        an <code>IllegalAccessError</code> is thrown if a pre-existing binary is linked that needs but no longer has
+        access to the interface type, so such a change is not recommended for widely distributed interfaces.
+    </li>
+    <li>
+        If an interface that was freely extensible (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.1.4" target="_blank">
+            &sect;9.1.1.4
+        </a>) is changed to be declared <code>sealed</code>, then an <code>IncompatibleClassChangeError</code> is thrown
+        if a binary of a pre-existing subclass or subinterface of this interface is loaded and is not a permitted direct
+        subclass or subinterface of this interface (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.4" target="_blank">
+            &sect;9.1.4
+        </a>); such a change is also not recommended for widely distributed classes.
+    </li>
+    <li>
+        Adding an interface to the set of permitted direct subinterfaces of a <code>sealed</code> interface will not
+        break compatibility with pre-existing binaries. However, it may cause the execution of an exhaustive
+        <code>switch</code> (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-14.11.1" target="_blank">
+            &sect;14.11.1
+        </a>) to
+        fail with an error (a <code>MatchException</code> may be thrown) if the <code>switch</code> encounters
+        an instance of the new permitted direct subinterface that was not known at compile time (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-14.11.3" target="_blank">&sect;14.11.3</a>,
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.28.2" target="_blank">&sect;15.28.2</a>).
+    </li>
+    <li>
+        If a class or interface is removed from the set of permitted direct subclasses or subinterfaces of a
+        <code>sealed</code> interface, then an <code>IncompatibleClassChangeError</code> is thrown if the pre-existing
+        binary of the removed class or interface is loaded.
+    </li>
+    <li>
+        Changing an interface that was declared <code>sealed</code> to be declared <code>non-sealed</code> does not
+        break compatibility with pre-existing binaries. However, a <code>non-sealed</code> interface <em>X</em> must
+        have a <code>sealed</code> direct superinterface. Deleting the <code>non-sealed</code> modifier would prevent
+        <em>X</em> from being recompiled, as every interface with a <code>sealed</code> direct superinterface must
+        be <code>sealed</code> or <code>non-sealed</code>.
+    </li>
+    <li>Deleting a member from an interface may cause linkage errors in pre-existing binaries.</li>
+</ul>
+
+<h3 id="interface-examples">Examples</h3>
+
+<p>Let's see some more examples.</p>
+
+<h4 id="example1">A public generic interface with two constants, one private method and one public method</h4>
+
+<pre><code class="language-java">
+public interface Processor&lt;T&gt; {
+    int MAX_PROCESSES = 5;
+    boolean LANGUAGE_AGNOSTIC = true;
+
+	public void process(T element);
+
+    private boolean isValid(T e) {
+        return e != null;
+    }
+}
+</code></pre>
+
+<h4 id="example2">
+    A public interface with one static inner class and one static inner interface; both of them have
+    package-private visibility
+</h4>
+<pre><code class="language-java">
+public interface OrderProcessor {
+    class Sender {                  // &lt;-- the 'static' keyword is default here before the keyword 'class'
+    }
+    static interface Calculator {
+    }
+}
+</code></pre>
+
+<h4 id="example3">A package-private interface with one public static inner interface</h4>
+<pre><code class="language-java">
+interface OrderProcessor {
+    public static interface Calculator {
+    }
+}
+</code></pre>
+
+<h4 id="example5">
+    A sealed interface that permits another sealed interface to extend it, and a final class that implements the
+    intermediate interface
+</h4>
+<pre><code class="language-java">
+sealed interface Processor&lt;T&gt; permits OrderProcessor {
+    void process(T element);
+}
+sealed interface OrderProcessor extends Processor&lt;String&gt; {
+    void process(String order);
+}
+final class Waiter implements OrderProcessor {
+  	public void process(String order) {
+	    System.out.println("Brought " + order + " to customer");
+    }
+}
+</code></pre>
+
+<h4 id="example6">
+    A sealed interface that permits another non-sealed interface to extend it, and a NON-final class that implements
+    the intermediate interface
+</h4>
+<pre><code class="language-java">
+sealed interface Processor&lt;T&gt; permits OrderProcessor {
+    void process(T element);
+}
+non-sealed interface OrderProcessor extends Processor&lt;String&gt; {
+    void process(String order);
+}
+class Waiter implements OrderProcessor {
+  	public void process(String order) {
+	    System.out.println("Brought " + order + " to customer");
+    }
+}
+</code></pre>
+
+<h4 id="example7">
+    A sealed interface that permits a final class to implement it
+</h4>
+<pre><code class="language-java">
+sealed interface OrderProcessor permits Waiter {
+    void process(String order);
+}
+final class Waiter implements OrderProcessor {
+  	public void process(String order) {
+	    System.out.println("Brought " + order + " to customer");
+    }
+}
+</code></pre>
+
+<h3 id="why-do-we-need-interfaces">Why do we need interfaces?</h3>
+
+<p>
+    While interfaces are not a mandatory component of the software we implement, it's true our programs can use
+    interfaces to provide a common supertype for otherwise unrelated classes, and to make it unnecessary for related
+    classes to share a common <code>abstract</code> superclass (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html" target="_blank">&sect;9</a>).
+</p>
+<p>
+    Many software patterns have been put into practice taking into account the concept of interfaces. These patterns
+    solve well-known problems with a defined context and solution. Just to mention a few, we could point out
+    <a href="https://en.wikipedia.org/wiki/SOLID" target="_blank">SOLID</a>, and many of the patterns presented by
+    <a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank">GoF</a>; thus they bring flexibility,
+    robustness, re-usability and a lot more benefits to our well-designed software solutions.
+</p>
+<p>
+    Nowadays, when systems are more complex, and we need to model more complex scenarios as well, interfaces
+    play a vital role in promoting a loose coupling between the elements of our software. They're also a very powerful
+    element of Java: they allow a class to inherit behaviors from multiple supertypes (so we can overcome the
+    "limitation" of not having
+    <a href="https://medium.com/edureka/multiple-inheritance-in-java-a996c26143ac" target="_blank">
+        multiple inheritance in Java
+    </a>), they play a pivotal role in
+    <a href="https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html" target="_blank">
+        polymorphism
+    </a>, they allow us to define clear boundaries and responsibilities for each software component and in most cases
+    they make easier for us to implement automated test for the code we write.
+</p>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+
+<p>
+    There is so much material we could revise about Java interfaces that this single article wouldn't be enough to cover
+    it all. I've presented here high level information as well as several of the implementation details about this topic
+    which I hope, along with the linked documentation, is a good start for you to review and deepen your knowledge about
+    Java.
+</p>
