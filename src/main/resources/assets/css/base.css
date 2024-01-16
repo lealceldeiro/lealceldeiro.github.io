@@ -49,3 +49,10 @@ body {
 img.gray-image {
   filter: grayscale(1);
 }
+
+/**
+Customization to highlight.js
+ */
+pre code.hljs {
+  padding-top: 0!important;
+}
