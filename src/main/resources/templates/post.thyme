@@ -96,5 +96,13 @@
 
 </div>
 <div th:replace="footer.thyme::footer"></div>
+
+<!-- https://highlightjs.org/ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<!-- https://highlightjs.readthedocs.io/en/latest/readme.html#supported-languages -->
+<!-- https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
