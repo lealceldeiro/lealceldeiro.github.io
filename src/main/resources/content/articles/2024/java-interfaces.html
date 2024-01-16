@@ -31,7 +31,13 @@ ogAuthor=Asiel Leal Celdeiro
 </p>
 <p>
     The second "entity", the one that would interact with the class implementation through the interface,
-    would be the caller: the one that <em>calls</em> the method.
+    would be the caller: the one that <em>calls</em> the methods.
+</p>
+<p>
+    This way we can summarize it as follows: the interface defines what behaviors/methods it provides to callers, and
+    that must be implemented by any concrete class. It establishes a well-defined
+    <a href="https://en.wikipedia.org/wiki/API" target="_blank">API</a> contract between two parties: one party that
+    provides the implementation and another party that will consume it.
 </p>
 <p>
     If we were to create a simulation of a restaurant to illustrate the usage of an interface. We could have three
@@ -54,7 +60,7 @@ ogAuthor=Asiel Leal Celdeiro
 <h2 id="interface-declaration-in-java">How does an interface declaration look like in Java?</h2>
 
 <p>Let's look at an example, by following our previous analogy of the restaurant:</p>
-<pre>
+<pre><code  class="language-java">
 // interface declaration
 interface OrderProcessor {
     // here we declare only the method (behavior)
@@ -81,7 +87,7 @@ class Customer {
         orderProcessor.bringFood(favoriteDish);
     }
 }
-</pre>
+</code></pre>
 
 <p>
     This interface is called <code>OrderProcessor</code> and it defines the "bring food" behavior, which is declared as
@@ -102,9 +108,9 @@ class Customer {
     in a separate article.
 </p>
 <p>Let’s see the structure of an interface declaration:</p>
-<pre>
+<pre><code  class="language-java">
 {InterfaceModifier} interface TypeIdentifier [TypeParameters] [InterfaceExtends] [InterfacePermits] InterfaceBody
-</pre>
+</code></pre>
 <p>Where:</p>
 <ul>
     <li>
