@@ -98,11 +98,20 @@
 <div th:replace="footer.thyme::footer"></div>
 
 <!-- https://highlightjs.org/ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+        integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
 <!-- https://highlightjs.readthedocs.io/en/latest/readme.html#supported-languages -->
 <!-- https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"
+        integrity="sha512-sQgzBflUTahXrlGeMqS6Z+ugjLta005qmvARRaCSEJ8aflXe03DNo8VzxCDHGzqAUqe1+iRnLfCP5ivekMZnGA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"
+        integrity="sha512-oXIjzcLt5aPmQEl6MaYwcoCX70QJZq1qiyEYE3tlOixhfsYiTKKftLjJFuRjV7wo3WTHI+wfVr3EJQfRJrMnSQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
 <script>hljs.highlightAll();</script>
 </body>
 </html>

@@ -87,7 +87,11 @@
           referrerpolicy="no-referrer"/>
 
     <!-- https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css"
+          integrity="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
 
     <!-- last to be included to override defaults -->
     <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
