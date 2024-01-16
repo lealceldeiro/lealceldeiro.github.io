@@ -37,10 +37,10 @@ ogAuthor=Asiel Leal Celdeiro
 <h5 id="javac"><code>javac</code></h5>
 <p>This command converts .java source files into .class bytecode files.</p>
 <p>Let's suppose we have the following Java class inside a file called <em>MyClass.java</em>:</p>
-<pre>
+<pre><code  class="language-java">
 public class MyClass {
 }
-</pre>
+</code></pre>
 <p>
     Now, if we run <code>javac MyClass.java</code>, in the command line (at the same level the .java file is located at
     ), we'll see that a file <em>MyClass.class</em> is created.
@@ -52,13 +52,13 @@ public class MyClass {
     Following along with the previous example, let's now add some code that prints "Hello world" in console and exits.
     First, let's modify the class to look like this:
 </p>
-<pre>
+<pre><code  class="language-java">
 public class MyClass {
     public static void main(String[] args) {
         System.out.println("Hello world");
     }
 }
-</pre>
+</code></pre>
 <p>Now let's re-compile it to get the new changes into the bytecode file (<code>javac MyClass.java</code>).</p>
 <p>
     Now we're ready to run it. Let's execute <code>java MyClass.class</code> from the command line (notice we provided
@@ -76,9 +76,9 @@ public class MyClass {
     In our example, we could use it to create an archive called <em>MyProgram.jar</em>, that contains one class file,
     <em>MyClass.class</em>, and set <code>MyClass</code> as the entry point. Like this:
 </p>
-<pre>
+<pre><code  class="language-shell">
     jar --create --file MyProgram.jar --main-class MyClass MyClass.class
-</pre>
+</code></pre>
 
 <p>
     If you feel curious, you can run the program, as a jar file now, with <code>java -jar MyProgram.jar</code> and you
@@ -90,7 +90,7 @@ public class MyClass {
     This command is used to generate the API documentation from Java source files as HTML pages.
 </p>
 <p>If we add a documentation comment to our previous <code>main</code> method like this:</p>
-<pre>
+<pre><code  class="language-java">
 public class MyClass {
     /**
      * Entry point for our application.
@@ -101,7 +101,7 @@ public class MyClass {
         System.out.println("Hello world");
     }
 }
-</pre>
+</code></pre>
 <p>
     And now run <code>javadoc MyClass.java</code>, we can see all the HTML files created by the tool to include
     our documentation.

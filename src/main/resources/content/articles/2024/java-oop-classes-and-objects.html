@@ -60,10 +60,10 @@ ogAuthor=Asiel Leal Celdeiro
     The simplest form of a class definition in Java you could find is this (<code>Animal</code> could have been any
     other name we define):
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
 }
-</pre>
+</code></pre>
 
 <p>
     But that class isn't very useful, is it? So, let's see everything we have in our power to declare and define our
@@ -83,9 +83,9 @@ class Animal {
 </p>
 
 <p>Formally, this is the structure of a Java class:</p>
-<pre>
+<pre><code  class="language-java">
 {ClassModifier} class TypeIdentifier [TypeParameters] [ClassExtends] [ClassImplements] [ClassPermits] ClassBody
-</pre>
+</code></pre>
 
 <p>Where</p>
 <ul>
@@ -174,14 +174,14 @@ class Animal {
         <code>{ClassBodyDeclaration}</code>
     </a>):
 </p>
-<pre>
+<pre><code  class="language-java">
 {
     ClassMemberDeclaration
     InstanceInitializer
     StaticInitializer
     ConstructorDeclaration
 }
-</pre>
+</code></pre>
 
 <p>
     Let's see what these elements are, along with some examples.
@@ -235,12 +235,12 @@ class Animal {
     We saw already some examples of properties for our mentioned <code>Animal</code> class. Now, let's see how we can
     actually write that in our code. Let's enhance our <code>Animal</code> class with some fields:
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     String name;
     int energy;
 }
-</pre>
+</code></pre>
 
 <h6 id="methods">Methods</h6>
 
@@ -257,7 +257,7 @@ class Animal {
 <p>
     Let's see how we can define the actions our <code>Animal</code> objects can do:
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     String name;
     int energy;
@@ -272,7 +272,7 @@ class Animal {
         System.out.println(name + " ate");
     }
 }
-</pre>
+</code></pre>
 
 <p>
     In this example, the method <code>move</code> decreases the <em>energy</em> value and prints the name of the animal
@@ -306,14 +306,14 @@ class Animal {
 <p>
     This is the structure of the constructor. Look closely; it looks similar to a method, but it lacks a return type:
 </p>
-<pre>
+<pre><code  class="language-java">
     {ConstructorModifier} ConstructorDeclarator [Throws] ConstructorBody
-</pre>
+</code></pre>
 
 <p>
     But, it can be better understood with an example, so let's see it in action in our <code>Animal</code> class.
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     String name;
     int energy;
@@ -325,7 +325,7 @@ class Animal {
 
     // rest of the code omitted for brevity...
 }
-</pre>
+</code></pre>
 
 <p>
     Here we've created a constructor that accepts a <code>name</code> argument and assigns it to the <code>name</code>
@@ -360,9 +360,9 @@ class Animal {
     </a>
     keyword.
 </p>
-<pre>
+<pre><code  class="language-java">
     Animal teo = new Animal("Teo");
-</pre>
+</code></pre>
 
 <h5 id="nested-classes">Nested classes</h5>
 
@@ -401,7 +401,7 @@ class Animal {
     to model the solution as if it's a member of <code>Animal</code>. In this case we declare another class "inside"
     <code>Animal</code>, with all the same components we've discussed so far.
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     class BodyPart {      // &lt;-- inner class added
         String partName;
@@ -415,7 +415,7 @@ class Animal {
 
     // rest of the code omitted for brevity...
 }
-</pre>
+</code></pre>
 
 <h5 id="nested-interfaces">Nested interfaces</h5>
 
@@ -428,17 +428,17 @@ class Animal {
     a group of related methods with empty bodies, and its declaration is quite similar to that of a class. For example,
     this is an interface called <code>MovingBeing</code>:
 </p>
-<pre>
+<pre><code  class="language-java">
 interface MovingBeing {
     void move();
 }
-</pre>
+</code></pre>
 
 <p>
     Now, if we were to declare this interface as a member of the <code>Animal</code> class, we just need to follow the
     same logic we used to declare the inner class <code>BodyPart</code>:
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     interface MovingBeing {     // &lt;-- inner interface added, not very useful now
         void move();
@@ -446,7 +446,7 @@ class Animal {
 
     // rest of the code omitted for brevity...
 }
-</pre>
+</code></pre>
 
 <p>
     More, formally: a <em>member interface</em> is an interface whose declaration is <em>directly enclosed</em> in the
@@ -497,7 +497,7 @@ class Animal {
     Let's suppose we want to move the initialization of the field <code>energy</code> out of the constructor. We can do
     it by placing the expression <code>energy = 100;</code> inside an instance initializer:
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     String name;
     int energy;
@@ -512,7 +512,7 @@ class Animal {
 
     // rest of the code omitted for brevity...
 }
-</pre>
+</code></pre>
 
 <h6>Static initializers</h6>
 
@@ -527,18 +527,18 @@ class Animal {
     modified, we get the same value, regardless of the <code>Animal</code> instance the value is being accessed from. It
     would look like this:
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     static double perceivedTemperature;
 
     // rest of the code omitted for brevity...
 }
-</pre>
+</code></pre>
 
 <p>
     Now, we would like to initialize it in an instance initializer block, how do we do it? Simple:
 </p>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     static double perceivedTemperature;
 
@@ -548,7 +548,7 @@ class Animal {
 
     // rest of the code omitted for brevity...
 }
-</pre>
+</code></pre>
 
 <h2>The <em>.java</em> file</h2>
 
@@ -575,7 +575,7 @@ class Animal {
 
 <p>We saw this one already, but for the sake of completeness, let's review it:</p>
 
-<pre>
+<pre><code  class="language-java">
 public class Animal {
     String name;
     int energy;
@@ -595,13 +595,13 @@ public class Animal {
         System.out.println(name + " ate");
     }
 }
-</pre>
+</code></pre>
 
 <h5>
     A public class with one protected static inner class, two fields, one instance initializer, and one
     static initializer
 </h5>
-<pre>
+<pre><code  class="language-java">
 public class Animal {
     protected static class BodyPart {
     }
@@ -616,13 +616,13 @@ public class Animal {
         perceivedTemperature = 32.4d;
     }
 }
-</pre>
+</code></pre>
 
 <h5>A package-private class with one private static inner class, and one public static inner interface</h5>
 <blockquote>
     Side note: interfaces are <code>static</code> by default, but I'm putting it here for demonstration purposes only.
 </blockquote>
-<pre>
+<pre><code  class="language-java">
 class Animal {
     private static class BodyPart {
         String partName;
@@ -631,23 +631,23 @@ class Animal {
         void move();
     }
 }
-</pre>
+</code></pre>
 
 <h5>A sealed class that permits another final class to extend it</h5>
-<pre>
+<pre><code  class="language-java">
 sealed class Animal permits Tiger {
 }
 final class Tiger extends Animal {
 }
-</pre>
+</code></pre>
 
 <h5>A sealed class that permits another non-sealed class to extend it</h5>
-<pre>
+<pre><code  class="language-java">
 sealed class Animal permits Tiger {
 }
 non-sealed class Tiger extends Animal {
 }
-</pre>
+</code></pre>
 
 <h2>Could we implement our programs entirely without classes?</h2>
 
