@@ -86,7 +86,7 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css">
 
     <!-- last to be included to override defaults -->
     <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
