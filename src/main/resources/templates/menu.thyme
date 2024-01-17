@@ -5,8 +5,8 @@
 <div th:fragment="menu">
 
     <div class="container">
-        <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary container">
-            <div class="container-fluid">
+        <nav id="menuNav" class="navbar fixed-top navbar-expand-lg">
+            <div class="container container-fluid">
                 <a class="navbar-brand"
                    th:href="${config.site_host}">
                     <span class="fs-3">Home</span>
@@ -35,6 +35,7 @@
             </div>
         </nav>
     </div>
+
 </div>
 </body>
 </html>
