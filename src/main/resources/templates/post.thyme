@@ -11,7 +11,24 @@
             <h1 th:text='${content.title}'></h1>
         </div>
 
-        <p><em th:text='${#dates.format(content.date,"dd MMMM yyyy")}'></em></p>
+        <div class="row d-flex h-100 mt-4 mb-5">
+            <div class="col col-xl-10">
+                <div class="d-flex align-items-center">
+                    <p class="mb-0">
+                                <span class="text-muted small">
+                                    <em th:text='${#dates.format(content.date,"MMMM d, yyyy")}'></em>
+                                </span>
+                    </p>
+
+                    <a th:if="${content.authorHandle}" th:href="'/about/' + ${content.authorHandle} + '.html'"
+                    class="px-3 mx-3 border-start border-secondary">
+                        <img th:src="${content.authorProfileImage} ?: '/img/user.svg'"
+                             th:alt="${content.authorHandle}"
+                             class="img-fluid rounded-circle me-3" width="35">
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <p class="mt-3" th:utext='${content.body}'></p>
 
