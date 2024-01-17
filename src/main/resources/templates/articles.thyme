@@ -21,9 +21,9 @@
                         <div class="col mt-3" th:each="post, iterStat : ${published_posts}"
                              th:if="${iterStat.index} < 4">
                             <div class="card">
-                                <img th:if="${post.image_src} != null"
-                                     th:src="${post.image_src}"
-                                     th:alt="${post.image_alt}?: ('Image')"
+                                <img th:if="${post.imageSrc} != null"
+                                     th:src="${post.imageSrc}"
+                                     th:alt="${post.imageAlt}?: ('Image')"
                                      class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title" th:text='${post.title}'></h5>
