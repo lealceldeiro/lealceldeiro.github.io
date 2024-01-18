@@ -21,8 +21,8 @@
                                     <div>
                                         <p class="mb-0 text-end" th:if="${content.userRate}" th:text="${content.userRate}"></p>
                                         <p class="mb-0 text-end" th:if="${content.userLocation}">
-                                            <i class="bi bi-geo-alt-fill"></i><span
-                                                th:text="${content.userLocation}"></span>
+                                            <i class="bi bi-geo-alt-fill"></i>&nbsp;
+                                            <span th:text="${content.userLocation}"></span>
                                         </p>
                                     </div>
                                 </div>
