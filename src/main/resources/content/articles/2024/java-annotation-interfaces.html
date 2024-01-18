@@ -1,0 +1,182 @@
+title=Java annotation interfaces
+type=post
+date=2024-01-20
+tags=java, java-interfaces, annotations
+status=draft
+summary=Annotation interfaces in Java.
+
+ogAuthor=Asiel Leal Celdeiro
+authorHandle=lealceldeiro
+authorProfileImage=/img/fav/ms-icon-310x310.png
+~~~~~~
+
+<h2 id="what-s-a-java-interface">What's a Java annotation interface?</h2>
+
+<p>
+    In a <a href="java-interfaces.html" target="_blank">previous article</a> we learned about normal
+    interfaces. This begs the question, then, what's a Java annotation interface?
+</p>
+<p>
+    An <em>annotation interface</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.6" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        &sect;9.6
+    </a>) is an interface declared with distinct syntax, intended to be implemented by reflective representations
+    of <em>annotations</em> (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.7" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        &sect;9.7
+    </a>).
+</p>
+
+<p>
+    We can say that it's a specialized kind of interface and to differentiate it from a normal interface, the keyword
+    <code>interface</code> is preceded by an at sign (<code>@</code>). For example:
+</p>
+<pre><code class="language-java">
+@interface TraceableLogic {
+}
+</code></pre>
+
+<p>
+    Once we have declared (or imported) an annotation interface in our code, we can use that annotation to augment
+    our application, for example, to enhance the Java type system with nullability information. An example of this
+    is Spring's
+    <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/lang/NonNull.html" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        <code>@NonNull</code>
+    </a> annotation.
+</p>
+
+<p>
+    In this sense, annotations can be used as well with static code analysis tools to detect possible bugs in our
+    code in an early stage and increase productivity in general by avoiding common mistakes in our code and focus in
+    our business logic.
+</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>
+    From the previous example you're probably already inferring the syntax of this type of interfaces. Let's see it:
+</p>
+<pre><code class="language-java">
+{InterfaceModifier} @ interface TypeIdentifier AnnotationInterfaceBody
+</code></pre>
+<p>Where</p>
+<ul>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceModifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>{InterfaceModifier}</code>
+        </a> is one of:
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-Annotation" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>Annotation</code>
+        </a>, <code>public</code>, <code>protected</code>, <code>private</code>, <code>abstract</code>,
+        <code>static</code>, <code>sealed</code>, <code>non-sealed</code>, <code>strictfp</code>.
+    </li>
+    <li>
+        <code>@</code> is the special sing used to indicate that this is an annotation interface declaration, and not
+        a normal interface declaration.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-TypeIdentifier" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>TypeIdentifier</code>
+        </a> is the name we want to give the annotation. In our previous example we used <code>TraceableLogic</code>.
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-AnnotationInterfaceBody"
+           target="_blank" class="link-underline link-underline-opacity-0">
+            <code>AnnotationInterfaceBody</code>
+        </a>
+        is the <code>body</code> of our annotation, including the curly braces (<code>{}</code>). See next section.
+    </li>
+</ul>
+
+<h3 id="syntax-body">Body</h3>
+
+<p>
+    The structure of the body of an annotation interface (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-AnnotationInterfaceMemberDeclaration"
+       target="_blank"
+       class="link-underline link-underline-opacity-0">
+        AnnotationInterfaceMemberDeclaration
+    </a>) is as follows:
+</p>
+<pre><code class="language-java">
+{
+    AnnotationInterfaceElementDeclaration
+    ConstantDeclaration
+    ClassDeclaration
+    InterfaceDeclaration
+}
+</code></pre>
+
+<p>
+    Let's analyze
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-AnnotationInterfaceElementDeclaration"
+       target="_blank"
+       class="link-underline link-underline-opacity-0">
+        AnnotationInterfaceElementDeclaration
+    </a>. The rest of the elements follow the same <sup>1</sup> rules as those described in
+    <a href="java-interfaces.html#interface-body" target="_blank">normal interface declarations</a>.
+</p>
+
+<h4 id="elements">Annotation interface elements</h4>
+
+<p>
+
+</p>
+
+<h3 id="interface-examples">Examples</h3>
+
+<h4 id="example1">Find annotations through reflection</h4>
+
+<p>
+    The method
+    <code>public Annotation[] getDeclaredAnnotations()</code>
+    is provided by reflection to find annotations in classes, methods, constructors and fields in each respective
+    class. The result is represented by an object of type
+    <code>java.lang.annotation.Annotation</code>. The result of calling that method returns an array of annotations
+    declared for the element type.
+</p>
+<p>
+    The following program finds all members with the annotation <code>TraceableLogic</code> and prints the member name.
+</p>
+
+<pre><code class="language-java">
+import java.lang.reflect.*;
+import java.lang.annotation.*;
+public class GetAnnotations {
+public static void main(String args[]) throws Exception {
+Class c = Class.forName(args[0]);
+Method[] methods = c.getDeclaredMethods();
+for(Method method : methods) {
+Annotation[] anos = method.getDeclaredAnnotations();
+for(Annotation a : anos)
+if(a.toString().contains("Deprecated")) System.out.println(method);
+}
+Constructor[] cons = c.getConstructors();
+for(Constructor con : cons) {
+Annotation[] anos = con.getDeclaredAnnotations();
+for(Annotation a : anos)
+if(a.toString().contains("Deprecated")) System.out.println(con);
+}
+}
+}
+</code></pre>
+
+<h3 id="why-do-we-need-interfaces">Do we need annotation interfaces?</h3>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+
+<hr/>
+
+<p>
+    <sup>1</sup>: While the structure and most of the "rules" are the same, there are actually some subtle differences.
+    For example, the return type of a method declared in the body of annotation interface must be one of: a primitive
+    type, <code>String</code>, <code>Class</code> or an invocation of <code>Class</code>, an enum class type, an
+    annotation interface type, or an array type whose component type is one of the previously mentioned types. If such
+    return type is different, a compile-time error occurs.
+</p>
