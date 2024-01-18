@@ -18,8 +18,13 @@
                                 <div class="d-flex align-items-center justify-content-between mb-3">
                                     <p class="small mb-0"
                                        th:text="${content.userTitle} ?: 'Software Development Enthusiast'"></p>
-                                    <p class="fw-bold mb-0" th:if="${content.userRate}"
-                                       th:text="${content.userRate}"></p>
+                                    <div>
+                                        <p class="mb-0 text-end" th:if="${content.userRate}" th:text="${content.userRate}"></p>
+                                        <p class="mb-0 text-end" th:if="${content.userLocation}">
+                                            <i class="bi bi-geo-alt-fill"></i><span
+                                                th:text="${content.userLocation}"></span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-4">
