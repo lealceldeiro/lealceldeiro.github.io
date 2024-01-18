@@ -36,7 +36,7 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
     would be the caller: the one that <em>calls</em> the methods.
 </p>
 <p>
-    This way we can summarize it as follows: the interface defines what behaviors/methods it provides to callers, and
+    In summary we could say: the interface defines what behaviors/methods it provides to callers, and
     that must be implemented by any concrete class. It establishes a well-defined
     <a href="https://en.wikipedia.org/wiki/API" target="_blank">API</a> contract between two parties: one party that
     provides the implementation and another party that will consume it.
@@ -65,7 +65,7 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
 <pre><code class="language-java">
 // interface declaration
 interface OrderProcessor {
-    // here we declare only the method (behavior)
+    // here we declare only the method (behavior) - but not the actual implementation
     public void bringFood(String dishName);
 }
 
@@ -75,14 +75,11 @@ class Waiter implements OrderProcessor {
   	public void bringFood(String dishName) {
 	    System.out.println("Brought " + dishName + " to customer");
     }
-    // ... rest of the code omitted for brevity
 }
 
 // another class that can ask for food
 class Customer {
     private String favoriteDish = "Fish and Vegetables";
-
-	// ... other code omitted for brevity
 
     void askForFood(OrderProcessor orderProcessor) {
 	    // the customer interacts with the interface OrderProcessor
@@ -95,7 +92,7 @@ class Customer {
     This interface is called <code>OrderProcessor</code> and it defines the "bring food" behavior, which is declared as
     a method named: <code>bringFood</code>.
 </p>
-<p>This a very simple example; let's dive deeper into the intricacies of interfaces in Java.</p>
+<p>This is a very simple example; let's dive deeper into the intricacies of interfaces in Java.</p>
 
 <h2 id="diving-deeper-into-java-interfaces">Diving deeper into Java interfaces</h2>
 <h3 id="declaring-an-interface">Declaring an interface</h3>
@@ -431,11 +428,14 @@ interface OrderProcessor extends Processor&lt;String&gt; {  // 3
 	}
 }
 </code></pre>
-<p>There are several things going on here, so let's review it, point by point from the previous commented lines:</p>
+<p>
+    There are several things going on in this example, so let's review it, point by point from the previous commented
+    lines:
+</p>
 
 <ol>
     <li>
-        The <code>Processor</code> interface is declared as a generic interface that accepts a type <code>T</code>
+        <code>Processor</code> is declared as a generic interface that accepts a type <code>T</code>
         (this is the type of the elements the interface will work with). See
         <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.2" target="_blank">
             &sect;9.1.2
@@ -446,7 +446,7 @@ interface OrderProcessor extends Processor&lt;String&gt; {  // 3
         <code>T</code>.
     </li>
     <li>
-        <code>OrderProcessor</code> declares that it extends <code>Processor</code> and it specifies that the
+        <code>OrderProcessor</code> extends <code>Processor</code> and it specifies that the
         elements it will work with are of type <code>String</code>.
     </li>
     <li>
@@ -455,7 +455,7 @@ interface OrderProcessor extends Processor&lt;String&gt; {  // 3
         <code>bringFood</code> and it will be inherited by any concrete class.
     </li>
 </ol>
-<p>This example shows how versatile our implementations can be by combining different Java features.</p>
+<p>This example shows how powerful our implementations can be by combining different Java features.</p>
 
 <h3 id="evolving-interfaces">Evolving interfaces</h3>
 
