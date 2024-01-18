@@ -34,7 +34,7 @@
 
         <div class="container text-center">
             <div class="row justify-content-between">
-                <div class="col-4 text-start">
+                <div class="col-7 text-start">
                     <th:block th:with="postTags = ${#strings.arraySplit(content.tags,',')}">
                         <div th:if="*{#arrays.length(postTags) > 0}">
 
@@ -53,7 +53,7 @@
                         </div>
                     </th:block>
                 </div>
-                <div class="col-4 text-end">
+                <div class="col-5 text-end">
                     <a th:href="'https://github.com/lealceldeiro/lealceldeiro.github.io/issues/new?assignees=lealceldeiro&labels=bug&template=bug_report.yml&title=%5BBug%5D+&post-url=' + ${content.uri}"
                        target="_blank"
                        class="btn btn-light text-muted">
