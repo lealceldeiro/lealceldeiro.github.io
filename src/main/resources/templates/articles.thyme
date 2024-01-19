@@ -44,7 +44,7 @@
                                     </p>
                                     <p th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}">
                                         <a th:href="${post.uri} + '#disqus_thread'"
-                                           class="text-muted link-underline link-underline-opacity-0"></a>
+                                           class="text-body-secondary link-underline link-underline-opacity-0"></a>
                                     </p>
                                     <a th:href='${post.uri}' class="btn btn-light">Read</a>
                                 </div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class=" mt-3 position-relative p-3 text-center text-muted bg-body border border-dashed rounded-5"
+                <div class=" mt-3 position-relative p-3 text-center text-body-secondary bg-body border border-dashed rounded-5"
                      th:if="*{postsCount &gt; 4}">
                     <h3 class="text-body-emphasis">Older posts</h3>
                     <p class="col-lg-6 mx-auto mb-3">

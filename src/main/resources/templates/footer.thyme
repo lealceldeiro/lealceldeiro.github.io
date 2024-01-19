@@ -8,71 +8,71 @@
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-7 d-flex align-items-center">
-                <span class="mb-3 mb-md-0 text-muted"
+                <span class="mb-3 mb-md-0 text-body-secondary"
                       th:text="'Asiel Leal Celdeiro, 2023 - ' + ${#dates.format(published_date,'yyyy')}">
                 </span>
-                <span class="mb-3 mb-md-0 text-muted">
-                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/legal.html">Legal</a>
+                <span class="mb-3 mb-md-0 text-body-secondary">
+                    <span>&nbsp;|&nbsp;</span><a class="text-body-secondary link-underline link-underline-opacity-0" href="/legal.html">Legal</a>
                 </span>
-                <span class="mb-3 mb-md-0 text-muted">
-                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/privacy.html">Privacy</a>
+                <span class="mb-3 mb-md-0 text-body-secondary">
+                    <span>&nbsp;|&nbsp;</span><a class="text-body-secondary link-underline link-underline-opacity-0" href="/privacy.html">Privacy</a>
                 </span>
-                <span class="mb-3 mb-md-0 text-muted">
-                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/terms.html">Terms</a>
+                <span class="mb-3 mb-md-0 text-body-secondary">
+                    <span>&nbsp;|&nbsp;</span><a class="text-body-secondary link-underline link-underline-opacity-0" href="/terms.html">Terms</a>
                 </span>
-                <span class="mb-3 mb-md-0 text-muted">
-                    <span>&nbsp;|&nbsp;</span><a class="text-muted link-underline link-underline-opacity-0" href="/conduct.html">Conduct</a>
+                <span class="mb-3 mb-md-0 text-body-secondary">
+                    <span>&nbsp;|&nbsp;</span><a class="text-body-secondary link-underline link-underline-opacity-0" href="/conduct.html">Conduct</a>
                 </span>
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                 <li class="ms-3">
-                    <a class="text-muted" href="mailto:asielpro@pm.me" target="_blank">
+                    <a class="text-body-secondary" href="mailto:asielpro@pm.me" target="_blank">
                         <i class="bi bi-envelope-at-fill"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://linkedin.com/in/lealceldeiro" target="_blank">
+                    <a class="text-body-secondary" href="https://linkedin.com/in/lealceldeiro" target="_blank">
                         <i class="bi bi-linkedin"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted"  href="https://github.com/lealceldeiro" target="_blank">
+                    <a class="text-body-secondary"  href="https://github.com/lealceldeiro" target="_blank">
                         <i class="bi bi-github"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted"  href="http://stackoverflow.com/users/5640649/lealceldeiro" target="_blank">
+                    <a class="text-body-secondary"  href="http://stackoverflow.com/users/5640649/lealceldeiro" target="_blank">
                         <i class="bi bi-stack-overflow"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://twitter.com/lealceldeiro" target="_blank">
+                    <a class="text-body-secondary" href="https://twitter.com/lealceldeiro" target="_blank">
                         <i class="bi bi-twitter-x"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://www.youtube.com/@lealceldeiro" target="_blank">
+                    <a class="text-body-secondary" href="https://www.youtube.com/@lealceldeiro" target="_blank">
                         <i class="bi bi-youtube"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://www.facebook.com/lealceldeiro/" target="_blank">
+                    <a class="text-body-secondary" href="https://www.facebook.com/lealceldeiro/" target="_blank">
                         <i class="bi bi-facebook"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://www.instagram.com/lealceldeiro/" target="_blank">
+                    <a class="text-body-secondary" href="https://www.instagram.com/lealceldeiro/" target="_blank">
                         <i class="bi bi-instagram"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://www.threads.net/@lealceldeiro" target="_blank">
+                    <a class="text-body-secondary" href="https://www.threads.net/@lealceldeiro" target="_blank">
                         <i class="bi bi-threads"></i>
                     </a>
                 </li>
                 <li class="ms-3">
-                    <a class="text-muted" href="https://software.codidact.com/users/53229" target="_blank">
+                    <a class="text-body-secondary" href="https://software.codidact.com/users/53229" target="_blank">
                         <i class="bi bi-lightbulb"></i>
                     </a>
                 </li>

@@ -11,20 +11,20 @@
         <main>
             <div class="position-relative overflow-hidden p-3 text-center">
                 <div class="col-md-6 p-lg-5 mx-auto">
-                    <h3 class="display-3 text-muted fw-medium">Let's talk</h3>
+                    <h3 class="display-3 text-body-secondary fw-medium">Let's talk</h3>
                     <h1 class="display-4 fw-bold">Software Development</h1>
-                    <h3 class="fw-normal text-muted mb-3">Technical knowledge, personal experiences, and more</h3>
+                    <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, personal experiences, and more</h3>
                     <div class="d-flex gap-3 justify-content-center lead fw-normal">
                         <span>
                             <i class="bi bi-book"></i>
-                            <a class="icon-link text-muted link-underline link-underline-opacity-0"
+                            <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/articles.html">
                             Articles
                         </a>
                         </span>
                         <span>
                             <i class="bi bi-person-fill-add"></i>
-                            <a class="icon-link text-muted link-underline link-underline-opacity-0"
+                            <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/about/lealceldeiro.html">
                             About me
                         </a>
@@ -39,10 +39,10 @@
         <div class="container px-4 py-3 mb-4" id="icon-grid">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-envelope-at-fill text-muted" style="font-size:1.3rem;"></i>&nbsp;
+                    <i class="bi bi-envelope-at-fill text-body-secondary" style="font-size:1.3rem;"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="mailto:asielpro@pm.me"
                                target="_blank">
                                 Email
@@ -51,10 +51,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-linkedin text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-linkedin text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://linkedin.com/in/lealceldeiro"
                                target="_blank">
                                 LinkedIn
@@ -63,10 +63,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-github text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-github text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://github.com/lealceldeiro"
                                target="_blank">
                                 GitHub
@@ -75,10 +75,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-stack-overflow text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-stack-overflow text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="http://stackoverflow.com/users/5640649/lealceldeiro"
                                target="_blank">
                                 StackOverflow
@@ -87,10 +87,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-twitter-x text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-twitter-x text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://twitter.com/lealceldeiro"
                                target="_blank">
                                 (Twitter)
@@ -99,10 +99,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-youtube text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-youtube text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://www.youtube.com/@lealceldeiro"
                                target="_blank">
                                 YouTube
@@ -111,10 +111,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-facebook text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-facebook text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://www.facebook.com/lealceldeiro/"
                                target="_blank">
                                 Facebook
@@ -123,10 +123,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-instagram text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-instagram text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://www.instagram.com/lealceldeiro/"
                                target="_blank">
                                 Instagram
@@ -135,10 +135,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-threads text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-threads text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://www.threads.net/@lealceldeiro"
                                target="_blank">
                                 Threads
@@ -147,10 +147,10 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-start">
-                    <i class="bi bi-lightbulb text-muted c-icon"></i>&nbsp;
+                    <i class="bi bi-lightbulb text-body-secondary c-icon"></i>&nbsp;
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
-                            <a class="text-muted link-underline link-underline-opacity-0"
+                            <a class="text-body-secondary link-underline link-underline-opacity-0"
                                href="https://software.codidact.com/users/53229"
                                target="_blank">
                                 Codidact
