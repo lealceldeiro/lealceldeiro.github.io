@@ -13,7 +13,7 @@
 				<h1 th:text='${content.title}'>title</h1>
 			</div>
 
-			 <p>Last updated: <em th:text='${#dates.format(content.date,"dd MMMM yyyy")}'></em></p>
+			 <p>Last updated: <em th:text='${#dates.format(content.date, "MMMM d, yyyy")}'></em></p>
 
 			<p class="mt-3" th:utext='${content.body}'>body</p>
 		</div>

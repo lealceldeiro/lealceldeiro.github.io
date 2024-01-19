@@ -32,7 +32,7 @@
                                         <h5 class="card-title fw-semibold text-body-secondary" th:text='${post.title}'></h5>
                                     </a>
                                     <h6 class="card-subtitle mb-2 text-body-secondary"
-                                        th:text='${#dates.format(post.date,"dd MMMM yyyy")}'>
+                                        th:text='${#dates.format(post.date, "MMMM d, yyyy")}'>
                                     </h6>
                                     <p class="card-text"
                                        th:if="${post.summary != null}"
