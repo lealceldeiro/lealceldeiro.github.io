@@ -2,8 +2,12 @@ title=Java annotation interfaces
 type=post
 date=2024-01-20
 tags=java, java-interfaces, annotations
-status=draft
-summary=Annotation interfaces in Java.
+status=published-date
+summary=Annotation interfaces in Java are a specialized kind of interface declared with a distinct syntax, intended to augment our code with more capabilities, mainly by means of reflection.
+
+ogImg=articles/2024/images/01/java-annotation-interfaces_social.jpeg
+imageSrc=articles/2024/images/01/java-annotation-interfaces.jpeg
+imageAlt=Image of parchment
 
 ogAuthor=Asiel Leal Celdeiro
 authorHandle=lealceldeiro
@@ -306,12 +310,65 @@ Method process annotated as TraceableMethod - trace name: TracedMethod
     <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" target="_blank"
        class="link-underline link-underline-opacity-0">
         equals
-    </a> method.
+    </a> method in our class.
 </p>
+<p>
+    Consider the common error made when overriding, shown in the next code snippet:
+</p>
+<pre><code class="language-java">
+class Processor {
+    public boolean equals(Processor obj) {
+        // return true or false ... omitted for brevity
+    }
+}
+</code></pre>
+<p>
+    In this code there's one subtle mistake: the argument received in the <code>equals</code> method is of type
+    <code>Processor</code>, but it should be of type <code>Object</code> as per the specs. However, we may not notice
+    it. And the compiler can't help us: it's a completely valid java code; in fact this code creates an accidental
+    <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html" target="_blank">
+        overload
+    </a>.
+</p>
+<p>
+    <code>@Override</code> to the rescue! If we annotate the method with <code>@Override</code>, now the compiler knows
+    we're intending to override the <code>Object</code>'s <code>equals</code> method and reports an error at
+    compile time (Something like <em>"Method does not override method from its superclass"</em>).
+</p>
+<p>
+    This would be the fixed version of the previous code:
+</p>
+<pre><code class="language-java">
+@Override
+public boolean equals(Object obj) {
+    // code omitted for brevity
+}
+</code></pre>
 
 <h2 id="why-do-we-need-interfaces">Do we need annotation interfaces?</h2>
 
+<p>
+    Technically speaking, we may not strictly need them to write our day to day software, but it's really difficult
+    for me to imagine any modern Java program that doesn't use some form of annotation. They enhance our code in ways
+    that makes our lives (as developers) way easier than if we had to do the same work programmatically.
+</p>
+<p>
+    Annotations are also used to provide metadata at runtime. For example, the Jakarta Persistence API (
+    <a href="https://en.wikipedia.org/wiki/Jakarta_Persistence" target="_blank">
+        JPA
+    </a>) uses several annotations from the package <code>jakarta.persistence</code> to work internally and provide
+    all the features it provides. So, it's not only small enhancements we get in our code; we're talking at this point
+    of entire frameworks relying on annotation to function properly.
+</p>
+
 <h2 id="final-thoughts">Final thoughts</h2>
+
+<p>
+    There's a bunch of articles, official documentation, and books out there that we can read to get more knowledge
+    about annotations. Hopefully, this is a good start for you to increase your knowledge a bit more about the Java
+    platform and sparkle your interest in reading more about interface annotations and other use cases and details
+    not covered in this article.
+</p>
 
 <hr/>
 
