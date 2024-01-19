@@ -21,7 +21,7 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
     <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.6" target="_blank"
        class="link-underline link-underline-opacity-0">
         &sect;9.6
-    </a>) is an interface declared with distinct syntax, intended to be implemented by reflective representations
+    </a>) is an interface declared with a distinct syntax, intended to be implemented by reflective representations
     of <em>annotations</em> (
     <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.7" target="_blank"
        class="link-underline link-underline-opacity-0">
@@ -34,15 +34,16 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
     <code>interface</code> is preceded by an at sign (<code>@</code>). For example:
 </p>
 <pre><code class="language-java">
-@interface TraceableLogic {
+@interface TraceableMethod {
 }
 </code></pre>
 
 <p>
-    Once we have declared (or imported) an annotation interface in our code, we can use that annotation to augment
+    Once we have declared (or imported) an annotation interface in our code, we can use it to augment
     our application, for example, to enhance the Java type system with nullability information. An example of this
     is Spring's
-    <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/lang/NonNull.html" target="_blank"
+    <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/lang/NonNull.html"
+       target="_blank"
        class="link-underline link-underline-opacity-0">
         <code>@NonNull</code>
     </a> annotation.
@@ -83,7 +84,7 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
         <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-TypeIdentifier" target="_blank"
            class="link-underline link-underline-opacity-0">
             <code>TypeIdentifier</code>
-        </a> is the name we want to give the annotation. In our previous example we used <code>TraceableLogic</code>.
+        </a> is the name we want to give the annotation. In our previous example we used <code>TraceableMethod</code>.
     </li>
     <li>
         <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-AnnotationInterfaceBody"
@@ -126,48 +127,189 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
 <h4 id="elements">Annotation interface elements</h4>
 
 <p>
-
+    Annotations (like classes and interfaces) can have attributes. The difference is that they are defined as methods
+    in the annotation body but used as attributes where the annotation is used. Let's see an example to get a better
+    idea.
 </p>
-
-<h3 id="interface-examples">Examples</h3>
-
-<h4 id="example1">Find annotations through reflection</h4>
-
-<p>
-    The method
-    <code>public Annotation[] getDeclaredAnnotations()</code>
-    is provided by reflection to find annotations in classes, methods, constructors and fields in each respective
-    class. The result is represented by an object of type
-    <code>java.lang.annotation.Annotation</code>. The result of calling that method returns an array of annotations
-    declared for the element type.
-</p>
-<p>
-    The following program finds all members with the annotation <code>TraceableLogic</code> and prints the member name.
-</p>
-
 <pre><code class="language-java">
-import java.lang.reflect.*;
-import java.lang.annotation.*;
-public class GetAnnotations {
-public static void main(String args[]) throws Exception {
-Class c = Class.forName(args[0]);
-Method[] methods = c.getDeclaredMethods();
-for(Method method : methods) {
-Annotation[] anos = method.getDeclaredAnnotations();
-for(Annotation a : anos)
-if(a.toString().contains("Deprecated")) System.out.println(method);
-}
-Constructor[] cons = c.getConstructors();
-for(Constructor con : cons) {
-Annotation[] anos = con.getDeclaredAnnotations();
-for(Annotation a : anos)
-if(a.toString().contains("Deprecated")) System.out.println(con);
-}
-}
+@interface TraceableMethod {
+    public String traceName() default "TracedMethod";
 }
 </code></pre>
 
-<h3 id="why-do-we-need-interfaces">Do we need annotation interfaces?</h3>
+<p>
+    Here, we've defined an attribute (the method-like syntax) in the annotation declaration called
+    <code>traceName</code>. Notice how the syntax is somehow the same but different from fields declared in normal
+    interfaces and classes. For example, the modifier (<code>public</code>), the type (<code>String</code>), and the
+    identifier (<code>traceName</code>) are specified similar to how they'd be specified in a class or interface, but
+    then we have the parenthesis (<code>()</code>) and the <code>default</code> keyword used after it, along the actual
+    attribute default value (<code>"TracedMethod"</code>).
+</p>
+
+<h2 id="how-to-use-the-annotation">How to use annotations?</h2>
+
+<p>
+    Once the annotation is created (through the annotation interface declaration) it can be placed on classes, methods,
+    fields, and a few other places, and it must appear immediately before what's being annotated. For example, let's
+    suppose we have the following class.
+</p>
+<pre><code class="language-java">
+class Processor {
+    void process() {
+    }
+
+    String getName() {
+        return "processor";
+    }
+}
+</code></pre>
+<p>
+    Now, let's suppose that the goal of the annotation we just declared (<code>TraceableMethod</code>) is, given a
+    class, to "mark" the methods in that class whose names we want to print when our program starts up. For this to
+    happen we must do two things: first, <em>annotate</em> the methods, and second, when our program starts up, "scan"
+    our code and find these methods <em>annotated</em> as <code>TraceableMethod</code>. Let's see it.
+</p>
+
+<h3 id="annotating-an-element">Annotate the elements</h3>
+
+<p>For now, we're going to annotate only the <code>process</code> method.</p>
+
+<pre><code class="language-java">
+class Processor {
+    @TraceableMethod
+    void process() {
+    }
+
+    String getName() {
+        return "processor";
+    }
+}
+</code></pre>
+
+<h3 id="find-elements-annotate-in-our-code">Find the methods annotated in our code</h3>
+
+<pre><code class="language-java">
+public static void main(String[] args) {
+    Class<?> clazz = Processor.class;
+    Method[] methods = clazz.getDeclaredMethods();
+
+    for (Method method : methods) {
+        for (Annotation annotation : method.getAnnotations()) {
+            if (annotation instanceof TraceableMethod traceableMethodAnnotation) {
+                System.out.printf("""
+                                  Method %s annotated as %s - trace name: %s
+                                  """,
+                                  method.getName(),
+                                  TraceableMethod.class.getSimpleName(),
+                                  traceableMethodAnnotation.traceName());
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>
+    If you run this example you'll see an empty output. That's because we did not specify the
+    <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/RetentionPolicy.html"
+       target="_blank">
+        retention policy
+    </a> of the annotation.
+</p>
+<p>There are three values we can use here:</p>
+<ul>
+    <li>
+        <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#CLASS"
+           target="_blank" class="link-underline link-underline-opacity-0">
+            <code>CLASS</code>
+        </a> (keep the annotation after the code is compiled but ignored by the JVM during runtime)
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME"
+           target="_blank" class="link-underline link-underline-opacity-0">
+            <code>RUNTIME</code>
+        </a> (keep the annotation after the code is compiled and by the JVM during runtime)
+    </li>
+    <li>
+        <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#SOURCE"
+           target="_blank" class="link-underline link-underline-opacity-0">
+            <code>SOURCE</code>
+        </a> (discard the annotation by the compiler)
+    </li>
+</ul>
+
+<p>
+    So, because <code>CLASS</code> is the default retention policy our annotation was kept after compilation, but
+    during runtime, it was not taken into account by the JVM, hence the call to <code>method.getAnnotations()</code>
+    returned an empty array. How do we fix it? We change the retention policy... by using a meta-annotation!
+</p>
+<pre><code class="language-java">
+@Retention(RetentionPolicy.RUNTIME)
+@interface TraceableMethod {
+    public String traceName() default "TracedMethod";
+}
+</code></pre>
+<p>
+    Now, if you run the same code again you'll se the following output:
+</p>
+<pre><code class="language-shell">
+Method process annotated as TraceableMethod - trace name: TracedMethod
+</code></pre>
+
+<h3 id="specifying-attributes">Specifying annotation attributes</h3>
+
+<p>
+    What about the field <code>traceName</code> declared in the body of the annotation? From the previous output
+    we can see it took the default value (<code>TracedMethod</code>); but what if we want to change it. Simple, we can
+    specify it within parenthesis (<code>()</code>) after the annotation name.
+</p>
+<p>
+    Let's annotate the method <code>getName</code>, in <code>Processor</code>, and let's specify for it a different
+    <code>traceName</code> value.
+</p>
+<pre><code class="language-java">
+class Processor {
+    @TraceableMethod
+    void process() {
+    }
+
+    @TraceableMethod(traceName = "String returning method")
+    String getName() {
+        return "processor";
+    }
+}
+</code></pre>
+
+<p>
+    When we run again the code, now this is the output:
+</p>
+<pre><code class="language-shell">
+Method getName annotated as TraceableMethod - trace name: String returning method
+Method process annotated as TraceableMethod - trace name: TracedMethod
+</code></pre>
+<p>
+    As you see here, now the method <code>getName</code> is reported with a <code>traceName</code> value different from
+    the default one, that's it, <code>String returning method</code>.
+</p>
+
+<h2 id="interface-examples">Example: Using the <code>@Override</code> annotation</h2>
+
+<p>
+    The previous example is contrived and somehow silly, the code doesn't do anything useful. It was for demonstration
+    purposes. Let's see an example of an annotation that's used very often and which is extremely helpful:
+    <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Override.html" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        @Override
+    </a>.
+</p>
+<p>
+    This annotation provides us with great benefit during compile-time by "forcing" us to properly implement an
+    <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        equals
+    </a> method.
+</p>
+
+<h2 id="why-do-we-need-interfaces">Do we need annotation interfaces?</h2>
 
 <h2 id="final-thoughts">Final thoughts</h2>
 
