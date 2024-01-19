@@ -43,6 +43,7 @@ As a standard, we're writing all articles files in HTML format (`.html`).
   called `why-java.html`
 
 ### Metadata
+
 - Define:
     * `title`
     * `type=post`
@@ -56,26 +57,32 @@ As a standard, we're writing all articles files in HTML format (`.html`).
         + `ogAuthor` -> `author`
         + `ogKeyworkds` -> `keywords` (defaults to the article tags)
         + `ogLocale` -> `locale`
-        + `ogImg` -> `image`
+        + `ogImg` -> `image`, the location of the image to be used on social media when sharing the article (we're
+          following as a convention to name the file as the name of the html file plus `_social` at the end)
         + `ogArticleModifiedTime` -> `article:modified_time` (defaults to the article date)
         + `ogArticleAuthor` -> `article:author`
         + `ogArticleTags` -> `article:tag` (defaults to the article tags)
-        + optionally, define `imageSrc` with the location of the thumbnail image to be used on the "articles" page and on social media when sharing the article
-        + if `imageSrc` is defined, then `imageAlt` should also be defined -- this is the `alt` attribute of the `img` html element
-
-When creating an article, if it's a work in progress, yuo can skip the pages build by appending `[skip-ci]` to the end
-of the commit message.
-
-IMPORTANT: Once an article is published, if it has received any interactions through the Disqus integration, the
-article file name must NOT be updated, so the comments, reactions, etc. are not lost. This is because we're using the
-file name as the thread id.
+        + optionally, define `imageSrc` with the location of the thumbnail image to be used on the "articles" page
+        + if `imageSrc` is defined, then `imageAlt` should also be defined -- this is the `alt` attribute of the `img`
+          html element (we're following as a convention to name the file as the name of the html file plus)
 
 ### Images
 
 Images used to be displayed in the article thumbnail (`imageSrc`) should be:
 
-- located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks like)
+- located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks
+  like)
 - _width_: 500px
 - _height_: 120px
 
-As a recommendation, this image generator could be used: https://deepai.org/machine-learning-model/old-style-generator or any of its alternatives in https://deepai.org/
+As a recommendation, this image generator could be used: https://deepai.org/machine-learning-model/old-style-generator
+or any of its alternatives in https://deepai.org/
+
+## Build and publish
+
+When creating an article, if it's a work in progress, you can skip the pages build by appending `[skip-ci]` to the end
+of the commit message.
+
+IMPORTANT: Once an article is published, if it has received any interactions through the Disqus integration, the
+article file name must NOT be updated, so the comments, reactions, etc. are not lost. This is because we're using the
+file name as the thread id.
