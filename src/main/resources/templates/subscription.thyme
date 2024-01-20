@@ -1,0 +1,56 @@
+<div th:fragment="subscription(formAction, formClass, submitBtnClass)"
+     class="container mt-4 border border-secondary-subtle">
+    <div class="col-12">
+        <form th:class="'row row-cols-lg-auto g-3 align-items-center ' + (${formClass} ?: '')"
+              th:action="${formAction} ?: ''"
+              method="post">
+            <div class="col-12">
+                <label class="visually-hidden" for="subscribeNameField">Name</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-person"></i></div>
+                    <input type="text" class="form-control" id="subscribeNameField" placeholder="Name"
+                           name="name">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="visually-hidden" for="subscribeEmailField">Email</label>
+                <div class="input-group">
+                    <div class="input-group-text">@</div>
+                    <input type="email" class="form-control" id="subscribeEmailField" placeholder="Email"
+                           name="email">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="visually-hidden" for="subscribeActionField">Action</label>
+                <select class="form-select" id="subscribeActionField"
+                        name="action">
+                    <option selected value="Subscribe">Subscribe</option>
+                    <option value="Unsubscribe">Unsubscribe</option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" th:class="'btn btn-primary ' + (${submitBtnClass} ?: '')">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 mt-3 mx-2">
+        <p class="form-check-label" for="subscribeAcceptTermsField">
+            By submitting this form, you accept the
+            <a href="/privacy.html" target="_blank"
+               class="link-underline link-underline-opacity-0">
+                Privacy Policy
+            </a>, the
+            <a href="/terms.html" target="_blank"
+               class="link-underline link-underline-opacity-0">
+                Terms and Conditions
+            </a> and the
+            <a href="/conduct.html" target="_blank"
+               class="link-underline link-underline-opacity-0">
+                Code of Conduct
+            </a>.
+        </p>
+    </div>
+</div>
