@@ -1,12 +1,17 @@
-<div th:fragment="subscription(formAction, formClass, submitBtnClass)"
+<div th:fragment="subscription(accessKey, formActionUrl)"
      class="container mt-4 pt-4 border rounded border-opacity-10">
     <div class="col-12 mb-3 mx-2">
         <h5 class="text-body-secondary"><i class="bi bi-envelope-paper"></i> Get the latest news from us!</h5>
     </div>
     <div class="col-12">
-        <form th:class="'row row-cols-lg-auto g-3 align-items-center ' + (${formClass} ?: '')"
-              th:action="${formAction} ?: ''"
-              method="post">
+        <form class="row row-cols-lg-auto g-3 align-items-center" th:action="${formActionUrl} ?: ''" method="post">
+            <!-- Required -->
+            <input type="hidden" name="accessKey" th:value="${accessKey}">
+            <!--Spam protection-->
+            <input type="text" name="honeypot" style="display: none;">
+            <!-- Specified as @ to be the visitor email -->
+            <input type="hidden" name="replyTo" value="@">
+
             <div class="col-12">
                 <label class="visually-hidden" for="subscribeNameField">Name</label>
                 <div class="input-group">
@@ -28,14 +33,14 @@
             <div class="col-12">
                 <label class="visually-hidden" for="subscribeActionField">Action</label>
                 <select class="form-select" id="subscribeActionField"
-                        name="action">
+                        name="$action">
                     <option selected value="Subscribe">Subscribe</option>
                     <option value="Unsubscribe">Unsubscribe</option>
                 </select>
             </div>
 
             <div class="col-12">
-                <button type="submit" th:class="'btn btn-primary ' + (${submitBtnClass} ?: '')">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
