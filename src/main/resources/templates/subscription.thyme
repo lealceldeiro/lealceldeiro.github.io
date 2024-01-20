@@ -1,7 +1,7 @@
 <div th:fragment="subscription(formAction, formClass, submitBtnClass)"
      class="container mt-4 pt-4 border rounded border-opacity-10">
     <div class="col-12 mb-3 mx-2">
-        <h5 class="text-body-secondary"><i class="bi bi-envelope-paper"></i> Newsletter signup</h5>
+        <h5 class="text-body-secondary"><i class="bi bi-envelope-paper"></i> Get the latest news from us!</h5>
     </div>
     <div class="col-12">
         <form th:class="'row row-cols-lg-auto g-3 align-items-center ' + (${formClass} ?: '')"
