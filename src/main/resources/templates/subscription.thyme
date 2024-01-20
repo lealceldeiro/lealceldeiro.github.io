@@ -46,15 +46,15 @@
     </div>
     <div class="col-12 mt-3 mx-2">
         <p class="form-check-label" for="subscribeAcceptTermsField">
-            By submitting this form, you accept the
+            By submitting this form, you accept our
             <a href="/privacy.html" target="_blank"
                class="link-underline link-underline-opacity-0">
                 Privacy Policy
-            </a>, the
+            </a>, our
             <a href="/terms.html" target="_blank"
                class="link-underline link-underline-opacity-0">
                 Terms and Conditions
-            </a> and the
+            </a> and our
             <a href="/conduct.html" target="_blank"
                class="link-underline link-underline-opacity-0">
                 Code of Conduct
