@@ -11,6 +11,8 @@
             <input type="text" name="honeypot" style="display: none;">
             <!-- Specified as @ to be the visitor email -->
             <input type="hidden" name="replyTo" value="@">
+            <!-- To be displayed after success -->
+            <input type="hidden" name="redirectTo" value="https://lealceldeiro.github.io/thank-you-for-subscribing.html">
 
             <div class="col-12">
                 <label class="visually-hidden" for="subscribeNameField">Name</label>
