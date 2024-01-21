@@ -84,7 +84,9 @@
         </div>
 
         <!-- Subscriptions -->
-        <div th:replace="subscription.thyme::subscription(${config.subscription_key}, ${config.subscription_url})"></div>
+        <div th:replace="subscription.thyme::subscription(${config.subscription_key},
+                                                          ${config.subscription_url},
+                                                          'subscribe')"></div>
         <!-- End subscriptions -->
 
         <hr th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}"/>

@@ -1,6 +1,7 @@
-<div th:fragment="subscription(accessKey, formActionUrl)"
-     class="container mt-4 pt-4 border rounded border-opacity-10">
-    <div class="col-12 mb-3 mx-2">
+<div th:fragment="subscription(accessKey, formActionUrl, subscriptionAction)"
+     th:with="subscribe = ${#strings.equals('subscribe', subscriptionAction)}"
+     th:class="${subscribe ? 'border rounded border-opacity-10 ' : ''} + 'container mt-4 pt-4'">
+    <div class="col-12 mb-3 mx-2" th:if="*{subscribe}">
         <h5 class="text-body-secondary"><i class="bi bi-envelope-paper"></i> Get the latest news from us!</h5>
     </div>
     <div class="col-12">
@@ -12,9 +13,11 @@
             <!-- Specified as @ to be the visitor email -->
             <input type="hidden" name="replyTo" value="@">
             <!-- To be displayed after success -->
-            <input type="hidden" name="redirectTo" value="https://lealceldeiro.github.io/thank-you-for-subscribing.html">
+            <input type="hidden" name="redirectTo"
+                   th:value="${subscribe ? 'https://lealceldeiro.github.io/thank-you-for-subscribing.html'
+                                         : 'https://lealceldeiro.github.io/'}">
 
-            <div class="col-12">
+            <div class="col-12" th:if="*{subscribe}">
                 <label class="visually-hidden" for="subscribeNameField">Name</label>
                 <div class="input-group">
                     <div class="input-group-text"><i class="bi bi-person"></i></div>
@@ -36,17 +39,19 @@
                 <label class="visually-hidden" for="subscribeActionField">Action</label>
                 <select class="form-select" id="subscribeActionField"
                         name="$action" required>
-                    <option selected value="Subscribe">Subscribe</option>
-                    <option value="Unsubscribe">Unsubscribe</option>
+                    <option th:selected="*{subscribe}" value="Subscribe">Subscribe</option>
+                    <option th:selected="*{!subscribe}" value="Unsubscribe">Unsubscribe</option>
                 </select>
             </div>
+
+            <input type="hidden" name="$from" th:value="${content.uri}">
 
             <div class="col-12">
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </div>
         </form>
     </div>
-    <div class="col-12 mt-3 mx-2">
+    <div class="col-12 mt-3 mx-2" th:if="*{subscribe}">
         <p class="form-check-label" for="subscribeAcceptTermsField">
             By submitting this form, you accept our
             <a href="/privacy.html" target="_blank"
