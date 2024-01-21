@@ -8,4 +8,4 @@ You can report a security vulnerability in three ways:
    (preferred).
 2. Create a
    [new security issue](https://github.com/lealceldeiro/lealceldeiro.github.io/issues/new?assignees=lealceldeiro&labels=security&template=bug_report.yml&title=%5BSecurity%5D+).
-3. Email [asielpro@pm.me](mailto:asielpro@pm.me) with the details.
+3. Email [asiel@lealceldeiro.com](mailto:asiel@lealceldeiro.com) with the details.
