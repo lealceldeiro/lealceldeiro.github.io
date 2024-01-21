@@ -7,4 +7,4 @@ Disallow: /img/fav/
 Disallow: /*-draft.html$
 Allow: /
 
-Sitemap: https://lealceldeiro.github.io/sitemap.xml
+Sitemap: https://lealceldeiro.com/sitemap.xml

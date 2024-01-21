@@ -30,7 +30,7 @@ body:
     attributes:
       label: Post URL
       description: The post URL that contains the content showing this bug
-      placeholder: (optional) example -> https://lealceldeiro.github.io/articles/2024/how-to-run-a-java-program.html
+      placeholder: (optional) example -> articles/2024/how-to-run-a-java-program.html
     validations:
       required: false
   - type: checkboxes
