@@ -11,10 +11,10 @@
         <main>
             <div class="position-relative overflow-hidden p-3 text-center">
                 <div class="col-md-6 p-lg-5 mx-auto">
-                    <h3 class="display-3 text-body-secondary fw-medium">Let's talk</h3>
+                    <h3 class="display-5 text-body-secondary fw-normal">Let's talk about</h3>
                     <h1 class="display-4 fw-bold">Software Development</h1>
-                    <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, personal experiences, and more</h3>
-                    <div class="d-flex gap-3 justify-content-center lead fw-normal">
+                    <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, profesional experiences, and more</h3>
+                    <div class="d-flex gap-3 justify-content-center lead fw-normal mt-4">
                         <span>
                             <i class="bi bi-book"></i>
                             <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
@@ -23,7 +23,7 @@
                         </a>
                         </span>
                         <span>
-                            <i class="bi bi-person-fill-add"></i>
+                            <i class="bi bi-person"></i>
                             <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/about/lealceldeiro.html">
                             About me
