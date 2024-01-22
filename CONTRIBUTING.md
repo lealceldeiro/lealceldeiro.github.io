@@ -53,6 +53,7 @@ As a standard, we're writing all articles files in HTML format (`.html`).
       See https://jbake.org/docs/2.6.7/#status)
     * `summary`
     * optionally, you can define the following [Open Graph](https://ogp.me/) (_og_) _meta_ values
+        + `ogTitle` -> `title` (defaults to `title`)
         + `ogDesc` -> `description` (defaults to `summary`)
         + `ogAuthor` -> `author`
         + `ogKeyworkds` -> `keywords` (defaults to the article tags)
