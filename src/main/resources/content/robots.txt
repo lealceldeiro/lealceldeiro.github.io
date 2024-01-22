@@ -5,6 +5,7 @@ Disallow: /img/logo/
 Disallow: /img/meta.jpg
 Disallow: /img/fav/
 Disallow: /*-draft.html$
+Disallow: /404.html$
 Allow: /
 
 Sitemap: https://lealceldeiro.com/sitemap.xml
