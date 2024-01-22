@@ -48,7 +48,7 @@
             </div>
 
             <input type="hidden" name="$from"
-                   th:value="(${config.site_host} ?: '') + (${content.uri} ?: '')">
+                   th:value="(${config.site_host} ?: '') + '/' + (${content.uri} ?: '')">
 
             <div class="col-12">
                 <button type="submit" class="btn btn-secondary">Submit</button>
