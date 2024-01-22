@@ -17,9 +17,9 @@
                 </div>
                 <div class="col-md-6 mx-auto">
                     <!-- Subscriptions -->
-                    <div th:replace="subscription.thyme::subscription(${config.subscription_key},
-                                                                      ${config.subscription_url},
-                                                                      'unsubscribe')"></div>
+                    <div th:replace="subscriptionform.thyme::subscription(${config.subscription_key},
+                                                                          ${config.subscription_url},
+                                                                          'unsubscribe')"></div>
                     <!-- End subscriptions -->
                 </div>
             </div>
