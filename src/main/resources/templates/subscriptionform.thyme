@@ -1,8 +1,11 @@
-<div th:fragment="subscription(accessKey, formActionUrl, subscriptionAction)"
+<!-- subscriptionAction: either 'subscribe' or 'manage'-->
+<div th:fragment="subscription(accessKey, formActionUrl, subscriptionAction, headerText)"
      th:with="subscribe = ${#strings.equals('subscribe', subscriptionAction)}"
-     th:class="${subscribe ? 'border rounded border-opacity-10 ' : ''} + 'container mt-4 pt-4'">
-    <div class="col-12 mb-3 mx-2" th:if="*{subscribe}">
-        <h5 class="text-body-secondary"><i class="bi bi-envelope-paper"></i> Get the latest news from us!</h5>
+     class="border rounded border-opacity-10 container mt-4 p-4 pb-2">
+    <div class="col-12 mb-4 text-start">
+        <h5 class="text-body-secondary">
+            <i class="bi bi-envelope-paper"></i>&nbsp;<span th:text="${headerText}"></span>
+        </h5>
     </div>
     <div class="col-12">
         <form class="row row-cols-lg-auto g-3 align-items-center" th:action="${formActionUrl} ?: ''" method="post">
@@ -51,9 +54,9 @@
             </div>
         </form>
     </div>
-    <div class="col-12 mt-3 mx-2" th:if="*{subscribe}">
-        <p class="form-check-label" for="subscribeAcceptTermsField">
-            By submitting this form, you accept our
+    <div class="col-12 mt-2">
+        <p>
+            When you subscribe, you accept our
             <a href="/privacy.html" target="_blank"
                class="text-body-secondary link-underline link-underline-opacity-0">
                 Privacy Policy

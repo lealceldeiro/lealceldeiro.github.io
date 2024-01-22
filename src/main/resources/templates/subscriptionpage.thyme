@@ -9,17 +9,13 @@
 
     <div class="container">
         <main>
-            <div class="position-relative overflow-hidden p-3 text-center">
-                <div class="col-md-6 p-lg-5 mx-auto">
-                    <h1 class="display-4 fw-bold"><i class="bi bi-heartbreak"></i></h1>
-                    <h4 class="fw-normal text-body-secondary mb-3" th:text="${content.message}">
-                    </h4>
-                </div>
-                <div class="col-md-6 mx-auto">
+            <div class="position-relative overflow-hidden p-3 mt-5 text-center">
+                <div class="col-md-8 mx-auto">
                     <!-- Subscriptions -->
                     <div th:replace="subscriptionform.thyme::subscription(${config.subscription_key},
                                                                           ${config.subscription_url},
-                                                                          'unsubscribe')"></div>
+                                                                          'manage',
+                                                                          'Manage subscription')"></div>
                     <!-- End subscriptions -->
                 </div>
             </div>
