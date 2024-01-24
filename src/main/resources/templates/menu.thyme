@@ -29,6 +29,9 @@
                             <a class="nav-link" href="/about/lealceldeiro.html">About me</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/booknotes.html">Book Shelf</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" th:href="${config.site_host} + '/' + ${config.feed_file}">RSS</a>
                         </li>
                     </ul>

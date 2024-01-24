@@ -1,0 +1,78 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="header.thyme::head('Book Shelf', 'Explore notes taken from books about software development')"></head>
+<body onload="prettyPrint()">
+
+<div id="wrap">
+    <div th:replace="menu.thyme::menu"></div>
+
+    <div class="container">
+
+        <div class="mt-5 text-center">
+            <h1>Book Shelf</h1>
+        </div>
+
+        <div>
+            <p>
+                This is a collection of books I have either read, or intend to read. I usually take notes from those
+                I've read already. These notes are listed in a dedicated page for each of the books listed below and
+                are intended to be used as a memo for myself.
+            </p>
+            <p>
+                They are publicly available because I think many people may find them useful as a summary or as a
+                reading list to be considered, but, if you want to really learn about these topics, you should read the
+                linked books.
+            </p>
+            <p>
+                <strong>Disclaimer</strong>: the content here is not intended to be used as an official reference.
+            </p>
+
+            <small>
+                If you're the co/author, publisher (in general, a copyright owner) of some of these books and consider
+                the content of this website (https://lealceldeiro.com/) doesn't comply with your work's copyright
+                policy, please get in touch with me:
+                <a href="mailto:asiel@lealceldeiro.com?subject=About%20use%20of%20book%20in%20your%20Blog%20(Legal%20Notice)&body=Hi%2C%20Asiel%2C%0A%0AI%27m%20writing%20you%20in%20regards%20to%20the%20use%20you%27ve%20made%20in%20your%20blog%20of%20the%20book%20titled%3A%20">
+                    asiel@lealceldeiro.com
+                </a>.
+            </small>
+        </div>
+
+        <div class="vstack gap-3">
+            <th:block th:each="note, stat : ${all_content}">
+                <div class="p-2" th:if="${#strings.equals(note.type, config.booknote_key)}">
+                    <a th:href="*{content.rootpath + note.uri}" class="link-underline link-underline-opacity-0">
+
+                        <div class="card mt-3" style="max-width: 30em;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img class="img-fluid rounded-start"
+                                         th:src="${note.imageSrc}"
+                                         th:alt="${note.imageAlt}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${note.title}"></h5>
+                                        <p class="card-text" th:text="${note.authors}"></p>
+                                        <p class="card-text">
+                                            <small class="text-body-secondary" th:text="'Published: ' + ${note.published}"></small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="footer.thyme::footer"></div>
+
+<script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+        th:src="${rootpath} + 'js/base.js'"></script>
+</body>
+</html>
