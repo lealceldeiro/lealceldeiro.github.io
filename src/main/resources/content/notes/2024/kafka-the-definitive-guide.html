@@ -1,0 +1,517 @@
+title=Kafka: The Definitive Guide
+authors=Gwen Shapira, Todd Palino, Rajini Sivaram & Krit Petty
+publisher=O'REILLY
+published=2022
+date=2024-01-24
+type=booknote
+tags=kafka
+status=published
+
+ogImg=notes/2024/images/kafka-the-definitive-guide_social.png
+imageSrc=notes/2024/images/kafka-the-definitive-guide_social.png
+imageAlt=Image of the book cover: Kafka: The Definitive Guide
+
+ogAuthor=Asiel Leal Celdeiro
+authorHandle=lealceldeiro
+authorProfileImage=/img/fav/ms-icon-310x310.png
+~~~~~~
+<p>
+    Main notes taken from the book
+    <a href="https://a.co/d/7GZmuD8" target="_blank">
+        Kafka: The Definitive Guide: Real-Time Data and Stream Processing at Scale
+    </a>.
+</p>
+
+<h2>Chapter 1: Meet Kafka</h2>
+<p>
+    Data within Kafka is stored durably, in order, and can be read deterministically.
+</p>
+<p>
+    In addition, the data can be distributed within the system to provide additional protections against failures, as
+    well as significant opportunities for scaling performance.
+</p>
+<p>
+    The unit of data within Kafka is the <em>message</em>.
+</p>
+<p>
+    A message can have an optional piece of metadata, which is referred to as a <em>key</em>.
+</p>
+<p>
+    The message and the key are byte arrays and have no specific meaning to Kafka.
+</p>
+<p>
+    The <em>offset</em>, an integer value that continually increases, is another piece of metadata that Kafka adds to
+    each message as it is produced.
+</p>
+<p>
+    A single Kafka server is called a <em>broker</em>.
+</p>
+<p>
+    Kafka brokers are designed to operate as part of a <em>cluster</em>.
+</p>
+<p>
+    Within a cluster of brokers, one broker will also function as the cluster <em>controller</em>.
+</p>
+<p>
+    A partition is owned by a single broker in the cluster, and that broker is called the <em>leader</em> of the
+    partition.
+</p>
+<p>
+    A replicated partition is assigned to additional brokers, called <em>followers</em> of the partition.
+</p>
+
+<h3>Some pros</h3>
+
+<ul>
+    <li>Support for multiple producers</li>
+    <li>Support for multiple consumers</li>
+    <li>Disk-based retention</li>
+    <li>Scalable</li>
+    <li>High performance</li>
+</ul>
+
+<h3>Use Cases</h3>
+
+<ul>
+    <li>Activity tracking</li>
+    <li>Messaging</li>
+    <li>Metrics and logging</li>
+    <li>Commit log</li>
+    <li>Stream processing</li>
+</ul>
+
+<h2>Chapter 2: Installing Kafka</h2>
+
+<h3>My own experience running Kafka locally with Docker</h3>
+
+<p>
+    For this to work, <a href="https://www.docker.com/" target="_blank">Docker</a> must be installed.
+</p>
+<p>
+    The book starts by mentioning the installation of Kafka and ZooKeeper, but after
+    <a href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-833%3A+Mark+KRaft+as+Production+Ready"
+       target="_blank">
+        KRaft was marked as Production Ready
+    </a>, only the Kafka image is actually needed when the version 2.8 or later of Apache Kafka is used.
+</p>
+<p>
+    The following example uses
+    <a href="https://hub.docker.com/r/bitnami/kafka" target="_blank">
+        bitnami/kafka
+    </a> and is based in that official documentation examples.
+</p>
+<ul>
+    <li>
+        <strong>Create a Docker network</strong> (see <a href="https://docs.docker.com/network/" target="_blank">networking</a>)
+        <blockquote>
+            This is to get the Apache Kafka server running inside the container accessed by another Apache Kafka client,
+            running inside another container. This is possible because containers attached to the same network can
+            communicate with each other using the container name as the hostname.
+        </blockquote>
+
+        <pre><code class="language-shell">
+            docker network create app-tier --driver bridge
+        </code></pre>
+    </li>
+    <li>
+        <strong>Launch the Apache Kafka server</strong> instance from a docker container
+        <blockquote>
+            Use the <code>--network app-tier</code> argument to run the docker command to attach the Apache Kafka
+            container to the <code>app-tier</code> network.
+        </blockquote>
+        <pre><code class="language-shell">
+            docker run -d -p 9094:9094 --name kafka-server --hostname kafka-server --network app-tier \
+                       -e KAFKA_CFG_NODE_ID=0 \
+                       -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+                       -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094 \
+                       -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://:9092,EXTERNAL://localhost:9094 \
+                       -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+                       -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-server:9093 \
+                       -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
+                       bitnami/kafka:3.6.1
+        </code></pre>
+
+        To create a cluster (with more than one broker) see
+        <a href="https://github.com/bitnami/containers/blob/main/bitnami/kafka/README.md#setting-up-a-apache-kafka-cluster"
+           target="_blank">
+            Setting up an Apache Kafka cluster
+        </a>.
+        <blockquote>
+            The following parameters are optional in this minimal setup, and are only required if the server will be
+            accessed from the same local machine by another app running from the host machine.
+            <ul>
+                <li><code>-p 9094:9094</code></li>
+                <li><code>EXTERNAL://:9094</code> in <code>KAFKA_CFG_LISTENERS</code></li>
+                <li><code>-e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://:9092,EXTERNAL://localhost:9094 \</code></li>
+                <li>and, <code>EXTERNAL:PLAINTEXT</code> in <code>KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP</code></li>
+            </ul>
+            Also, after the container is (created) and ran the first time, then, in subsequent runs, only this is
+            required to start the container:
+            <pre><code class="language-shell">
+                docker container start kafka-server
+            </code></pre>
+        </blockquote>
+    </li>
+    <li>
+        <strong>Launch an Apache Kafka client</strong> instance from another container and list topics
+        <blockquote>
+            This new container instance running the client will connect to the server created in the previous step.
+        </blockquote>
+        <pre><code class="language-shell">
+        docker run -it --rm --network app-tier bitnami/kafka:3.6.1 kafka-topics.sh --bootstrap-server kafka-server:9092 --list
+        </code></pre>
+        <blockquote>At this point there shouldn't be any topics displayed.</blockquote>
+    </li>
+    <li>
+        <strong>Create a topic</strong>
+        <pre><code class="language-shell">
+            docker run -it --rm --network app-tier bitnami/kafka:3.6.1 kafka-topics.sh --bootstrap-server kafka-server:9092 \
+                       --create --replication-factor 1 --partitions 1 --topic topic1
+        </code></pre>
+    </li>
+    <li>
+        <strong>Verify the previously created topic</strong>
+        <pre><code class="language-shell">
+            docker run -it --rm --network app-tier bitnami/kafka:3.6.1 kafka-topics.sh --bootstrap-server kafka-server:9092 \
+                       --describe --topic topic1
+        </code></pre>
+    </li>
+    <li>
+        <strong>Produce messages</strong> to the previously created topic
+        <pre><code class="language-shell">
+            docker run -it --rm --network app-tier \
+                       bitnami/kafka:3.6.1 kafka-console-producer.sh --bootstrap-server kafka-server:9092 --topic topic1
+        </code></pre>
+        <blockquote>
+            When the console waits for input (symbol <code>></code> visible) enter some message and hit <em>Enter</em>
+            (once for every message). To finish producing messages send an end-of-file (EOF) character to close the
+            client. In most common terminals, this is done with <code>Control</code> + <code>D</code> (<code>^D</code>).
+            If that doesn't work, then do <code>Ctrl</code> + <code>C</code> (<code>^C</code>).
+        </blockquote>
+    </li>
+    <li>
+        <strong>Consume messages</strong> from the previously created topic
+        <pre><code class="language-shell">
+            docker run -it --rm --network app-tier \
+                   bitnami/kafka:3.6.1 kafka-console-consumer.sh --bootstrap-server kafka-server:9092 \
+                   --topic topic1 --from-beginning
+        </code></pre>
+        <details>
+            <summary>Docker run info</summary>
+            See the
+            <a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank">
+                <code>run</code> command
+            </a> for more details.
+
+            <ul>
+                <li><code>-d</code>: run container in background and print container ID</li>
+                <li>
+                    <code>-it</code>: instructs Docker to allocate a pseudo-TTY connected to the container's stdin;
+                    creating an interactive bash shell in the container.
+                </li>
+                <li>
+                    <code>--rm</code>: automatically remove the container when it exits
+                </li>
+            </ul>
+        </details>
+    </li>
+</ul>
+
+<h3>General Broker Parameters</h3>
+
+<ul>
+    <li><code>broker.id</code>: it must be unique for each broker within a single Kafka cluster</li>
+    <li>
+        <code>listeners</code>: defined as <code>&lt;protocol&gt;://&lt;hostname&gt;:&lt;port&gt;</code>, i.e.:
+        <code>PLAINTEXT://localhost:9092,SSL://:9091</code>
+    </li>
+    <li>
+        <code>zookeeper.connect</code>: location of the ZooKeeper used for storing the broker metadata in the format
+        <code>hostname:port/path</code>
+    </li>
+    <li>
+        <code>log.dirs</code>: comma-separated list of paths on disk where all the message log segments are persisted
+    </li>
+    <li>
+        <code>num.recovery.threads.per.data.dir</code>: number of recovery threads per log directory
+    </li>
+    <li>
+        <code>auto.create.topics.enable</code>: whether to create (or not) automatically topics under certain conditions
+    </li>
+    <li>
+        <code>auto.leader.rebalance.enable</code>: this config can be specified to ensure leadership is balanced as much
+        as possible
+    </li>
+    <li>
+        <code>delete.topic.enable</code>: this config can be set to prevent arbitrary deletions of topics (false:
+        disabling topic deletion)
+    </li>
+</ul>
+
+<h3>Selecting Hardware</h3>
+
+<h4>Factors that can contribute to overall performance bottlenecks</h4>
+
+<h5>Disk throughput and capacity</h5>
+
+<p>Faster disk writes will equal lower produce latency.</p>
+
+<p>
+    Generally, observations show that HDD drives are typically more useful for clusters with very high storage
+    needs but aren't accessed as often, while SSDs are better options if there is a very large number of client
+    connections.
+</p>
+
+<p>
+    The total traffic for a cluster can be balanced across the cluster by having multiple partitions per topic,
+    which will allow additional brokers to augment the available capacity if the density on a single broker will not
+    suffice.
+</p>
+
+<h5>Memory</h5>
+
+<p>
+    The normal mode of operation for a Kafka consumer is reading from the end of the partitions, where the
+    consumer is caught up and lagging behind the producers very little, if at all. In this situation, the messages the
+    consumer is reading are optimally stored in the system’s page cache, resulting in faster reads than if the broker
+    has to reread the messages from disk. Therefore, having more memory available to the system for page cache will
+    improve the performance of consumer clients.
+</p>
+
+<p>
+    Kafka itself does not need much heap memory configured for the JVM. Even a broker that is handling 150000
+    messages per second and a data rate of 200 megabits per second can run with a 5GB heap.
+</p>
+
+<p>
+    It is not recommended to have Kafka running on a system with any other significant application, as it will
+    have to share the use of the page cache. This will decrease the consumer performance for Kafka.
+</p>
+
+<h5>Networking</h5>
+
+<p>
+    The available network throughput will specify the maximum amount of traffic that Kafka can handle. This can
+    be a governing factor, combined with disk storage, for cluster sizing. To prevent the network from being a major
+    governing factor, it is recommended to run with at least 10 Gb NICs (Network Interface Cards). Older machines with 1
+    Gb NICs are easily saturated and aren't recommended.
+</p>
+
+<h5>CPU</h5>
+
+<p>
+    Processing power is not as important as disk and memory until you begin to scale Kafka very large, but it
+    will affect overall performance of the broker to some extent.
+</p>
+
+<h3>Configuring Kafka Clusters</h3>
+
+<p>Typically, the size of a cluster will be bound on the following key areas:</p>
+
+<ul>
+    <li>Disk capacity</li>
+    <li>Replica capacity per broker</li>
+    <li>CPU capacity</li>
+    <li>Network capacity</li>
+</ul>
+
+<p>
+    Currently &mdash;2023&mdash;, in a well-configured environment, it is recommended to not have more than 14000
+    partition replicas per broker and 1 million replicas per cluster.
+</p>
+
+<p>Requirements in the broker configuration to allow multiple Kafka brokers to join a single cluster:</p>
+
+<ol>
+    <li>All brokers must have the same configuration for the <code>zookeeper.connect</code> parameter</li>
+    <li>All brokers in the cluster must have a unique value for the <code>broker.id</code> parameter</li>
+</ol>
+
+<p>
+    The current number of dirty pages can be determined by checking:
+</p>
+<pre><code class="language-shell">
+cat /proc/vmstat | egrep "dirty|writeback"
+</code></pre>
+
+<p>
+    The most common choices for local filesystems are either Ext4 (fourth extended filesystem) or Extents File
+    System (XFS), being XFS the preferred option because it outperforms Ext4 for most workloads with minimal tuning
+    required.
+</p>
+
+<h3>Production Concerns</h3>
+
+<h4>JVM Garbage Collector Options</h4>
+
+<p>
+    As of this writing, the Garbage-First garbage collector (G1GC) is the recommended one, but it's worth
+    checking the official
+    <a href="https://kafka.apache.org/documentation.html#java" target="_blank">
+        Kafka documentation
+    </a> related to this topic to get the latest updates; and a best practice is to use if (G1GC) for anything for Java
+    1.8 and later.
+</p>
+
+<p>
+    Configuration options for G1GC used to adjust its performance:
+</p>
+
+<ul>
+    <li><code>MaxGCPauseMillis</code>: preferred pause time for each garbage-collection cycle</li>
+    <li>
+        <code>InitiatingHeapOccupancyPercent</code>: specifies the percentage of the total heap that may be in use
+        before G1GC will start a collection cycle
+    </li>
+</ul>
+
+<h4>Datacenter Layout</h4>
+
+<p>A datacenter environment that has a concept of fault zones is preferable.</p>
+
+<p>
+    It is recommended to use tools that keep your cluster balanced properly to maintain rack awareness, such as
+    <a href="https://github.com/linkedin/cruise-control" target="_blank">
+        Cruise Control
+    </a>.
+</p>
+
+<p>
+    Overall, the best practice is to have each Kafka broker in a cluster installed in a different rack, or at
+    the very least not share single points of failure for infrastructure services such as power and network.
+</p>
+
+<h2>Chapter 3: Kafka Producers: Writing Messages to Kafka</h2>
+
+<h3>Source code</h3>
+
+<p>
+    The source code of a sample Java Kafka Producer, based on the content from this chapter, can be found
+    <a href="https://github.com/lealceldeiro/kafkaproducer" target="_blank">here</a>.
+</p>
+
+<h3>Producer Overview</h3>
+
+<p>Messages to Kafka are produced by creating a <code>ProducerRecord</code>, which includes</p>
+
+<ul>
+    <li>(<strong>mandatory</strong>) the topic we want to send the record to</li>
+    <li>(<strong>mandatory</strong>) and a value</li>
+    <li>(<em>optional</em>) a key</li>
+    <li>(<em>optional</em>) a partition</li>
+    <li>(<em>optional</em>) a timestamp</li>
+    <li>(<em>optional</em>) a collection of headers</li>
+</ul>
+
+<p>
+    When the <code>ProducerRecord</code> is sent, the first thing the producer will do is serialize the key and value
+    objects to byte arrays, so they can be sent over the network.
+</p>
+
+<p>
+    If a partition isn't explicitly specified, the data is sent to a partitioner (which chooses a partition for
+    the message, usually, based on the key).
+</p>
+
+<p>
+    Then, the record is added to a batch of records that will also be sent to the same topic and partition. A
+    separate thread is responsible for sending those batches of records to the appropriate Kafka brokers.
+</p>
+
+<h3>Constructing a Kafka Producer</h3>
+
+<p>Mandatory properties of a Kafka producer:</p>
+<ul>
+    <li>
+        <code>bootstrap.servers</code>: List of host:port pairs of brokers that the producer will use to establish
+        initial connection to the Kafka cluster.
+    </li>
+    <li>
+        <code>key.serializer</code>: Name of a class that will be used to serialize the keys of the records that will be
+        produced to Kafka.
+    </li>
+    <li>
+        <code>value.serializer</code>: Name of a class that will be used to serialize the values of the records that
+        will be produced to Kafka.
+    </li>
+</ul>
+
+
+<p>
+    All the configuration options are available in the
+    <a href="https://kafka.apache.org/documentation.html#producerconfigs" target="_blank">
+        official docs
+    </a>.
+</p>
+
+<p>Primary methods of sending messages:</p>
+<ul>
+    <li>
+        Fire-and-forget
+    </li>
+    <li>
+        Synchronous send
+    </li>
+    <li>
+        Asynchronous send
+    </li>
+</ul>
+
+<h3>Configuring Producers</h3>
+
+<p>
+    Some of the parameters that have a significant impact on memory use, performance, and reliability of the
+    producers:
+</p>
+<ul>
+    <li>
+        <code>client.id</code>: logical identifier for the client and the application it is used in
+    </li>
+    <li>
+        <code>acks</code>: controls how many partition replicas must receive the record before the producer can consider
+        the write successful (valid values: <code>0</code>, <code>1</code>, <code>all</code>)
+    </li>
+    <li>
+        <code>max.block.ms</code>: controls how long the producer may block when calling <code>send()</code> and when
+        explicitly requesting metadata via <code>partitionsFor()</code>
+    </li>
+    <li>
+        <code>delivery.timeout.ms</code>: limits the amount of time spent from the point a record is ready for sending
+        (<code>send()</code> returned successfully and the record is placed in a batch) until either the broker responds
+        or the client gives up, including time spent on retries
+    </li>
+    <li>
+        <code>request.timeout.ms</code>: controls how long the producer will wait for a reply from the server when
+        sending data
+    </li>
+    <li>
+        <code>retries</code>: control how many times the producer will retry sending the message before giving up and
+        notifying the client of an issue. <code>retries=0</code> disables retrying
+    </li>
+    <li>
+        <code>retry.backoff.ms</code>: controls the time to wait when retrying (time-lapse between one and the
+        subsequents retry) to send a message
+    </li>
+    <li>
+        <code>linger.ms</code>: controls the amount of time to wait for additional messages before sending the current
+        batch
+    </li>
+    <li>
+        <code>buffer.memory</code>: sets the amount of memory the producer will use to buffer messages waiting to be
+        sent to brokers
+    </li>
+    <li>
+        <code>compression.type</code>: sets the compression algorithms to be used to compress the data before sending it
+        to the brokers. Valid values are <code>snappy</code>, <code>gzip</code>, <code>lz4</code>, and <code>zstd</code>
+    </li>
+    <li>
+        <code>batch.size</code>: controls the amount of memory <strong>in bytes</strong> used for each batch when
+        batching multiple messages together by the producer before sending them to the broker
+    </li>
+</ul>
+
+<h3>Serializers</h3>
+
+<h4>Apache Avro</h4>
+
+<p>Apache Avro is a language-neutral data serialization format.</p>
