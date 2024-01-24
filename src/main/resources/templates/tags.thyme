@@ -12,60 +12,72 @@
         <th:block th:with="postsCount = ${#lists.size(tag_posts)}">
             <th:block th:if="*{postsCount &gt; 0}">
 
-				<div class="mt-5 text-center">
-					<h2>
-						<span>Articles tagged:</span>
-						<span class="btn btn-light">
+                <div class="mt-5 text-center">
+                    <h2>
+                        <span>Articles tagged:</span>
+                        <span class="btn btn-light">
 							<span th:text="${tag}"></span>
 							<i class="bi bi-tag-fill"></i>
 						</span>
-					</h2>
-				</div>
+                    </h2>
+                </div>
 
-				<div class="accordion" id="tagPostsAccordion">
+                <div class="accordion" id="tagPostsAccordion">
 
-					<!--I'm willing to pay for this accordion with with O(n^2) while baking the site-->
-					<th:block th:each="outerPost, outerStat : ${tag_posts}">
+                    <!--I'm willing to pay for this accordion with with O(n^2) while baking the site-->
+                    <th:block th:each="outerPost, outerStat : ${tag_posts}">
 
-						<div class="accordion-item"
-							 th:if="${outerStat.first
+                        <div class="accordion-item"
+                             th:if="${outerStat.first
                               || #dates.format(outerPost.date, 'MMMM-yyyy')
                                  != #dates.format(tag_posts[outerStat.index - 1].date, 'MMMM-yyyy')}">
-							<!-- the outer loop creates the accordion items/headers-->
-							<h2 class="accordion-header">
-								<button type="button" data-bs-toggle="collapse"
-										th:class="'accordion-button ' + (${outerStat.first} ? '' : 'collapsed')"
-										th:attr="data-bs-target='#collapseIt' + ${#dates.format(outerPost.date,'MMMM-yyyy')},
+                            <!-- the outer loop creates the accordion items/headers-->
+                            <h2 class="accordion-header">
+                                <button type="button" data-bs-toggle="collapse"
+                                        th:class="'accordion-button ' + (${outerStat.first} ? '' : 'collapsed')"
+                                        th:attr="data-bs-target='#collapseIt' + ${#dates.format(outerPost.date,'MMMM-yyyy')},
                                          aria-expanded= ${outerStat.first} ? 'true' : 'false',
                                          aria-controls='collapseIt' + ${#dates.format(outerPost.date,'MMMM-yyyy')}">
-									<span th:text="${#dates.format(outerPost.date,'MMMM yyyy')}"></span>
-								</button>
-							</h2>
+                                    <span th:text="${#dates.format(outerPost.date,'MMMM yyyy')}"></span>
+                                </button>
+                            </h2>
 
-							<th:block th:each="innerPost, innerStat : ${tag_posts}"
-									  th:if="${innerStat.index >= outerStat.index
+                            <th:block th:each="innerPost, innerStat : ${tag_posts}"
+                                      th:if="${innerStat.index >= outerStat.index
                                        && #dates.format(innerPost.date,'MMMM-yyyy')
                                           == #dates.format(outerPost.date,'MMMM-yyyy')}">
-								<!-- the inner loop creates the post-entries inside each accordion item/header-->
-								<div th:class="'accordion-collapse collapse ' + (${outerStat.first} ? 'show' : '')"
-									 th:id="'collapseIt' + *{#dates.format(innerPost.date,'MMMM-yyyy')}">
-									<div class="accordion-body">
-										<span class="font-weight-bold" th:text="${#dates.format(innerPost.date, 'dd')}"/>:
-										<a th:href="*{content.rootpath + innerPost.uri}"
-										   th:text="${innerPost.title}"></a>
-									</div>
-								</div>
-							</th:block>
+                                <!-- the inner loop creates the post-entries inside each accordion item/header-->
+                                <div th:class="'accordion-collapse collapse ' + (${outerStat.first} ? 'show' : '')"
+                                     th:id="'collapseIt' + *{#dates.format(innerPost.date,'MMMM-yyyy')}">
+                                    <div class="accordion-body">
+                                        <span class="font-weight-bold"
+                                              th:text="${#dates.format(innerPost.date, 'dd')}"/>:
+                                        <a th:href="*{content.rootpath + innerPost.uri}"
+                                           th:text="${innerPost.title}"></a>
+                                    </div>
+                                </div>
+                            </th:block>
 
-						</div>
+                        </div>
 
-					</th:block>
-				</div>
+                    </th:block>
+                </div>
 
             </th:block>
 
             <th:block th:unless="*{postsCount &gt; 0}">
-                <div th:replace="cooking.thyme::cooking"></div>
+
+                <th:block th:with="allPostsCount = ${#lists.size(published_posts)}">
+
+                    <th:block th:if="*{allPostsCount &gt; 0}">
+                        <div th:replace="noposts.thyme::noposts"></div>
+                    </th:block>
+                    <th:block th:unless="*{allPostsCount &gt; 0}">
+                        <div th:replace="cooking.thyme::cooking"></div>
+                    </th:block>
+
+                </th:block>
+
             </th:block>
         </th:block>
 
@@ -76,6 +88,6 @@
 <div th:replace="footer.thyme::footer"></div>
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-		th:src="${rootpath} + 'js/base.js'"></script>
+        th:src="${rootpath} + 'js/base.js'"></script>
 </body>
 </html>

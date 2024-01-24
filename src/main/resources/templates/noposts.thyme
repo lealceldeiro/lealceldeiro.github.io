@@ -1,0 +1,12 @@
+<div th:fragment="noposts" class="px-4 py-5 my-5 text-center">
+    <i class="bi bi-emoji-smile-upside-down" style="font-size:5rem;"></i>
+
+    <h3 class="mt-3 display-5 fw-bold text-body-emphasis">No posts tagged '<span th:text="${tag}"></span>'</h3>
+    <div class="mt-5">
+        <p class="lead">Try another tag, or take a look at our
+            <a href="/archive.html" class="link-underline link-underline-opacity-0">
+                Archive
+            </a>
+        </p>
+    </div>
+</div>
