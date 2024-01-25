@@ -85,6 +85,8 @@
 
 </div>
 
+<button th:replace="backtopbutton.thyme::backtopbutton"></button>
+
 <div th:replace="footer.thyme::footer"></div>
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
