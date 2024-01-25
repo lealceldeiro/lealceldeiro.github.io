@@ -51,7 +51,7 @@
                                      th:id="'collapseIt' + *{#dates.format(innerPost.date,'MMMM-yyyy')}">
                                     <div class="accordion-body">
                                         <span class="font-weight-bold"
-                                              th:text="${#dates.format(innerPost.date, 'dd')}"/>:
+                                              th:text="${#dates.format(innerPost.date, 'd')}"/>:
                                         <a th:href="*{content.rootpath + innerPost.uri}"
                                            th:text="${innerPost.title}"></a>
                                     </div>
