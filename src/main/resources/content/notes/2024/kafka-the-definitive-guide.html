@@ -193,8 +193,8 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
         <strong>Consume messages</strong> from the previously created topic
         <pre><code class="language-shell">
             docker run -it --rm --network app-tier \
-                   bitnami/kafka:3.6.1 kafka-console-consumer.sh --bootstrap-server kafka-server:9092 \
-                   --topic topic1 --from-beginning
+                       bitnami/kafka:3.6.1 kafka-console-consumer.sh --bootstrap-server kafka-server:9092 \
+                       --topic topic1 --from-beginning
         </code></pre>
         <details>
             <summary>Docker run info</summary>
@@ -255,13 +255,11 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
 <h5>Disk throughput and capacity</h5>
 
 <p>Faster disk writes will equal lower produce latency.</p>
-
 <p>
     Generally, observations show that HDD drives are typically more useful for clusters with very high storage
     needs but aren't accessed as often, while SSDs are better options if there is a very large number of client
     connections.
 </p>
-
 <p>
     The total traffic for a cluster can be balanced across the cluster by having multiple partitions per topic,
     which will allow additional brokers to augment the available capacity if the density on a single broker will not
@@ -273,16 +271,14 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
 <p>
     The normal mode of operation for a Kafka consumer is reading from the end of the partitions, where the
     consumer is caught up and lagging behind the producers very little, if at all. In this situation, the messages the
-    consumer is reading are optimally stored in the system’s page cache, resulting in faster reads than if the broker
+    consumer is reading are optimally stored in the system's page cache, resulting in faster reads than if the broker
     has to reread the messages from disk. Therefore, having more memory available to the system for page cache will
     improve the performance of consumer clients.
 </p>
-
 <p>
     Kafka itself does not need much heap memory configured for the JVM. Even a broker that is handling 150000
     messages per second and a data rate of 200 megabits per second can run with a 5GB heap.
 </p>
-
 <p>
     It is not recommended to have Kafka running on a system with any other significant application, as it will
     have to share the use of the page cache. This will decrease the consumer performance for Kafka.
@@ -307,7 +303,6 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
 <h3>Configuring Kafka Clusters</h3>
 
 <p>Typically, the size of a cluster will be bound on the following key areas:</p>
-
 <ul>
     <li>Disk capacity</li>
     <li>Replica capacity per broker</li>
@@ -319,9 +314,7 @@ authorProfileImage=/img/fav/ms-icon-310x310.png
     Currently &mdash;2023&mdash;, in a well-configured environment, it is recommended to not have more than 14000
     partition replicas per broker and 1 million replicas per cluster.
 </p>
-
 <p>Requirements in the broker configuration to allow multiple Kafka brokers to join a single cluster:</p>
-
 <ol>
     <li>All brokers must have the same configuration for the <code>zookeeper.connect</code> parameter</li>
     <li>All brokers in the cluster must have a unique value for the <code>broker.id</code> parameter</li>
@@ -352,11 +345,9 @@ cat /proc/vmstat | egrep "dirty|writeback"
     </a> related to this topic to get the latest updates; and a best practice is to use if (G1GC) for anything for Java
     1.8 and later.
 </p>
-
 <p>
     Configuration options for G1GC used to adjust its performance:
 </p>
-
 <ul>
     <li><code>MaxGCPauseMillis</code>: preferred pause time for each garbage-collection cycle</li>
     <li>
@@ -368,14 +359,12 @@ cat /proc/vmstat | egrep "dirty|writeback"
 <h4>Datacenter Layout</h4>
 
 <p>A datacenter environment that has a concept of fault zones is preferable.</p>
-
 <p>
     It is recommended to use tools that keep your cluster balanced properly to maintain rack awareness, such as
     <a href="https://github.com/linkedin/cruise-control" target="_blank">
         Cruise Control
     </a>.
 </p>
-
 <p>
     Overall, the best practice is to have each Kafka broker in a cluster installed in a different rack, or at
     the very least not share single points of failure for infrastructure services such as power and network.
@@ -393,7 +382,6 @@ cat /proc/vmstat | egrep "dirty|writeback"
 <h3>Producer Overview</h3>
 
 <p>Messages to Kafka are produced by creating a <code>ProducerRecord</code>, which includes</p>
-
 <ul>
     <li>(<strong>mandatory</strong>) the topic we want to send the record to</li>
     <li>(<strong>mandatory</strong>) and a value</li>
@@ -407,12 +395,10 @@ cat /proc/vmstat | egrep "dirty|writeback"
     When the <code>ProducerRecord</code> is sent, the first thing the producer will do is serialize the key and value
     objects to byte arrays, so they can be sent over the network.
 </p>
-
 <p>
     If a partition isn't explicitly specified, the data is sent to a partitioner (which chooses a partition for
     the message, usually, based on the key).
 </p>
-
 <p>
     Then, the record is added to a batch of records that will also be sent to the same topic and partition. A
     separate thread is responsible for sending those batches of records to the appropriate Kafka brokers.
@@ -435,7 +421,6 @@ cat /proc/vmstat | egrep "dirty|writeback"
         will be produced to Kafka.
     </li>
 </ul>
-
 
 <p>
     All the configuration options are available in the
@@ -515,3 +500,912 @@ cat /proc/vmstat | egrep "dirty|writeback"
 <h4>Apache Avro</h4>
 
 <p>Apache Avro is a language-neutral data serialization format.</p>
+
+<p>
+    Generating Avro classes can be done either using the `avro-tools.jar` or the Avro Maven plugin, both part of
+    Apache Avro (<a href="https://avro.apache.org/docs/current/getting-started-java/" target="_blank">see docs</a>).
+</p>
+
+<h3>Partitions</h3>
+
+<p>
+    When partitioning keys is important, the easiest solution is to create topics with sufficient partitions,
+    see
+    <a href="https://www.confluent.io/blog/how-choose-number-topics-partitions-kafka-cluster/" target="_blank">
+        How to Choose the Number of Topics/Partitions in a Kafka Cluster?
+    </a>
+</p>
+
+<h3>Headers</h3>
+
+<p>
+    Records can also include headers. Record headers give us the ability to add some metadata about the Kafka
+    record, without adding any extra information to the key/value pair of the record itself.
+</p>
+
+<h3>Interceptors</h3>
+
+<p>
+    Interceptors can help us to modify the behavior of our Kafka client application without modifying its code.
+</p>
+<p>
+    Common use cases for producer interceptors include capturing monitoring and tracing information; enhancing
+    the message with standard headers, especially for lineage tracking purposes; and redacting sensitive information.
+</p>
+
+<h3>Quotas and Throttling</h3>
+
+<p>
+    Kafka brokers have the ability to limit the rate at which messages are produced and consumed. This is done
+    via the quota mechanism. Kafka has three quota types: produce, consume, and request.
+</p>
+<p>
+    Produce and consume quotas limit the rate at which clients can send and receive data, measured in bytes per
+    second. Request quotas limit the percentage of time the broker spends processing client requests.
+</p>
+<p>
+    When a client reaches its quota, the broker will start throttling the client's requests to prevent it from
+    exceeding the quota. This means that the broker will delay responses to client requests; in most clients this will
+    automatically reduce the request rate (since the number of in-flight requests is limited) and bring the client
+    traffic down to a level allowed by the quota. To protect the broker from misbehaved clients sending additional
+    requests while being throttled, the broker will also mute the communication channel with the client for the period
+    of time needed to achieve compliance with the quota.
+</p>
+
+<h2>Chapter 4: Kafka Consumers: Reading Data from Kafka</h2>
+
+<p>
+    The source code of a sample Java Kafka Consumer, based on the content from this chapter, can be found
+    <a href="https://github.com/lealceldeiro/kafkaconsumer" target="_blank">here</a>.
+</p>
+<p>
+    Applications that need to read data from Kafka use a KafkaConsumer to subscribe to Kafka topics and receive
+    messages from these topics.
+</p>
+
+<h4>Consumers and Consumer Groups</h4>
+
+<p>
+    A consumer group must be created for each application that needs all the messages from one or more topics.
+</p>
+<p>
+    Consumers are added to an existing consumer group to scale the reading and processing of messages from the
+    topics, so each additional consumer in a group will only get a subset of the messages.
+</p>
+
+<h4>Consumer Groups and Partition Rebalance</h4>
+
+<p>
+    Moving partition ownership from one consumer to another is called a <em>rebalance</em>.
+</p>
+<p>Types of rebalances:</p>
+<ul>
+    <li>
+        Eager rebalances: all consumers stop consuming, give up their ownership of all partitions, rejoin the consumer
+        group, and get a brand-new partition assignment.
+    </li>
+    <li>
+        Cooperative rebalances: typically involve reassigning only a small subset of the partitions from one consumer to
+        another, and allowing consumers to continue processing records from all the partitions that are not reassigned.
+    </li>
+</ul>
+
+<p>
+    Consumers maintain membership in a consumer group and ownership of the partitions assigned to them by
+    sending <em>heartbeats</em> to a Kafka broker designated as the <em>group coordinator</em>.
+</p>
+
+<p>The first consumer to join the group becomes the group <em>leader</em>.</p>
+
+<p>
+    By default, the identity of a consumer as a member of its consumer group is transient, unless it's
+    configured with a unique <code>group.instance.id</code>, which makes the consumer a <em>static</em> member of the
+    group.
+</p>
+<p>
+    If two consumers join the same group with the same group.instance.id, the second consumer will get an error
+    saying that a consumer with this ID already exists.
+</p>
+
+<p>
+    To consume records from a Kafka broker: create a <code>KafkaConsumer</code> (create a Java <code>Properties</code>
+    instance with the properties to be passed to the consumer; three mandatory properties:
+    <code>bootstrap.servers</code>, <code>key.deserializer</code>, and <code>value.deserializer</code>).
+</p>
+<ul>
+    <li>
+        <code>bootstrap.servers</code>: connection string to a Kafka cluster
+    </li>
+    <li>
+        <code>key.deserializer</code> and <code>value.deserializer</code>: specify classes that turn Java objects to
+        byte arrays
+    </li>
+</ul>
+
+<p>
+    Another common property is <code>group.id</code>, and it specifies the consumer group the <code>KafkaConsumer</code>
+    instance belongs to.
+</p>
+
+<h4>Creating a Kafka Consumer</h4>
+
+<h5>The Poll Loop</h5>
+
+<p>
+    At the heart of the Consumer API is a simple loop for polling the server for more data.
+</p>
+
+<h6>Thread Safety</h6>
+
+<p>
+    Multiple consumers that belong to the same group cannot coexist in the same thread, and there cannot be
+    multiple threads safely use the same consumer. One consumer per thread is the rule.
+</p>
+<p>
+    To run multiple consumers in the same group in one application, each of them needs to run in its own thread.
+    It is useful to wrap the consumer logic in its own object and then use Java's <code>ExecutorService</code> to start
+    multiple threads, each with its own consumer. See an example in this
+    <a href="https://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/"
+       target="_blank">
+        Tutorial
+    </a>.
+</p>
+
+<h4>Configuring Consumers</h4>
+
+<p>
+    All the consumer configuration is documented in the
+    <a href="https://kafka.apache.org/documentation.html#newconsumerconfigs" target="_blank">
+        Apache Kafka documentation
+    </a>.
+</p>
+<p>
+    Assignment strategies (used to configure `partition.assignment.strategy` with one of
+    the <code>org.apache.kafka.clients.consumer.*Assignor</code> values):
+</p>
+<ul>
+    <li>Range</li>
+    <li>RoundRobin</li>
+    <li>Sticky</li>
+    <li>Cooperative Sticky</li>
+</ul>
+
+<h4>Standalone Consumer: Why and How to Use a Consumer Without a Group</h4>
+
+<p>
+    When it's known exactly which partitions the consumer should read, the consumer can be not subscribed to a
+    topic, instead, it is assigned a few partitions. A consumer can either subscribe to topics (and be part of a
+    consumer group) or assign itself partitions, but not both at the same time.
+</p>
+
+<p>Example:</p>
+<pre><code class="language-java">
+Duration timeout = Duration.ofMillis(100);
+List&lt;PartitionInfo&gt; partitionInfos = null;
+partitionInfos = consumer.partitionsFor("topic");
+
+if (partitionInfos != null) {
+    for (PartitionInfo partition : partitionInfos) {
+        partitions.add(new TopicPartition(partition.topic(), partition.partition()));
+    }
+    consumer.assign(partitions);
+
+    while (true) {
+        ConsumerRecords&lt;String, String&gt; records = consumer.poll(timeout);
+
+        for (ConsumerRecord&lt;String, String&gt; record: records) {
+            // do some work with record
+        }
+        consumer.commitSync();
+    }
+}
+</code></pre>
+
+<h2>Chapter 5: Managing Apache Kafka Programmatically</h2>
+
+<p>
+    Kafka's <em>AdminClient</em> is asynchronous. It is useful for application developers who want to create topics
+    on the fly and validate that the topics they are using are configured correctly for their application. It is also
+    useful for operators and SREs who want to create tooling and automation around Kafka or need to recover from an
+    incident.
+</p>
+
+<h4>AdminClient Lifecycle: Creating, Configuring, and Closing</h4>
+
+<p>Example:</p>
+<pre><code class="language-java">
+Properties props = new Properties();
+props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+AdminClient admin = AdminClient.create(props);
+// Do something with the AdminClient instance
+admin.close(Duration.ofSeconds(30));
+</code></pre>
+
+<p>
+    All <code>AdminClient</code> configuration can be found at the
+    <a href="https://kafka.apache.org/documentation/#adminclientconfigs" target="_blank">
+        Apache Kafka officialdocumentation
+    </a>.
+</p>
+<p>Some noteworthy ones are:</p>
+<ul>
+    <li><code>client.dns.lookup</code></li>
+    <li><code>request.timeout.ms</code></li>
+</ul>
+<p>
+    <code>AdminClient</code> result objects throw <code>ExecutionException</code> when Kafka responds with an error.
+    This is because <code>AdminClient</code> results are wrapped <code>Future</code> objects, and those wrap exceptions.
+    The cause of <code>ExecutionException</code> needs to be examined always to get the error that Kafka returned.
+</p>
+
+<h2>Chapter 6: Kafka Internals</h2>
+
+<p>
+    Kafka uses ZooKeeper's ephemeral node feature to elect a controller and to notify the controller when nodes join and
+    leave the cluster. The controller is responsible for electing leaders among the partitions and replicas whenever it
+    notices nodes join and leave the cluster. The controller uses the epoch number to prevent a "split brain" scenario
+    where two nodes believe each is the current controller.
+</p>
+<p>
+    From the list of replicas for a partition displayed by the <code>kafka-topics.sh</code> tool, the first replica in
+    the list is always the preferred leader.
+</p>
+<p>
+    This is true no matter who is the current leader and even if the replicas were reassigned to different brokers using
+    the replica reassignment tool.
+</p>
+<p>When replicas are manually reassigned, the first replica specified will be the preferred one.</p>
+<p>Common types of client requests:</p>
+<ul>
+    <li>Produce requests: Sent by producers and contain messages the clients write to Kafka brokers</li>
+    <li>Fetch requests: Sent by consumers and follower replicas when they read messages from Kafka brokers</li>
+    <li>Admin requests: Sent by admin clients when performing metadata operations such as creating and deleting topics
+    </li>
+</ul>
+
+<p>
+    New brokers know how to handle old requests, but old brokers don't know how to handle new requests. Now, in release
+    <code>0.10.0</code>, <code>ApiVersionRequest</code> was added, which allows clients to ask the broker which versions
+    of each request are supported and to use the correct version accordingly. Clients that use this new capability
+    correctly will be able to talk to older brokers by using a version of the protocol that is supported by the broker
+    they are connecting to.
+</p>
+
+<h2>Chapter 7: Reliable Data Delivery</h2>
+
+<p>
+    Reliability is not just a matter of specific Kafka features. An entire reliable system needs to be built, including
+    the application architecture, the way applications use the producer and consumer APIs, producer and consumer
+    configuration, topic configuration, and broker configuration. Making the system more reliable always has trade-offs
+    in application complexity, performance, availability, or disk-space usage. By understanding all the options and
+    common patterns and understanding requirements for each use case, more informed decisions can be made regarding how
+    reliable the application and Kafka deployment need to be and which trade-offs make sense.
+</p>
+
+<p>Guarantees provided by Kafka:</p>
+<ul>
+    <li>
+        Kafka provides order guarantee of messages in a partition. If message B was written after message A, using the
+        same producer in the same partition, then Kafka guarantees that the offset of message B will be higher than
+        message A, and that consumers will read message B after message A.
+    </li>
+    <li>
+        Produced messages are considered "committed" when they were written to the partition on all its in-sync replicas
+        (but not necessarily flushed to disk). Producers can choose to receive acknowledgments of sent messages when the
+        message was fully committed, when it was written to the leader, or when it was sent over the network.
+    </li>
+    <li>
+        Messages that are committed will not be lost as long as at least one replica remains alive.
+    </li>
+    <li>
+        Consumers can only read messages that are committed.
+    </li>
+</ul>
+
+<p>
+    These guarantees can then be "tweaked" by changing Kafka's configuration, depending on the business needs and
+    trade-offs made taking into account other important considerations, such as availability, high throughput, low
+    latency, and hardware costs.
+</p>
+<p>
+    If we allow out-of-sync replicas to become leaders, we risk data loss and inconsistencies. If we don't allow them to
+    become leaders, we face lower availability as we must wait for the original leader to become available before the
+    partition is back online.
+
+</p>
+<p>
+    There are two important things that everyone who writes applications that produce to Kafka must pay attention to:
+</p>
+<ul>
+    <li>Use the correct <code>acks</code> configuration to match reliability requirements</li>
+    <li>Handle errors correctly both in configuration and in code</li>
+</ul>
+
+<p>Some failure conditions under which integration tests can be run:</p>
+<ul>
+    <li>Clients lose connectivity to one of the brokers</li>
+    <li>High latency between client and broker</li>
+    <li>Disk full</li>
+    <li>Hanging disk (also called "brown out")</li>
+    <li>Leader election</li>
+    <li>Rolling restart of brokers</li>
+    <li>Rolling restart of consumers</li>
+    <li>Rolling restart of producers</li>
+</ul>
+
+<p>
+    <a href="https://github.com/apache/kafka/blob/trunk/trogdor/README.md"
+       target="_blank">Trogdor</a>, the test framework for
+    Apache Kafka could be used to simulate systems faults.
+</p>
+<p>
+    <a href="https://github.com/linkedin/Burrow" target="_blank">Burrow, the Kafka Consumer Lag Checking</a> could be
+    useful in helping monitoring of consumer lags.
+</p>
+
+<h2>Chapter 8: Exactly-Once Semantics</h2>
+
+<p>Mechanisms that provide exactly-once guarantees:</p>
+<ol>
+    <li>idempotent producer - which avoids duplicates that are caused by the retry mechanism</li>
+    <li>transactions - form the basis of exactly-once semantics in Kafka Streams</li>
+</ol>
+
+<p>
+    When the idempotent producer is enabled, each message will include a unique identified producer ID (<em>PID</em>)
+    and a <em>sequence number</em>, which together with the target <em>topic</em> and <em>partition</em>, uniquely
+    identify each message.
+</p>
+<p>
+    The idempotent producer will only prevent duplicates caused by the retry mechanism of the producer itself, whether
+    the retry is caused by producer, network, or broker errors. But nothing else.
+</p>
+<p>
+    Exactly-once processing means that consuming, processing, and producing are done <em>atomically</em>. Either the
+    offset of the original message is committed and the result is successfully produced or neither of these things
+    happen. We need to make sure that partial results—where the offset is committed but the result isn't produced, or
+    vice versa&mdash;can't happen. To support this behavior, Kafka transactions introduce the idea of atomic
+    multi-partition
+    writes.
+</p>
+<p>
+    A transactional producer is simply a Kafka producer that is configured with a <code>transactional.id</code> and has
+    been initialized using <code>initTransactions()</code>.
+</p>
+<p>
+    Transactions provide exactly-once guarantees when used within chains of consume-process-produce stream processing
+    tasks. In other contexts, transactions will either straight-out not work or will require additional effort in order
+    to achieve the guarantees we want.
+</p>
+<p>
+    Two mistakes are assuming that exactly-once guarantees apply on actions other than producing to Kafka, and that
+    consumers always read entire transactions and have information about transaction boundaries.
+</p>
+<p>
+    The most common and most recommended way to use transactions is to enable exactly-once guarantees in Kafka Streams.
+</p>
+<p>
+    To enable exactly-once guarantees for a Kafka Streams application, we simply set the
+    <code>processing.guarantee</code> configuration to either <code>exactly_once</code> or
+    <code>exactly_once_beta</code>.
+</p>
+
+<h2>Chapter 9: Building Data Pipelines</h2>
+
+<p>
+    The main value Kafka provides to data pipelines is its ability to serve as a very large, reliable buffer between
+    various stages in the pipeline.
+</p>
+
+<h3>Run Kafka Connect</h3>
+
+<pre><code class="language-shell">
+bin/connect-distributed.sh config/connect-distributed.properties
+</code></pre>
+
+<p>
+    The <a href="https://debezium.io/" target="_blank">Debezium Project</a> provides a collection of high-quality, open
+    source, change capture connectors for a variety of databases.
+</p>
+<p>
+    Kafka can be looked at as a platform that can handle data integration (with Connect), application integration (with
+    producers and consumers), and stream processing. Kafka could be a viable replacement for an ETL tool that only
+    integrates data stores.
+</p>
+
+<h2>Chapter 10: Cross-Cluster Data Mirroring</h2>
+
+<p>Apache Kafka's built-in cross-cluster replicator is called MirrorMaker.</p>
+
+<h3>Use Cases of Cross-Cluster Mirroring</h3>
+<ul>
+    <li>Regional and central clusters</li>
+    <li>High availability (HA) and disaster recovery (DR)</li>
+    <li>Regulatory compliance</li>
+    <li>Cloud migrations</li>
+    <li>Aggregation of data from edge clusters</li>
+</ul>
+
+<h3>Multicluster Architectures</h3>
+
+<p>Some principles that should guide these architectures:</p>
+<ul>
+    <li>No less than one cluster per datacenter.</li>
+    <li>Replicate each event exactly once (barring retries due to errors) between each pair of datacenters.</li>
+    <li>Some principles that should guide these architectures:When possible, consume from a remote datacenter rather
+        than produce to a remote datacenter.
+    </li>
+</ul>
+
+<h4>Hub-and-Spoke Architecture</h4>
+
+<p>
+    The main benefit of this architecture is that data is always produced to the local datacenter and events from each
+    datacenter are only mirrored once—to the central datacenter.
+</p>
+<p>
+    The main drawback of this architecture is the direct result of its benefits and simplicity. Processors in one
+    regional datacenter can't access data in another.
+</p>
+
+<h4>Active-Active Architecture</h4>
+
+<p>
+    One benefit of this architecture is the ability to serve users from a nearby datacenter, which typically has
+    performance benefits, without sacrificing functionality due to limited availability of data.
+</p>
+<p>
+    Another benefit is redundancy and resilience. Since every datacenter has all the functionality, if one datacenter is
+    unavailable, you can direct users to a remaining datacenter. This type of failover only requires network redirects
+    of users, typically the easiest and most transparent type of failover.
+</p>
+<p>
+    The main drawback of this architecture is the challenge in avoiding conflicts when data is read and updated
+    asynchronously in multiple locations.
+</p>
+
+<h4>Active-Standby Architecture</h4>
+
+<p>
+    The benefits of this setup are simplicity in setup and the fact that it can be used in pretty much any use case.
+</p>
+<p>
+    The disadvantages are waste of a good cluster and the fact that failover between Kafka clusters is, in fact, much
+    harder than it looks.
+</p>
+
+<h4>Stretch Clusters</h4>
+
+<p>
+    One advantage of this architecture is in the synchronous replication&mdash;some types of business simply require
+    that their DR site is always 100% synchronized with the primary site.
+</p>
+<p>
+    Other advantage is that both datacenters and all brokers in the cluster are used. There is no waste like in
+    <em>active-standby</em> architectures.
+</p>
+<p>
+    This architecture is limited in the type of disasters it protects against. It only protects from datacenter
+    failures, not any kind of application or Kafka failures. The operational complexity is also limited. This
+    architecture demands physical infrastructure that not all companies can provide.
+</p>
+
+<h3>Apache Kafka's MirrorMaker</h3>
+
+<p>
+    MirrorMaker is highly configurable. In addition to the cluster settings to define the topology, Kafka Connect, and
+    connector settings, every configuration property of the underlying producer, consumers, and admin client used by
+    MirrorMaker can be customized.
+</p>
+
+<p>Example: start MirrorMaker with the configuration options specified in the properties file:</p>
+
+<pre><code class="language-shell">
+bin/connect-mirror-maker.sh etc/kafka/connect-mirror-maker.properties
+</code></pre>
+
+<p>
+    Any number of these processes can be started to form a dedicated MirrorMaker cluster that is scalable and
+    fault-tolerant. The processes mirroring to the same cluster will find each other and balance load between them
+    automatically. Usually when running MirrorMaker in a production environment, we'd want to run MirrorMaker as a
+    service, running in the background with `nohup` and redirecting its console output to a log file. The tool also
+    has <code>-daemon</code> as a command-line option that should do that for us.
+</p>
+<p>
+    Production deployment systems like Ansible, Puppet, Chef, and Salt are often used to automate deployment and manage
+    the many configuration options. MirrorMaker may also be run inside a Docker container. MirrorMaker is completely
+    stateless and doesn't require any disk storage (all the data and state are stored in Kafka itself).
+</p>
+
+<p>When deploying MirrorMaker in production, it is important to monitor it as follows:</p>
+<ul>
+    <li>Kafka Connect monitoring</li>
+    <li>MirrorMaker metrics monitoring</li>
+    <li>Lag monitoring</li>
+    <li>Producer and consumer metrics monitoring</li>
+    <li>Canary</li>
+</ul>
+
+<h2>Chapter 11: Securing Kafka</h2>
+
+<h3>
+    Some security procedures applied in Kafka to establish and maintain confidentiality/integrity/availability of data
+</h3>
+<ul>
+    <li>Authentication establishes your identity and determines _who_ you are.</li>
+    <li>Authorization determines _what_ you are allowed to do.</li>
+    <li>Encryption protects your data from eavesdropping and tampering.</li>
+    <li>Auditing tracks what you have done or have attempted to do.</li>
+    <li>Quotas control how much of the resources you can utilize.</li>
+</ul>
+
+<h3>A secure deployment must guarantee</h3>
+<ul>
+    <li>Client authenticity</li>
+    <li>Server authenticity</li>
+    <li>Data privacy</li>
+    <li>Data integrity</li>
+    <li>Access control</li>
+    <li>Auditability</li>
+    <li>Availability</li>
+</ul>
+
+<h3>Security Protocols</h3>
+
+<p>
+    Each Kafka security protocol combines a transport layer (PLAINTEXT or SSL) with an optional authentication layer
+    (SSL or SASL):
+</p>
+<ul>
+    <li><code>PLAINTEXT</code></li>
+    <li><code>SSL</code></li>
+    <li><code>SASL_PLAINTEXT</code></li>
+    <li><code>SASL_SSL</code></li>
+</ul>
+
+<p>
+    Example: Configure SSL for the inter-broker and internal listeners, and SASL_SSL for the external listener:
+</p>
+
+<pre><code class="language-properties">
+listeners=EXTERNAL://:9092,INTERNAL://10.0.0.2:9093,BROKER://10.0.0.2:9094
+advertised.listeners=EXTERNAL://broker1.example.com:9092,INTERNAL://broker1.local:9093,BROKER://broker1.local:9094
+listener.security.protocol.map=EXTERNAL:SASL_SSL,INTERNAL:SSL,BROKER:SSL
+inter.broker.listener.name=BROKER
+</code></pre>
+
+<p>
+    Then clients are configured with a security protocol and bootstrap servers that determine the broker listener.
+    Metadata returned to clients contains only the endpoints corresponding to the same listener as the bootstrap
+    servers:
+</p>
+<pre><code class="language-properties">
+security.protocol=SASL_SSL
+bootstrap.servers=broker1.example.com:9092,broker2.example.com:9092
+</code></pre>
+
+<h4>SASL</h4>
+
+<p>Kafka brokers support the following SASL mechanisms out of the box:</p>
+<ul>
+    <li><code>GSSAPI</code></li>
+    <li><code>PLAIN</code></li>
+    <li><code>SCRAM-SHA-256 and SCRAM-SHA-512</code></li>
+    <li><code>OAUTHBEARER</code></li>
+</ul>
+
+<p>Kafka uses the Java Authentication and Authorization Service (JAAS) for configuring SASL.</p>
+
+<h4>SASL/GSSAPI</h4>
+
+<p>
+    Generic Security Service Application Program Interface (GSS-API) is a framework for providing security services to
+    applications using different authentication mechanisms.
+</p>
+
+<h4>SASL/SCRAM</h4>
+
+<p>
+    SCRAM applies a one-way cryptographic hash function on the password combined with a random salt to avoid the actual
+    password being transmitted over the wire or stored in a database.
+</p>
+<p>
+    Kafka provides safeguards by supporting only the strong hashing algorithms SHA-256 and SHA-512 and avoiding weaker
+    algorithms like SHA-1. This is combined with a high default iteration count of 4,096 and unique random salts for
+    every stored key to limit the impact if ZooKeeper security is compromised.
+</p>
+
+<h4>SASL/OAUTHBEARER</h4>
+
+<p>
+    Kafka supports SASL/OAUTHBEARER for client authentication, enabling integration with third-party OAuth servers. The
+    built-in implementation of OAUTHBEARER uses unsecured JSON Web Tokens (JWTs) and is not suitable for production use.
+    Custom callbacks can be added to integrate with standard OAuth servers to provide secure authentication using the
+    OAUTHBEARER mechanism in production deployments.
+
+</p>
+<p>
+    Because the built-in implementation of SASL/OAUTHBEARER in Kafka does not validate tokens, it only requires the
+    login module to be specified in the JAAS configuration. If the listener is used for inter-broker communication,
+    details of the token used for client connections initiated by brokers must also be provided.
+</p>
+<p>
+    The option <code>unsecuredLoginStringClaim_sub</code> is the subject claim that determines the KafkaPrincipal for
+    the connection by default. Example:
+</p>
+<pre><code class="language-properties">
+sasl.enabled.mechanisms=OAUTHBEARER
+sasl.mechanism.inter.broker.protocol=OAUTHBEARER
+listener.name.external.oauthbearer.sasl.jaas.config=\
+org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule \
+required unsecuredLoginStringClaim_sub="kafka";
+</code></pre>
+
+<p>
+    Clients must be configured with the subject claim option `unsecuredLoginStringClaim_sub`. Other claims and token
+    lifetime may also be configured:
+</p>
+<pre><code class="language-properties">
+sasl.mechanism=OAUTHBEARER
+sasl.jaas.config=\
+org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule \
+required unsecuredLoginStringClaim_sub="John";
+</code></pre>
+
+<p>
+    To integrate Kafka with third-party OAuth servers for using bearer tokens in production, Kafka clients must be
+    configured with <code>sasl.login.callback.handler.class</code> to acquire tokens from the OAuth server using the
+    long-term password or a refresh token.
+</p>
+<p>
+    If OAUTHBEARER is used for inter-broker communication, brokers must also be configured with a login callback
+    handler to acquire tokens for client connections created by the broker for inter-broker communication.
+</p>
+<p>
+    To create and validate delegation tokens, all brokers must be configured with the same master key using the
+    configuration option <code>delegation.token.master.key</code>.
+</p>
+
+<p>
+    Delegation tokens also are suitable for production use only in deployments where ZooKeeper is secure.
+</p>
+
+<h3>Reauthentication</h3>
+
+<p>
+    Kafka brokers support reauthentication for connections authenticated using SASL using the configuration option
+    <code>connections.max.reauth.ms</code>.
+</p>
+
+<h3>Authorization</h3>
+
+<p>Kafka brokers manage access control using a customizable authorizer.</p>
+<p>
+    Kafka has a built-in authorizer, `AclAuthorizer`, that can be enabled by configuring the authorizer class name as
+    follows:
+</p>
+<pre><code class="language-properties">
+authorizer.class.name=kafka.security.authorizer.AclAuthorizer
+</code></pre>
+
+<p>
+    Super users are granted access for all operations on all resources without any restrictions and cannot be denied
+    access using Deny ACLs.
+</p>
+
+<h3>Security Considerations</h3>
+
+<p>
+    Since AclAuthorizer stores ACLs in ZooKeeper, access to ZooKeeper should be restricted. Deployments without a secure
+    ZooKeeper can implement custom authorizers to store ACLs in a secure external database.
+</p>
+<p>
+    Restricting user access using the principle of least privilege can limit exposure if a user is compromised.
+</p>
+<p>
+    ACLs should be removed immediately when a user principal is no longer in use, for instance, when a person leaves the
+    organization.
+</p>
+<p>
+    Long-running applications can be configured with service credentials rather than credentials associated with a
+    specific user to avoid any disruption when employees leave the organization.
+</p>
+
+<h3>Auditing</h3>
+
+<p>
+    Kafka brokers can be configured to generate comprehensive _log4j_ logs for auditing and debugging. The logging level
+    as well as the appenders used for logging and their configuration options can be specified in
+    <code>log4j.properties</code>.
+</p>
+
+<h3>Securing the platform</h3>
+
+<p>Kafka supports externalizing passwords in a secure store.</p>
+<p>
+    Customizable configuration providers can be configured for Kafka brokers and clients to retrieve
+    passwords from a secure third-party password store.
+</p>
+<p>
+    Passwords may also be stored in encrypted form in configuration files with custom configuration
+    providers that perform decryption.
+
+</p>
+<p>
+    Sensitive broker configuration options can also be stored encrypted in ZooKeeper using the Kafka
+    configs tool without using custom providers.
+</p>
+
+<h2>Chapter 12: Administering Kafka</h2>
+
+<p>
+    While Apache Kafka implements authentication and authorization to control topic operations, default configurations
+    do not restrict the use of these tools. This means that these CLI tools can be used without any authentication
+    required, which will allow operations such as topic changes to be executed with no security check or audit.
+</p>
+
+<h3>Topic Operations</h3>
+
+<p>
+    The <code>kafka-topics.sh</code> tool provides access to most topic operations. It allows us to create,
+    modify, delete, and list information about topics in the cluster. While some topic configurations are possible
+    through this command, they have been deprecated, and it is recommended to use the more robust method of using the
+    <code>kafka-config.sh</code> tool for configuration changes.
+</p>
+
+<h3>Consumer Groups</h3>
+
+<p>
+    The <code>kafka-consumer-groups.sh</code> tool helps manage and gain insight into the consumer groups that are
+    consuming from topics in the cluster.
+</p>
+
+<h3>Dynamic Configuration Changes</h3>
+
+<p>
+    The <code>kafka-configs.sh</code> is the main tool for modifying all the configurations for topics, clients,
+    brokers, and more that can be updated dynamically during runtime without having to shut down or redeploy a cluster.
+</p>
+
+<h3>Producing and Consuming</h3>
+
+<p>
+    To manually produce or consume some sample messages these tools are provided: <code>kafka-console-consumer.sh</code>
+    and <code>kafka-console-producer.sh</code>.
+</p>
+
+<h4>Example</h4>
+
+<p>Consuming the earliest message from the <code>__consumer_offsets</code> topic:</p>
+<pre><code class="language-shell">
+kafka-console-consumer.sh --bootstrap-server localhost:9092
+                          --topic __consumer_offsets --from-beginning --max-messages 1
+                          --formatter "kafka.coordinator.group.GroupMetadataManager\$OffsetsMessageFormatter"
+                          --consumer-property exclude.internal.topics=false
+</code></pre>
+
+<p>This will show something like this:</p>
+<pre><code class="language-shell">
+[my-group-name,my-topic,0]::[OffsetMetadata[1,NO_METADATA]
+CommitTime 1623034799990 ExpirationTime 1623639599990]
+Processed a total of 1 messages
+</code></pre>
+
+<h3>Partition Management</h3>
+
+<p>
+    A default Kafka installation contains a few scripts for working with the management of partitions. One of these
+    tools allows for the reelection of leader replicas; another is a low-level utility for assigning partitions to
+    brokers. Together these tools can assist in situations where a more manual hands-on approach to balance message
+    traffic within a cluster of Kafka brokers is needed.
+</p>
+
+<p>The <code>kafka-leader-election.sh</code> utility can be used to trigger manually a new leader election.</p>
+
+<h4>Example</h4>
+
+<p>Start a preferred leader election for all topics in a cluster:</p>
+<pre><code class="language-shell">
+kafka-leader-election.sh --bootstrap-server localhost:9092 --election-type PREFERRED --all-topic-partitions
+</code></pre>
+
+<p>
+    It is also possible to start elections on specific partitions or topics. This can be done by passing in a topic name
+    with the `--topic` option and a partition with the `--partition` option directly. It is also possible to pass in a
+    list of several partitions to be elected through a JSON file with the topic names.
+</p>
+
+<h4>Example</h4>
+
+<p>
+    Start a preferred replica election with a specified list of partitions in a file named <code>partitions.json</code>,
+    with the following content:
+</p>
+
+<pre><code class="language-json">
+{
+    "partitions": [
+        {
+            "partition": 1,
+            "topic": "my-topic"
+        },
+        {
+            "partition": 2,
+            "topic": "foo"
+        }
+    ]
+}
+</code></pre>
+
+<pre><code class="language-shell">
+kafka-leader-election.sh --bootstrap-server localhost:9092 --election-type PREFERRED --path-to-json-file partitions.json
+</code></pre>
+
+<p>
+    The <code>kafka-reassign-partitions.sh</code> can be used to change the replica assignments manually for a
+    partition.
+</p>
+
+<p>The <code>kafka-dump-log.sh</code> tool can be used to decode the log segments for a partition.</p>
+
+<p>
+    The <code>kafka-replica-verification.sh</code> tool can be used to validate that the replicas for a topic's
+    partitions are the same across the cluster.
+</p>
+
+<h3>Unsafe Operations</h3>
+<ul>
+    <li>Moving the Cluster Controller</li>
+    <li>Removing Topics to Be Deleted</li>
+    <li>Deleting Topics Manually</li>
+</ul>
+
+<h2>Chapter 13: Monitoring Kafka</h2>
+
+<p>
+    If the metrics are consumed by automation, they should be very specific. It's OK to have a large number of metrics,
+    each describing small details, because computers process a lot of data easily. The more specific the data is,
+    the easier it is to create automation that acts on it, because the data does not leave as much room for
+    interpretation as to its meaning. On the other hand, if the metrics will be consumed by humans, presenting a large
+    number of metrics will be overwhelming. This becomes even more important when defining alerts based on those
+    measurements.
+</p>
+
+<h3>Application Health Checks</h3>
+
+<p>Two ways to do a health check:</p>
+<ul>
+    <li>An external process that reports whether the broker is up or down (health check)</li>
+    <li>Alerting on the lack of metrics being reported by the Kafka broker (sometimes called stale metrics)</li>
+</ul>
+
+<h3>Service-Level Objectives (SLOs)</h3>
+
+<p>
+    A <em>service-level indicator</em> (SLI) is a metric that describes one aspect of a service's reliability.
+</p>
+<p>
+    A <em>service-level objective</em> (SLO), which can also be called a <em>service-level threshold</em> (SLT),
+    combines an SLI with a target value.
+</p>
+
+<blockquote>
+    The term <em>operational-level agreement</em> (OLA) is less frequently used. It describes agreements between
+    multiple internal services or support providers in the overall delivery of an SLA.
+</blockquote>
+
+<p>Further reads to dive deeper into these topics are:</p>
+<ul>
+    <li>
+        <a href="https://www.oreilly.com/library/view/site-reliability-engineering/9781491929117/" target="_blank">
+            Site Reliability Engineering
+        </a>
+    </li>
+    <li>
+        <a href="https://www.oreilly.com/library/view/the-site-reliability/9781492029496/" target="_blank">
+            The Site Reliability Workbook
+        </a>
+    </li>
+</ul>
+
+<h3>Kafka Broker Metrics</h3>
