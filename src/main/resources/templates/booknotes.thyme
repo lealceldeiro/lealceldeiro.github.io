@@ -41,28 +41,47 @@
         <div class="vstack gap-3">
             <th:block th:each="note, stat : ${all_content}">
                 <div class="p-2" th:if="${#strings.equals(note.type, config.booknote_key)}">
-                    <a th:href="*{content.rootpath + note.uri}" class="link-underline link-underline-opacity-0">
 
-                        <div class="card mt-3" style="max-width: 30em;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img class="img-fluid rounded-start"
-                                         th:src="${note.imageSrc}"
-                                         th:alt="${note.imageAlt}">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
+                    <div class="card mt-3">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <a th:href="*{content.rootpath + note.uri}"
+                                   class="link-underline link-underline-opacity-0">
+                                    <img th:src="${note.imageSrc}" th:alt="${note.imageAlt}"
+                                         class="img-fluid rounded-start">
+                                </a>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <a th:href="*{content.rootpath + note.uri}"
+                                       class="link-underline link-underline-opacity-0 text-body-secondary">
                                         <h5 class="card-title" th:text="${note.title}"></h5>
                                         <p class="card-text" th:text="${note.authors}"></p>
                                         <p class="card-text">
-                                            <small class="text-body-secondary" th:text="'Published: ' + ${note.published}"></small>
+                                            <small th:text="'Published: ' + ${note.published}"></small>
                                         </p>
+                                        <p class="card-text" th:if="${note.summary != null}"
+                                           th:text="${#strings.abbreviate(note.summary, 350)}"></p>
+                                        <p class="card-text text-truncate" th:if="${note.summary == null}"
+                                           th:utext="${note.body}"></p>
+                                    </a>
+
+                                    <div class="card-text d-flex flex-wrap align-items-left mt-3">
+                                        <a th:if="${note.amazonLink}" th:href="${note.amazonLink}" target="_blank"
+                                           class="btn btn-light btn-outline-secondary mr-2">
+                                            <i class="bi bi-amazon"></i>&nbsp;<span>Amazon</span>
+                                        </a>
+                                        <a th:if="${note.orreillyLink}" th:href="${note.orreillyLink}" target="_blank"
+                                           class="btn btn-light btn-outline-secondary mx-2">
+                                            <i class="bi bi-bookmark"></i>&nbsp;<span>O'REILLY</span>
+                                        </a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    </a>
                 </div>
             </th:block>
         </div>

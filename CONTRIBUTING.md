@@ -79,6 +79,43 @@ Images used to be displayed in the article thumbnail (`imageSrc`) should be:
 As a recommendation, this image generator could be used: https://deepai.org/machine-learning-model/old-style-generator
 or any of its alternatives in https://deepai.org/
 
+## Creating a book note
+
+As a standard, we're writing all notes files in HTML format (`.html`).
+
+### File structure
+
+- Create the year of the note under the `notes` directory (if not already crated); this is the year the file is created
+- Name the file according to the book name. i.e.: for an article called "Why Java?", the file could be
+  called `why-java.html`
+
+### Metadata
+
+- Define:
+    * `title`
+    * `summary`
+    * `date` (it can be a future date to keep the note in draft mode, if `status` is not `published`)
+    * `type=booknote`
+    * `tags` (separated by comma -- `,`)
+    * `status` (it can be `published`, `draft` for work in progress, or `published-date`.
+      See https://jbake.org/docs/2.6.7/#status)
+    * `authors` (the authors of the book from which the notes are being taken from)
+    * `publisher` (the publisher of the book from which the notes are being taken from)
+    * `published` (the date when the book from which the notes are being taken from was released)
+    * optionally, you can define the same [Open Graph](https://ogp.me/) (_og_) _meta_ values described in the previous "
+      articles" section, including `imageSrc`, `imageAlt`, and `ogImg`
+    * optionally, `amazonLink`, with the link to buy the book on Amazon
+    * optionally, `orreillyLink`, with the link to buy the book on O'REILLY
+
+### Images for book notes
+
+Images used to be displayed in the book thumbnail (`imageSrc`) should be:
+
+- located under notes{year}/images/{image-name} (see current examples to get an idea in practice how it looks
+  like)
+- _width_: 630px
+- _height_: 850px
+
 ## Build and publish
 
 When creating an article, if it's a work in progress, you can skip the pages build by appending `[skip-ci]` to the end
