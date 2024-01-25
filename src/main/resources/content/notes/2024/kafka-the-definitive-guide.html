@@ -1422,3 +1422,37 @@ kafka-leader-election.sh --bootstrap-server localhost:9092 --election-type PREFE
     <li>Overloaded clusters</li>
     <li>Controller problems</li>
 </ul>
+
+<p>
+    The under-replicated partitions measurement, provided on each broker in a cluster, gives a count of the number of
+    partitions for which the broker is the leader replica, where the follower replicas are not caught up. This
+    measurement provides insight into a number of problems with the Kafka cluster, from a broker being down to resource
+    exhaustion.
+</p>
+
+<p>List under-replicated partitions in a cluster:</p>
+<pre><code class="language-shell">
+kafka-topics.sh --bootstrap-server kafka1.example.com:9092/kafka-cluster --describe --under-replicated
+</code></pre>
+
+<p>
+    Cluster-level problems are usually either <em>Unbalanced load</em> or <em>resource exhaustion</em>.
+</p>
+<p>Host level problems can be any of:</p>
+<ul>
+    <li>Hardware failures</li>
+    <li>Networking</li>
+    <li>Conflicts with another process</li>
+    <li>Local configuration differences</li>
+</ul>
+
+<p>
+    Configuration management system, such as <a href="https://www.chef.io/" target="_blank">Chef</a> or
+    <a href="https://www.puppet.com/" target="_blank">Puppet</a> can be used to maintain consistent configurations
+    across the operating systems running the Kafka brokers.
+</p>
+
+<p>
+    In general, the number of request handler threads should be set equal to the number of processors in the system,
+    including hyperthreaded processors.
+</p>
