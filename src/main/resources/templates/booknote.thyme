@@ -28,13 +28,6 @@
         <hr/>
 
         <p class="mt-3" th:utext='${content.body}'></p>
-
-        <!-- Subscriptions -->
-        <div th:replace="subscriptionform.thyme::subscription(${config.subscription_key},
-                                                              ${config.subscription_url},
-                                                              'subscribe',
-                                                              'Get the latest news from us!')"></div>
-        <!-- End subscriptions -->
     </div>
 
 </div>
