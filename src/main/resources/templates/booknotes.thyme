@@ -42,7 +42,9 @@
             <th:block th:each="note, stat : ${all_content}">
                 <div class="p-2" th:if="${#strings.equals(note.type, config.booknote_key)}">
 
-                    <div class="card mt-3">
+                    <div th:class="'card mt-3 border '
+                                   + (${#strings.equals(note.read, 'done')} ? 'border-success'
+                                                                            : (${#strings.equals(note.read, 'progress') ? 'border-primary': 'border-warning'}))">
                         <div class="row g-0">
                             <div class="col-md-2">
                                 <a th:href="*{content.rootpath + note.uri}"

@@ -92,6 +92,8 @@ As a standard, we're writing all notes files in HTML format (`.html`).
 ### Metadata
 
 - Define:
+    * `read` (indicates the status: `done` means the reading was finished, `progress` means the reading is in progress,
+      and `future` means the reading has not started)
     * `title`
     * `summary`
     * `date` (it can be a future date to keep the note in draft mode, if `status` is not `published`)
