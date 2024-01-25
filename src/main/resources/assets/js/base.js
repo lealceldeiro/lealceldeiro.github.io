@@ -1,6 +1,8 @@
+// region: show navbar shadow box
 const navEl = document.querySelector("#menuNav");
 
 let navShown = false;
+
 function handleNavBarToggle() {
     if (!navShown) {
         showMenuNavbarShadow();
@@ -30,3 +32,20 @@ window.addEventListener("scroll", () => {
         hideMenuNavbarShadow();
     }
 });
+// endregion show navbar shadow box
+
+// region back to top button
+const backToTopBtn = document.getElementById("btn-back-to-top");
+
+window.addEventListener("scroll", () => {
+    const threshold = 18;
+    backToTopBtn.style.display = document.body.scrollTop > threshold
+                                                         || document.documentElement.scrollTop > threshold
+                                                         ? "block" : "none";
+});
+
+backToTopBtn.addEventListener("click", () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+});
+// end region back to top button
