@@ -13,13 +13,13 @@
             <th:block th:if="*{postsCount &gt; 0}">
 
                 <div class="mt-5 text-center">
-                    <h2>
+                    <h1>
                         <span>Articles tagged:</span>
                         <span class="btn btn-light">
 							<span th:text="${tag}"></span>
 							<i class="bi bi-tag-fill"></i>
 						</span>
-                    </h2>
+                    </h1>
                 </div>
 
                 <div class="accordion" id="tagPostsAccordion">
