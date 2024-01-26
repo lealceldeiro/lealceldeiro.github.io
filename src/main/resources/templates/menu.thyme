@@ -7,10 +7,7 @@
     <div class="container">
         <nav id="menuNav" class="navbar fixed-top navbar-expand-lg">
             <div class="container container-fluid">
-                <a class="navbar-brand"
-                   th:href="${config.site_host}">
-                    <span class="fs-3">Home</span>
-                </a>
+                <a class="navbar-brand" th:href="${config.site_host}"><span class="fs-3">Home</span></a>
                 <button class="navbar-toggler"
                         type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
