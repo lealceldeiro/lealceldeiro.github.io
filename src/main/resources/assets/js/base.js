@@ -34,7 +34,7 @@ window.addEventListener("scroll", () => {
 });
 // endregion show navbar shadow box
 
-// region back to top button
+// region: back to top button
 const backToTopBtn = document.getElementById("btn-back-to-top");
 if (backToTopBtn != null) {
     window.addEventListener("scroll", () => {
@@ -49,4 +49,20 @@ if (backToTopBtn != null) {
         document.documentElement.scrollTop = 0;
     });
 }
-// end region back to top button
+// endregion back to top button
+
+// region: mark active menu items
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("a.nav-link.active")
+            .forEach(li => {
+                li.classList.remove("active");
+                li.attributes.removeNamedItem("aria-current");
+            });
+
+    document.querySelectorAll(`a[href="${location.pathname}"].nav-link`)
+            .forEach(a => {
+                a.classList.add("active");
+                a.setAttribute("aria-current", "page");
+            });
+});
+// endregion: mark active menu items
