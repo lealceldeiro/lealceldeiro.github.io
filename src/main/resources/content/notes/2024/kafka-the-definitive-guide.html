@@ -1451,8 +1451,87 @@ kafka-topics.sh --bootstrap-server kafka1.example.com:9092/kafka-cluster --descr
     <a href="https://www.puppet.com/" target="_blank">Puppet</a> can be used to maintain consistent configurations
     across the operating systems running the Kafka brokers.
 </p>
-
 <p>
     In general, the number of request handler threads should be set equal to the number of processors in the system,
     including hyperthreaded processors.
 </p>
+
+<h4>Logging</h4>
+
+<p>
+    Two loggers write to separate files on disk: <code>kafka.controller</code> and
+    <code>kafka.server.ClientQuotaManager</code>, both at the <code>INFO</code> level.
+</p>
+<p>
+    The <code>kafka.request.logger</code> is also useful when debugging issues with Kafka, turned on at either
+    <code>DEBUG</code> or <code>TRACE</code> level.
+</p>
+
+<h3>Client Monitoring</h3>
+
+<h4>Producer Metrics</h4>
+
+<p>
+    The <strong>overall producer metrics</strong> bean provides attributes describing everything from the
+    sizes of the message batches to the memory buffer utilization.
+</p>
+
+<h4>Consumer Metrics</h4>
+
+<p>
+    The overall consumer bean has metrics regarding the lower-level network operations, and the fetch manager bean has
+    metrics regarding bytes, request, and record rates.
+</p>
+<p>
+    Unlike the producer client, the metrics provided by the consumer are useful to look at but not useful
+    for setting up alerts on.
+</p>
+
+<h3>Quotas</h3>
+
+<p>
+    A Kafka broker does not use error codes in the response to indicate a client is being throttled. So, it's not
+    obvious to and application that throttling is happening without monitoring the metrics that are provided to show
+    the amount of time that the client is being throttled. The metrics that must be monitored are:
+</p>
+<ul>
+    <li>(Consumer) bean
+        <code>
+            kafka.consumer:type=consumer-fetch-manager-metrics,client-id=&lt;THE_CLIENTID&gt;,attribute
+            fetch-throttle-time-avg
+        </code>
+    </li>
+    <li>(Producer) bean
+        <code>
+            kafka.producer:type=producer-metrics,client-id=&lt;THE_CLIENTID&gt;,attribute produce-throttle-time-avg
+        </code>
+    </li>
+</ul>
+
+<h3>Lag Monitoring</h3>
+
+<p>
+    For Kafka consumers, the most important thing to monitor is the consumer lag (the difference between the last
+    message produced in a specific partition and the last message processed by the consumer).
+</p>
+<p>
+    The preferred method of consumer lag monitoring is to have an external process that
+    can watch both the state of the partition on the broker, tracking the offset of the most
+    recently produced message, and the state of the consumer, tracking the last offset the
+    consumer group has committed for the partition.
+</p>
+<p>
+    <a href="https://github.com/linkedin/Burrow" target="_blank">Burrow</a> can be used to monitor consumer groups.
+    More on this can be checked at
+    <a href="https://engineering.linkedin.com/apache-kafka/burrow-kafka-consumer-monitoring-reinvented" target="_blank">
+        this blog post
+    </a>.
+</p>
+<p>
+    <a href="https://github.com/linkedin/kafka-monitor" target="_blank">Xinfra Monitor</a> can be used to continually
+    produce and consume data from a topic that is spread across all brokers in a cluster. This way, we can monitor
+    if we can produce messages to the broker(s) and if we can consume them. It measures the availability of both produce
+    and consume requests on each broker, as well as the total produce to consume latency.
+</p>
+
+<h2>Chapter 14: Stream Processing</h2>
