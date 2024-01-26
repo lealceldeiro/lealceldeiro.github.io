@@ -1,4 +1,4 @@
 <button th:fragment="backtopbutton"
-        type="button" class="btn btn-light btn-outline-dark btn-lg" id="btn-back-to-top">
+        type="button" class="btn btn-light btn-lg rounded-circle shadow" id="btn-back-to-top">
     <i class="bi bi-arrow-up"></i>
 </button>
