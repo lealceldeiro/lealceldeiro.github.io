@@ -16,7 +16,7 @@
                     <h1>Archive</h1>
                 </div>
 
-                <div class="accordion" id="archiveAccordion">
+                <div class="accordion mt-5" id="archiveAccordion">
 
                     <!--I'm willing to pay for this accordion with with O(n^2) while baking the site-->
                     <th:block th:each="outerPost, outerStat : ${published_posts}">
