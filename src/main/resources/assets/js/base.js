@@ -36,16 +36,17 @@ window.addEventListener("scroll", () => {
 
 // region back to top button
 const backToTopBtn = document.getElementById("btn-back-to-top");
+if (backToTopBtn != null) {
+    window.addEventListener("scroll", () => {
+        const threshold = 18;
+        backToTopBtn.style.display = document.body.scrollTop > threshold
+        || document.documentElement.scrollTop > threshold
+            ? "block" : "none";
+    });
 
-window.addEventListener("scroll", () => {
-    const threshold = 18;
-    backToTopBtn.style.display = document.body.scrollTop > threshold
-                                                         || document.documentElement.scrollTop > threshold
-                                                         ? "block" : "none";
-});
-
-backToTopBtn.addEventListener("click", () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-});
+    backToTopBtn.addEventListener("click", () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+}
 // end region back to top button
