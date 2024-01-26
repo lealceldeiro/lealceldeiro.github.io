@@ -41,13 +41,20 @@
                                        && #dates.format(innerPost.date,'MMMM-yyyy')
                                           == #dates.format(outerPost.date,'MMMM-yyyy')}">
                                 <!-- the inner loop creates the post-entries inside each accordion item/header-->
-                                <div th:class="'accordion-collapse collapse ' + (${outerStat.first} ? 'show' : '')"
+                                <div th:class="'list-group accordion-collapse collapse ' + (${outerStat.first} ? 'show' : '')"
                                      th:id="'collapseIt' + *{#dates.format(innerPost.date,'MMMM-yyyy')}">
-                                    <div class="accordion-body">
-                                        <span class="font-weight-bold" th:text="${#dates.format(innerPost.date, 'd')}"/>:
-                                        <a th:href="*{content.rootpath + innerPost.uri}"
-                                           th:text="${innerPost.title}"></a>
-                                    </div>
+                                    <a th:href="*{content.rootpath + innerPost.uri}"
+                                       class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">
+                                                <span class="badge rounded-pill text-bg-secondary"
+                                                      th:text="${#dates.format(innerPost.date, 'd')}"></span>
+                                                <span th:text="${innerPost.title}"></span>
+                                            </h5>
+                                            <small class="text-body-secondary" th:text="'by ' + ${innerPost.ogAuthor}"></small>
+                                        </div>
+                                        <p class="mb-1 text-body-secondary" th:text="${innerPost.summary}"></p>
+                                    </a>
                                 </div>
                             </th:block>
 
