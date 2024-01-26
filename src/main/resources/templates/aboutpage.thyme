@@ -19,7 +19,8 @@
                                     <p class="small mb-0"
                                        th:text="${content.userTitle} ?: 'Software Development Enthusiast'"></p>
                                     <div>
-                                        <p class="mb-0 text-end" th:if="${content.userRate}" th:text="${content.userRate}"></p>
+                                        <p class="mb-0 text-end" th:if="${content.userRate}"
+                                           th:text="${content.userRate}"></p>
                                         <p class="mb-0 text-end" th:if="${content.userLocation}">
                                             <i class="bi bi-geo-alt-fill"></i>&nbsp;
                                             <span th:text="${content.userLocation}"></span>
@@ -37,22 +38,21 @@
                                 <div class="flex-grow-1 ms-3">
                                     <div class="d-flex flex-row align-items-center mb-2"
                                          th:if="${content.userGithubUsername}">
-                                        <a class="text-body-secondary link-underline link-underline-opacity-0" target="_blank"
+                                        <a class="text-body-secondary link-underline link-underline-opacity-0"
+                                           target="_blank"
                                            th:href="${'https://github.com/' + content.userGithubUsername + '?tab=repositories'}">
                                             <ul class="text-body-secondary mb-0 mx-3 list-unstyled d-flex flex-row">
                                                 <li class="d-none">
                                                     <i class="bi bi-file-code-fill"></i>
                                                     <span id="githubRepos"></span>
                                                 </li>
-                                                <!--
-                                                <li class="mx-2">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <span id="githubStars">3</span>
-                                                </li>
-                                                -->
                                                 <li class="d-none mx-2">
                                                     <i class="bi bi-people-fill"></i>
                                                     <span id="githubFollowers"></span>
+                                                </li>
+                                                <li class="d-none">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <span id="githubStars"></span>
                                                 </li>
                                             </ul>
                                         </a>
@@ -213,20 +213,41 @@
 
     const octokit = new Octokit()
 
-    const req = "GET /users/" + [[${content.userGithubUsername}]];
-    const GH_API_VERSION = [[${config.github_apiversion}]];
-    const res = await octokit.request(req, {username: 'USERNAME', headers: {'X-GitHub-Api-Version': GH_API_VERSION}});
-    const data = res.data;
+    // get user info
+    const userReq = "GET /users/" + [[${content.userGithubUsername}]];
+    const userRes = await request(userReq);
+    // alternative impl would be: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+    setAndShow('githubRepos', userRes.data.public_repos + userRes.data.public_gists)
+    // alternative impl would be: https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#list-followers-of-a-user
+    setAndShow('githubFollowers', userRes.data.followers);
 
-    const followers = data.followers;
-    const followersElement = document.getElementById('githubFollowers');
-    followersElement.innerText = followers;
-    followersElement.parentElement.classList.remove("d-none");
+    // get user repos' stars: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+    const reposRes = await request(userReq + "/repos");
+    const repoStarsCount = starsCount(reposRes.data);
+    setAndShow('githubStars', repoStarsCount)
 
-    const code = data.public_repos + data.public_gists;
-    const repos = document.getElementById('githubRepos');
-    repos.innerText = code;
-    repos.parentElement.classList.remove("d-none");
+    // FIXME: get user gists' stars: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28
+    const gistsRes = await request(userReq + "/gists");
+    const starsCountUpdated = repoStarsCount + starsCount(gistsRes.data)
+    setAndShow('githubStars', starsCountUpdated);
+
+    function request(url) {
+        const GH_API_VERSION = [[${config.github_apiversion}]];
+        return octokit.request(url, {username: 'USERNAME', headers: {'X-GitHub-Api-Version': GH_API_VERSION}});
+    }
+
+    function setAndShow(elementId, value) {
+        const el = document.getElementById(elementId);
+        el.innerText = value;
+        el.parentElement.classList.remove("d-none");
+    }
+
+    function starsCount(data) {
+        return data.map(repo => {
+            const stargazerCount = repo['stargazers_count'];
+            return stargazerCount !== undefined && stargazerCount !== null ? stargazerCount : 0;
+        }).reduce((i, j) => i + j, 0);
+    }
 </script>
 
 </body>
