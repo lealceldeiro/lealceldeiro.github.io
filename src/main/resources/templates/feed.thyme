@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:th="http://www.thymeleaf.org">
   <channel>
 
-    <title>Let's talk about Software Development</title>
+    <title th:text='${config.site_name}'></title>
     <link th:text='${config.site_host}'/>
     <atom:link th:href="${config.site_host} + '/' +${config.feed_file}" href="link" rel="self" type="application/rss+xml" />
 

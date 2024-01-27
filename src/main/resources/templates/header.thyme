@@ -5,10 +5,10 @@
     <meta charset="utf-8"/>
     <title th:text="${fragmentHeadTitle} ?: (${content.ogTitle} ?: (${content.title != null && !#strings.isEmpty(content.title)}
                                                                                     ? ${content.title}
-                                                                                    : 'Let\'s talk about Software Development'))"></title>
+                                                                                    : ${config.site_name}))"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description"
-          th:content="${fragmentOgDescription} ?: (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, and more about software development.'))"/>
+          th:content="${fragmentOgDescription} ?: (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, and more about software development.')))"/>
     <meta name="author"
           th:content="${content.ogAuthor} ?: 'Asiel Leal Celdeiro'"/>
     <meta name="keywords"
@@ -44,27 +44,27 @@
     <meta property="og:description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, and more about software development.'))">
-    <meta property="og:title" th:content="${content.title} ?: 'Let\'s talk about Software Development'">
-    <meta property="og:site_name" content="Let's talk about Software Development">
+                                               : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
+    <meta property="og:title" th:content="${content.title} ?: ${config.site_name}">
+    <meta property="og:site_name" th:content="${config.site_name}">
     <meta property="og:see_also" th:content="${config.site_host}">
 
-    <meta itemprop="name" th:content="${content.title} ?: 'Let\'s talk about Software Development'">
+    <meta itemprop="name" th:content="${content.title} ?: ${config.site_name}">
     <meta itemprop="description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, and more about software development.'))">
+                                               : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta itemprop="image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
           th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.jpg')">
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" th:content="${config.site_host} + (${content.uri} ?: '')">
-    <meta name="twitter:title" th:content="${content.title} ?: 'Let\'s talk about Software Development'">
+    <meta name="twitter:title" th:content="${content.title} ?: ${config.site_name}">
     <meta name="twitter:description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: 'Let\'s talk about Software Development is a personal blog where the main articles discuss technical content, professional experiences, and more about software development.'))">
+                                               : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta name="twitter:image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
           th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.jpg')">
