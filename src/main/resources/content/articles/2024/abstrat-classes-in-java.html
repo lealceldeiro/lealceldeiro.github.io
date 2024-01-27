@@ -1,0 +1,383 @@
+title=Abstract classes in Java
+type=post
+date=2024-01-28
+tags=java, abstract-classes, java-classes, oop
+status=published-date
+summary=Abstract classes represent a powerful tool at our disposal when following the OOP paradigm. Properly implemented, they enhance our code and make it more robust, secure, and maintainable.
+
+ogImg=articles/2024/images/01/abstract-classes-in-java_social.jpeg
+imageSrc=articles/2024/images/01/abstract-classes-in-java.jpeg
+imageAlt=Image of abstract figures
+
+ogAuthor=Asiel Leal Celdeiro
+authorHandle=lealceldeiro
+authorProfileImage=/img/fav/ms-icon-310x310.png
+~~~~~~
+<h2 id="what-are-abstract-classes-in-java">What are abstract classes in Java?</h2>
+
+<p>
+    In a <a href="/articles/2024/java-oop-classes-and-objects.html" target="_blank">previous post</a> we learned
+    what's a Java class. To be more precise, the examples mentioned there are <em>concrete</em> classes. Usually, when
+    there's no mention whether a class is concrete or abstract, it's inferred we're talking about a concrete class.
+    Likewise, if we want to talk about an abstract one, we usually make the distinction by saying <em>... an abstract
+    class...</em>.
+</p>
+<p>
+    So, then, when is a class abstract?
+</p>
+
+<h2 id="abstract-class-keyword">The <code>abstract</code> keyword</h2>
+
+<p>
+    A class is abstract when the <code>abstract</code> keyword (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-ClassModifier" target="_blank"
+       class="link-underline link-underline-opacity-0">
+        ClassModifier
+    </a>) is used in the class declaration. It is a class that is incomplete, or to be considered incomplete (
+    <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.1.1" target="_blank">
+        &sect;8.1.1.1
+    </a>). Hence, the syntax for the full declaration of an abstract class is the same
+    we <a href="/articles/2024/java-oop-classes-and-objects.html#structure" target="_blank">saw already</a>:
+</p>
+<pre><code class="language-java">
+{ClassModifier} class TypeIdentifier [TypeParameters] [ClassExtends] [ClassImplements] [ClassPermits] ClassBody
+</code></pre>
+
+<p>Let's see an example</p>
+<pre><code class="language-java">
+abstract class Animal {
+}
+</code></pre>
+
+<h2 id="abstract-classes-abstract-methods">Abstract methods</h2>
+
+<p>
+    Ok, the code looks simple. By just adding <code>abstract</code> to our class declaration we made it abstract. But
+    what's so especial about it?
+</p>
+<p>
+    Well, when a class is abstract we can declare abstract methods in its
+    <a href="/articles/2024/java-oop-classes-and-objects.html#class-body" target="_blank">body</a>. An abstract method
+    is a method without a body (no implementation). Then, subclasses that extend the abstract class must provide
+    concrete implementations for these abstract methods. For example:
+</p>
+<pre><code class="language-java">
+abstract class Animal {
+    abstract void move();
+}
+</code></pre>
+
+<h2 id="uses-of-abstract-classes">Use cases for abstract classes</h2>
+
+<p>
+    Before seeing some elaborated examples, let's understand this: why would we want to declare an abstract class to
+    begin with?
+</p>
+<p>
+    Let's recap: we use classes to model our domain, our real world entities and concepts as well as their interactions
+    with each other. And, as you might guess, some of those concept and entities are represented in our minds as
+    abstract ones.
+</p>
+<p>
+    For example: if we're modeling a software for a Zoo, we need to model animals, the staff, food,
+    cages, etc. Some of these concepts need to be modeled at a higher level of abstraction to represent them properly.
+    Imagine we want to have a class <code>Tiger</code> to handle information about tigers, <code>Snake</code> to handle
+    information about the snakes in the Zoo, <code>Crocodile</code>, <code>Parrot</code>, ... you get the idea.
+</p>
+<p>
+    All of these animals have many things in common; for example, they all move, they eat, they breathe, and so on. But
+    they also have many differences: some of them walk, some crawl, some fly, etc.
+</p>
+<p>
+    It's exactly because of their differences that we need to create separate classes for each of them &mdash;that's
+    clear&mdash;. But this leaves us with a problem, what do we do with the things (
+    <a href="/articles/2024/java-oop-classes-and-objects.html#fields" target="_blank">properties</a>
+    and <a href="/articles/2024/java-oop-classes-and-objects.html#methods" target="_blank">behaviors</a>) they share?
+    Do we just duplicate those fields and methods in each class? That doesn't sound good. Let's see an example of how
+    it would look like:
+</p>
+<pre><code class="language-java">
+class Tiger {
+    String name;
+    int energy;
+
+    Tiger(String name) {
+        this.name = name;
+        energy = 100;
+    }
+
+    void move() {
+        energy -= 3;
+        System.out.println(name + " walked");
+    }
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+
+class Snake {
+    String name;
+    int energy;
+
+    Snake(String name) {
+        this.name = name;
+        energy = 100;
+    }
+
+    void move() {
+        energy -= 2;
+        System.out.println(name + " crawled");
+    }
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+
+class Parrot {
+    String name;
+    int energy;
+
+    Parrot(String name) {
+        this.name = name;
+        energy = 100;
+    }
+
+    void move() {
+        energy--;
+        System.out.println(name + " flew");
+    }
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+</code></pre>
+
+<p>
+    There's a LOT of duplication in that code! Actually, everything, except for the <code>move</code> method is the
+    same. This design is difficult to maintain at a bigger scale. Imagine a production code base with hundreds of
+    classes and several team members working simultaneously on it. That's not how we should design it for the
+    long term.
+</p>
+<p>
+    This is one of the scenarios where abstract classes shine. They allow us to represent abstract concepts and
+    "delegate" the specificities to the concrete classes that implement them.
+</p>
+
+<h2 id="examples">Example</h2>
+
+<p>
+    Let's refactor the previous code to use an abstract class to keep the same fields and methods in it and delegate the
+    specifics of each animal to the subclasses.
+</p>
+<pre><code class="language-java">
+abstract class Animal {
+    String name;
+    int energy;
+
+    Animal(String name) {
+        this.name = name;
+        energy = 100;
+    }
+
+    abstract void move();
+
+    void eat() {
+        energy++;
+        System.out.println(name + " ate");
+    }
+}
+
+class Tiger extends Animal {
+    Tiger(String name) {
+        super(name);
+    }
+
+    @Override
+    void move() {
+        energy -= 3;
+        System.out.println(name + " walked");
+    }
+}
+
+class Snake extends Animal {
+    Snake(String name) {
+        super(name);
+    }
+
+    @Override
+    void move() {
+        energy -= 2;
+        System.out.println(name + " crawled");
+    }
+}
+
+class Parrot extends Animal {
+    Parrot(String name) {
+        super(name);
+    }
+
+    @Override
+    void move() {
+        energy--;
+        System.out.println(name + " flew");
+    }
+}
+</code></pre>
+
+<p>
+    Now, this is better. Now we can see clearly what fields and methods belong to an <em><code>Animal</code></em>.
+    Everything else belongs to the details of specific classes (<code>Tiger</code>, <code>Parrot</code>, etc.)
+</p>
+
+<blockquote>
+    Notice in the previous code snippet we've used the
+    <a href="/articles/2024/java-annotation-interfaces.html#interface-examples" target="_blank">
+        <code>@Override</code> annotation
+    </a> to make sure we're overriding properly the <code>move</code> method.
+</blockquote>
+
+<h2 id="instantiation">Instantiation</h2>
+
+<p>
+    Now we can use the abstract class and its subclasses in our code, but, because abstract classes cannot be
+    instantiated directly using the <code>new</code> keyword (see next section), we need create objects of the concrete
+    subclasses and use them polymorphically.
+</p>
+<pre><code class="language-java">
+public static void main(String[] args) {
+    Animal teo = new Tiger("Teo");
+    Animal sisi = new Snake("Sisi");
+    Animal pepi = new Parrot("Pepi");
+
+    teo.move();
+    teo.eat();
+
+    sisi.move();
+    sisi.eat();
+
+    pepi.move();
+    pepi.eat();
+}
+</code></pre>
+
+<p>This will print in console:</p>
+<pre><code class="language-shell">
+Teo walked
+Teo ate
+Sisi crawled
+Sisi ate
+Pepi flew
+Pepi ate
+</code></pre>
+
+<p>
+    No matter all the objects (<code>teo</code>, <code>sisi</code>, <code>pepi</code>) are stored in a variable
+    (reference) of type <code>Animal</code>, their specific types are different at runtime (such as <code>Tiger</code>)
+    and so their behaviors are different (different texts printed in console).
+</p>
+
+<h2>Considerations</h2>
+
+<p>
+    With abstract classes (and <a href="/articles/2024/java-interfaces.html" target="_blank">interfaces</a>) we can
+    simplify complex concepts in the software by modeling these classes based on the real-world concepts we're
+    representing. We could talk infinitely about many of the advantages of this design. Some of the most remarkable ones
+    are:
+</p>
+<ul>
+    <li>It ensures consistent behavior and at the same time it permits various implementations</li>
+    <li>Data can now be encapsulated more easily in each class, separately</li>
+    <li>Clear separation of boundaries, concerns and responsibilities of each class</li>
+    <li>More cohesive data structure, without unnecessary code duplication</li>
+    <li>Classes focused on "doing one thing well" &mdash; without bloating their code</li>
+    <li>Code base easier to maintain, adapt and scale</li>
+</ul>
+
+<p>
+    However, they're not a silver bullet, we must use them responsibly and have in mind what's their purpose and the
+    problem they solve:
+</p>
+<ul>
+    <li>
+        Abstract classes can also have regular (concrete) methods with a complete implementation. These methods can be
+        inherited by the subclasses without any need for overriding.
+    </li>
+    <li>
+        It is a compile-time error if an attempt is made to create an instance of an abstract class using a class
+        instance creation expression (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.9.1" target="_blank">
+            &sect;15.9.1
+        </a>). For example, the following code would report a compilation error:
+        <pre><code class="language-java">
+            Animal animal = new Animal("Teo"); &lt; -- compilation error!
+        </code></pre>
+        The closest we can get the previous code is to use an anonymous class &mdash; but this is something completely
+        different from what we're discussing here. Let's see it, for the sake of completeness:
+        <pre><code class="language-java">
+                    Animal animal = new Animal("Tiger") {
+                        @Override
+                        void move() {
+                            energy -=5;
+                            System.out.println(name + " moved in an 'anonymous' way");
+                        }
+                    };
+        </code></pre>
+    </li>
+    <li>
+        We can not declare <code>abstract</code> methods in a non-<code>abstract</code> class (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.1.1" target="_blank">
+            &sect;8.1.1.1
+        </a>).
+    </li>
+    <li>
+        Every constructor of a class extending an abstract class must call (directly, or indirectly) the constructor
+        of the abstract class. In our previous example this corresponds to the line <code>super(name);</code>.
+    </li>
+    <li>
+        <code>abstract</code> methods are inherited. This means if a class inherits some abstract method, that class
+        must either: implement the method (override it), or the class itself must be declared <code>abstract</code>
+        as well. This case would be useful if we want to represent another level of abstraction. For example, if we'd
+        want to model in our software some different types of animal, such as
+        <a href="https://en.wikipedia.org/wiki/Mammal" target="_blank"><em>mammals</em></a>,
+        <a href="https://en.wikipedia.org/wiki/Reptile" target="_blank"><em>reptiles</em></a>,
+        <a href="https://en.wikipedia.org/wiki/Oviparity" target="_blank"><em>oviparous</em></a>, etc., we could create
+        abstract classes for each of them. It would look like this:
+        <pre><code class="language-java">
+            abstract class Mammal extends Animal {
+            }
+            // ... other classes follow the same pattern
+        </code></pre>
+    </li>
+    <li>
+        Speaking of <em>levels</em> of abstraction; we should avoid creating too many levels of abstractions as then
+        our code can become hard to reason about and difficult to maintain in the long term.
+    </li>
+    <li>
+        Abstract classes should be used when the business domain really demands it. We should not use them just
+        because they give us a "free" pass to "code re-use". If we don't follow this recommendation we can end up with a
+        lot of <a href="https://en.wikipedia.org/wiki/No_Silver_Bullet" target="_blank">accidental complexity</a>.
+    </li>
+    <li>
+        Similarly, abstract classes should not be used with the purpose of preventing its instantiation. If that's the
+        goal, then the correct way of doing it is to declare a constructor for that class and make it
+        <code>private</code> (
+        <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.8.10" target="_blank">
+            &sect;8.8.10
+        </a>).
+    </li>
+</ul>
+
+<h2 id="abstract-classes-final-thoughts">Final thoughts</h2>
+
+<p>
+    Abstract classes represent a powerful tool at our disposal when following the OOP paradigm. Properly implemented,
+    they enhance our code and make it more robust, secure, maintainable and profitable (why not?) in the long term. This
+    article is by no means a complete guide to this topic, and there's much more you can review on your own; but
+    hopefully this is a good start for you to dive deeper into the documentation and information linked here.
+</p>
