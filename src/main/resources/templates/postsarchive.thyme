@@ -26,7 +26,7 @@
                        class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">
-                                <span class="badge rounded-pill text-bg-secondary"
+                                <span class="badge rounded-pill text-bg-light"
                                       th:text="${#dates.format(innerPost.date, 'd')}"></span>
                                 <span th:text="${innerPost.title}"></span>
                             </h5>
