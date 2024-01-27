@@ -14,7 +14,7 @@
     <ttl>2880</ttl>
     <generator>JBake</generator>
     <image>
-      <url th:text="${rootpath} + 'img/meta.jpg'"></url>
+      <url th:text="${rootpath} + 'img/meta.png'"></url>
       <title>Software Development</title>
       <link th:text="${config.site_host}"/>
     </image>

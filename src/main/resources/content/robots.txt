@@ -2,7 +2,7 @@
 
 User-agent: *
 Disallow: /img/logo/
-Disallow: /img/meta.jpg
+Disallow: /img/meta.png
 Disallow: /img/fav/
 Disallow: /*-draft.html$
 Disallow: /404.html$

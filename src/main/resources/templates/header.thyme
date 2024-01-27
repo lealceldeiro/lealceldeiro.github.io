@@ -40,7 +40,7 @@
     <meta property="og:url" th:content="${config.site_host} + (${content.uri} ?: '')">
     <meta property="og:image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.jpg')">
+          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.png')">
     <meta property="og:description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
@@ -56,7 +56,7 @@
                                                : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta itemprop="image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.jpg')">
+          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.png')">
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" th:content="${config.site_host} + (${content.uri} ?: '')">
@@ -67,7 +67,7 @@
                                                : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta name="twitter:image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.jpg')">
+          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.png')">
 
     <link th:href="${config.site_host} + '/' + ${config.feed_file}" rel="self" type="application/rss+xml" />
 
