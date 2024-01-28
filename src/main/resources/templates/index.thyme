@@ -13,7 +13,7 @@
                 <div class="col-md-6 p-lg-5 mx-auto">
                     <h3 class="display-5 text-body-secondary fw-normal">Let's talk about</h3>
                     <h1 class="display-4 fw-bold">Software Development</h1>
-                    <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, profesional experiences, and more</h3>
+                    <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, professional experiences, and more</h3>
                     <div class="d-flex gap-3 justify-content-center lead fw-normal mt-4">
                         <span>
                             <i class="bi bi-book"></i>
