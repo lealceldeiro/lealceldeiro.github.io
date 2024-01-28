@@ -31,55 +31,55 @@
                         <i class="bi bi-envelope-at-fill"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_linkedin_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://linkedin.com/in/' + ${config.social_linkedin_handle} + '/'">
                         <i class="bi bi-linkedin"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_github_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://github.com/' + ${config.social_github_handle} + '/'">
                         <i class="bi bi-github"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_stackoverflow_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'http://stackoverflow.com/users/' + ${config.social_stackoverflow_handle} + '/'">
                         <i class="bi bi-stack-overflow"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_twitter_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://twitter.com/' + ${config.social_twitter_handle} + '/'">
                         <i class="bi bi-twitter-x"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_youtube_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://www.youtube.com/' + ${config.social_youtube_handle} + '/'">
                         <i class="bi bi-youtube"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_facebook_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://www.facebook.com/' + ${config.social_facebook_handle} + '/'">
                         <i class="bi bi-facebook"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_instagram_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://www.instagram.com/' + ${config.social_instagram_handle} + '/'">
                         <i class="bi bi-instagram"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_threads_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://www.threads.net/' + ${config.social_threads_handle}">
                         <i class="bi bi-threads"></i>
                     </a>
                 </li>
-                <li class="ms-3">
+                <li class="ms-3" th:if="${config.social_codidact_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://software.codidact.com/users/' + ${config.social_codidact_handle} + '/'">
                         <i class="bi bi-lightbulb"></i>
