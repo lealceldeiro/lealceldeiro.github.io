@@ -55,7 +55,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://linkedin.com/in/lealceldeiro"
+                               th:href="'https://linkedin.com/in/' + ${config.social_linkedin_handle} + '/'"
                                target="_blank">
                                 LinkedIn
                             </a>
@@ -67,7 +67,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://github.com/lealceldeiro"
+                               th:href="'https://github.com/' + ${config.social_github_handle} + '/'"
                                target="_blank">
                                 GitHub
                             </a>
@@ -79,7 +79,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="http://stackoverflow.com/users/5640649/lealceldeiro"
+                               th:href="'http://stackoverflow.com/users/' + ${config.social_stackoverflow_handle} + '/'"
                                target="_blank">
                                 StackOverflow
                             </a>
@@ -91,7 +91,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://twitter.com/lealceldeiro"
+                               th:href="'https://twitter.com/' + ${config.social_twitter_handle} + '/'"
                                target="_blank">
                                 (Twitter)
                             </a>
@@ -103,7 +103,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://www.youtube.com/@lealceldeiro"
+                               th:href="'https://www.youtube.com/' + ${config.social_youtube_handle} + '/'"
                                target="_blank">
                                 YouTube
                             </a>
@@ -115,7 +115,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://www.facebook.com/lealceldeiro/"
+                               th:href="'https://www.facebook.com/' + ${config.social_facebook_handle} + '/'"
                                target="_blank">
                                 Facebook
                             </a>
@@ -127,7 +127,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://www.instagram.com/lealceldeiro/"
+                               th:href="'https://www.instagram.com/' + ${config.social_instagram_handle} + '/'"
                                target="_blank">
                                 Instagram
                             </a>
@@ -139,7 +139,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://www.threads.net/@lealceldeiro"
+                               th:href="'https://www.threads.net/' + ${config.social_threads_handle}"
                                target="_blank">
                                 Threads
                             </a>
@@ -151,7 +151,7 @@
                     <div>
                         <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
                             <a class="text-body-secondary link-underline link-underline-opacity-0"
-                               href="https://software.codidact.com/users/53229"
+                               th:href="'https://software.codidact.com/users/' + ${config.social_codidact_handle} + '/'"
                                target="_blank">
                                 Codidact
                             </a>
