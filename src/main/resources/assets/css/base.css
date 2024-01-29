@@ -78,3 +78,8 @@ pre code.hljs {
     -1px -1px 0 #000,
     1px -1px 0 #000;
 }
+
+.emoji {
+    color: transparent;
+    text-shadow: 0 0 0 #8f969dbf;
+}
