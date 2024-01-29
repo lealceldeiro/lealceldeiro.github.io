@@ -76,6 +76,13 @@ Images used to be displayed in the article thumbnail (`imageSrc`) should be:
 - _width_: 500px
 - _height_: 120px
 
+Images used to be displayed on social media (`ogImg`) should be:
+
+- located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks
+  like)
+- _width_: 1024px
+- _height_: 512px
+
 As a recommendation, this image generator could be used: https://deepai.org/machine-learning-model/old-style-generator
 or any of its alternatives in https://deepai.org/
 
