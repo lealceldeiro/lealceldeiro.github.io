@@ -9,20 +9,77 @@
 
     <div class="container">
         <main>
-            <div class="position-relative overflow-hidden p-3 text-center">
-                <div class="col-md-6 p-lg-5 mx-auto">
-                    <h3 class="display-5 text-body-secondary fw-normal">Let's talk about</h3>
-                    <h1 class="display-4 fw-bold">Software Development</h1>
-                    <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, professional experiences, and more</h3>
+            <div th:with="postsCount = ${#lists.size(published_posts)}"
+                 class="position-relative overflow-hidden p-3 text-center">
+                <div th:class="'col-md-' + (*{postsCount &gt; config.indexpage_show_posts_min_threshold} ? '8' : '6') + ' p-lg-' + (*{postsCount &gt; config.indexpage_show_posts_min_threshold} ? '3' : '5') +' mx-auto'">
+
+                    <!-- Welcome -->
+                    <th:block th:unless="*{postsCount &gt; config.indexpage_show_posts_min_threshold}">
+                        <h3 class="display-5 text-body-secondary fw-normal">Let's talk about</h3>
+                        <h1 class="display-4 fw-bold">Software Development</h1>
+                        <h3 class="fw-normal text-body-secondary mb-3">Technical knowledge, professional experiences,
+                            and more</h3>
+                    </th:block>
+                    <!-- End Welcome -->
+
+                    <!-- Carousel -->
+                    <th:block th:if="*{postsCount &gt; config.indexpage_show_posts_min_threshold}"
+                              th:with="top = (${postsCount &gt; config.indexpage_show_posts_max_threshold
+                                                              ? config.indexpage_show_posts_max_threshold
+                                                              : postsCount }) - 1">
+                        <div id="indexLatestArticlesCarousel" class="shadow carousel slide carousel-fade"
+                             data-bs-ride="true">
+                            <div class="carousel-indicators">
+                                <th:block th:each="idx : ${#numbers.sequence(0, top)}">
+                                    <button type="button" data-bs-target="#indexLatestArticlesCarousel"
+                                            th:class="*{idx == 0} ? 'active' : ''"
+                                            th:attr="data-bs-slide-to=*{idx},
+                                                     aria-label='Article ' + *{idx},
+                                                     aria-current=(*{idx == 0} ? 'true' : 'false')"></button>
+                                </th:block>
+                            </div>
+
+                            <div class="carousel-inner">
+                                <th:block th:each="idx : ${#numbers.sequence(0, top)}"
+                                          th:with="iPost = ${published_posts[idx]}">
+                                    <a th:href='${iPost.uri}'>
+                                        <div th:class="'carousel-item ' + (*{idx == 0} ? 'active' : '')">
+                                            <img th:src="*{iPost.ogImg}"
+                                                 th:alt="*{iPost.imageAlt}"
+                                                 class="d-block w-100">
+                                            <div class="carousel-caption d-block">
+                                                <h1 th:text="${iPost.title}" class="text-carousel"></h1>
+                                                <h3 th:text='${#dates.format(iPost.date, "MMMM d, yyyy")}'
+                                                    class="text-carousel"></h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </th:block>
+                            </div>
+
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#indexLatestArticlesCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#indexLatestArticlesCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </th:block>
+                    <!-- End carousel -->
+
                     <div class="d-flex gap-3 justify-content-center lead fw-normal mt-4">
-                        <span>
+                        <span th:class="*{postsCount &gt; config.indexpage_show_posts_min_threshold} ? 'fs-3' : ''">
                             <i class="bi bi-book"></i>
                             <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/articles.html">
                             Articles
                         </a>
                         </span>
-                        <span>
+                        <span th:class="*{postsCount &gt; config.indexpage_show_posts_min_threshold} ? 'fs-3' : ''">
                             <i class="bi bi-person"></i>
                             <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/about/lealceldeiro.html">
@@ -30,6 +87,7 @@
                         </a>
                         </span>
                     </div>
+
                 </div>
                 <div class="product-device shadow-sm d-none d-md-block"></div>
                 <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
