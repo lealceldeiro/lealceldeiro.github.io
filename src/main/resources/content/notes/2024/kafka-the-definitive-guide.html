@@ -1535,3 +1535,43 @@ kafka-topics.sh --bootstrap-server kafka1.example.com:9092/kafka-cluster --descr
 </p>
 
 <h2>Chapter 14: Stream Processing</h2>
+
+<p>
+    Starting from version 0.10.0, Kafka includes a stream processing library as part of its collection of client
+    libraries, called Kafka Streams (Streams API). It allows developers to consume, process, and produce events in their
+    apps, without relying on an external processing framework.
+</p>
+
+<h3>What Is Stream Processing?</h3>
+
+<p>
+    Data stream (event stream, streaming data) is an abstraction that represents an unbounded data. Here,
+    <em>unbounded</em> means infinite and ever-growing. That's because the dataset is unbounded, as, over time, new
+    records keep arriving. Some of its characteristics are:
+</p>
+<ul>
+    <li>Event streams are ordered</li>
+    <li>Immutable data records</li>
+    <li>Event streams are replayable</li>
+</ul>
+
+<p>
+    Stream processing refers to the continuous processing of event streams. It's a programming paradigm, just like
+    request-response and batch processing are.
+</p>
+<blockquote>
+    In a databases context, online transaction processing (OLTP) is the equivalente to request-response is.
+</blockquote>
+
+<p>
+    The collection of all the information that can be handled by the stream processing pipeline, such as counting the
+    number of events by type, moving averages, and joining two streams to create an enriched stream of information is
+    called a <em>state</em>. In this case it's not enough to look at each event by itself; we need to keep track of
+    more information &mdash; how many events of each type did we see this hour, all events that require joining,
+    sums, averages, etc.
+</p>
+<p>
+    Kafka Streams uses Kafka’s transactions to implement exactly-once guarantees for stream processing applications.
+    The <em>exactly-once guarantees</em> provided by the Kafka Streams library can be enabled  by setting
+    <code>processing.guarantee</code> to <code>exactly_once</code>
+</p>
