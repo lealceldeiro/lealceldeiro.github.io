@@ -79,7 +79,21 @@ pre code.hljs {
     1px -1px 0 #000;
 }
 
+.divider {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.divider::before, .divider::after {
+    flex: 1;
+    content: '';
+    padding: 1px;
+    background-color: #2125290d;
+    margin: 5px;
+}
+
 .emoji {
-    color: transparent;
-    text-shadow: 0 0 0 #8f969dbf;
+    color: transparent !important;
+    text-shadow: 0 0 0 #8f969dbf !important;
 }

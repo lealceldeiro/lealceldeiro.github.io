@@ -97,7 +97,7 @@
         <th:block th:with="notesCount = ${#lists.size(published_booknotes)}">
             <!-- Currently reading-->
             <th:block th:if="*{notesCount &gt; config.indexpage_show_booknotes_min_threshold}">
-                <div class="text-center">
+                <div class="text-center divider">
                     <span class="fs-3 emoji">&#128071;</span>
                     <span class="fs-3 text-body-secondary">Currently reading</span>
                     <span class="fs-3 emoji">&#128071;</span>
