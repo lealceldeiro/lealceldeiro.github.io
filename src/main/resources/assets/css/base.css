@@ -50,7 +50,7 @@ body {
     max-height: 1.5rem;
 }
 
-#wrap.content-justify p:not(.text-end) {
+#wrap.content-justify p:not(.content-not-justify) {
     text-align: justify !important;
 }
 

@@ -19,9 +19,9 @@
                                     <p class="small mb-0"
                                        th:text="${content.userTitle} ?: 'Software Development Enthusiast'"></p>
                                     <div>
-                                        <p class="mb-0 text-end" th:if="${content.userRate}"
+                                        <p class="mb-0 text-end content-not-justify" th:if="${content.userRate}"
                                            th:text="${content.userRate}"></p>
-                                        <p class="mb-0 text-end" th:if="${content.userLocation}">
+                                        <p class="mb-0 text-end content-not-justify" th:if="${content.userLocation}">
                                             <i class="bi bi-geo-alt-fill"></i>&nbsp;
                                             <span th:text="${content.userLocation}"></span>
                                         </p>
