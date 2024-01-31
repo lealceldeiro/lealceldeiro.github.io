@@ -12,8 +12,8 @@
             <div class="position-relative overflow-hidden p-3 mt-5 text-center">
                 <div class="col-md-8 mx-auto">
                     <!-- Subscriptions -->
-                    <div th:replace="subscriptionform.thyme::subscription(${config.subscription_key},
-                                                                          ${config.subscription_url},
+                    <div th:replace="subscriptionform.thyme::subscription(${config.staticform_key},
+                                                                          ${config.staticform_url},
                                                                           'manage',
                                                                           'Manage subscription')"></div>
                     <!-- End subscriptions -->
