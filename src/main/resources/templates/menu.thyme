@@ -26,11 +26,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/articles.html">Articles</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about/lealceldeiro.html">About me</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="/booknotes.html">Book Shelf</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                About
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="/about/lealceldeiro.html">About me</a></li>
+                                <li><a class="nav-link" href="/testimonials/lealceldeiro.html">Testimonials</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="${config.site_host} + '/' + ${config.feed_file}">RSS</a>
