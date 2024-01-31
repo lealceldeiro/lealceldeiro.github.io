@@ -1635,3 +1635,53 @@ kafka-topics.sh --bootstrap-server kafka1.example.com:9092/kafka-cluster --descr
         reading the results from an output topic.
     </li>
 </ul>
+
+<h3>The Stream Processing Library</h3>
+
+<p>
+    Apache Kafka has two stream APIs: a low-level
+    <a href="https://kafka.apache.org/28/documentation/streams/developer-guide/processor-api.html" target="_blank">
+        Processor API
+    </a>
+    and a high-level Streams DSL (see
+    <a href="https://events19.linuxfoundation.org/wp-content/uploads/2017/12/Beyond-the-DSL%E2%80%94Unlocking-the-Power-of-Kafka-Streams-with-the-Processor-API-Antony-Stubbs-Confluent-Inc..pdf"
+       target="_blank">
+        presentation
+    </a>).
+</p>
+<p>
+    Some examples:
+</p>
+<ul>
+    <li>
+        <a href="https://github.com/gwenshap/kafka-streams-wordcount" target="_blank">Word Count</a>
+    </li>
+    <li>
+        <a href="https://github.com/gwenshap/kafka-streams-stockstats" target="_blank">Stock Market Statistics</a>
+    </li>
+    <li>
+        <a href="https://github.com/gwenshap/kafka-clickstream-enrich" target="_blank">ClickStream Enrichment</a>
+    </li>
+</ul>
+
+<h3>Kafka Streams: Architecture Overview</h3>
+
+<p>
+    Every streams application implements and executes one topology (or <em>DAG</em> &mdash; or directed acyclic graph).
+</p>
+<p>The main testing tool for Kafka Streams applications is <code>TopologyTestDriver</code>.</p>
+<p>
+    Two popular integration test frameworks used for testing Kafka application are: <em>EmbeddedKafkaCluster</em> and
+    <em>Testcontainers</em>.
+</p>
+<p>
+    The blog post
+    <a href="https://www.confluent.io/blog/testing-kafka-streams/" target="_blank">
+        Testing Kafka Streams &mdash; A Deep Dive
+    </a> has deep explanations and detailed code examples of topologies and tests.
+</p>
+<p>
+    Kafka Streams handles scenarios where there are dependencies between tasks (i.e.: because a processing step
+    requires an input from multiple partitions) by assigning all the partitions needed for one join to the same task so
+    the task can consume from all the relevant partitions and perform the join independently.
+</p>
