@@ -29,6 +29,7 @@
     <section class="vh-90">
 
         <div class="container mt-5 pt-5 h-90">
+            <!-- region: intro-->
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10 col-xl-8 text-center mb-5">
                     <h3 class="mb-4">Testimonials</h3>
@@ -38,7 +39,9 @@
                        th:text="'- ' + ${content.userName}"></p>
                 </div>
             </div>
+            <!-- endregion: intro-->
 
+            <!-- region: testimonials -->
             <div class="row text-center">
                 <div class="col-md-6 mb-5 justify-content-center"
                      th:each="t : ${content.testimonialsContent.testimonials}">
@@ -64,7 +67,101 @@
                     </p>
                 </div>
             </div>
+            <!-- endregion: testimonials-->
 
+            <!-- region: add testimonial -->
+            <hr>
+            <div>
+                <small>
+                    Have we worked/collaborated together in a professional environment? You can write a testimonial for
+                    me too. It'll mean a LOT! You can do it directly on
+                    <a th:href="'https://www.linkedin.com/in/' + ${content.userLinkedinHandle} + '/details/recommendations/'"
+                       target="_blank">
+                        LinkedIn
+                    </a>,
+                    or by filling this form.
+                </small>
+
+                <div class="container mt-4 p-4 pb-2">
+                    <div class="col-12">
+                        <form th:action="${config.staticform_url} ?: ''" method="post">
+
+                            <!-- Required -->
+                            <input type="hidden" name="accessKey" th:value="${config.staticform_key}">
+                            <!--Spam protection-->
+                            <input type="text" name="honeypot" style="display: none;">
+                            <!-- To be displayed after success -->
+                            <input type="hidden" name="redirectTo"
+                                   th:value="${config.site_host} + '/thank-you-for-your-testimonial.html'">
+
+                            <div class="col-12 mb-3">
+                                <label class="visually-hidden" for="newTestimonialNameField">Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-text"><i class="bi bi-person"></i></div>
+                                    <input type="text" class="form-control" id="newTestimonialNameField"
+                                           placeholder="Name" name="name" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label class="visually-hidden" for="newTestimonialEmailField">Email (optional)</label>
+                                <div class="input-group">
+                                    <div class="input-group-text">@</div>
+                                    <input type="email" class="form-control" id="newTestimonialEmailField"
+                                           placeholder="Email (optional)" name="email">
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label class="visually-hidden"
+                                       for="newTestimonialRelationshipField">Relationship</label>
+                                <div class="input-group">
+                                    <div class="input-group-text"><i class="bi bi-people"></i></div>
+                                    <input type="text" class="form-control" id="newTestimonialRelationshipField"
+                                           placeholder="Did we work/study/collaborated together? Write it here..."
+                                           name="$relationship" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-blockquote-left"></i> Testimonial
+                                    </span>
+                                    <textarea class="form-control" aria-label="Testimonial" name="message" required>
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3 d-grid gap-2">
+                                <button type="submit" class="btn btn-secondary">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-12">
+                        <p>
+                            By submitting this form, you accept our
+                            <a href="/privacy.html" target="_blank"
+                               class="text-body-secondary link-underline link-underline-opacity-0">
+                                Privacy Policy
+                            </a>, our
+                            <a href="/terms.html" target="_blank"
+                               class="text-body-secondary link-underline link-underline-opacity-0">
+                                Terms and Conditions
+                            </a> and our
+                            <a href="/conduct.html" target="_blank"
+                               class="text-body-secondary link-underline link-underline-opacity-0">
+                                Code of Conduct
+                            </a>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- endregion: add testimonial -->
+
+            <!-- region: disclaimer -->
             <hr>
             <div>
                 <small>
@@ -75,6 +172,7 @@
                     </a>. To remove it from other platforms, you need to do it from the specific platform itself.
                 </small>
             </div>
+            <!-- endregion: disclaimer-->
         </div>
 
     </section>
