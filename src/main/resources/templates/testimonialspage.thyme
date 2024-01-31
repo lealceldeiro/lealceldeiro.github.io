@@ -115,12 +115,30 @@
                             </div>
 
                             <div class="col-12 mb-3">
+                                <label class="visually-hidden" for="newTestimonialLinkedInField">LinkedIn (optional)</label>
+                                <div class="input-group">
+                                    <div class="input-group-text"><i class="bi bi-linkedin text-body-secondary"></i></div>
+                                    <input type="text" class="form-control" id="newTestimonialLinkedInField"
+                                           placeholder="LinkedIn (optional)" name="$linkedIn">
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label class="visually-hidden" for="newTestimonialPictureField">Link to profile picture (optional)</label>
+                                <div class="input-group">
+                                    <div class="input-group-text"><i class="bi bi-image-fill text-body-secondary"></i></div>
+                                    <input type="text" class="form-control" id="newTestimonialPictureField"
+                                           placeholder="Link to profile picture (optional)" name="$pictureUrl">
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
                                 <label class="visually-hidden"
                                        for="newTestimonialRelationshipField">Relationship</label>
                                 <div class="input-group">
                                     <div class="input-group-text"><i class="bi bi-people"></i></div>
                                     <input type="text" class="form-control" id="newTestimonialRelationshipField"
-                                           placeholder="Did we work/study/collaborated together? Write it here..."
+                                           placeholder="Relationship: Did we work/study/collaborate together? Write it here..."
                                            name="$relationship" required>
                                 </div>
                             </div>
