@@ -4,6 +4,24 @@
 <head th:replace="header.thyme::head(${'Testimonials about' + content.userName}, (${content.ogDesc} ?: ${content.intro}))"></head>
 <body onload="prettyPrint()">
 
+<script>
+    // region: replace broken images
+    function replaceImgOnErr(imgEl, originalImgDataAttr, newImgDataAttr) {
+        if (imgEl == null) {
+            return;
+        }
+        const authorImg = imgEl.getAttribute(originalImgDataAttr);
+        const authorAlternativeImg = imgEl.getAttribute(newImgDataAttr);
+        if (authorImg === null || authorImg === "" || authorAlternativeImg === null || authorAlternativeImg === "") {
+            return;
+        }
+
+        imgEl.onerror = null;
+        imgEl.src = authorAlternativeImg;
+    }
+    // endregion: replace broken images
+</script>
+
 <div id="wrap" class="content-justify">
     <div th:replace="menu.thyme::menu"></div>
 
@@ -26,7 +44,10 @@
                     <div class="d-flex mb-4 justify-content-center">
                         <img th:src="${t.authorImg} ?: ('/testimonials/img/' + ${t.authorAlternativeImg})"
                              th:alt="${t.authorImgAlt} ?: ('Image of ' + ${t.authorName})"
-                             class="rounded-circle shadow-1-strong" width="100" height="100"/>
+                             class="rounded-circle shadow-1-strong" width="100" height="100"
+                             th:data-author-alternative-img="'/testimonials/img/' + ${t.authorAlternativeImg}"
+                             th:data-author-img="${t.authorAlternativeImg}"
+                             onerror="replaceImgOnErr(this, 'data-author-img', 'data-author-alternative-img')"/>
                     </div>
                     <p class="lead my-3 text-body-secondary content-not-justify" th:text='|"${t.value}"|'></p>
                     <p class="font-italic font-weight-normal mb-0 content-not-justify">
@@ -52,69 +73,6 @@
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
         th:src="${rootpath} + 'js/base.js'"></script>
-
-<!-- Calendly badge widget begin -->
-<span class="mb-0 me-2" th:if="${content.userCalendlyUrl}">
-    <link href="https://assets.calendly.com/assets/external/widget.css"
-          rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js"
-            type="text/javascript" async></script>
-    <script type="text/javascript" th:inline="javascript">
-        window.onload = function () {
-            Calendly.initBadgeWidget({
-                url: [[${content.userCalendlyUrl}]],
-                text: 'Schedule time with me',
-                color: '#0d6efd',
-                textColor: '#ffffff',
-                branding: false
-            });
-        }
-    </script>
-</span>
-<!-- Calendly badge widget end -->
-
-<script type="module" th:if="${content.userGithubUsername}" th:inline="javascript">
-    // https://github.com/octokit/core.js#readme
-    import {Octokit} from "https://esm.sh/@octokit/core";
-
-    const octokit = new Octokit()
-
-    // get user info
-    const userReq = "GET /users/" + [[${content.userGithubUsername}]];
-    const userRes = await request(userReq);
-    // alternative impl would be: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-    setAndShow('githubRepos', userRes.data.public_repos + userRes.data.public_gists)
-    // alternative impl would be: https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#list-followers-of-a-user
-    setAndShow('githubFollowers', userRes.data.followers);
-
-    // get user repos' stars: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-    const reposRes = await request(userReq + "/repos");
-    const repoStarsCount = starsCount(reposRes.data);
-    setAndShow('githubStars', repoStarsCount)
-
-    // FIXME: get user gists' stars: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28
-    const gistsRes = await request(userReq + "/gists");
-    const starsCountUpdated = repoStarsCount + starsCount(gistsRes.data)
-    setAndShow('githubStars', starsCountUpdated);
-
-    function request(url) {
-        const GH_API_VERSION = [[${config.github_apiversion}]];
-        return octokit.request(url, {username: 'USERNAME', headers: {'X-GitHub-Api-Version': GH_API_VERSION}});
-    }
-
-    function setAndShow(elementId, value) {
-        const el = document.getElementById(elementId);
-        el.innerText = value;
-        el.parentElement.classList.remove("d-none");
-    }
-
-    function starsCount(data) {
-        return data.map(repo => {
-            const stargazerCount = repo['stargazers_count'];
-            return stargazerCount !== undefined && stargazerCount !== null ? stargazerCount : 0;
-        }).reduce((i, j) => i + j, 0);
-    }
-</script>
 
 </body>
 </html>
