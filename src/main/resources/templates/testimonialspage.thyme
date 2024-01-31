@@ -92,7 +92,9 @@
                             <input type="text" name="honeypot" style="display: none;">
                             <!-- To be displayed after success -->
                             <input type="hidden" name="redirectTo"
-                                   th:value="${config.site_host} + '/thank-you-for-your-testimonial.html'">
+                                   th:value="${config.site_host}
+                                               + (*{#strings.startsWith(config.site_host, config.site_localhost)} ? '' : '/')
+                                               + 'thank-you-for-your-testimonial.html'">
 
                             <div class="col-12 mb-3">
                                 <label class="visually-hidden" for="newTestimonialNameField">Name</label>
