@@ -1685,3 +1685,73 @@ kafka-topics.sh --bootstrap-server kafka1.example.com:9092/kafka-cluster --descr
     requires an input from multiple partitions) by assigning all the partitions needed for one join to the same task so
     the task can consume from all the relevant partitions and perform the join independently.
 </p>
+
+<h3>Use Cases for Stream Processing</h3>
+
+<ul>
+    <li>Customer service</li>
+    <li>Internet of Things</li>
+    <li>Fraud detection</li>
+</ul>
+
+<h3>How to Choose a Stream Processing Framework to use with Apache Kafka</h3>
+
+<p>
+    Different types of applications call for different stream processing solutions:
+</p>
+<ul>
+    <li>Ingest</li>
+    <li>Low milliseconds actions</li>
+    <li>Asynchronous microservices</li>
+    <li>Near real-time data analytics</li>
+</ul>
+
+<p>
+    There are also some global considerations that should taken into account:
+</p>
+<ul>
+    <li>Operability of the system</li>
+    <li>Usability of APIs and ease of debugging</li>
+    <li>Makes hard things easy</li>
+    <li>Community</li>
+</ul>
+
+<h3>Books that Cover more in Depth Stream Processing</h3>
+
+<ul>
+    <li>
+        <a href="https://www.oreilly.com/library/view/making-sense-of/9781492042563/" target="_blank">
+            Making Sense of Stream Processing
+        </a>
+    </li>
+    <li>
+        <a href="https://www.oreilly.com/library/view/streaming-systems/9781491983867/" target="_blank">
+            Streaming Systems
+        </a>
+    </li>
+    <li>
+        <a href="https://www.oreilly.com/library/view/flow-architectures/9781492075882/" target="_blank">
+            Flow Architectures
+        </a>
+    </li>
+    <li>
+        <a href="https://www.oreilly.com/library/view/mastering-kafka-streams/9781492062486/" target="_blank">
+            Mastering Kafka Streams and ksqlDB
+        </a>
+    </li>
+    <li>
+        <a href="https://www.manning.com/books/kafka-streams-in-action-second-edition" target="_blank">
+            Kafka Streams in Action, Second Edition
+        </a>
+    </li>
+    <li>
+        <a href="https://www.oreilly.com/library/view/stream-processing-with/9781491974285/" target="_blank">
+            Stream Processing with Apache Flink
+        </a>
+    </li>
+    <li>
+        <a href="https://www.oreilly.com/library/view/stream-processing-with/9781491944233/" target="_blank">
+            Stream Processing with Apache Spark
+        </a>
+    </li>
+</ul>
