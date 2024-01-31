@@ -115,18 +115,26 @@
                             </div>
 
                             <div class="col-12 mb-3">
-                                <label class="visually-hidden" for="newTestimonialLinkedInField">LinkedIn (optional)</label>
+                                <label class="visually-hidden" for="newTestimonialLinkedInField">
+                                    LinkedIn (optional)
+                                </label>
                                 <div class="input-group">
-                                    <div class="input-group-text"><i class="bi bi-linkedin text-body-secondary"></i></div>
+                                    <div class="input-group-text">
+                                        <i class="bi bi-linkedin text-body-secondary"></i>
+                                    </div>
                                     <input type="text" class="form-control" id="newTestimonialLinkedInField"
                                            placeholder="LinkedIn (optional)" name="$linkedIn">
                                 </div>
                             </div>
 
                             <div class="col-12 mb-3">
-                                <label class="visually-hidden" for="newTestimonialPictureField">Link to profile picture (optional)</label>
+                                <label class="visually-hidden" for="newTestimonialPictureField">
+                                    Link to profile picture (optional)
+                                </label>
                                 <div class="input-group">
-                                    <div class="input-group-text"><i class="bi bi-image-fill text-body-secondary"></i></div>
+                                    <div class="input-group-text">
+                                        <i class="bi bi-image-fill text-body-secondary"></i>
+                                    </div>
                                     <input type="text" class="form-control" id="newTestimonialPictureField"
                                            placeholder="Link to profile picture (optional)" name="$pictureUrl">
                                 </div>
@@ -148,8 +156,8 @@
                                     <span class="input-group-text">
                                         <i class="bi bi-blockquote-left"></i> Testimonial
                                     </span>
-                                    <textarea class="form-control" aria-label="Testimonial" name="message" required>
-                                    </textarea>
+                                    <textarea class="form-control" aria-label="Testimonial" name="message"
+                                              required></textarea>
                                 </div>
                             </div>
 
