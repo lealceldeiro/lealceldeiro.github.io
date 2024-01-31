@@ -205,6 +205,18 @@
                             </h3>
                         </div>
                     </div>
+                    <div class="col d-flex align-items-start" th:if="${config.social_mastodon_profile != null}">
+                        <i class="bi bi-mastodon text-body-secondary c-icon"></i>&nbsp;
+                        <div>
+                            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">
+                                <a class="text-body-secondary link-underline link-underline-opacity-0"
+                                   th:href="${config.social_mastodon_profile}"
+                                   target="_blank">
+                                    Mastodon
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
                     <div class="col d-flex align-items-start" th:if="${config.social_youtube_handle != null}">
                         <i class="bi bi-youtube text-body-secondary c-icon"></i>&nbsp;
                         <div>

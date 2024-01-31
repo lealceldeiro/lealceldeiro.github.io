@@ -55,6 +55,12 @@
                         <i class="bi bi-twitter-x"></i>
                     </a>
                 </li>
+                <li class="ms-3" th:if="${config.social_mastodon_profile != null}">
+                    <a class="text-body-secondary" target="_blank"
+                       th:href="${config.social_mastodon_profile}">
+                        <i class="bi bi-mastodon"></i>
+                    </a>
+                </li>
                 <li class="ms-3" th:if="${config.social_youtube_handle != null}">
                     <a class="text-body-secondary" target="_blank"
                        th:href="'https://www.youtube.com/' + ${config.social_youtube_handle} + '/'">
