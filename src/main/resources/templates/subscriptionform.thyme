@@ -17,8 +17,7 @@
             <input type="hidden" name="replyTo" value="@">
             <!-- To be displayed after success -->
             <input type="hidden" name="redirectTo"
-                   th:value="${subscribe ? 'https://lealceldeiro.com/thank-you-for-subscribing.html'
-                                         : 'https://lealceldeiro.com/'}">
+                   th:value="${config.site_host} + (${subscribe} ? '/thank-you-for-subscribing.html' : '')">
 
             <div class="col-12" th:if="*{subscribe}">
                 <label class="visually-hidden" for="subscribeNameField">Name</label>
