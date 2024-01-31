@@ -1,6 +1,7 @@
 # https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt
 
 User-agent: *
+Disallow: /testimonials/img/
 Disallow: /img/logo/
 Disallow: /img/meta.png
 Disallow: /img/fav/
