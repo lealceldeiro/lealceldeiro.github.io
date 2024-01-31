@@ -1572,6 +1572,66 @@ kafka-topics.sh --bootstrap-server kafka1.example.com:9092/kafka-cluster --descr
 </p>
 <p>
     Kafka Streams uses Kafka’s transactions to implement exactly-once guarantees for stream processing applications.
-    The <em>exactly-once guarantees</em> provided by the Kafka Streams library can be enabled  by setting
-    <code>processing.guarantee</code> to <code>exactly_once</code>
+    The <em>exactly-once guarantees</em> provided by the Kafka Streams library can be enabled by setting
+    <code>processing.guarantee</code> to <code>exactly_once</code>.
 </p>
+
+<h3>Stream Processing Design Patterns</h3>
+
+<ul>
+    <li>
+        <em>Single-Event Processing:</em> Processing of each event in isolation &mdash; the most basic pattern.
+    </li>
+    <li>
+        <em>Processing with Local State:</em> Used when the information being calculated/aggregated requires a
+        <em>local state</em> (rather than a shared state). Some of the issues that must be
+        addressed when using this pattern are:
+        <ul>
+            <li>Memory usage</li>
+            <li>Persistence</li>
+            <li>Rebalancing</li>
+        </ul>
+    </li>
+    <li>
+        <em>Multiphase Processing/Repartitioning:</em> A "two-phase approach". There is a first step where some
+        calculation happens and then the results are written to a new topic with a single partition. This partition will
+        be read by a single application instance that can then find the previously calculated results. The calculation
+        can be performed on each instance with a local state. Sometimes more steps are needed to produce the final
+        results.
+    </li>
+    <li>
+        <em>Processing with External Lookup: Stream-Table Join:</em> One of the streams represents changes
+        to a locally cached table. It's used when we want to enrich the information from the information stream with
+        information stored in an external storage system, like an external database. A common approach to keep the
+        local cache up-to-date is to perform some Change Data Capture (CDC) from the external database to keep the
+        local cache updated.
+    </li>
+    <li>
+        <em>Table-Table Join:</em> Represents a join between two tables at the time the operation is performed. With
+        Kafka Streams, we can perform <code>equi-join</code> and <code>foreign-key join</code>.
+    </li>
+    <li>
+        <em>Streaming Join:</em> Matches events from one stream with events from another stream that have the same key
+        and happened in the same time window.
+    </li>
+    <li>
+        <em>Out-of-Sequence Events:</em> Handles events that arrive at an "incorrect" time. Examples of such events are
+        mobiles that send events after a network recovery or when monitoring faulty network equipment.
+    </li>
+    <li>
+        <em>Reprocessing</em>, in its two variants:
+        <ul>
+            <li>
+                An improved version of the processing app is run against the same (old) stream, the new processing
+                result is compared to the initial one (not replaced), and then move clients to use the new result.
+            </li>
+            <li>
+                The old stream is processed by an updated application and the results are recalculated.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <em>Interactive Queries:</em> Read the results from the processing application state store itself, as apposed to
+        reading the results from an output topic.
+    </li>
+</ul>
