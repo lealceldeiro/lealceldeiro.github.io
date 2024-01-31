@@ -55,20 +55,6 @@
         </form>
     </div>
     <div class="col-12 mt-2">
-        <p>
-            When you subscribe, you accept our
-            <a href="/privacy.html" target="_blank"
-               class="text-body-secondary link-underline link-underline-opacity-0">
-                Privacy Policy
-            </a>, our
-            <a href="/terms.html" target="_blank"
-               class="text-body-secondary link-underline link-underline-opacity-0">
-                Terms and Conditions
-            </a> and our
-            <a href="/conduct.html" target="_blank"
-               class="text-body-secondary link-underline link-underline-opacity-0">
-                Code of Conduct
-            </a>.
-        </p>
+        <p th:replace="termsacceptance.thyme::termsacceptance('When you subscribe, you accept our')"></p>
     </div>
 </div>
