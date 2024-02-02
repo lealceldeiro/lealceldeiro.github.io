@@ -57,11 +57,7 @@
                                 <a th:href="*{content.rootpath + note.uri}"
                                    class="link-underline link-underline-opacity-0 text-body-secondary">
                                     <div>
-                                        <span th:text="${note.read}"
-                                              th:class="'float-end badge text-bg-' + (${#strings.equals(note.read, 'done')}
-                                                                                      ? 'success'
-                                                                                      : (${#strings.equals(note.read, 'progress')
-                                                                                           ? 'primary' : 'warning'}))" ></span>
+                                        <span th:replace="booknotestatus.thyme::booknotestatus(${note.read})"></span>
                                         <h5 class="card-title" th:text="${note.title}"></h5>
                                     </div>
                                     <p class="card-text" th:text="${note.authors}"></p>

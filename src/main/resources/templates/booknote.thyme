@@ -8,6 +8,7 @@
     <div class="container">
 
         <div class="page-header mt-4">
+            <span th:replace="booknotestatus.thyme::booknotestatus(${content.read})"></span>
             <h1 th:text='${content.title}'></h1>
         </div>
         <hr/>
