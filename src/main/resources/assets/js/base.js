@@ -66,3 +66,53 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 });
 // endregion: mark active menu items
+
+// region: theme picker
+const LIGHT = 'light';
+const DARK = 'dark';
+const selectedThemeKey = 'lc_theme';
+
+const storedTheme = localStorage.getItem(selectedThemeKey);
+let selectedTheme = storedTheme === undefined || storedTheme === null ? LIGHT : storedTheme;
+
+setTheme();
+
+function setTheme() {
+    document.querySelectorAll('html').forEach(e => e.setAttribute('data-bs-theme', selectedTheme));
+
+    const toggleBtnEl = document.querySelector('i#themeToggle');
+    const biToggleOff = 'bi-toggle2-off';
+    const biToggleOn = 'bi-toggle2-on';
+
+    toggleBtnEl.classList.remove(biToggleOff, biToggleOn);
+    toggleBtnEl.classList.add(selectedTheme === DARK ? biToggleOn : biToggleOff);
+
+    localStorage.setItem(selectedThemeKey, selectedTheme);
+
+    setHighlightJsTheme();
+}
+
+function setHighlightJsTheme() {
+    if (!window.hljs) {
+        return;
+    }
+    const baseUrl = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/"
+    const extension = ".min.css"
+
+    const integrityLight="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
+    const integrityDark="sha512-bfLTSZK4qMP/TWeS1XJAR/VDX0Uhe84nN5YmpKk5x8lMkV0D+LwbuxaJMYTPIV13FzEv4CUOhHoc+xZBDgG9QA=="
+    const hrefLight = "intellij-light";
+    const hrefDark = "dark";
+
+    const linkEl = document.querySelector('link#highlightJsThemeLink');
+    linkEl.integrity = selectedTheme === DARK ? integrityDark : integrityLight;
+    linkEl.href = baseUrl + (selectedTheme === DARK ? hrefDark : hrefLight) + extension;
+
+    hljs.highlightAll();
+}
+
+function changeTheme() {
+    selectedTheme = selectedTheme === LIGHT ? DARK : LIGHT;
+    setTheme();
+}
+// endregion: theme picker

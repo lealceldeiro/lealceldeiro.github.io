@@ -73,11 +73,6 @@
 
     <!-- Le styles -->
     <!--https://cdnjs.com/-->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.min.css"
-          integrity="sha512-lb4ZuGfCVoGO2zu/TMakNlBgRA6mPXZ0RamTYgluFxULAwOoNnBIZaNjsdfhnlKlIbENaQbEAYEWxtzjkB8wsQ=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
@@ -97,7 +92,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css"
           integrity="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
           crossorigin="anonymous"
-          referrerpolicy="no-referrer"/>
+          referrerpolicy="no-referrer"
+          id="highlightJsThemeLink"/>
 
     <!-- last to be included to override defaults -->
     <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
