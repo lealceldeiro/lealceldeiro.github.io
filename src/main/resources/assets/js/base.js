@@ -113,9 +113,9 @@ function setHighlightJsTheme() {
     const extension = ".min.css"
 
     const integrityLight="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
-    const integrityDark="sha512-bfLTSZK4qMP/TWeS1XJAR/VDX0Uhe84nN5YmpKk5x8lMkV0D+LwbuxaJMYTPIV13FzEv4CUOhHoc+xZBDgG9QA=="
+    const integrityDark="sha512-zcatBMvxa7rT7dDklfjauWsfiSFParF+hRfCdf4Zr40/MmA1gkFcBRbop0zMpvYF3FmznYFgcL8wlcuO/GwHoA=="
     const hrefLight = "intellij-light";
-    const hrefDark = "dark";
+    const hrefDark = "github-dark-dimmed";
 
     const linkEl = document.querySelector('link#highlightJsThemeLink');
     linkEl.integrity = isDark() ? integrityDark : integrityLight;
