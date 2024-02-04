@@ -80,16 +80,29 @@ setTheme();
 function setTheme() {
     document.querySelectorAll('html').forEach(e => e.setAttribute('data-bs-theme', selectedTheme));
 
+    toggleThemeIcon();
+    setNavbarLogo();
+    setHighlightJsTheme();
+
+    localStorage.setItem(selectedThemeKey, selectedTheme);
+}
+
+function toggleThemeIcon() {
     const toggleBtnEl = document.querySelector('i#themeToggle');
     const biToggleOff = 'bi-toggle2-off';
     const biToggleOn = 'bi-toggle2-on';
 
     toggleBtnEl.classList.remove(biToggleOff, biToggleOn);
-    toggleBtnEl.classList.add(selectedTheme === DARK ? biToggleOn : biToggleOff);
+    toggleBtnEl.classList.add(isDark() ? biToggleOn : biToggleOff);
+}
 
-    localStorage.setItem(selectedThemeKey, selectedTheme);
+function isDark() {
+    return selectedTheme === DARK;
+}
 
-    setHighlightJsTheme();
+function setNavbarLogo(){
+    const logoImg = isDark() ? 'logo500x500_dark_transparent.png' : 'logo500x500_transparent.png';
+    document.querySelector('img#logo').setAttribute('src', 'img/' + logoImg);
 }
 
 function setHighlightJsTheme() {
@@ -105,8 +118,8 @@ function setHighlightJsTheme() {
     const hrefDark = "dark";
 
     const linkEl = document.querySelector('link#highlightJsThemeLink');
-    linkEl.integrity = selectedTheme === DARK ? integrityDark : integrityLight;
-    linkEl.href = baseUrl + (selectedTheme === DARK ? hrefDark : hrefLight) + extension;
+    linkEl.integrity = isDark() ? integrityDark : integrityLight;
+    linkEl.href = baseUrl + (isDark() ? hrefDark : hrefLight) + extension;
 
     hljs.highlightAll();
 }
