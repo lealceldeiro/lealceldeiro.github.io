@@ -101,10 +101,15 @@ class Animal {
             <code>{ClassModifier}</code>
         </a>
         is one of: <code>public</code>, <code>protected</code>, <code>private</code>,
-        <a href="/articles/2024/abstrat-classes-in-java.html" target="_blank">
+        <a href="/articles/2024/abstrat-classes-in-java.html" target="_blank"
+           class="link-underline link-underline-opacity-0">
             <code>abstract</code>
-        </a>, <code>static</code>, <code>final</code>, <code>sealed</code>, <code>non-sealed</code>,
-        <code>strictfp</code>.
+        </a>, <code>static</code>, <code>final</code>,
+        <a href="/articles/2024/sealed-classes-in-java.html#sealed-keyword" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>sealed</code>
+        </a>,
+        <code>non-sealed</code>, <code>strictfp</code>.
     </li>
 
     <li><code>class</code> is the Java keyword used to specify we're declaring a class.</li>
@@ -158,8 +163,17 @@ class Animal {
            class="link-underline link-underline-opacity-0">
             <code>[ClassPermits]</code>
         </a>
-        is used when the <code>sealed</code> modifier is specified, and it indicates, after the keyword
-        <code>permits</code>, the other classes (if any) that are allowed to extend our class. For example,
+        is used when the
+        <a href="/articles/2024/sealed-classes-in-java.html#sealed-keyword" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>sealed</code>
+        </a>
+        modifier is specified, and it indicates, after the keyword
+        <a href="/articles/2024/sealed-classes-in-java.html#permits-keyword" target="_blank"
+           class="link-underline link-underline-opacity-0">
+            <code>permits</code>
+        </a>,
+        the other classes (if any) that are allowed to extend our class. For example,
         <code>permits Tiger, Ostrich, Bear</code>.
     </li>
 
