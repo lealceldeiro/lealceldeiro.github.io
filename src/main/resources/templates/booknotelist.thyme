@@ -15,9 +15,11 @@
 
         <div>
             <p>
-                This is a collection of books I have either read, or intend to read. I usually take notes from those
-                I've read already. These notes are located in a dedicated page for each of the books listed below and
-                are intended to be used as a memo for myself.
+                This is a collection of books I have either read
+                <sup><i class="text-success bi bi-check-circle-fill"></i></sup> or intend to read
+                <sup><i class="text-warning bi bi-hourglass-top"></i></sup>.
+                I usually take notes from those I've read already. These notes are located in a dedicated page for each
+                of the books listed below and are intended to be used as a memo for myself.
             </p>
             <p>
                 They are publicly available because I think many people may find them useful as a summary or as a
