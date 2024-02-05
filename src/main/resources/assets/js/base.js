@@ -84,6 +84,8 @@ function setTheme() {
     setNavbarLogo();
     setHighlightJsTheme();
 
+    document.dispatchEvent(new Event('themeSwitched'));
+
     localStorage.setItem(selectedThemeKey, selectedTheme);
 }
 
