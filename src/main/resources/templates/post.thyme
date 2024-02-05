@@ -21,11 +21,25 @@
                     </p>
 
                     <a th:if="${content.authorHandle}" th:href="'/about/' + ${content.authorHandle} + '.html'"
-                       class="px-3 mx-3 border-start border-secondary">
+                       class="px-3 mx-3 border-start border-secondary link-underline link-underline-opacity-0">
                         <img th:src="${content.authorProfileImage} ?: '/img/user.svg'"
                              th:alt="${content.authorHandle}"
                              class="img-fluid rounded-circle me-3" width="35">
                     </a>
+
+                    <!-- Contributors -->
+                    <th:block th:if="${content.contribution != null}">
+                        <a th:each="contributor: ${content.contribution.contributors}"
+                           th:href="${contributor.handle != null} ? ('/about/' + ${contributor.handle} + '.html')
+                                                                  : (${contributor.profileUrl} ?: '#')"
+                           class="link-underline link-underline-opacity-0"
+                           target="_blank">
+                            <img th:src="${contributor.profileImage} ?: '/img/user.svg'"
+                                 th:alt="${contributor.handle} ?: (${contributor.name} ?: 'Anonymous')"
+                                 class="img-fluid rounded-circle me-3" width="35">
+                        </a>
+                    </th:block>
+                    <!-- End contributors -->
                 </div>
             </div>
         </div>
@@ -114,7 +128,7 @@
             document.addEventListener('themeSwitched', (e) => {
                 // https://help.disqus.com/en/articles/1717163-using-disqus-on-ajax-sites
                 if (!!window.DISQUS && document.readyState === 'complete') {
-                    DISQUS.reset({ reload: true, config: disqus_config });
+                    DISQUS.reset({reload: true, config: disqus_config});
                 }
             });
         </script>
