@@ -130,7 +130,69 @@ so it knows where to further interact with the resource that was just created
 For `DELETE`, the HTTP specification requires that we send a response code of `200 OK`,
 and a response message body or a response code of `204 No Content`, without any response body.
 
-== Chapter 3: Your First JAX-RS Service
+== Chapter 3: First JAX-RS Service
+
+JAX-RS is a framework that focuses on applying Java annotations to plain Java objects.
+It has annotations to bind specific URI patterns and HTTP operations to individual methods in the Java classes.
+
+A JAX-RS service is a Java class that uses JAX-RS annotations to bind and map specific incoming HTTP requests to
+Java methods that can service these requests.
+
+In vanilla JAX-RS, services can either be singletons or per-request objects.
+A _singleton_ means that one and only one Java object services HTTP requests.
+_Per-request_ means that a Java object is created to process each incoming request and is thrown away at the
+end of that request.
+
+Example:
+
+[source,java]
+----
+import jakarta.ws.rs.Path;
+
+@Path("/resource-uri")
+public class ResourceService {
+    // ... logic omitted for brevity
+}
+----
+
+IMPORTANT: https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/path[`@Path`^, role=link-underline link-underline-opacity-0],
+under package `jakarta.ws.rs`, was formerly under the package `javax.ws.rs`.
+See https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#uritemplates[`URI Templates`^]
+and https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#changes-since-2.1-release[Changes since version 2.1^] for more info.
+
+Example of a service to create a resource:
+
+[source,java]
+----
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import java.io.InputStream;
+
+@POST
+@Consumes("application/xml")
+public Response createResource(InputStream is) {
+    // ... code omitted for brevity
+}
+----
+
+Example of a service to get a resource:
+[source,java]
+----
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.StreamingOutput;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+
+@GET
+@Path("{id}")
+@Produces("application/xml")
+public StreamingOutput getResource(@PathParam("id") int id) {
+    // code omitted for brevity
+}
+----
 
 == Chapter 4: HTTP Method and URI Matching
 
