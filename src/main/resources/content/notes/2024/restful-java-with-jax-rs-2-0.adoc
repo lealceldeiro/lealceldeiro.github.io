@@ -73,7 +73,7 @@ Content-Type: text/html
 
 URI characters are encoded following these rules:
 
-* The characters `a–z`, `A–Z`, `0–9`, `.`, `-`, `*`, and `_` remain the same
+* The characters `a-z`, `A-Z`, `0-9`, `.`, `-`, `*`, and `_` remain the same
 * The space character is converted to `+`
 * The other characters are first converted into a sequence of bytes using a specific encoding scheme.
 Next, a two-digit hexadecimal number prefixed by `%` represents each byte
