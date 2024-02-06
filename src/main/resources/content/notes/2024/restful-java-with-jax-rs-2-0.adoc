@@ -24,9 +24,7 @@ Copyright 2014 Bill Burke, 978-1-449-36134-1
 
 Source code at: https://github.com/oreillymedia/restful_java_jax-rs_2_0
 
-_Note: As this is rather an old book, it's advisable to always verify if there are newer, more modern
-alternatives for solutions explained here; for instance, when Java clients or options to secure Java application
-are mentioned._
+_Note: As this is rather an old book, it's advisable to always verify if there are newer, more modern alternatives for solutions explained here; for instance, when Java clients or options to secure Java application are mentioned._
 
 '''
 
@@ -41,6 +39,79 @@ Architectural principles of the REpresentational State Transfer (REST):
 * Representation-oriented
 * Communicate statelessly
 * Hypermedia As The Engine Of Application State (HATEOAS)
+
+Example of an HTTP request performed by the browser:
+
+[source,console]
+----
+GET /resteasy HTTP/1.1
+Host: jboss.org
+User-Agent: Mozilla/5.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language:
+en-us,en;q=0.5
+Accept-Encoding:
+gzip,deflate
+----
+
+To the previous request the response could be:
+
+[source,console]
+----
+HTTP/1.1 200 OK
+X-Powered-By: Servlet 2.4; JBoss-4.2.2.GA
+Content-Type: text/html
+<head>
+<title>JBoss RESTEasy Project</title>
+</head>
+<body>
+<h1>JBoss RESTEasy</h1>
+<p>JBoss RESTEasy is an open source implementation of the JAX-RS specification...
+----
+
+URI characters are encoded following these rules:
+
+* The characters `a–z`, `A–Z`, `0–9`, `.`, `-`, `*`, and `_` remain the same
+* The space character is converted to `+`
+* The other characters are first converted into a sequence of bytes using a specific encoding scheme.
+Next, a two-digit hexadecimal number prefixed by `%` represents each byte
+
+`GET` is a read-only operation.
+It is used to query the server for specific information.
+It is both an idempotent and safe operation.
+
+`PUT` requests that the server store the message body sent with the request under the location provided in the HTTP message.
+It is usually modeled as an insert or update and it's also idempotent.
+
+`DELETE` is used to remove resources.
+It is idempotent as well.
+
+`POST` is non-idempotent and unsafe operation.
+Each POST method is allowed to modify the service in a unique way.
+We may or may not send information with the request.
+We may or may not receive information from the response.
+
+`HEAD` is exactly like `GET` except that instead of returning a response body, it returns only a response code and any headers associated with the request.
+
+`OPTIONS` is used to request information about the communication options of the resource we're interested in.
+It allows the client to determine the capabilities of a server and a resource without triggering any resource action
+or retrieval.
+
+In a RESTful system, the complexity of the client-server interaction is within the representations being passed
+back and forth.
+These representations could be XML, JSON, YAML, or any other format designed for this purpose.
+
+HTTP uses the `Content-Type` header to tell the client or server what data format it is receiving.
+Its value string is in the Multipurpose Internet Mail Extension (MIME) format.
+The MIME format is basic: `type/subtype;name=value;name=value...`.
+For example:
+[source,console]
+----
+text/plain
+text/html
+application/xml
+text/html; charset=iso-8859-1
+----
 
 == Chapter 2: Designing RESTful Services
 
