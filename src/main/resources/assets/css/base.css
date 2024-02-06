@@ -102,3 +102,18 @@ pre code.hljs {
     color: transparent !important;
     text-shadow: 0 0 0 #8f969dbf !important;
 }
+
+/* overrides */
+/* asciidoc */
+:not(pre)>code {
+    background: inherit;
+}
+.admonitionblock > table td.content {
+    color: inherit;
+}
+.admonitionblock>table td.icon {
+    color: inherit;
+}
+blockquote, blockquote p {
+    color: inherit;
+}
