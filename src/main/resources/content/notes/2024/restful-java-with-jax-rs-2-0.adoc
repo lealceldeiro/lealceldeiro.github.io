@@ -109,6 +109,7 @@ HTTP uses the `Content-Type` header to tell the client or server what data forma
 Its value string is in the Multipurpose Internet Mail Extension (MIME) format.
 The MIME format is basic: `type/subtype;name=value;name=value...`.
 For example:
+
 [source,console]
 ----
 text/plain
