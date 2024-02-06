@@ -1,0 +1,73 @@
+= RESTful Java with JAX-RS 2.0, 2nd Edition
+Asiel Leal Celdeiro
+2024-02-01
+:jbake-type: booknote
+:jbake-status: published
+:jbake-tags: java, jax-rs, webservice
+:jbake-read: progress
+:jbake-summary: Recommended by the official docs from https://resteasy.dev/books, "RESTful Java with JAX-RS 2.0" is an excellent guide to start building RESTful services in Java.
+:jbake-authors: Bill Burke
+:jbake-publisher: O'Reilly Media, Inc.
+:jbake-published: November 2013
+:jbake-amazon_link: https://a.co/d/15qvYGA
+:jbake-orreilly_link: https://www.oreilly.com/library/view/restful-java-with/9781449361433/
+:jbake-og_img: notes/2024/images/restful-java-with-jax-rs-2-0.jpg
+:jbake-image_src: notes/2024/images/restful-java-with-jax-rs-2-0.jpg
+:jbake-image_alt: Image of the book cover: RESTful Java with JAX-RS 2.0, 2nd Edition
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.png
+
+Main notes taken from the book https://a.co/d/15qvYGA["RESTful Java with JAX-RS 2.0, Second Edition"^]
+by Bill Burke.
+Copyright 2014 Bill Burke, 978-1-449-36134-1.
+
+Source code at: https://github.com/oreillymedia/restful_java_jax-rs_2_0
+
+_Note: As this is rather an old book, it's advisable to always verify if there are newer, more modern
+alternatives for solutions explained here; for instance, when Java clients or options to secure Java application
+are mentioned._
+
+'''
+
+Java API for RESTful web services (JAX-RS) aims to make development of RESTful web services in Java simple and intuitive.
+
+== Chapter 1: Introduction to REST
+
+Architectural principles of the REpresentational State Transfer (REST):
+
+* Addressable resources
+* A uniform, constrained interface
+* Representation-oriented
+* Communicate statelessly
+* Hypermedia As The Engine Of Application State (HATEOAS)
+
+== Chapter 2: Designing RESTful Services
+
+== Chapter 3: Your First JAX-RS Service
+
+== Chapter 4: HTTP Method and URI Matching
+
+== Chapter 5: JAX-RS Injection
+
+== Chapter 6: JAX-RS Content Handlers
+
+== Chapter 7: Server Responses and Exception Handling
+
+== Chapter 8: JAX-RS Client API
+
+== Chapter 9: HTTP Content Negotiation
+
+== Chapter 10: HATEOAS
+
+== Chapter 11: Scaling JAX-RS Applications
+
+== Chapter 12: Filters and Interceptors
+
+== Chapter 13: Asynchronous JAX-RS
+
+== Chapter 14: Deployment and Integration
+
+== Chapter 15: Securing JAX-RS
+
+== Chapter 16: Alternative Java Clients

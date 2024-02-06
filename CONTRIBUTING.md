@@ -34,13 +34,13 @@ Example `./mvnw jbake:inline`
 
 ## Creating an article
 
-As a standard, we're writing all articles files in HTML format (`.html`).
+As a standard, we're writing all articles files as either [AsciiDoc](https://asciidoc.org/) (`.adoc`) or HTML (`.html`).
 
 ### File structure
 
 - Create the year of the article under the `articles` directory (if not already crated)
 - Name the file according to the article name. i.e.: for an article called "Why Java?", the file could be
-  called `why-java.html`
+  called `why-java.adoc` or `why-java.html`
 
 ### Metadata
 
@@ -88,13 +88,13 @@ or any of its alternatives in https://deepai.org/
 
 ## Creating a book note
 
-As a standard, we're writing all notes files in HTML format (`.html`).
+As a standard, we're writing all notes files as either [AsciiDoc](https://asciidoc.org/) (`.adoc`) or HTML (`.html`).
 
 ### File structure
 
 - Create the year of the note under the `notes` directory (if not already crated); this is the year the file is created
 - Name the file according to the book name. i.e.: for an article called "Why Java?", the file could be
-  called `why-java.html`
+  called `why-java.adoc` or `why-java.html`
 
 ### Metadata
 
