@@ -120,6 +120,16 @@ text/html; charset=iso-8859-1
 
 == Chapter 2: Designing RESTful Services
 
+`PUT` and `POST` are required by their specification to send a response code of 201, “Created,” if a new resource was
+created on the server as a result of the request.
+
+The `Location` header in the response message provides a URI to the client for a created resource,
+so it knows where to further interact with the resource that was just created
+(i.e., if the client wanted to update the resource).
+
+For `DELETE`, the HTTP specification requires that we send a response code of `200 OK`,
+and a response message body or a response code of `204 No Content`, without any response body.
+
 == Chapter 3: Your First JAX-RS Service
 
 == Chapter 4: HTTP Method and URI Matching
