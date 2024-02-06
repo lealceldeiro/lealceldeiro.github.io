@@ -20,7 +20,7 @@ Asiel Leal Celdeiro
 
 Main notes taken from the book https://a.co/d/15qvYGA["RESTful Java with JAX-RS 2.0, Second Edition"^]
 by Bill Burke.
-Copyright 2014 Bill Burke, 978-1-449-36134-1.
+Copyright 2014 Bill Burke, 978-1-449-36134-1
 
 Source code at: https://github.com/oreillymedia/restful_java_jax-rs_2_0
 
