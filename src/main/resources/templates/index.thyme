@@ -44,8 +44,8 @@
                                           th:with="iPost = ${published_posts[idx]}">
                                     <a th:href='${iPost.uri}'>
                                         <div th:class="'carousel-item ' + (*{idx == 0} ? 'active' : '')">
-                                            <img th:src="*{iPost.ogImg}"
-                                                 th:alt="*{iPost.imageAlt}"
+                                            <img th:src="*{iPost.og_img}"
+                                                 th:alt="*{iPost.image_alt}"
                                                  class="d-block w-100">
                                             <div class="carousel-caption d-block">
                                                 <h1 th:text="${iPost.title}" class="text-carousel"></h1>
@@ -112,7 +112,7 @@
                                     <div class="col-md-2">
                                         <a th:href="*{content.rootpath + iNote.uri}"
                                            class="link-underline link-underline-opacity-0">
-                                            <img th:src="${iNote.imageSrc}" th:alt="${iNote.imageAlt}"
+                                            <img th:src="${iNote.image_src}" th:alt="${iNote.image_alt}"
                                                  class="img-fluid rounded-start">
                                         </a>
                                     </div>

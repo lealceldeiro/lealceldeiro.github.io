@@ -53,30 +53,30 @@ As a standard, we're writing all articles files in HTML format (`.html`).
       See https://jbake.org/docs/2.6.7/#status)
     * `summary`
     * optionally, you can define the following [Open Graph](https://ogp.me/) (_og_) _meta_ values
-        + `ogTitle` -> `title` (defaults to `title`)
-        + `ogDesc` -> `description` (defaults to `summary`)
-        + `ogAuthor` -> `author`
+        + `og_title` -> `title` (defaults to `title`)
+        + `og_desc` -> `description` (defaults to `summary`)
+        + `og_author` -> `author`
         + `ogKeyworkds` -> `keywords` (defaults to the article tags)
-        + `ogLocale` -> `locale`
-        + `ogImg` -> `image`, the location of the image to be used on social media when sharing the article (we're
-          following as a convention to name the file as the name of the html file plus `_social` at the end)
-        + `ogArticleModifiedTime` -> `article:modified_time` (defaults to the article date)
-        + `ogArticleAuthor` -> `article:author`
-        + `ogArticleTags` -> `article:tag` (defaults to the article tags)
-        + optionally, define `imageSrc` with the location of the thumbnail image to be used on the "articles" page
-        + if `imageSrc` is defined, then `imageAlt` should also be defined -- this is the `alt` attribute of the `img`
-          html element (we're following as a convention to name the file as the name of the html file plus)
+        + `og_locale` -> `locale`
+        + `og_img` -> `image`, the location of the image to be used on social media when sharing the article (we're
+          following as a convention to name the file as the name of the adoc/html file plus `_social` at the end)
+        + `og_article_modified_time` -> `article:modified_time` (defaults to the article date)
+        + `og_article_author` -> `article:author`
+        + `og_article_tags` -> `article:tag` (defaults to the article tags)
+        + optionally, define `image_src` with the location of the thumbnail image to be used on the "articles" page
+        + if `image_src` is defined, then `image_alt` should also be defined -- this is the `alt` attribute of the `img`
+          html element
 
 ### Images
 
-Images used to be displayed in the article thumbnail (`imageSrc`) should be:
+Images used to be displayed in the article thumbnail (`image_src`) should be:
 
 - located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks
   like)
 - _width_: 500px
 - _height_: 120px
 
-Images used to be displayed on social media (`ogImg`) should be:
+Images used to be displayed on social media (`og_img`) should be:
 
 - located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks
   like)
@@ -111,14 +111,14 @@ As a standard, we're writing all notes files in HTML format (`.html`).
     * `authors` (the authors of the book from which the notes are being taken from)
     * `publisher` (the publisher of the book from which the notes are being taken from)
     * `published` (the date when the book from which the notes are being taken from was released)
-    * optionally, you can define the same [Open Graph](https://ogp.me/) (_og_) _meta_ values described in the previous "
-      articles" section, including `imageSrc`, `imageAlt`, and `ogImg`
-    * optionally, `amazonLink`, with the link to buy the book on Amazon
-    * optionally, `orreillyLink`, with the link to buy the book on O'REILLY
+    * optionally, you can define the same [Open Graph](https://ogp.me/) (_og_) _meta_ values described in the previous
+      "articles" section, including `image_src`, `image_alt`, and `og_img`
+    * optionally, `amazon_link`, with the link to buy the book on Amazon
+    * optionally, `orreilly_link`, with the link to buy the book on O'REILLY
 
 ### Images for book notes
 
-Images used to be displayed in the book thumbnail (`imageSrc`) should be:
+Images used to be displayed in the book thumbnail (`image_src`) should be:
 
 - located under notes{year}/images/{image-name} (see current examples to get an idea in practice how it looks
   like)

@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="header.thyme::head(${'About ' + content.userName}, ${content.userBioSummary})"></head>
+<head th:replace="header.thyme::head(${'About ' + content.user_name}, ${content.user_bio_summary})"></head>
 <body onload="prettyPrint()">
 
 <div id="wrap" class="content-justify">
@@ -14,33 +14,33 @@
                     <div class="card bg-body-tertiary" style="border-radius: 15px;">
                         <div class="card-body p-4">
                             <div>
-                                <h6 th:text="${content.userName}"></h6>
+                                <h6 th:text="${content.user_name}"></h6>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
                                     <p class="small mb-0"
-                                       th:text="${content.userTitle} ?: 'Software Development Enthusiast'"></p>
+                                       th:text="${content.user_title} ?: 'Software Development Enthusiast'"></p>
                                     <div>
-                                        <p class="mb-0 text-end content-not-justify" th:if="${content.userRate}"
-                                           th:text="${content.userRate}"></p>
-                                        <p class="mb-0 text-end content-not-justify" th:if="${content.userLocation}">
+                                        <p class="mb-0 text-end content-not-justify" th:if="${content.user_rate}"
+                                           th:text="${content.user_rate}"></p>
+                                        <p class="mb-0 text-end content-not-justify" th:if="${content.user_location}">
                                             <i class="bi bi-geo-alt-fill"></i>&nbsp;
-                                            <span th:text="${content.userLocation}"></span>
+                                            <span th:text="${content.user_location}"></span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-4">
                                 <div class="flex-shrink-0">
-                                    <img th:src="${content.userProfileImage} ?: '/img/user.svg'"
-                                         th:alt="${content.userName} + 'profile image'"
+                                    <img th:src="${content.user_profile_image} ?: '/img/user.svg'"
+                                         th:alt="${content.user_name} + 'profile image'"
                                          class="img-fluid rounded-circle border border-info-subtle"
                                          style="width: 70px;">
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <div class="d-flex flex-row align-items-center mb-2"
-                                         th:if="${content.userGithubUsername}">
+                                         th:if="${content.user_github_username}">
                                         <a class="text-body-secondary link-underline link-underline-opacity-0"
                                            target="_blank"
-                                           th:href="${'https://github.com/' + content.userGithubUsername + '?tab=repositories'}">
+                                           th:href="${'https://github.com/' + content.user_github_username + '?tab=repositories'}">
                                             <ul class="text-body-secondary mb-0 mx-3 list-unstyled d-flex flex-row">
                                                 <li class="d-none">
                                                     <i class="bi bi-file-code-fill"></i>
@@ -59,111 +59,111 @@
                                     </div>
                                     <div>
                                         <ul class="nav mx-0 col-12 justify-content-start list-unstyled d-flex">
-                                            <li class="ms-3" th:if="${content.userCalendarLink != null}">
+                                            <li class="ms-3" th:if="${content.user_calendar_link != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${content.userCalendarLink}">
+                                                   th:href="${content.user_calendar_link}">
                                                     <i class="bi bi-calendar3"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userPhone != null}">
+                                            <li class="ms-3" th:if="${content.user_phone != null}">
                                                 <!-- full number including + sign -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'tel:' + content.userPhone}">
+                                                   th:href="${'tel:' + content.user_phone}">
                                                     <i class="bi bi-telephone-outbound"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userWhatsapp != null}">
+                                            <li class="ms-3" th:if="${content.user_whatsapp != null}">
                                                 <!-- https://faq.whatsapp.com/5913398998672934 -->
                                                 <!-- full number including + sign -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://wa.me/' + content.userWhatsapp}">
+                                                   th:href="${'https://wa.me/' + content.user_whatsapp}">
                                                     <i class="bi bi-whatsapp"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userTelegramHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_telegram_handle != null}">
                                                 <!-- handle without @ sign -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://t.me/' + content.userTelegramHandle}">
+                                                   th:href="${'https://t.me/' + content.user_telegram_handle}">
                                                     <i class="bi bi-telegram"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userSkypeHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_skype_handle != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'skype:' + content.userSkypeHandle + '?chat'}">
+                                                   th:href="${'skype:' + content.user_skype_handle + '?chat'}">
                                                     <i class="bi bi-skype"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userViber != null}">
+                                            <li class="ms-3" th:if="${content.user_viber != null}">
                                                 <!-- number without + sign -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'viber://chat?number=' + content.userViber}">
+                                                   th:href="${'viber://chat?number=' + content.user_viber}">
                                                     <img src="/img/logo/viber-tile.svg" alt="Viber"
                                                          width="18" height="18" class="gray-image">
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userEmail != null}">
+                                            <li class="ms-3" th:if="${content.user_email != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'mailto:' + content.userEmail}">
+                                                   th:href="${'mailto:' + content.user_email}">
                                                     <i class="bi bi-envelope-at-fill"></i>
                                                 </a>
                                             </li>
                                             <li class="ms-3"
-                                                th:if="${content.userLinkedinHandle != null}">
+                                                th:if="${content.user_linkedin_handle != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://linkedin.com/in/' + content.userLinkedinHandle}">
+                                                   th:href="${'https://linkedin.com/in/' + content.user_linkedin_handle}">
                                                     <i class="bi bi-linkedin"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userGithubHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_github_handle != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://github.com/' + content.userGithubHandle}">
+                                                   th:href="${'https://github.com/' + content.user_github_handle}">
                                                     <i class="bi bi-github"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userStackOverflow != null}">
+                                            <li class="ms-3" th:if="${content.user_stack_overflow != null}">
                                                 <!-- user number in stackoverflow -->
                                                 <a class="text-body-secondary"
-                                                   th:href="${'http://stackoverflow.com/users/' + content.userStackOverflow}"
+                                                   th:href="${'http://stackoverflow.com/users/' + content.user_stack_overflow}"
                                                    target="_blank">
                                                     <i class="bi bi-stack-overflow"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userTwitterHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_twitter_handle != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://twitter.com/' + content.userTwitterHandle}">
+                                                   th:href="${'https://twitter.com/' + content.user_twitter_handle}">
                                                     <i class="bi bi-twitter-x"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userYoutubeHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_youtube_handle != null}">
                                                 <!-- handle including @ sign -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://www.youtube.com/' + content.userYoutubeHandle}">
+                                                   th:href="${'https://www.youtube.com/' + content.user_youtube_handle}">
                                                     <i class="bi bi-youtube"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userFacebookHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_facebook_handle != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://www.facebook.com/' + content.userFacebookHandle}">
+                                                   th:href="${'https://www.facebook.com/' + content.user_facebook_handle}">
                                                     <i class="bi bi-facebook"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userInstagramHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_instagram_handle != null}">
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://www.instagram.com/' + content.userInstagramHandle}">
+                                                   th:href="${'https://www.instagram.com/' + content.user_instagram_handle}">
                                                     <i class="bi bi-instagram"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userThreadsHandle != null}">
+                                            <li class="ms-3" th:if="${content.user_threads_handle != null}">
                                                 <!-- handle including @ sign -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://www.threads.net/' + content.userThreadsHandle}">
+                                                   th:href="${'https://www.threads.net/' + content.user_threads_handle}">
                                                     <i class="bi bi-threads"></i>
                                                 </a>
                                             </li>
-                                            <li class="ms-3" th:if="${content.userCodidact != null}">
+                                            <li class="ms-3" th:if="${content.user_codidact != null}">
                                                 <!-- user number in stackoverflow -->
                                                 <a class="text-body-secondary" target="_blank"
-                                                   th:href="${'https://software.codidact.com/users/' + content.userCodidact}">
+                                                   th:href="${'https://software.codidact.com/users/' + content.user_codidact}">
                                                     <i class="bi bi-lightbulb"></i>
                                                 </a>
                                             </li>
@@ -188,7 +188,7 @@
         th:src="${rootpath} + 'js/base.js'"></script>
 
 <!-- Calendly badge widget begin -->
-<span class="mb-0 me-2" th:if="${content.userCalendlyUrl}">
+<span class="mb-0 me-2" th:if="${content.user_calendly_url}">
     <link href="https://assets.calendly.com/assets/external/widget.css"
           rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js"
@@ -196,7 +196,7 @@
     <script type="text/javascript" th:inline="javascript">
         window.onload = function () {
             Calendly.initBadgeWidget({
-                url: [[${content.userCalendlyUrl}]],
+                url: [[${content.user_calendly_url}]],
                 text: 'Schedule time with me',
                 color: '#0d6efd',
                 textColor: '#ffffff',
@@ -207,14 +207,14 @@
 </span>
 <!-- Calendly badge widget end -->
 
-<script type="module" th:if="${content.userGithubUsername}" th:inline="javascript">
+<script type="module" th:if="${content.user_github_username}" th:inline="javascript">
     // https://github.com/octokit/core.js#readme
     import {Octokit} from "https://esm.sh/@octokit/core";
 
     const octokit = new Octokit()
 
     // get user info
-    const userReq = "GET /users/" + [[${content.userGithubUsername}]];
+    const userReq = "GET /users/" + [[${content.user_github_username}]];
     const userRes = await request(userReq);
     // alternative impl would be: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
     setAndShow('githubRepos', userRes.data.public_repos + userRes.data.public_gists)

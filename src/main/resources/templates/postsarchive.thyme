@@ -30,7 +30,7 @@
                                       th:text="${#dates.format(innerPost.date, 'd')}"></span>
                                 <span th:text="${innerPost.title}"></span>
                             </h5>
-                            <small class="text-body-secondary" th:text="'by ' + ${innerPost.ogAuthor}"></small>
+                            <small class="text-body-secondary" th:text="'by ' + ${innerPost.og_author}"></small>
                         </div>
                         <p class="mb-1 text-body-secondary" th:text="${innerPost.summary}"></p>
                     </a>

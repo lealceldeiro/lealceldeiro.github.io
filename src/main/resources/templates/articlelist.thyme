@@ -22,9 +22,9 @@
                              th:if="${iterStat.index} < 4">
                             <div class="card">
                                 <a th:href='${post.uri}'>
-                                    <img th:if="${post.imageSrc} != null"
-                                         th:src="${post.imageSrc}"
-                                         th:alt="${post.imageAlt}?: ('Image')"
+                                    <img th:if="${post.image_src} != null"
+                                         th:src="${post.image_src}"
+                                         th:alt="${post.image_alt}?: ('Image')"
                                          class="card-img-top">
                                 </a>
                                 <div class="card-body">

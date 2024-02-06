@@ -3,18 +3,18 @@
 <head th:fragment="head(fragmentHeadTitle, fragmentOgDescription)">
     <!--ref: https://ogp.me/-->
     <meta charset="utf-8"/>
-    <title th:text="${fragmentHeadTitle} ?: (${content.ogTitle} ?: (${content.title != null && !#strings.isEmpty(content.title)}
-                                                                                    ? ${content.title}
-                                                                                    : ${config.site_name}))"></title>
+    <title th:text="${fragmentHeadTitle} ?: (${content.og_title} ?: (${content.title != null && !#strings.isEmpty(content.title)}
+                                                                                     ? ${content.title}
+                                                                                     : ${config.site_name}))"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description"
-          th:content="${fragmentOgDescription} ?: (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, and more about software development.')))"/>
+          th:content="${fragmentOgDescription} ?: (${content.summary} ?: (${content.og_desc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, and more about software development.')))"/>
     <meta name="author"
-          th:content="${content.ogAuthor} ?: 'Asiel Leal Celdeiro'"/>
+          th:content="${content.og_author} ?: 'Asiel Leal Celdeiro'"/>
     <meta name="keywords"
-          th:content="${#strings.equals('post', content.type) && (content.ogArticleTags != null || content.tags != null)}
-                      ? *{#strings.substring((content.ogArticleTags != null ? content.ogArticleTags : content.tags), 1,
-                                             #strings.length((content.ogArticleTags != null ? content.ogArticleTags : content.tags)) - 1)}
+          th:content="${#strings.equals('post', content.type) && (content.og_article_tags != null || content.tags != null)}
+                      ? *{#strings.substring((content.og_article_tags != null ? content.og_article_tags : content.tags), 1,
+                                             #strings.length((content.og_article_tags != null ? content.og_article_tags : content.tags)) - 1)}
                       : 'blog java software engineer software development'"/>
     <meta name="generator" content="JBake"/>
 
@@ -24,27 +24,27 @@
           th:if="${#strings.equals('post', content.type)}" th:content="${content.date}" />
     <meta property="og:article:modified_time"
           th:if="${#strings.equals('post', content.type)}"
-          th:content="${content.ogArticleModifiedTime} ?: ${content.date}" />
+          th:content="${content.og_article_modified_time} ?: ${content.date}" />
     <meta property="og:article:author"
-          th:if="${#strings.equals('post', content.type) && (content.ogAuthor != null || content.ogArticleAuthor != null)}"
-          th:content="${content.ogAuthor != null ? content.ogAuthor : content.ogArticleAuthor}" />
+          th:if="${#strings.equals('post', content.type) && (content.og_author != null || content.og_article_author != null)}"
+          th:content="${content.og_author != null ? content.og_author : content.og_article_author}" />
 
     <meta property="og:article:tag"
-          th:if="${#strings.equals('post', content.type) && (content.ogArticleTags != null || content.tags != null)}"
-          th:each="pTag, itStat : *{#strings.arraySplit((content.ogArticleTags != null ? content.ogArticleTags : content.tags), ',')}"
+          th:if="${#strings.equals('post', content.type) && (content.og_article_tags != null || content.tags != null)}"
+          th:each="pTag, itStat : *{#strings.arraySplit((content.og_article_tags != null ? content.og_article_tags : content.tags), ',')}"
           th:content="*{itStat.first} ? *{#strings.trim(#strings.substring(pTag, 1))}
                                         : (*{!itStat.last} ? *{#strings.trim(pTag)}
                                                            : *{#strings.trim(#strings.substring(pTag, 0, #strings.length(pTag) - 1))})" />
 
-    <meta property="og:locale" th:content="${content.ogLocale} ?: 'en_US'" />
+    <meta property="og:locale" th:content="${content.og_locale} ?: 'en_US'" />
     <meta property="og:url" th:content="${config.site_host} + (${content.uri} ?: '')">
     <meta property="og:image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.png')">
+          th:content="${rootpath} + (${content.og_img} ?: 'img/meta.png')">
     <meta property="og:description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
+                                               : (${content.summary} ?: (${content.og_desc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta property="og:title" th:content="${content.title} ?: ${config.site_name}">
     <meta property="og:site_name" th:content="${config.site_name}">
     <meta property="og:see_also" th:content="${config.site_host}">
@@ -53,10 +53,10 @@
     <meta itemprop="description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
+                                               : (${content.summary} ?: (${content.og_desc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta itemprop="image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.png')">
+          th:content="${rootpath} + (${content.og_img} ?: 'img/meta.png')">
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" th:content="${config.site_host} + (${content.uri} ?: '')">
@@ -64,10 +64,10 @@
     <meta name="twitter:description"
           th:content="${fragmentOgDescription} != null
                                                ? ${fragmentOgDescription}
-                                               : (${content.summary} ?: (${content.ogDesc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
+                                               : (${content.summary} ?: (${content.og_desc} ?: (${config.site_name} + ' is a personal website where the main articles discuss technical content, professional experiences, and more about software development.')))">
     <meta name="twitter:image"
           th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:content="${rootpath} + (${content.ogImg} ?: 'img/meta.png')">
+          th:content="${rootpath} + (${content.og_img} ?: 'img/meta.png')">
 
     <link th:href="${config.site_host} + '/' + ${config.feed_file}" rel="self" type="application/rss+xml" />
 
@@ -97,11 +97,11 @@
 
     <!-- last to be included to override defaults -->
     <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath}+'css/base.css'"
+          th:href="${rootpath} + 'css/base.css'"
           rel="stylesheet"/>
 
     <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath}+'css/timeline.css'"
+          th:href="${rootpath} + 'css/timeline.css'"
           rel="stylesheet"/>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

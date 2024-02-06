@@ -20,10 +20,10 @@
                         </span>
                     </p>
 
-                    <a th:if="${content.authorHandle}" th:href="'/about/' + ${content.authorHandle} + '.html'"
+                    <a th:if="${content.author_handle}" th:href="'/about/' + ${content.author_handle} + '.html'"
                        class="px-3 mx-3 border-start border-secondary link-underline link-underline-opacity-0">
-                        <img th:src="${content.authorProfileImage} ?: '/img/user.svg'"
-                             th:alt="${content.authorHandle}"
+                        <img th:src="${content.author_profile_image} ?: '/img/user.svg'"
+                             th:alt="${content.author_handle}"
                              class="img-fluid rounded-circle me-3" width="35">
                     </a>
 
@@ -31,10 +31,10 @@
                     <th:block th:if="${content.contribution != null}">
                         <a th:each="contributor: ${content.contribution.contributors}"
                            th:href="${contributor.handle != null} ? ('/about/' + ${contributor.handle} + '.html')
-                                                                  : (${contributor.profileUrl} ?: '#')"
+                                                                  : (${contributor.profile_url} ?: '#')"
                            class="link-underline link-underline-opacity-0"
                            target="_blank">
-                            <img th:src="${contributor.profileImage} ?: '/img/user.svg'"
+                            <img th:src="${contributor.profile_image} ?: '/img/user.svg'"
                                  th:alt="${contributor.handle} ?: (${contributor.name} ?: 'Anonymous')"
                                  class="img-fluid rounded-circle me-3" width="35">
                         </a>

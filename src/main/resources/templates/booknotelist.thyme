@@ -50,7 +50,7 @@
                         <div class="col-md-2">
                             <a th:href="*{content.rootpath + note.uri}"
                                class="link-underline link-underline-opacity-0">
-                                <img th:src="${note.imageSrc}" th:alt="${note.imageAlt}"
+                                <img th:src="${note.image_src}" th:alt="${note.image_alt}"
                                      class="img-fluid rounded-start">
                             </a>
                         </div>
@@ -73,11 +73,11 @@
                                 </a>
 
                                 <div class="card-text d-flex flex-wrap align-items-left mt-3">
-                                    <a th:if="${note.amazonLink}" th:href="${note.amazonLink}" target="_blank"
+                                    <a th:if="${note.amazon_link}" th:href="${note.amazon_link}" target="_blank"
                                        class="btn btn-light btn-outline-secondary mr-2">
                                         <i class="bi bi-amazon"></i>&nbsp;<span>Amazon</span>
                                     </a>
-                                    <a th:if="${note.orreillyLink}" th:href="${note.orreillyLink}" target="_blank"
+                                    <a th:if="${note.orreilly_link}" th:href="${note.orreilly_link}" target="_blank"
                                        class="btn btn-light btn-outline-secondary mx-2">
                                         <i class="bi bi-bookmark"></i>&nbsp;<span>O'REILLY</span>
                                     </a>
