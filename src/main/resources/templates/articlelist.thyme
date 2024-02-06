@@ -29,19 +29,22 @@
                                 </a>
                                 <div class="card-body">
                                     <a th:href='${post.uri}' class="link-underline link-underline-opacity-0">
-                                        <h5 class="card-title fw-semibold text-body-secondary" th:text='${post.title}'></h5>
+                                        <h5 class="card-title fw-semibold text-body-secondary"
+                                            th:text='${post.title}'></h5>
                                     </a>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary"
-                                        th:text='${#dates.format(post.date, "MMMM d, yyyy")}'>
-                                    </h6>
-                                    <p class="card-text"
-                                       th:if="${post.summary != null}"
-                                       th:text="${#strings.abbreviate(post.summary, 350)}">
-                                    </p>
-                                    <p class="card-text text-truncate"
-                                       th:if="${post.summary == null}"
-                                       th:utext="${post.body}">
-                                    </p>
+                                    <a th:href='${post.uri}' class="link-underline link-underline-opacity-0">
+                                        <h6 class="card-subtitle mb-2 text-body-secondary"
+                                            th:text='${#dates.format(post.date, "MMMM d, yyyy")}'>
+                                        </h6>
+                                        <p class="card-text text-body-secondary"
+                                           th:if="${post.summary != null}"
+                                           th:text="${#strings.abbreviate(post.summary, 350)}">
+                                        </p>
+                                        <p class="card-text text-truncate text-body-secondary"
+                                           th:if="${post.summary == null}"
+                                           th:utext="${post.body}">
+                                        </p>
+                                    </a>
                                     <p th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}">
                                         <a th:href="${post.uri} + '#disqus_thread'"
                                            class="text-body-secondary link-underline link-underline-opacity-0"></a>
