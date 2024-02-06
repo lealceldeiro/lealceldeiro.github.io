@@ -56,7 +56,7 @@ Accept-Encoding:
 gzip,deflate
 ----
 
-To the previous request the response could be:
+To the previous request, the response could be:
 
 [source,console]
 ----
