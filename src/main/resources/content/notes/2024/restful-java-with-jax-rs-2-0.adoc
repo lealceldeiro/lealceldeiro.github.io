@@ -5,7 +5,8 @@ Asiel Leal Celdeiro
 :jbake-status: published
 :jbake-tags: java, jax-rs, webservice
 :jbake-read: progress
-:jbake-summary: Recommended by the official docs from https://resteasy.dev/books, "RESTful Java with JAX-RS 2.0" is an excellent guide to start building RESTful services in Java.
+:jbake-summary: Recommended by the official docs from https://resteasy.dev/books, "RESTful Java with JAX-RS 2.0" is \
+an excellent guide to start building RESTful services in Java.
 :jbake-authors: Bill Burke
 :jbake-publisher: O'Reilly Media, Inc.
 :jbake-published: November 2013
@@ -28,7 +29,8 @@ _Note: As this is rather an old book, it's advisable to always verify if there a
 
 '''
 
-Java API for RESTful web services (JAX-RS) aims to make development of RESTful web services in Java simple and intuitive.
+Java API for RESTful web services (JAX-RS) aims to make development of RESTful web services in Java simple and
+intuitive.
 
 == Chapter 1: Introduction to REST
 
@@ -80,7 +82,8 @@ Next, a two-digit hexadecimal number prefixed by `%` represents each byte
 It is used to query the server for specific information.
 It is both an idempotent and safe operation.
 
-`PUT` requests that the server store the message body sent with the request under the location provided in the HTTP message.
+`PUT` requests that the server store the message body sent with the request under the location provided in the HTTP
+message.
 It is usually modeled as an insert or update and it's also idempotent.
 
 `DELETE` is used to remove resources.
@@ -91,7 +94,8 @@ Each POST method is allowed to modify the service in a unique way.
 We may or may not send information with the request.
 We may or may not receive information from the response.
 
-`HEAD` is exactly like `GET` except that instead of returning a response body, it returns only a response code and any headers associated with the request.
+`HEAD` is exactly like `GET` except that instead of returning a response body, it returns only a response code and
+any headers associated with the request.
 
 `OPTIONS` is used to request information about the communication options of the resource we're interested in.
 It allows the client to determine the capabilities of a server and a resource without triggering any resource action
