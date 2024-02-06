@@ -78,8 +78,7 @@
                     <a th:href="'https://www.linkedin.com/in/' + ${content.user_linkedin_handle} + '/details/recommendations/'"
                        target="_blank">
                         LinkedIn
-                    </a>,
-                    or by filling this form.
+                    </a>, or by filling this form.
                 </small>
 
                 <div class="container mt-4 p-4 pb-2">
