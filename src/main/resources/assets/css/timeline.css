@@ -1,5 +1,5 @@
 .timeline-with-icons {
-    border-left: 1px solid hsl(0, 0%, 90%);
+    border-left: 1px solid #E6E6E6FF;
     position: relative;
     list-style: none;
 }
@@ -17,7 +17,7 @@
 .timeline-with-icons .timeline-icon {
     position: absolute;
     left: -48px;
-    background-color: hsl(217, 88.2%, 90%);
+    background-color: #cfe0fc;
     border-radius: 50%;
     height: 31px;
     width: 31px;

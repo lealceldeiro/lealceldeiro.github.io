@@ -83,6 +83,7 @@ function setTheme() {
     toggleThemeIcon();
     setNavbarLogo();
     setHighlightJsTheme();
+    tweakSpecificDesigns();
 
     document.dispatchEvent(new Event('themeSwitched'));
 
@@ -102,7 +103,7 @@ function isDark() {
     return selectedTheme === DARK;
 }
 
-function setNavbarLogo(){
+function setNavbarLogo() {
     const logoImg = isDark() ? 'logo500x500_dark_transparent.png' : 'logo500x500_transparent.png';
     document.querySelector('img#logo').setAttribute('src', '/img/' + logoImg);
 }
@@ -114,8 +115,8 @@ function setHighlightJsTheme() {
     const baseUrl = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/"
     const extension = ".min.css"
 
-    const integrityLight="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
-    const integrityDark="sha512-zcatBMvxa7rT7dDklfjauWsfiSFParF+hRfCdf4Zr40/MmA1gkFcBRbop0zMpvYF3FmznYFgcL8wlcuO/GwHoA=="
+    const integrityLight = "sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
+    const integrityDark = "sha512-zcatBMvxa7rT7dDklfjauWsfiSFParF+hRfCdf4Zr40/MmA1gkFcBRbop0zMpvYF3FmznYFgcL8wlcuO/GwHoA=="
     const hrefLight = "intellij-light";
     const hrefDark = "github-dark-dimmed";
 
@@ -124,6 +125,12 @@ function setHighlightJsTheme() {
     linkEl.href = baseUrl + (isDark() ? hrefDark : hrefLight) + extension;
 
     hljs.highlightAll();
+}
+
+function tweakSpecificDesigns() {
+    document.querySelectorAll('.timeline-with-icons .timeline-icon')
+            .forEach(e => e.setAttribute('style',
+                                         'background-color: ' + (isDark() ? '#595f69!important;' : '#cfe0fc!important;')));
 }
 
 function changeTheme() {
