@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="header.thyme::head(${'Articles tagged: ' + tag}, ${'Explore \'' + tag + '\' articles about software development, professional experiences and more, ordered by date, in descending order.'})"></head>
-<body onload="prettyPrint()">
+<body>
 
 <div id="wrap">
     <div th:replace="menu.thyme::menu"></div>

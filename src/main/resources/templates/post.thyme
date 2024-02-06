@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="header.thyme::head(null, null)"></head>
-<body onload="prettyPrint()">
+<body>
 <div id="wrap" class="content-justify">
     <div th:replace="menu.thyme::menu"></div>
     <div class="container">

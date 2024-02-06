@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="header.thyme::head(${'Testimonials about' + content.user_name}, (${content.og_desc} ?: ${content.intro}))"></head>
-<body onload="prettyPrint()">
+<body>
 
 <script>
     // region: replace broken images

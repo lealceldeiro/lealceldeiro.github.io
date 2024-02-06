@@ -81,12 +81,6 @@
           referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"
-          integrity="sha512-PW9BfYtoXV6XYb/4FTkBoJEBM92TrGk7N324cCmF5i2dY02YvBg6ZPEAnSOZ5i2/nGPbsYFQwVzDxVVoWEKWww=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"/>
-
     <!-- https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css"
