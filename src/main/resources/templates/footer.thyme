@@ -33,60 +33,70 @@
                 </li>
                 <li class="ms-3" th:if="${config.social_linkedin_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View LinkedIn Profile"
                        th:href="'https://linkedin.com/in/' + ${config.social_linkedin_handle} + '/'">
                         <i class="bi bi-linkedin"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_github_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View GitHub Profile"
                        th:href="'https://github.com/' + ${config.social_github_handle} + '/'">
                         <i class="bi bi-github"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_stackoverflow_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View StackOverflow Profile"
                        th:href="'http://stackoverflow.com/users/' + ${config.social_stackoverflow_handle} + '/'">
                         <i class="bi bi-stack-overflow"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_twitter_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Twitter Profile"
                        th:href="'https://twitter.com/' + ${config.social_twitter_handle} + '/'">
                         <i class="bi bi-twitter-x"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_mastodon_profile != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Mastodon Profile"
                        th:href="${config.social_mastodon_profile}">
                         <i class="bi bi-mastodon"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_youtube_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Youtube Channel Profile"
                        th:href="'https://www.youtube.com/' + ${config.social_youtube_handle} + '/'">
                         <i class="bi bi-youtube"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_facebook_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Facebook Page"
                        th:href="'https://www.facebook.com/' + ${config.social_facebook_handle} + '/'">
                         <i class="bi bi-facebook"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_instagram_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Instagram Profile"
                        th:href="'https://www.instagram.com/' + ${config.social_instagram_handle} + '/'">
                         <i class="bi bi-instagram"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_threads_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Threads Profile"
                        th:href="'https://www.threads.net/' + ${config.social_threads_handle}">
                         <i class="bi bi-threads"></i>
                     </a>
                 </li>
                 <li class="ms-3" th:if="${config.social_codidact_handle != null}">
                     <a class="text-body-secondary" target="_blank"
+                       aria-label="View Codidact Profile"
                        th:href="'https://software.codidact.com/users/' + ${config.social_codidact_handle} + '/'">
                         <i class="bi bi-lightbulb"></i>
                     </a>
