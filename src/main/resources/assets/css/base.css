@@ -108,7 +108,17 @@ pre code.hljs {
 .sect1+.sect1 {border-top: inherit}
 :not(pre)>code { background: inherit; }
 .admonitionblock > table td.content, .admonitionblock>table td.icon, blockquote, blockquote p,
-#preamble>.sectionbody>[class=paragraph]:first-of-type p, .paragraph.lead>p { color: inherit; }
+#preamble>.sectionbody>[class=paragraph]:first-of-type p, .paragraph.lead>p, table tr td, table tr th {
+    color: inherit;
+}
 .admonitionblock td.icon [class^="fa icon-"] {
     font-size: 2em;
+}
+[data-bs-theme="dark"] {
+    .conum[data-value]::after {
+        color: #2f2b2b;
+    }
+    .conum[data-value] {
+        background-color: #dee2e6;
+    }
 }
