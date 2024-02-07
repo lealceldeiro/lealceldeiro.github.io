@@ -177,9 +177,9 @@ public Response createResource(InputStream is) {
 ----
 
 Example of a service to get a resource:
+
 [source,java]
 ----
-import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.StreamingOutput;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.GET;
@@ -193,6 +193,10 @@ public StreamingOutput getResource(@PathParam("id") int id) {
     // code omitted for brevity
 }
 ----
+
+TIP: In general, we don't use the `StreamingOutput` interface to output responses.
+Instead, we would use some of the content handlers provided by JAX-RS
+that can automatically convert Java objects straight into the data format being sent across the wire.
 
 == Chapter 4: HTTP Method and URI Matching
 
