@@ -109,3 +109,6 @@ pre code.hljs {
 :not(pre)>code { background: inherit; }
 .admonitionblock > table td.content, .admonitionblock>table td.icon, blockquote, blockquote p,
 #preamble>.sectionbody>[class=paragraph]:first-of-type p, .paragraph.lead>p { color: inherit; }
+.admonitionblock td.icon [class^="fa icon-"] {
+    font-size: 2em;
+}
