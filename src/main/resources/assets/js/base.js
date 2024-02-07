@@ -96,7 +96,7 @@ function toggleThemeIcon() {
     const biMoon = 'bi-moon-stars-fill';
 
     toggleBtnEl.classList.remove(biSun, biMoon);
-    toggleBtnEl.classList.add(isDark() ? biSun : biMoon);
+    toggleBtnEl.classList.add(isDark() ? biMoon : biSun);
 }
 
 function isDark() {
