@@ -92,11 +92,11 @@ function setTheme() {
 
 function toggleThemeIcon() {
     const toggleBtnEl = document.querySelector('i#themeToggle');
-    const biToggleOff = 'bi-toggle2-off';
-    const biToggleOn = 'bi-toggle2-on';
+    const biSun = 'bi-brightness-high';
+    const biMoon = 'bi-moon-stars-fill';
 
-    toggleBtnEl.classList.remove(biToggleOff, biToggleOn);
-    toggleBtnEl.classList.add(isDark() ? biToggleOn : biToggleOff);
+    toggleBtnEl.classList.remove(biSun, biMoon);
+    toggleBtnEl.classList.add(isDark() ? biSun : biMoon);
 }
 
 function isDark() {

@@ -45,9 +45,7 @@
                         </li>
                         <li class="nav-item">
                             <button class="nav-link" onclick="changeTheme()">
-                                <i class="bi bi-brightness-high"></i>&nbsp;
-                                <i class="bi bi-toggle2-off" id="themeToggle"></i>&nbsp;
-                                <i class="bi bi-moon"></i>
+                                <i class="bi bi-moon-stars-fill" id="themeToggle"></i>
                             </button>
                         </li>
                     </ul>
