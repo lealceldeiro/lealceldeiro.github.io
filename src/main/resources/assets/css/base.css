@@ -105,6 +105,7 @@ pre code.hljs {
 
 /* overrides */
 /* asciidoc */
+.sect1+.sect1 {border-top: inherit}
 :not(pre)>code { background: inherit; }
 .admonitionblock > table td.content, .admonitionblock>table td.icon, blockquote, blockquote p,
 #preamble>.sectionbody>[class=paragraph]:first-of-type p, .paragraph.lead>p { color: inherit; }
