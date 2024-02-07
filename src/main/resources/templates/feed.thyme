@@ -26,10 +26,10 @@
       <pubDate th:text='${#dates.format(post.date,"EEE, d MMM yyyy HH:mm:ss Z")}'></pubDate>
       <guid th:text='${post.uri}' isPermaLink="false"></guid>
       <description th:text='${#strings.escapeXml(post.body)}'></description>
-      <author th:if="${post.og_author} != null"
-              th:text="${post.og_author} + '<' + (${post.og_author_email} ?: ${config.site_email}) + '>'"></author>
+      <author th:if="${post.og_author} != null || ${post.og_author_email} != null"
+              th:text="(${post.og_author_email} ?: ${config.site_email})
+              + '(' + (${post.og_author} ?: ${config.site_name}) + ')'"></author>
       <source th:attr="url=${config.site_host}"></source>
-
     </item>
 
   </channel> 
