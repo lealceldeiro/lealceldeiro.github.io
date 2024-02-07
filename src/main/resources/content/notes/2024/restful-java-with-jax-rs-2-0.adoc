@@ -241,6 +241,10 @@ The full ist of JAX-RS annotations that map to specific HTTP operations are:
 * `@jakarta.ws.rs.DELETE`
 * `@jakarta.ws.rs.HEAD`
 
+These annotations by themselves don't mean anything to JAX-RS.
+Instead, the framework looks at the meta-annotation `@jakarta.ws.rs.HttpMethod` applied to them;
+that's how they're picked up and used to map the HTTP operation to the methods they annotate.
+
 The value of the `@Path` annotation is an expression that denotes a relative URI to the
 context root of the JAX-RS application.
 
@@ -416,6 +420,9 @@ class ResourceX2 implements IResourceX {
 ----
 <1> Now, instead of a specific resource (concrete class), we return an interface.
 JAX-RS will introspect the instance returned to figure out how to dispatch the request.
+
+NOTE: If there is at least one other resource method whose `@Path` expression matches,
+then no subresource locator will be traversed to match the request.
 
 == Chapter 5: JAX-RS Injection
 
