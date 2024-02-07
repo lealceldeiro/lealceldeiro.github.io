@@ -15,7 +15,7 @@
     <generator>JBake</generator>
     <image>
       <url th:text="${config.site_host} + '/img/meta.png'"></url>
-      <title>Software Development</title>
+      <title th:text="${config.site_name}"></title>
       <link th:text="${config.site_host}"/>
     </image>
 
