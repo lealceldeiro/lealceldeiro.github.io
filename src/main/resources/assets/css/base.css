@@ -121,4 +121,7 @@ pre code.hljs {
     .conum[data-value] {
         background-color: #dee2e6;
     }
+    .admonitionblock td.icon [class^="fa icon-"]::before {
+        color: #dee2e6;
+    }
 }
