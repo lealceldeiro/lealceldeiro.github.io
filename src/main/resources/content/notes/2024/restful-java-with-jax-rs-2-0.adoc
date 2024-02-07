@@ -198,6 +198,37 @@ TIP: In general, we don't use the `StreamingOutput` interface to output response
 Instead, we would use some of the content handlers provided by JAX-RS
 that can automatically convert Java objects straight into the data format being sent across the wire.
 
+Example of a service to update a resource:
+
+[source,java]
+----
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.PathParam;
+import java.io.InputStream;
+
+@PUT
+@Path("{id}")
+@Consumes("application/xml")
+public void updateResource(@PathParam("id") int id, InputStream is) {
+    // code omitted for brevity
+}
+----
+
+In the previous example, `IntputSteram is` is not annotated with a JAX-RS annotation,
+so it's considered a representation of the body of the incoming message.
+
+An alternative implementation to having the JAX-RS annotations applied directly to the methods than handle
+the business logic, is to have an interface where the methods are defined along with the annotations.
+Then a class that implements the interface would implement the methods defined by the interface, without needing to
+have the annotations applied to the methods in the concrete class.
+
+In case it's needed, any of the JAX-RS annotations applied to the interface can be applied again to the methods in the
+concrete class (and re-define the annotation configuration).
+Although, re-applying annotation on the concrete class is not advisable because the code is harder to reason about and
+maintain.
+
 == Chapter 4: HTTP Method and URI Matching
 
 == Chapter 5: JAX-RS Injection
