@@ -239,6 +239,138 @@ The full ist of JAX-RS annotations that map to specific HTTP operations are:
 * `@jakarta.ws.rs.DELETE`
 * `@jakarta.ws.rs.HEAD`
 
+The value of the `@Path` annotation is an expression that denotes a relative URI to the
+context root of the JAX-RS application.
+
+The JAX-RS specification has defined strict sorting and precedence rules for matching URI expressions
+and is based on a _most specific match wins_ algorithm.
+
+The JAX-RS provider gathers the deployed URI expressions and sorts them based on the following logic:
+
+1. The primary key of the sort is the number of literal characters in the full URI matching pattern.
+The sort is in descending order.
+2. The secondary key of the sort is the number of template expressions embedded within the pattern,
+that is, i.e., `++{id}++` or `++{id : .+}++`.
+This sort is also in descending order.
+3. The tertiary key of the sort is the number of non-default template expressions.
+A default template expression is one that does not define a regular expression, that is, i.e., `++{id}++`.
+
+Example of URIs, sorted by this logic:
+
+[source,console]
+----
+/resource/{id}/{name}/address   // <1>
+/resource/{id : .+}/address     // <2>
+/resource/{id}/address          // <3>
+/resource/{id : .+}             // <4>
+----
+<1> Expressions 1 to 3 all have the same number of literal characters,
+but expression 1 comes first because of the second sorting rule:
+it has more template expressions embedded within the pattern.
+<2> Expression 2 is sorted ahead of 3 because of the third sorting rule;
+it has a template pattern that is a regular expression while expression 3 doesn't have one.
+<3> Expression 3 is sorted ahead of expression 4 because it has more literal characters tan expression 4.
+<4> Expressions 1 to 3 come first because they all have more literal characters than expression 4.
+
+Allowable and reserved characters:
+
+* The US-ASCII alphabetic characters `a-z` and `A-Z` are allowable.
+* The decimal digit characters `0-9` are allowable.
+* All these other characters are allowable: `_-!.~'()*`.
+* These characters are allowed but are reserved for URI syntax: `,;:$&+=?/\[]@`.
+
+All other characters must be encoded using the `%` character followed by a two-digit hexadecimal number.
+This hexadecimal number corresponds to the equivalent hexadecimal character in the ASCII table.
+
+_Matrix parameters_ are name-value pairs embedded within the path of a URI string. Example:
+
+[source,console]
+----
+https://domain.com/resources/r1;color=black/333
+----
+
+They come after a URI segment and are delimited by the `;`.
+In the previous example that'd be `color=black/333`.
+The name is `color` and the value is `black`.
+
+Matrix parameters are different from query parameters,
+as they represent attributes of certain URI segments and are used for identification purposes.
+They could be seen as adjectives.
+Query parameters, on the other hand, always come at the end of the URI
+and always pertain to the full resource we're referencing.
+They are ignored when matching incoming requests to JAX-RS resource methods,
+and it's illegal to specify them within an `@Path` expression.
+
+JAX-RS also allows us to dynamically dispatch requests through _subresource locators_.
+These are Java methods annotated with `@Path`, but with no HTTP method annotation, like `@GET`, applied to them.
+These methods return an object that is itself a JAX-RS annotated service that knows how to dispatch the remainder of
+the request.
+
+Example:
+
+[source,java]
+----
+// imports omitted for brevity
+
+@Path("/resource")
+public class RootResource {                                         // <1>
+    @Path("{id}-x")                                                 // <2>
+    public ResourceX getX(@PathParam("id") String xId) {
+        return locateXResource(xId);                                // <3>
+    }
+
+    protected XResource locateXResource(String xId) {
+        // code omitted for brevity
+    }
+}
+----
+<1> The `RootResource` class is our root resource,
+and it does not service any HTTP requests directly, it serves as a _locator_.
+<2> It processes the _x_ identifier part of the URI (`id`)
+<3> Then it locates the identified _x_ resource and returns an instance of the `XResource`
+
+The JAX-RS provider uses this `XResource` instance to service the remainder of the request:
+
+[source,java]
+----
+// imports omitted for brevity
+
+// no need to annotate this resource with `@Path` as the locator will create an instance of it
+// and the JAX-RS framework will know how to handle the rest of the request processing
+public class XResource {
+    private Map<Integer, Customer> xResources;
+    private AtomicInteger idCounter = new AtomicInteger();
+
+    public XResource(Map<Integer, Customer> xResources) {
+        this.xResources = xResources;
+    }
+
+    @POST
+    @Consumes("application/xml")
+    public Response createResource(InputStream is) {
+        // code omitted for brevity
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces("application/xml")
+    public StreamingOutput getResource(@PathParam("id") int id) {
+        // code omitted for brevity
+    }
+
+    @PUT
+    @Path("{id}")
+    @Consumes("application/xml")
+    public void updateResource(@PathParam("id") int id, InputStream is) {
+        // code omitted for brevity
+    }
+}
+----
+
+Following along with the previous example: if a client sends `GET /resource/blue-x/333`,
+the JAX-RS provider will first match the expression on the method `RootResource.getX`.
+Then, it will match and process the remaining part of the request with the method `XResource.getResource()`.
+
 == Chapter 5: JAX-RS Injection
 
 == Chapter 6: JAX-RS Content Handlers
