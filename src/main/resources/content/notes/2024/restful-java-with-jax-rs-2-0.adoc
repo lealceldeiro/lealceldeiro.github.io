@@ -156,7 +156,7 @@ public class ResourceService {
 ----
 
 IMPORTANT: https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/path[`@Path`^, role=link-underline link-underline-opacity-0],
-under package `jakarta.ws.rs`, was formerly under the package `javax.ws.rs`.
+under package `jakarta.ws.rs`, was formerly under the package `jakarta.ws.rs`.
 See https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#uritemplates[`URI Templates`^]
 and https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#changes-since-2.1-release[Changes since version 2.1^] for more info.
 
@@ -230,6 +230,14 @@ Although, re-applying annotation on the concrete class is not advisable because 
 maintain.
 
 == Chapter 4: HTTP Method and URI Matching
+
+The full ist of JAX-RS annotations that map to specific HTTP operations are:
+
+* `@jakarta.ws.rs.GET`
+* `@jakarta.ws.rs.PUT`
+* `@jakarta.ws.rs.POST`
+* `@jakarta.ws.rs.DELETE`
+* `@jakarta.ws.rs.HEAD`
 
 == Chapter 5: JAX-RS Injection
 
