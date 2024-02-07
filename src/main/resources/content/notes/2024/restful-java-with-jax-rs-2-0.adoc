@@ -316,10 +316,10 @@ Example:
 public class RootResource {                                         // <1>
     @Path("{id}-x")                                                 // <2>
     public ResourceX getX(@PathParam("id") String xId) {
-        return locateXResource(xId);                                // <3>
+        return locateResourceX(xId);                                // <3>
     }
 
-    protected XResource locateXResource(String xId) {
+    protected ResourceX locateResourceX(String xId) {
         // code omitted for brevity
     }
 }
@@ -327,9 +327,9 @@ public class RootResource {                                         // <1>
 <1> The `RootResource` class is our root resource,
 and it does not service any HTTP requests directly, it serves as a _locator_.
 <2> It processes the _x_ identifier part of the URI (`id`)
-<3> Then it locates the identified _x_ resource and returns an instance of the `XResource`
+<3> Then it locates the identified _x_ resource and returns an instance of the `ResourceX`
 
-The JAX-RS provider uses this `XResource` instance to service the remainder of the request:
+The JAX-RS provider uses this `ResourceX` instance to service the remainder of the request:
 
 [source,java]
 ----
@@ -337,11 +337,11 @@ The JAX-RS provider uses this `XResource` instance to service the remainder of t
 
 // no need to annotate this resource with `@Path` as the locator will create an instance of it
 // and the JAX-RS framework will know how to handle the rest of the request processing
-public class XResource {
+public class ResourceX {
     private Map<Integer, Customer> xResources;
     private AtomicInteger idCounter = new AtomicInteger();
 
-    public XResource(Map<Integer, Customer> xResources) {
+    public ResourceX(Map<Integer, Customer> xResources) {
         this.xResources = xResources;
     }
 
@@ -369,7 +369,51 @@ public class XResource {
 
 Following along with the previous example: if a client sends `GET /resource/blue-x/333`,
 the JAX-RS provider will first match the expression on the method `RootResource.getX`.
-Then, it will match and process the remaining part of the request with the method `XResource.getResource()`.
+Then, it will match and process the remaining part of the request with the method `ResourceX.getResource()`.
+
+JAX-RS provides an even more flexible _full dynamic dispatching_, where the located subresource can be "dynamically"
+defined in the root resource.
+Following along with the previous example, we could evolve it as follows:
+
+[source,java]
+----
+// imports omitted for brevity
+
+@Path("/resource")
+public class RootResource {
+    @Path("{id}-x")
+    public IResourceX getX(@PathParam("id") String xId) {           // <1>
+        return locateResourceX(xId);
+    }
+
+    protected IResourceX locateResourceX(String xId) {
+        if (/*some condition*/) {
+            return locateResourceX1(xId);
+        }
+        return locateResourceX2(xId);
+    }
+
+    private ResourceX1 locateResourceX1(String xId) {
+        // code omitted for brevity
+    }
+
+    private ResourceX2 locateResourceX2(String xId) {
+        // code omitted for brevity
+    }
+}
+
+interface IResourceX {
+    // code omitted for brevity
+}
+class ResourceX1 implements IResourceX {
+    // code omitted for brevity
+}
+class ResourceX2 implements IResourceX {
+    // code omitted for brevity
+}
+----
+<1> Now, instead of a specific resource (concrete class), we return an interface.
+JAX-RS will introspect the instance returned to figure out how to dispatch the request.
 
 == Chapter 5: JAX-RS Injection
 
