@@ -27,6 +27,7 @@
       <guid th:text='${post.uri}' isPermaLink="false"></guid>
       <description th:text='${#strings.escapeXml(post.body)}'></description>
       <author th:if="${post.og_author} != null" th:text="${post.og_author}"></author>
+      <author th:text="${post.og_author_email} ?: ${config.site_email}"></author>
       <source th:attr="url=${config.site_host}"></source>
 
     </item>
