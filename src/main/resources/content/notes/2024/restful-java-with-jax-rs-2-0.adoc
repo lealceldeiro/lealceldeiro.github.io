@@ -1,6 +1,8 @@
 = RESTful Java with JAX-RS 2.0, 2nd Edition
 Asiel Leal_Celdeiro
 2024-02-01
+:icons: font
+:jbake-fontawesome: true
 :jbake-type: booknote
 :jbake-status: published
 :jbake-tags: java, jax-rs, webservice
