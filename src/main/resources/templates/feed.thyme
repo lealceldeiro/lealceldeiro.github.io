@@ -17,6 +17,8 @@
       <url th:text="${config.site_host} + '/img/rss_thumbnail.png'"></url>
       <title th:text="${config.site_name}"></title>
       <link th:text="${config.site_host}"/>
+      <width>144</width>
+      <height>99</height>
     </image>
 
     <item th:each="post: ${published_posts}">
