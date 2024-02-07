@@ -157,7 +157,7 @@ public class ResourceService {
 }
 ----
 
-IMPORTANT: https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/path[`@Path`^, role=link-underline link-underline-opacity-0],
+NOTE: https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/path[`@Path`^, role=link-underline link-underline-opacity-0],
 under package `jakarta.ws.rs`, was formerly under the package `jakarta.ws.rs`.
 See https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#uritemplates[`URI Templates`^]
 and https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#changes-since-2.1-release[Changes since version 2.1^] for more info.
