@@ -103,8 +103,8 @@ pre code.hljs {
     text-shadow: 0 0 0 #8f969dbf !important;
 }
 
-/* overrides */
-/* asciidoc */
+/* Overrides */
+/* AsciiDoc */
 .sect1+.sect1 {border-top: inherit}
 :not(pre)>code { background: inherit; }
 .admonitionblock > table td.content, .admonitionblock>table td.icon, blockquote, blockquote p,
