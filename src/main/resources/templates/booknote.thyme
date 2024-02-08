@@ -28,6 +28,19 @@
         </p>
         <hr/>
 
+        <p th:if="${content.title != null}"
+           th:with="bookLink = (${content.amazon_link} ?: (${content.orreilly_link})),
+                    text = ((${content.title} + (${content.appendix_to_title_text} ?: '')) + '.')">
+            Main notes taken from the book
+            <a th:if="${bookLink != null}" th:href="${bookLink}" th:text="${text}" target="_blank"></a>
+            <span th:unless="${bookLink != null}" th:text="${text}"></span>
+        </p>
+
+        <p th:if="${content.extra_p1 != null}" th:utext="${content.extra_p1}"></p>
+        <p th:if="${content.extra_p2 != null}" th:utext="${content.extra_p2}"></p>
+
+        <hr/>
+
         <p class="mt-3" th:utext='${content.body}'></p>
     </div>
 

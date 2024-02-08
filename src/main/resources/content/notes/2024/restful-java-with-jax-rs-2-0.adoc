@@ -15,6 +15,9 @@ an excellent guide to start building RESTful services in Java.
 :jbake-published: November 2013
 :jbake-amazon_link: https://a.co/d/15qvYGA
 :jbake-orreilly_link: https://www.oreilly.com/library/view/restful-java-with/9781449361433/
+:jbake-appendix_to_title_text: by Bill Burke. Copyright 2014 Bill Burke, 978-1-449-36134-1
+:jbake-extra_p1: Source code at: https://github.com/oreillymedia/restful_java_jax-rs_2_0
+:jbake-extra_p2: Note: As this is rather an old book, it's advisable to always verify if there are newer, more modern alternatives for solutions explained here; for instance, when Java clients or options to secure Java application are mentioned.
 :jbake-og_img: notes/2024/images/restful-java-with-jax-rs-2-0.jpg
 :jbake-image_src: notes/2024/images/restful-java-with-jax-rs-2-0.jpg
 :jbake-image_alt: Image of the book cover: RESTful Java with JAX-RS 2.0, 2nd Edition
@@ -22,18 +25,7 @@ an excellent guide to start building RESTful services in Java.
 :jbake-author_handle: lealceldeiro
 :jbake-author_profile_image: /img/author/lealceldeiro.png
 
-Main notes taken from the book https://a.co/d/15qvYGA["RESTful Java with JAX-RS 2.0, Second Edition"^]
-by Bill Burke.
-Copyright 2014 Bill Burke, 978-1-449-36134-1
-
-Source code at: https://github.com/oreillymedia/restful_java_jax-rs_2_0
-
-_Note: As this is rather an old book, it's advisable to always verify if there are newer, more modern alternatives for solutions explained here; for instance, when Java clients or options to secure Java application are mentioned._
-
-'''
-
-Java API for RESTful web services (JAX-RS) aims to make development of RESTful web services in Java simple and
-intuitive.
+Java API for RESTful web services (JAX-RS) aims to make development of RESTful web services in Java simple and intuitive.
 
 == Chapter 1: Introduction to REST
 
