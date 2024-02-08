@@ -73,18 +73,16 @@
 
                     <div class="d-flex gap-3 justify-content-center lead fw-normal mt-4">
                         <span th:class="*{postsCount &gt; config.indexpage_show_posts_min_threshold} ? 'fs-3' : ''">
-                            <i class="bi bi-book"></i>
                             <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/articles.html">
-                            Articles
-                        </a>
+                                <span><i class="bi bi-newspaper"></i> Articles</span>
+                            </a>
                         </span>
                         <span th:class="*{postsCount &gt; config.indexpage_show_posts_min_threshold} ? 'fs-3' : ''">
-                            <i class="bi bi-person"></i>
                             <a class="icon-link text-body-secondary link-underline link-underline-opacity-0"
                                href="/about/lealceldeiro.html">
-                            About me
-                        </a>
+                                <span><i class="bi bi-person"></i> About me</span>
+                            </a>
                         </span>
                     </div>
 
@@ -98,9 +96,7 @@
             <!-- Currently reading-->
             <th:block th:if="*{notesCount &gt; config.indexpage_show_booknotes_min_threshold}">
                 <div class="text-center divider">
-                    <span class="fs-3 emoji">&#128071;</span>&nbsp;
-                    <span class="fs-3 text-body-secondary">Currently reading</span>&nbsp;
-                    <span class="fs-3 emoji">&#128071;</span>
+                    <span class="fs-3 text-body-secondary">Current read <i class="bi bi-book"></i></span>
                 </div>
 
                 <div class="vstack gap-3">
