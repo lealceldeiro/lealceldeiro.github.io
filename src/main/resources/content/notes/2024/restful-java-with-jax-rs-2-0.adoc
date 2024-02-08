@@ -2,6 +2,7 @@
 Asiel Leal_Celdeiro
 2024-02-01
 :icons: font
+:toc:
 :jbake-fontawesome: true
 :jbake-type: booknote
 :jbake-status: published
