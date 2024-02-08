@@ -426,6 +426,35 @@ then no subresource locator will be traversed to match the request.
 
 == Chapter 5: JAX-RS Injection
 
+JAX-RS annotations that can be used to inject values from the HTTP request into the Java method:
+
+* `@jakarta.ws.rs.PathParam`: Extracts values from URI template parameters.
+This is also able to inject instances of
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/pathsegment[`jakarta.ws.rs.core.PathSegment`^],
+which is an abstraction of a specific URI path segment.
+* `@jakarta.ws.rs.MatrixParam`: Extracts values from URI matrix parameters.
+* `@jakarta.ws.rs.QueryParam`: Extracts values from URI query parameters.
+* `@jakarta.ws.rs.FormParam`: Extracts values from posted form data.
+* `@jakarta.ws.rs.HeaderParam`: Extracts values from HTTP request headers.
+* `@jakarta.ws.rs.CookieParam`: Extracts values from HTTP cookies set by the client.
+* `@jakarta.ws.rs.core.Context`: The all-purpose injection annotation.
+It injects various helpers and informational objects that are provided by the JAX-RS API.
+
+[TIP]
+====
+The more interesting method in `PathSegment` is `getMatrixParameters()`.
+It returns a map with all the matrix parameters applied to a particular URI segment.
+In combination with `@PathParam`, we can access the matrix parameters applied to the request's URI.
+====
+
+When we need a more general raw API to query and browse information about the incoming request's URI, the interface
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/uriinfo[`jakarta.ws.rs.core.UriInfo`^]
+provides such an API.
+It's instance can be acquired by using the
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/context[`@jakarta.ws.rs.core.Context`^]
+injection annotation.
+
+
 == Chapter 6: JAX-RS Content Handlers
 
 == Chapter 7: Server Responses and Exception Handling
