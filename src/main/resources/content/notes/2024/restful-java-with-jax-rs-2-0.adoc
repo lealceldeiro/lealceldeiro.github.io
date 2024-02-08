@@ -447,6 +447,93 @@ It's instance can be acquired by using the
 https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/context[`@jakarta.ws.rs.core.Context`^]
 injection annotation.
 
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/beanparam[`jakarta.ws.rs.BeanParam`^]
+was added in the JAX-RS 2.0 specification.
+It injects an application-specific class whose property methods or fields are annotated with any of the other
+injection parameters (such as `@FormParam`, `@HeaderParam`, etc).
+
+Example:
+
+[source,java]
+----
+// imports omitted for brevity
+
+class CustomInput {
+    @FormParam("first")
+    String firstName;
+
+    @FormParam("list")
+    String lastName;
+
+    @HeaderParam("Content-Type")
+    String contentType;
+
+    // code omitted for brevity... getters... setters
+}
+
+@Path("/customers")
+class CustomerResource {
+    @POST
+    public void createCustomer(@BeanParam CustomInput customInput) {
+        // code omitted for brevity
+    }
+}
+----
+
+JAX-RS can convert the string data extracted by the previous annotations from the HTTP request (URI) into any Java
+type, provided that it matches one of the following criteria:
+
+1. It is a primitive type.
+The `int`, `short`, `float`, `double`, `byte`, `char`, and `boolean` types all fit into this category.
+2. It is a Java class that has a constructor with a single `String` parameter.
+3. It is a Java class that has a static method named `valueOf()` that takes a single `String` argument
+and returns an instance of the class.
+4. It is a `java.util.List<T>`, `java.util.Set<T>`, or `java.util.SortedSet<T>`,
+where `T` is a type that satisfies criteria 2 or 3 or is a `String`.
+Examples are `List<Double>`, `Set<String>`, or `SortedSet<Integer>`.
+
+Additionally, in scenarios where automatic conversion is not possible,
+JAX-RS (from version 2.0 onwards) provides the
+https://jakarta.ee/specifications/platform/9/apidocs/jakarta/ws/rs/ext/paramconverter[`jakarta.ws.rs.ext.ParamConverter<T>`^]
+interface to help with parameter conversions.
+
+Example:
+
+[source,java]
+----
+// imports omitted for brevity
+
+public enum Color {
+    BLACK, BLUE, RED, WHITE, SILVER
+}
+// ...
+public class ColorConverter implements ParamConverter<Color> {
+    public Color fromString(String value) {
+        return java.util.Arrays.stream(Color.values())
+                               .filter(color -> color.toString().equalsIgnoreCase(value))
+                               .findAny()
+                               .orElseThrow(() -> new IllegalArgumentException("Invalid color: " + value));
+    }
+    public String toString(Color value) { return value.toString(); }
+}
+// ...
+@Provider
+public class ColorConverterProvider {
+    private final ColorConverter converter = new ColorConverter();
+
+    public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations) {
+        return rawType.equals(Color.class) ? converter : null;
+    }
+}
+----
+
+If the JAX-RS provider fails to convert a string into the Java type specified, it is considered a client error.
+If this failure happens during the processing of an injection for an `@MatrixParam`, `@QueryParam`, or `@PathParam`,
+an error status of `404 Not Found` is sent back to the client.
+If the failure happens with `@HeaderParam` or `@CookieParam`, an error response code of `400 Bad Request` is sent.
+
+The `@jakarta.ws.rs.Encoded` annotation allows us to work with the raw-encoded values from the HTTP request,
+as opposite to working with the decoded values, as extracted by the other annotations such as `@QueryParam`.
 
 == Chapter 6: JAX-RS Content Handlers
 
