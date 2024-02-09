@@ -20,18 +20,32 @@ function hideMenuNavbarShadow() {
     navEl.classList.remove("bg-light-subtle");
 }
 
-window.addEventListener("scroll", () => {
+const scrollThreshold = 18;
+let tocScroll = 0;
+let windowScroll = 0;
+const handleElementScroll = (scrolledElement) => {
     if (navShown) {
         document.querySelector("#navbarSupportedContent").classList.remove("show");
         navShown = false;
     }
-    const threshold = 18;
-    if (window.scrollY >= threshold) {
+    const isWindowScroll = scrolledElement.scrollY !== undefined;
+    const scrollY = isWindowScroll ? scrolledElement.scrollY : scrolledElement.scrollTop;
+
+    windowScroll = isWindowScroll ? scrollY : windowScroll;
+    tocScroll = !isWindowScroll ? scrollY : tocScroll;
+
+    if (scrollY >= scrollThreshold) {
         showMenuNavbarShadow();
-    } else if (window.scrollY < threshold) {
+    } else if (((isWindowScroll && tocScroll < scrollThreshold) || (!isWindowScroll && windowScroll < scrollThreshold))
+        && scrollY < scrollThreshold) {
         hideMenuNavbarShadow();
     }
-});
+};
+window.addEventListener("scroll", () => handleElementScroll(window));
+const toc = document.querySelector("#toc");
+if (toc != null) {
+    toc.addEventListener("scroll", () => handleElementScroll(toc));
+}
 // endregion show navbar shadow box
 
 // region: back to top button
@@ -54,16 +68,16 @@ if (backToTopBtn != null) {
 // region: mark active menu items
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("a.nav-link.active")
-            .forEach(li => {
-                li.classList.remove("active");
-                li.attributes.removeNamedItem("aria-current");
-            });
+        .forEach(li => {
+            li.classList.remove("active");
+            li.attributes.removeNamedItem("aria-current");
+        });
 
     document.querySelectorAll(`a[href="${location.pathname}"].nav-link`)
-            .forEach(a => {
-                a.classList.add("active");
-                a.setAttribute("aria-current", "page");
-            });
+        .forEach(a => {
+            a.classList.add("active");
+            a.setAttribute("aria-current", "page");
+        });
 });
 // endregion: mark active menu items
 
@@ -129,12 +143,13 @@ function setHighlightJsTheme() {
 
 function tweakSpecificDesigns() {
     document.querySelectorAll('.timeline-with-icons .timeline-icon')
-            .forEach(e => e.setAttribute('style',
-                                         'background-color: ' + (isDark() ? '#595f69!important;' : '#cfe0fc!important;')));
+        .forEach(e => e.setAttribute('style',
+            'background-color: ' + (isDark() ? '#595f69!important;' : '#cfe0fc!important;')));
 }
 
 function changeTheme() {
     selectedTheme = selectedTheme === LIGHT ? DARK : LIGHT;
     setTheme();
 }
+
 // endregion: theme picker
