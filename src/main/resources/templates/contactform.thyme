@@ -9,11 +9,8 @@
             <input type="hidden" name="replyTo" value="@">
             <!-- To be displayed after success -->
             <input type="hidden" name="redirectTo"
-                   th:value="${config.site_host} + (${subscribe}
-                                                    ? ((*{#strings.startsWith(config.site_host, config.site_localhost)}
-                                                         ? '' : '/')
-                                                         + 'thank-you-for-reaching-out.html')
-                                                    : '')">
+                   th:value="${config.site_host} + (*{#strings.startsWith(config.site_host, config.site_localhost)}
+                                                         ? '' : '/') + 'thank-you-for-reaching-out.html'">
 
             <div class="mb-3">
                 <label class="visually-hidden" for="subscribeNameField">Name</label>
