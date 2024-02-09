@@ -558,6 +558,19 @@ There's a section of the book in this chapter that explains how to implement cus
 
 == Chapter 7: Server Responses and Exception Handling
 
+Standard HTTP success response code numbers range from `200` to `399`.
+
+Standard HTTP error response code numbers range from `400` to `599`.
+
+`ResponseBuilder` can be used to build custom `Response` objects.
+
+Errors can be reported to a client either by creating and returning the appropriate `Response` object
+or by throwing an exception.
+
+Own implementations of
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/ext/exceptionmapper[`jakarta.ws.rs.ext.ExceptionMapper`^, role=link-underline link-underline-opacity-0]
+could be used to map a thrown application exception to a `Response` object.
+
 == Chapter 8: JAX-RS Client API
 
 == Chapter 9: HTTP Content Negotiation
