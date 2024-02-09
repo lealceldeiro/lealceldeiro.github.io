@@ -34,7 +34,9 @@ Example `./mvnw jbake:inline`
 
 ## Creating an article
 
-As a standard, we're writing all articles files as either [AsciiDoc](https://asciidoc.org/) (`.adoc`) or HTML (`.html`).
+As a standard, we're writing all articles files as either [AsciiDoc](https://asciidoc.org/)(`.adoc`) or HTML(`.html`).
+The preferred option is AsciiDoc as it provides more features,
+including generating a table of content for the rendered html.
 
 ### File structure
 
@@ -124,6 +126,13 @@ Images used to be displayed in the book thumbnail (`image_src`) should be:
   like)
 - _width_: 630px
 - _height_: 850px
+
+## Document customization
+
+In both, articles and book notes is possible to create a table of content (toc) for those created as AsciiDoc files.
+To do that, the [document attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes/)
+[`:toc:`](https://docs.asciidoctor.org/asciidoc/latest/toc/) and `:jbake-table_of_content:` (custom) must be set;
+for now (and as standard) it can only be set to `left` (other values don't have any effect).
 
 ## Build and publish
 
