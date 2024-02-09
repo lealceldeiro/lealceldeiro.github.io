@@ -172,6 +172,16 @@ pre code.hljs {
     }
 }
 
+#toc {
+    a {
+        color: #495057;
+    }
+
+    li:hover, li:focus {
+        background-color: #e9ecef;
+    }
+}
+
 .sect1 + .sect1 {
     border-top: inherit
 }
@@ -202,5 +212,6 @@ pre code.hljs {
         color: #dee2e6;
     }
 }
+
 /* endregion */
 /* endregion */
