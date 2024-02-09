@@ -1,5 +1,4 @@
 .idea
-.jpb
 *.iml
 target/
 pom.xml.tag
