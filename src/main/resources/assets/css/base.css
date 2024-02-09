@@ -115,7 +115,7 @@ pre code.hljs {
         width: 15em;
         left: 0;
         top: 0;
-        border-right: 1px solid #efefed;
+        border-right: 0!important;
         border-top-width: 0 !important;
         border-bottom-width: 0 !important;
         z-index: 1000;
