@@ -125,6 +125,17 @@ pre code.hljs {
         padding-top: 90px;
     }
 
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    #toc.toc::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    #toc.toc {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
     #toc.toc #toctitle {
         margin-top: 0;
         margin-bottom: .8rem;
@@ -181,6 +192,9 @@ pre code.hljs {
         background-color: #e9ecef;
     }
 }
+#toc.toc #toctitle {
+    font-weight: 400;
+}
 
 .sect1 + .sect1 {
     border-top: inherit
@@ -210,6 +224,16 @@ pre code.hljs {
 
     .admonitionblock td.icon [class^="fa icon-"]::before {
         color: #dee2e6;
+    }
+
+    #toc {
+        a {
+            color: #bcc1c7;
+        }
+
+        li:hover, li:focus {
+            background-color: #3c3d3e;
+        }
     }
 }
 
