@@ -2,7 +2,9 @@
 Asiel Leal_Celdeiro
 2024-02-01
 :icons: font
-:toc:
+:toc-title: In this article
+:toc: left
+:jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: booknote
 :jbake-status: published
@@ -536,6 +538,21 @@ The `@jakarta.ws.rs.Encoded` annotation allows us to work with the raw-encoded v
 as opposite to working with the decoded values, as extracted by the other annotations such as `@QueryParam`.
 
 == Chapter 6: JAX-RS Content Handlers
+
+Built-in content marshalling handlers:
+
+* https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/streamingoutput[`jakarta.ws.rs.core.StreamingOutput`^, role=link-underline link-underline-opacity-0]
+is a simple callback interface that can be implemented to do raw streaming of
+response bodies.
+* https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/InputStream.html[`java.io.InputStream`^, role=link-underline link-underline-opacity-0]
+and https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Reader.html[`java.io.Reader`^, role=link-underline link-underline-opacity-0]
+can be used to read request message bodies and inputting any media type, respectively.
+While https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html[`java.io.File`^, role=link-underline link-underline-opacity-0]
+and `byte[]` can als be used for input and output of any media type.
+All these options are rather a low-level API option.
+* `String` and `char[]` can be used for input and output of _text-based_ values.
+* `MultivaluedMap<String, String>` can be used to receive HTTP requests form data encoded as the `application/x-www-form-urlencoded` media type.
+It's also possible to use it to return data through the HTTP response.
 
 == Chapter 7: Server Responses and Exception Handling
 
