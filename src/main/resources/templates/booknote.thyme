@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="header.thyme::head(null, null)"></head>
-<body th:class="${content.table_of_content} != null ? ('toc2 toc-left') : ''">
+<body th:class="(${#strings.equals(content.document_info, 'shared-footer')} ? 'doc ' : '')
+                 + (${content.table_of_content} != null ? ('toc2 toc-left') : '')">
 <div id="wrap" class="content-justify">
     <div th:replace="menu.thyme::menu"></div>
     <div class="container">
@@ -79,5 +80,9 @@
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
         th:src="${rootpath} + 'js/base.js'"></script>
+
+<script th:if="${#strings.equals(content.document_info, 'shared-footer')}"
+        th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+        th:src="${rootpath} + 'js/copy-to-clipboard.js'"></script>
 </body>
 </html>

@@ -134,6 +134,12 @@ To do that, the [document attributes](https://docs.asciidoctor.org/asciidoc/late
 [`:toc:`](https://docs.asciidoctor.org/asciidoc/latest/toc/) and `:jbake-table_of_content:` (custom) must be set;
 for now (and as standard) it can only be set to `left` (other values don't have any effect).
 
+In both, articles and book notes is possible to create a a "copy to clipboard" button
+for those created as AsciiDoc files.
+To do that, the [document attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes/)
+[`:docinfo:`](https://docs.asciidoctor.org/asciidoc/latest/docinfo/)
+and `:jbake-document_info:` (custom) must be set to`shared-footer` (other values don't have any effect).
+
 ## Build and publish
 
 When creating an article, if it's a work in progress, you can skip the pages build by appending `[skip-ci]` to the end

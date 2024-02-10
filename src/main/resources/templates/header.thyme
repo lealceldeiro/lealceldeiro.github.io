@@ -99,6 +99,10 @@
           rel="stylesheet"/>
 
     <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+          th:href="${rootpath} + 'css/copy-to-clipboard.css'"
+          rel="stylesheet"/>
+
+    <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
           th:href="${rootpath} + 'css/timeline.css'"
           rel="stylesheet"/>
 
