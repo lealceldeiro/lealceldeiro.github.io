@@ -1,9 +1,11 @@
 = RESTful Java with JAX-RS 2.0, 2nd Edition
 Asiel Leal_Celdeiro
 2024-02-01
+:docinfo: shared-footer
 :icons: font
 :toc-title: In this book
 :toc: left
+:jbake-document_info: shared-footer
 :jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: booknote
