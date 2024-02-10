@@ -168,7 +168,7 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"></script>
 
-<script th:if="${content.fontawesome == true}"
+<script th:if="${content.fontawesome}"
         src="https://kit.fontawesome.com/6c775a892a.js" crossorigin="anonymous"></script>
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
