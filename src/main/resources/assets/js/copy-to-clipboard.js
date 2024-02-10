@@ -77,3 +77,5 @@
     )
   }
 })()
+/* see https://github.com/asciidoctor/asciidoctor-extensions-lab/issues/61#issuecomment-1250380863 */
+/* and https://gitlab.com/antora/antora-ui-default/-/raw/master/src/js/06-copy-to-clipboard.js*/
