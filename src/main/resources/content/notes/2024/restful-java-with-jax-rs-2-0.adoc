@@ -618,7 +618,7 @@ public class Main {
             } catch (NotFoundException notFound) {
                 // code omitted for brevity: do something with notFound
             } catch (RedirectionException redirect) {
-                if (redirected) { // <1>
+                if (redirected) { // allow only one redirect
                     break;
                 }
                 redirected = true;
@@ -644,7 +644,6 @@ class Resource {
     }
 }
 ----
-<1> Allow only one redirect
 
 == Chapter 9: HTTP Content Negotiation
 
