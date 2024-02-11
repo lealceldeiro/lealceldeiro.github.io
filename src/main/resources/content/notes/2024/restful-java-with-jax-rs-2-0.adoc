@@ -575,6 +575,77 @@ could be used to map a thrown application exception to a `Response` object.
 
 == Chapter 8: JAX-RS Client API
 
+Example of a request to fetch a resource by using the
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/client/package-summary[jakarta.ws.rs.client^, role=link-underline link-underline-opacity-0]
+API (wrapped inside a Java `main` method for demonstration purposes only).
+
+[source,java]
+----
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
+import javax.net.ssl.SSLContext;
+
+public class Main {
+    public static void main(String[] args) {
+        SSLContext sslContext = sslContext();
+
+        Client client = ClientBuilder.newBuilder()
+                                     .property("connection.timeout", 100)
+                                     .sslContext(sslContext)
+                                     .register(JacksonJsonProvider.class)
+                                     .build();
+
+        WebTarget target = client.target("https://example.com/resources/{type}")
+                                 .resolveTemplate("type", "active")
+                                 .queryParam("verbose", true);
+
+        Response response = target.post(Entity.xml(new Resource("R1", "A1")));
+        response.close();
+
+        boolean redirected = false;
+        Resource resource = null;
+        do {
+            try {
+                resource = target.queryParam("name", "R1")
+                                          .accept("application/json")
+                                          .get(Resource.class);
+            } catch (NotAcceptableException notAcceptable) {
+                // code omitted for brevity: do something with notAcceptable
+            } catch (NotFoundException notFound) {
+                // code omitted for brevity: do something with notFound
+            } catch (RedirectionException redirect) {
+                if (redirected) { // <1>
+                    break;
+                }
+                redirected = true;
+                target = client.target(redirect.getLocation());
+            }
+        } while (resource == null);
+
+        client.close();
+        if (resource == null) {
+            // code omitted for brevity: throw exception
+        }
+    }
+
+    private static SSLContext sslContext() {
+        // code omitted for brevity
+    }
+}
+
+class Resource {
+    // code omitted for brevity
+    Resource(String name, String alias) {
+        // code omitted for brevity
+    }
+}
+----
+<1> Allow only one redirect
+
 == Chapter 9: HTTP Content Negotiation
 
 == Chapter 10: HATEOAS
