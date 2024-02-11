@@ -611,8 +611,8 @@ public class Main {
         do {
             try {
                 resource = target.queryParam("name", "R1")
-                                          .accept("application/json")
-                                          .get(Resource.class);
+                                 .accept("application/json")
+                                 .get(Resource.class);
             } catch (NotAcceptableException notAcceptable) {
                 // code omitted for brevity: do something with notAcceptable
             } catch (NotFoundException notFound) {
