@@ -37,25 +37,35 @@
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <div class="d-flex flex-row align-items-center mb-2"
-                                         th:if="${content.user_github_username}">
-                                        <a class="text-body-secondary link-underline link-underline-opacity-0"
-                                           target="_blank"
-                                           th:href="${'https://github.com/' + content.user_github_username + '?tab=repositories'}">
-                                            <ul class="text-body-secondary mb-0 mx-3 list-unstyled d-flex flex-row">
-                                                <li class="d-none">
-                                                    <i class="bi bi-file-code-fill"></i>
-                                                    <span id="githubRepos"></span>
-                                                </li>
-                                                <li class="d-none mx-2">
-                                                    <i class="bi bi-people-fill"></i>
-                                                    <span id="githubFollowers"></span>
-                                                </li>
-                                                <li class="d-none">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <span id="githubStars"></span>
-                                                </li>
-                                            </ul>
-                                        </a>
+                                         th:if="${content.user_github_username || content.user_stackoverflow_id}">
+                                        <ul class="text-body-secondary mb-0 mx-2 list-unstyled d-flex flex-row">
+                                            <li class="mx-1">
+                                                <a class="text-body-secondary link-underline link-underline-opacity-0"
+                                                   target="_blank"
+                                                   th:href="${'https://github.com/' + content.user_github_username}">
+                                                    <img th:alt="'GitHub ' + ${content.user_name} + '\followers'"
+                                                         th:src="'https://img.shields.io/github/followers/' + ${content.user_github_username}">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="text-body-secondary link-underline link-underline-opacity-0"
+                                                   target="_blank"
+                                                   th:href="${'https://github.com/' + content.user_github_username}">
+                                                    <img th:alt="'GitHub ' + ${content.user_name} + '\'s stars'"
+                                                         th:src="'https://img.shields.io/github/stars/' + ${content.user_github_username}">
+                                                </a>
+                                            </li>
+                                            <li class="mx-1">
+                                                <a class="text-body-secondary link-underline link-underline-opacity-0"
+                                                   th:href="${'http://stackoverflow.com/users/' + content.user_stackoverflow_id}"
+                                                   target="_blank">
+                                                    <img th:alt="${content.user_name} + '\'s Stackoverflow reputation'"
+                                                         th:src="'https://img.shields.io/stackexchange/stackoverflow/r/'
+                                                                 + ${content.user_stackoverflow_id}
+                                                                 + '?style=social&logo=Stack%20Overflow&label=Reputation'">
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div>
                                         <ul class="nav mx-0 col-12 justify-content-start list-unstyled d-flex">
@@ -206,49 +216,5 @@
     </script>
 </span>
 <!-- Calendly badge widget end -->
-
-<script type="module" th:if="${content.user_github_username}" th:inline="javascript">
-    // https://github.com/octokit/core.js#readme
-    import {Octokit} from "https://esm.sh/@octokit/core";
-
-    const octokit = new Octokit()
-
-    // get user info
-    const userReq = "GET /users/" + [[${content.user_github_username}]];
-    const userRes = await request(userReq);
-    // alternative impl would be: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-    setAndShow('githubRepos', userRes.data.public_repos + userRes.data.public_gists)
-    // alternative impl would be: https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#list-followers-of-a-user
-    setAndShow('githubFollowers', userRes.data.followers);
-
-    // get user repos' stars: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-    const reposRes = await request(userReq + "/repos");
-    const repoStarsCount = starsCount(reposRes.data);
-    setAndShow('githubStars', repoStarsCount)
-
-    // FIXME: get user gists' stars: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28
-    const gistsRes = await request(userReq + "/gists");
-    const starsCountUpdated = repoStarsCount + starsCount(gistsRes.data)
-    setAndShow('githubStars', starsCountUpdated);
-
-    function request(url) {
-        const GH_API_VERSION = [[${config.github_apiversion}]];
-        return octokit.request(url, {username: 'USERNAME', headers: {'X-GitHub-Api-Version': GH_API_VERSION}});
-    }
-
-    function setAndShow(elementId, value) {
-        const el = document.getElementById(elementId);
-        el.innerText = value;
-        el.parentElement.classList.remove("d-none");
-    }
-
-    function starsCount(data) {
-        return data.map(repo => {
-            const stargazerCount = repo['stargazers_count'];
-            return stargazerCount !== undefined && stargazerCount !== null ? stargazerCount : 0;
-        }).reduce((i, j) => i + j, 0);
-    }
-</script>
-
 </body>
 </html>
