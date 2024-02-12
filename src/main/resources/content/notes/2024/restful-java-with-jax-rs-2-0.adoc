@@ -590,7 +590,7 @@ import jakarta.ws.rs.core.Response;
 import javax.net.ssl.SSLContext;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) { // in a real application this code would go inside a service
         SSLContext sslContext = sslContext();
 
         Client client = ClientBuilder.newBuilder()
@@ -646,6 +646,62 @@ class Resource {
 ----
 
 == Chapter 9: HTTP Content Negotiation
+
+Clients can request a specific media type they would like returned when querying a server for information.
+They can set an `Accept` request header that is a comma-delimited list of preferred formats.
+For example:
+
+[source,console]
+----
+GET https://example.com/resource
+Accept: application/xml, application/json
+----
+
+More specific media types take precedence over less specific ones.
+
+Clients can also be more specific on their preferences by using the `q` MIME type property.
+This property is a numeric value between `0.0` (least preferred) and `1.0` (most preferred),
+being `1.0` the default value.
+
+For example:
+
+[source,console]
+----
+GET https://example.com/stuff
+Accept: text/*;q=0.9, */*;q=0.1, audio/mpeg, application/xml;q=0.5
+----
+
+The `Accept-Language` header can be set to specify which human language they would like to receive.
+For example:
+
+[source,console]
+----
+GET https://example.com/stuff
+Accept-Language: en-us, es, fr
+----
+
+The `Accept-Encoding` header can be set to specify which encodings client support. For example:
+
+[source,console]
+----
+GET https://example.com/stuff
+Accept-Encoding: gzip, deflate
+----
+
+When a client or server encodes a message body, the `Content-Encoding` header must be set
+to inform the receiver which encoding was used.
+
+By designing our own application media types we confine the complexity of different and new data types to our custom
+data formats.
+A common way to address this is to define custom media types using the `vnd+<custom_name>` where custom name is any
+string we'd like to define.
+
+For example, a specific XML format for company _Acme_ could be defined like this:
+`application/vnd.acm.resource+xml`, where `vnd` stands for "vendor", `acm` stands for "Acme", `resource` is the name
+of the resource and `xml` is the format used to return the data.
+
+After a base media type name is created, we can append versioning information to it so that older clients can still
+ask for older versions of the format: `application/vnd.acm.resource+xml;version=1.0`.
 
 == Chapter 10: HATEOAS
 
