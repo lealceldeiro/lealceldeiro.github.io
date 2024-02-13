@@ -1,4 +1,4 @@
-= The final keyword in Java
+= Mastering the final keyword in Java
 Asiel Leal_Celdeiro
 2024-02-15
 :docinfo: shared-footer
@@ -9,7 +9,7 @@ Asiel Leal_Celdeiro
 :jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: post
-:jbake-status: draft
+:jbake-status: published-date
 :jbake-tags: java, java-classes, java-methods, access-modifiers
 :jbake-summary: final is a very powerful keyword in Java that allows us to limit a class extensibility or a method to \
 be overriden, along with many other cases that contribute to Java being a secure and robust platform.
@@ -19,6 +19,11 @@ be overriden, along with many other cases that contribute to Java being a secure
 :jbake-og_author: Asiel Leal Celdeiro
 :jbake-author_handle: lealceldeiro
 :jbake-author_profile_image: /img/author/lealceldeiro.png
+
+The `final` keyword in Java might seem simple at first glance, but it's a powerful tool that can significantly
+impact our code's design, readability, and performance.
+In this article, we'll delve into the different ways we can use `final` and explore its various benefits for
+Java developers.
 
 == What's the `final` keyword in Java?
 
@@ -44,12 +49,7 @@ But it can get tricky sometimes. Let's see it in details.
 
 == Use cases for the `final` keyword
 
-The `final` keyword can be applied in the following scenarios:
-
-1. A final link:/articles/2024/java-oop-classes-and-objects.html#what-are-java-classes[class^]
-2. A final link:/articles/2024/java-oop-classes-and-objects.html#fields[field^]
-3. A final link:/articles/2024/java-oop-classes-and-objects.html#methods[method^]
-4. A final https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html#jls-4.12.4[variable^]
+The `final` keyword can be applied in several scenarios. Let's analyze them, one by one.
 
 === Final classes
 
@@ -63,8 +63,10 @@ final class Payment {
 
 A final class can't be extended.
 This means no other class can be a subclass of the _final_ class.
-This is useful in situations
-where we want to limit the inheritance of our type (class), for example, for security reasons.
+
+This is useful in situations where we want to limit the inheritance of our type (class),
+for example, for security reasons.
+It enforces the intended design and prevents unintended modifications through inheritance.
 
 === Final fields
 
@@ -120,8 +122,8 @@ inside the class constructor (as we saw previously).
 
 Final fields give us the big benefit of thread safety
 (https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html#jls-17.5[&sect;17.5^]).
-This doesn't mean that by declaring all fields in a class that makes the class thread safe;
-but it's one of the actions we can take towards that goal and it's a simple one.
+This doesn't mean that if we declare all fields as `final` in a class that will make the class thread safe;
+but it's one of the actions we can take towards that goal, and it's a simple one.
 
 It brings also with it more predictable and easy-to-reason-about code and the JVM can also perform low-level
 optimization over those fields because of their final nature.
@@ -185,30 +187,14 @@ Let's take as an example the following code:
 class Payment {
     void executeTransaction(Long id) {
         Transaction transaction = getTransaction();
-
-        queueTasks(() -> {
-            cleanUpTransaction(transaction);
-            cleanUpOldRows(id);
-        });
-        // rest of the code omitted for brevity
+        queueTasks(() -> System.out.printf("Queued tasks for transaction %s and id %s", transaction, id));
     }
 
-    Transaction getTransaction() {
-        // code omitted for brevity
-    }
+    Transaction getTransaction() { return new Transaction(); }
 
     void queueTasks(Runnable callback) {
         // code omitted for brevity
         callback.run();
-        // rest of the code omitted for brevity
-    }
-
-    void cleanUpTransaction(Transaction transaction) {
-        // code omitted for brevity
-    }
-
-    void cleanUpOldRows(Long id) {
-        // code omitted for brevity
     }
 }
 class Transaction {}
@@ -220,16 +206,11 @@ For the sake of simplicity, let's focus only on the method `executeTransaction` 
 ----
 void executeTransaction(Long id) {
     Transaction transaction = getTransaction();
-
-    queueTasks(() -> {
-        cleanUpTransaction(transaction);
-        cleanUpOldRows(id);
-    });
-    // ...
+    queueTasks(() -> System.out.printf("Queued tasks for transaction %s and id %s", transaction, id));
 }
 ----
 
-In its body, there's a call to `queueTasks` which accepts a `Runnable` argument.
+In its body, there's a call to `queueTasks` which accepts a `Runnable` an argument.
 Because
 https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runnable.html[`Runnable`^, role=link-underline link-underline-opacity-0]
 is a https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html[functional interface^]
@@ -262,3 +243,10 @@ have extended your class
 
 Questions like this should pop out of your mind when you design and implement your solutions. It will help with the
 overall code quality and the quality of the final product, which means happier final users.
+
+One final word of *caution*.
+
+With great power comes great responsibility.
+While `final` is powerful, its overuse can lead to inflexible code.
+We should use it judiciously, considering the trade-offs between immutability and flexibility
+and striving to achieve the correct balance.
