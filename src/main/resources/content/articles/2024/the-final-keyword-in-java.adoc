@@ -22,7 +22,7 @@ be overriden, along with many other cases that contribute to Java being a secure
 
 == What's the `final` keyword in Java?
 
-To put it simple, we say something is _final_ when it's not going to be "modified".
+To put it simple, we say something is _final_ when it can't be "modified".
 
 Imagine a chick that just hatched out of an egg.
 That egg is broken, and nothing can revert that; nobody can put together a hatched, or broken, egg, and make the small
@@ -35,11 +35,12 @@ link:/articles/2024/java-oop-classes-and-objects.html#constructors[object^] and 
 reference throughout the whole program execution.
 This means no other reference can be assigned to it.
 
-IMPORTANT: Final fields could still be modified through other mechanisms such as reflection, but that's a deeper topic
-that requird its own article.
+IMPORTANT: `final` fields could still be modified through other mechanisms such as
+https://www.oracle.com/technical-resources/articles/java/javareflection.html[reflection^]
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html#jls-17.5.3[&sect;17.5.3^]),
+but that's a more complex topic, better covered in its own article.
 
-But it can get tricky sometimes.
-So, let's see it in details.
+But it can get tricky sometimes. Let's see it in details.
 
 == Use cases for the `final` keyword
 
@@ -114,6 +115,150 @@ final class Payment {
 }
 ----
 +
-3. For the sake of completeness, let's put here the third option, inside the class constructor (as we saw previously).
+3. For the sake of completeness, let's mention here the third option:
+inside the class constructor (as we saw previously).
+
+Final fields give us the big benefit of thread safety
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html#jls-17.5[&sect;17.5^]).
+This doesn't mean that by declaring all fields in a class that makes the class thread safe;
+but it's one of the actions we can take towards that goal and it's a simple one.
+
+It brings also with it more predictable and easy-to-reason-about code and the JVM can also perform low-level
+optimization over those fields because of their final nature.
 
 === Final methods
+
+To declare a final method we use the same `final` keyword. For example:
+
+[source,java]
+----
+class Payment {
+    private final BigDecimal amount = new BigDecimal(100);
+
+    final BigDecimal getAmount() {
+        return amount;
+    }
+}
+----
+
+In this previous example the `Payment` class is not `final`.
+This means it can be subclassed and its methods overridden or hidden in the children classes
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.4.3.3[&sect;8.4.3.3^]).
+One way to avoid that is to declare those methods as `final`.
+
+This is a powerful technique: it permits that we have a class that can be extended but certain public behaviors of it
+can't be changed, not even by its subclasses. This keeps the parent class maintainers in control, and avoid
+unexpected bugs.
+
+=== Final variables
+
+Final variables are also declared by using the same `final` keyword.
+For example, in the following method, the argument `id` and the local variable `transaction` are final.
+
+[source,java]
+----
+class Payment {
+    void executeTransaction(final Long id) {
+        final Transaction transaction = getCurrentTransaction();
+        // rest of the code omitted for brevity
+    }
+}
+----
+
+Something to note here is that if we declare a variable without the `final` keyword,
+and it's never modified again, then it's
+https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html#jls-4.12.4[_effectively final_^].
+
+The use cases for final variables range from code standards and best practices established in some companies,
+to language requirements such as lambda expressions.
+Let's analyze this last one.
+
+https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.27[Lambda expressions^] require that any local
+variable, formal parameter, or exception parameter used but not declared in a lambda expression
+must either be final or effectively final
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.27.2[&sect;15.27.2^]).
+
+Let's take as an example the following code:
+
+[source,java]
+----
+class Payment {
+    void executeTransaction(Long id) {
+        Transaction transaction = getTransaction();
+
+        queueTasks(() -> {
+            cleanUpTransaction(transaction);
+            cleanUpOldRows(id);
+        });
+        // rest of the code omitted for brevity
+    }
+
+    Transaction getTransaction() {
+        // code omitted for brevity
+    }
+
+    void queueTasks(Runnable callback) {
+        // code omitted for brevity
+        callback.run();
+        // rest of the code omitted for brevity
+    }
+
+    void cleanUpTransaction(Transaction transaction) {
+        // code omitted for brevity
+    }
+
+    void cleanUpOldRows(Long id) {
+        // code omitted for brevity
+    }
+}
+class Transaction {}
+----
+
+For the sake of simplicity, let's focus only on the method `executeTransaction` (and ignore the auxiliary methods).
+
+[source,java]
+----
+void executeTransaction(Long id) {
+    Transaction transaction = getTransaction();
+
+    queueTasks(() -> {
+        cleanUpTransaction(transaction);
+        cleanUpOldRows(id);
+    });
+    // ...
+}
+----
+
+In its body, there's a call to `queueTasks` which accepts a `Runnable` argument.
+Because
+https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runnable.html[`Runnable`^, role=link-underline link-underline-opacity-0]
+is a https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html[functional interface^]
+we can provide the argument as a lambda expression.
+
+In the body of the lambda expression the variable `transaction` and the parameter `id` are used
+without being declared `final` explicitly.
+This is possible because they are _effectively final_.
+
+If we were to re-assign a new value to either `transaction` or `id` then they would stop being effectively final.
+This would cause a compile-time error reported when either of them is first accessed inside the lambda body.
+The message would say something like `Variable used in lambda expression should be final or effectively final`.
+
+To avoid such error, we can declare them as `final` and, if we ever re-assign a new value to them, we get a
+compile-time error on the line where the re-assignment happens.
+
+Declaring `final` variables is also useful in scenarios where there are many variables declared
+(common in long methods from legacy code), and we want to make sure none of them is re-assigned a new value.
+
+== Final thoughts
+
+Now that we've explored what's the `final` keyword used for and how to apply it, it's time for you to put that
+knowledge to work on your daily job.
+
+Look again that class design and ask yourself: Is this class supposed to be subclassed?
+If yes, then document it, if not, then make it final. Your future self will thank you. You can always come
+back and make the class non-final, but you can't make a class final without possibly breaking other code that could
+have extended your class
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.4.2.3[&sect;13.4.2.3^]).
+
+Questions like this should pop out of your mind when you design and implement your solutions. It will help with the
+overall code quality and the quality of the final product, which means happier final users.
