@@ -99,7 +99,8 @@
         </div>
 
         <!-- Subscriptions -->
-        <div th:replace="mailerlitesubscriptionform.thyme::form"></div>
+        <div th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}"
+             th:replace="mailerlitesubscriptionform.thyme::form"></div>
         <!-- End subscriptions -->
 
         <hr th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}"/>
@@ -178,7 +179,8 @@
         th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
         th:src="${rootpath} + 'js/copy-to-clipboard.js'"></script>
 
-<script th:if="${(content.mailerlite_on == null || #strings.equals(content.mailerlite_on, 'true'))
+<script th:if="${!#strings.startsWith(config.site_host, config.site_localhost)
+                 && (content.mailerlite_on == null || #strings.equals(content.mailerlite_on, 'true'))
                  && (config.mailerlite_on == null || #strings.equals(config.mailerlite_on, 'true'))}"
         th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
         th:src="${rootpath} + 'js/mailerlite.js'"></script>
