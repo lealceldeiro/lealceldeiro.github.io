@@ -1,0 +1,119 @@
+= The final keyword in Java
+Asiel Leal_Celdeiro
+2024-02-15
+:docinfo: shared-footer
+:icons: font
+:toc-title: In this article
+:toc: left
+:jbake-document_info: shared-footer
+:jbake-table_of_content: left
+:jbake-fontawesome: true
+:jbake-type: post
+:jbake-status: draft
+:jbake-tags: java, java-classes, java-methods, access-modifiers
+:jbake-summary: final is a very powerful keyword in Java that allows us to limit a class extensibility or a method to \
+be overriden, along with many other cases that contribute to Java being a secure and robust platform.
+:jbake-og_img: articles/2024/images/02/the-final-keyword-in-java_social.jpg
+:jbake-image_src: articles/2024/images/02/the-final-keyword-in-java.jpg
+:jbake-image_alt: Image of a small chick coming out of a broken hatched egg
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.png
+
+== What's the `final` keyword in Java?
+
+To put it simple, we say something is _final_ when it's not going to be "modified".
+
+Imagine a chick that just hatched out of an egg.
+That egg is broken, and nothing can revert that; nobody can put together a hatched, or broken, egg, and make the small
+chick live inside it again, right?
+It's the same in Java when something is final.
+However, technically speaking, the meaning that something can't be _modified_ takes several forms.
+
+For example, we can use it when we have a variable holding a reference to an
+link:/articles/2024/java-oop-classes-and-objects.html#constructors[object^] and we want that variable to keep the same
+reference throughout the whole program execution.
+This means no other reference can be assigned to it.
+
+IMPORTANT: Final fields could still be modified through other mechanisms such as reflection, but that's a deeper topic
+that requird its own article.
+
+But it can get tricky sometimes.
+So, let's see it in details.
+
+== Use cases for the `final` keyword
+
+The `final` keyword can be applied in the following scenarios:
+
+1. A final link:/articles/2024/java-oop-classes-and-objects.html#what-are-java-classes[class^]
+2. A final link:/articles/2024/java-oop-classes-and-objects.html#fields[field^]
+3. A final link:/articles/2024/java-oop-classes-and-objects.html#methods[method^]
+4. A final https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html#jls-4.12.4[variable^]
+
+=== Final classes
+
+To declare a class _final_ we use the `final` class modifier. For example:
+
+[source,java]
+----
+final class Payment {
+}
+----
+
+A final class can't be extended.
+This means no other class can be a subclass of the _final_ class.
+This is useful in situations
+where we want to limit the inheritance of our type (class), for example, for security reasons.
+
+=== Final fields
+
+To declare a field _final_, again we use the same keyword.
+For example, if we were to add a final field ("amount") to our previous class, this could be it:
+
+[source,java]
+----
+final class Payment {
+    private final BigDecimal amount;
+
+    Payment(BigDecimal amount) {
+        this.amount = amount;
+    }
+}
+----
+
+Notice, how we had to declare our own constructor to accept a value for our `amount` field.
+This is because all final instance fields must be initialized when the class instance is created.
+In the case of the static ones, they must be initialized when the class is loaded.
+
+Other ways to initialize final fields are as follows:
+
+1. On the same line where the field is declared. For example:
++
+[source,java]
+----
+final class Payment {
+    private static final BigDecimal MAX_ALLOWED = new BigDecimal(1000_000);
+    private final BigDecimal amount = new BigDecimal(100);
+}
+----
+
+2. Inside an instance, or static initializer, respectively. For example:
++
+[source,java]
+----
+final class Payment {
+    private static final BigDecimal MAX_ALLOWED;
+    private final BigDecimal amount;
+
+    static {
+        MAX_ALLOWED = new BigDecimal(1000_000);
+    }
+    {
+        amount = new BigDecimal(100);
+    }
+}
+----
++
+3. For the sake of completeness, let's put here the third option, inside the class constructor (as we saw previously).
+
+=== Final methods
