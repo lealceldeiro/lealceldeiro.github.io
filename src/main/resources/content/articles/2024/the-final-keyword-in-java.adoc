@@ -210,7 +210,7 @@ void executeTransaction(Long id) {
 }
 ----
 
-In its body, there's a call to `queueTasks` which accepts a `Runnable` an argument.
+In its body, there's a call to `queueTasks` which accepts a `Runnable` parameter.
 Because
 https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runnable.html[`Runnable`^, role=link-underline link-underline-opacity-0]
 is a https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html[functional interface^]
