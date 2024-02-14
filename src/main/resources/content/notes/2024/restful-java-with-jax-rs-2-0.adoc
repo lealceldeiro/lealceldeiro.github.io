@@ -256,7 +256,7 @@ The sort is in descending order.
 that is, i.e., `++{id}++` or `++{id : .+}++`.
 This sort is also in descending order.
 3. The tertiary key of the sort is the number of non-default template expressions.
-A default template expression is one that does not define a regular expression, that is, i.e., `++{id}++`.
+A default template expression is one that doesn't define a regular expression, that is, i.e., `++{id}++`.
 
 Example of URIs, sorted by this logic:
 
@@ -301,7 +301,7 @@ as they represent attributes of certain URI segments and are used for identifica
 They could be seen as adjectives.
 Query parameters, on the other hand, always come at the end of the URI
 and always pertain to the full resource we're referencing.
-They are ignored when matching incoming requests to JAX-RS resource methods,
+They're ignored when matching incoming requests to JAX-RS resource methods,
 and it's illegal to specify them within an `@Path` expression.
 
 JAX-RS also allows us to dynamically dispatch requests through _subresource locators_.
@@ -316,8 +316,8 @@ Example:
 // imports omitted for brevity
 
 @Path("/resource")
-public class RootResource {                                         // <1>
-    @Path("{id}-x")                                                 // <2>
+public class RootResource {                                         // // <1>
+    @Path("{id}-x")                                                 // // <2>
     public ResourceX getX(@PathParam("id") String xId) {
         return locateResourceX(xId);                                // <3>
     }
@@ -328,7 +328,7 @@ public class RootResource {                                         // <1>
 }
 ----
 <1> The `RootResource` class is our root resource,
-and it does not service any HTTP requests directly, it serves as a _locator_.
+and it doesn't service any HTTP requests directly, it serves as a _locator_.
 <2> It processes the _x_ identifier part of the URI (`id`)
 <3> Then it locates the identified _x_ resource and returns an instance of the `ResourceX`
 
@@ -385,7 +385,7 @@ Following along with the previous example, we could evolve it as follows:
 @Path("/resource")
 public class RootResource {
     @Path("{id}-x")
-    public IResourceX getX(@PathParam("id") String xId) {           // <1>
+    public IResourceX getX(@PathParam("id") String xId) {           // // <1>
         return locateResourceX(xId);
     }
 
