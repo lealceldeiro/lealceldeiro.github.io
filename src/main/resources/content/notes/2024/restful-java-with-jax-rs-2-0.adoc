@@ -705,6 +705,59 @@ ask for older versions of the format: `application/vnd.acm.resource+xml;version=
 
 == Chapter 10: HATEOAS
 
+HATEOAS stands for "Hypermedia As The Engine Of Application State" and aims to make easier to integrate clients and
+services by making their interactions decoupled and easily evolvable after application changes.
+
+JAX-RS doesn't have many facilities to help with HATEOAS.
+However, it has helper classes that we can use to build the URIs that we can link to in our data formats.
+For example,
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/uribuilder[UriBuilder^, role=link-underline link-underline-opacity-0].
+It could be used like this:
+
+[source,java]
+----
+// ...
+UriBuilder builder = UriBuilder.fromPath("/my-resources/{id}")  // // <1>
+                               .scheme("https")
+                               .host("{hostname}")
+                               .queryParam("param={param}");
+
+UriBuilder clone = builder.clone();                             // // <2>
+
+URI uri = clone.build("lealceldeiro.com", "333", "value");      // // <3>
+// ...
+----
+<1> Define a URI pattern that looks like this: `pass:[https://{hostname}/my-resources/{id}?param={param}]`
+<2> To re-use the builder, we get a clone first
+because the `build` method will replace the template parameters internally
+<3> Create a URI that looks like this: `pass:[https://lealceldeiro.com/my-resources/333?param=value]`
+
+We could also define a map that contains the template values. Like this:
+
+[source,java]
+----
+Map<String, Object> map = Map.of("hostname", "lealceldeiro.com",
+                                 "id", "333",
+                                 "param", "value");
+URI uri = clone.buildFromMap(map);  // re-use previously created `clone`
+----
+
+The `Link` and `Link.Builder` classes, from JAX-RS 2.0,
+allows building `Link` headers and embedding links in the XML documents.
+Example:
+
+[source,java]
+----
+@Path("/my-resource")
+class MyResource {
+    @GET
+    Response get() {
+        Link link = Link.fromUri("a/b/c").build();
+        return Response.noContent().links(link).build();
+    }
+}
+----
+
 == Chapter 11: Scaling JAX-RS Applications
 
 == Chapter 12: Filters and Interceptors
