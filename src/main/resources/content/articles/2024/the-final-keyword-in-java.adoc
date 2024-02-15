@@ -40,11 +40,6 @@ link:/articles/2024/java-oop-classes-and-objects.html#constructors[object^] and 
 reference throughout the whole program execution.
 This means no other reference can be assigned to it.
 
-IMPORTANT: `final` fields could still be modified through other mechanisms such as
-https://www.oracle.com/technical-resources/articles/java/javareflection.html[reflection^]
-(https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html#jls-17.5.3[&sect;17.5.3^]),
-but that's a more complex topic, better covered in its own article.
-
 But it can get tricky sometimes. Let's see it in details.
 
 == Use cases for the `final` keyword
@@ -84,7 +79,27 @@ final class Payment {
 }
 ----
 
-Notice, how we had to declare our own constructor to accept a value for our `amount` field.
+From now on, this field (`amount`) can't be assigned a new value, or a compile-time error will be reported
+and the code will fail to compile.
+
+[IMPORTANT]
+====
+`final` fields could still be modified through other mechanisms such as
+https://www.oracle.com/technical-resources/articles/java/javareflection.html[reflection^]
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html#jls-17.5.3[&sect;17.5.3^]),
+but that's a more complex topic, better covered in its own article.
+
+It's also important to have in mind that a `final` field (or variable, for the matter) holds a reference to an object,
+and that object can still be mutable regardless.
+So, it's possible to mutate the state of the object.
+
+For example, suppose we have a field like this: `final Map<String, String> map = new HashMap<>()`.
+If we call `map.add("a", "b")` we didn't change the reference which `map` points to, but we effectively changed
+the value of `map` by adding a new entry.
+====
+
+In the previous `Payment` class example, notice, how we had to declare our own constructor
+to accept a value for our `amount` field.
 This is because all final instance fields must be initialized when the class instance is created.
 In the case of the static ones, they must be initialized when the class is loaded.
 
