@@ -760,6 +760,14 @@ class MyResource {
 
 == Chapter 11: Scaling JAX-RS Applications
 
+The JAX-RS specification provides the class
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/cachecontrol[`jakarta.ws.rs.core.CacheControl`^, role=link-underline link-underline-opacity-0],
+useful to represent the `Cache-Control` header.
+
+JAX-RS has a simple class called
+https://jakarta.ee/specifications/platform/9/apidocs/jakarta/ws/rs/core/entitytag[`jakarta.ws.rs.core.EntityTag`^, role=link-underline link-underline-opacity-0],
+that represents the `ETag` header.
+
 == Chapter 12: Filters and Interceptors
 
 == Chapter 13: Asynchronous JAX-RS
