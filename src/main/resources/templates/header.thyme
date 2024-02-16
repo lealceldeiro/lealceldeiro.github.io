@@ -87,7 +87,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
     <!-- https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
-    <link rel="stylesheet"
+    <link th:if="${#strings.equals('post', content.type) || #strings.equals('booknote', content.type)}"
+            rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css"
           integrity="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
           crossorigin="anonymous"
