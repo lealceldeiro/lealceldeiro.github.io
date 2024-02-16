@@ -72,7 +72,7 @@
     <link th:href="${config.site_host} + '/' + ${config.feed_file}" rel="self" type="application/rss+xml" />
 
     <!-- Le styles -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous">
     <!--https://cdnjs.com/-->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.min.css"
