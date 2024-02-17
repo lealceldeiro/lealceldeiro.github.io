@@ -22,8 +22,8 @@ an excellent guide to start building RESTful services in Java.
 :jbake-appendix_to_title_text: by Bill Burke. Copyright 2014 Bill Burke, 978-1-449-36134-1
 :jbake-extra_p1: Source code at: https://github.com/oreillymedia/restful_java_jax-rs_2_0
 :jbake-extra_p2: Note: As this is rather an old book, it's advisable to always verify if there are newer, more modern alternatives for solutions explained here; for instance, when Java clients or options to secure Java application are mentioned.
-:jbake-og_img: notes/2024/images/restful-java-with-jax-rs-2-0.jpg
-:jbake-image_src: notes/2024/images/restful-java-with-jax-rs-2-0.jpg
+:jbake-og_img: notes/2024/images/restful-java-with-jax-rs-2-0.webp
+:jbake-image_src: notes/2024/images/restful-java-with-jax-rs-2-0.webp
 :jbake-image_alt: Image of the book cover: RESTful Java with JAX-RS 2.0, 2nd Edition
 :jbake-og_author: Asiel Leal Celdeiro
 :jbake-author_handle: lealceldeiro
