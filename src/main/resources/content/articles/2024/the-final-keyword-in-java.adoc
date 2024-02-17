@@ -18,7 +18,7 @@ be overriden, along with many other cases that contribute to Java being a secure
 :jbake-image_alt: Image of a small chick coming out of a broken hatched egg
 :jbake-og_author: Asiel Leal Celdeiro
 :jbake-author_handle: lealceldeiro
-:jbake-author_profile_image: /img/author/lealceldeiro.png
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
 
 The `final` keyword in Java might seem simple at first glance, but it's a powerful tool that can significantly
 impact our code's design, readability, and performance.

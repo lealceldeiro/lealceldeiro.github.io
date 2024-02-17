@@ -27,7 +27,7 @@ an excellent guide to start building RESTful services in Java.
 :jbake-image_alt: Image of the book cover: RESTful Java with JAX-RS 2.0, 2nd Edition
 :jbake-og_author: Asiel Leal Celdeiro
 :jbake-author_handle: lealceldeiro
-:jbake-author_profile_image: /img/author/lealceldeiro.png
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
 
 Java API for RESTful web services (JAX-RS) aims to make development of RESTful web services in Java simple and intuitive.
 
