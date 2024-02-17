@@ -85,11 +85,12 @@ Images used to be displayed on social media (`og_img`) should be:
 - _width_: 1024px
 - _height_: 512px
 
-As a recommendation, one of thes image generators could be used:
+As a recommendation, one of these image generators could be used:
 
-- https://ray.so/ to get a beatiful image of a meaningful code snippet
+- https://ray.so/ to get a beautiful image of a meaningful code snippet
 - https://deepai.org/machine-learning-model/old-style-generator or any of its alternatives in https://deepai.org/,
   to get an image that describes the article being posted
+- https://leonardo.ai/ to get an image that describes the article being posted
 
 ## Creating a book note
 
