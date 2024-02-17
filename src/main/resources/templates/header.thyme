@@ -1,6 +1,8 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-transitional-thymeleaf-4.dtd">
 <html lang="en">
-<head th:fragment="head(fragmentHeadTitle, fragmentOgDescription)">
+<head th:fragment="head(fragmentHeadTitle, fragmentOgDescription)"
+      th:with="loadCodeResources = (${#strings.equals('post', content.type) || #strings.equals('booknote', content.type)})">
+
     <!--ref: https://ogp.me/-->
     <meta charset="utf-8"/>
     <title th:text="${fragmentHeadTitle} ?: (${content.og_title} ?: (${content.title != null && !#strings.isEmpty(content.title)}
@@ -74,7 +76,7 @@
     <!-- Le styles -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous">
     <!--https://cdnjs.com/-->
-    <link th:if="${#strings.equals('post', content.type) || #strings.equals('booknote', content.type)}"
+    <link th:if="${loadCodeResources}"
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.9/css/asciidoctor.min.css"
           integrity="sha512-lb4ZuGfCVoGO2zu/TMakNlBgRA6mPXZ0RamTYgluFxULAwOoNnBIZaNjsdfhnlKlIbENaQbEAYEWxtzjkB8wsQ=="
@@ -88,7 +90,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
     <!-- https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
-    <link th:if="${#strings.equals('post', content.type) || #strings.equals('booknote', content.type)}"
+    <link th:if="${loadCodeResources}"
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/intellij-light.min.css"
           integrity="sha512-rxoFrVtnfvSuel468Qr3r4djCRmFKs4DiJXUnOeaA/+uac9DkEOTEhfkcwUNiGTiA4jr6pBvXk6leEhweuGaVg=="
@@ -101,12 +103,9 @@
           th:href="${rootpath} + 'css/base.css'"
           rel="stylesheet"/>
 
-    <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
+    <link th:if="${loadCodeResources}"
+          th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
           th:href="${rootpath} + 'css/copy-to-clipboard.css'"
-          rel="stylesheet"/>
-
-    <link th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
-          th:href="${rootpath} + 'css/timeline.css'"
           rel="stylesheet"/>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
