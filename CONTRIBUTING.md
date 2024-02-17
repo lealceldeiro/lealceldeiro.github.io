@@ -150,5 +150,5 @@ When creating an article, if it's a work in progress, you can skip the pages bui
 of the commit message.
 
 IMPORTANT: Once an article is published, if it has received any interactions through the Disqus integration, the
-article file name must NOT be updated, so the comments, reactions, etc. are not lost. This is because we're using the
+article file name mustn't be updated, so the comments, reactions, etc. aren’t lost. This is because we're using the
 file name as the thread id.
