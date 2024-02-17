@@ -774,6 +774,44 @@ JAX-RS has a simple class called
 https://jakarta.ee/specifications/platform/9/apidocs/jakarta/ws/rs/core/entitytag[`jakarta.ws.rs.core.EntityTag`^, role=link-underline link-underline-opacity-0],
 that represents the `ETag` header.
 
+Simultaneous requests to update a resources through a `POST` or `PUT` HTTP method can cause concurrency issues if the
+proper measures aren't taken into account.
+
+One way to handle this successfully is to have the clients first pull the current representation of the resource
+that's going to be modified.
+The pulled information from the server should include an `ETag` and/or a `Last-Modified` header(s).
+Then, when the update request is issued to the server, it should include an `If-Match` (for the received `ETag)
+and/or an `If-Unmodified-Since` (for the received `Last-Modified`) headers.
+Example:
+
+Get resource's current representation:
+
+[source,console]
+----
+HTTP/1.1 200 OK
+Content-Type: application/xml
+Cache-Control: max-age=1000
+ETag: "3141271342554322343200"
+Last-Modified: Sat, 17 Feb 2024 09:56 EST
+<resource id="333">...</resource>
+----
+
+Update resource:
+
+[source,console]
+----
+PUT /resources/123 HTTP/1.1
+If-Match: "3141271342554322343200"
+If-Unmodified-Since: Sat, 17 Feb 2024 09:56 EST
+Content-Type: application/xml
+<resources id="333">...</resource>
+----
+
+When the server receives this request, it checks to see if the current `ETag` of the resource matches the
+value of the `If-Match` header and also to see if the timestamp on the resource matches
+the `If-Unmodified-Since` header.
+If these conditions aren't met, the server will return an error response code of `412 Precondition Failed`.
+
 == Chapter 12: Filters and Interceptors
 
 == Chapter 13: Asynchronous JAX-RS
