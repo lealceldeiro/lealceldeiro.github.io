@@ -13,8 +13,8 @@ Asiel Leal_Celdeiro
 :jbake-tags: java, java-classes, java-methods, access-modifiers
 :jbake-summary: final is a very powerful keyword in Java that allows us to limit a class extensibility or a method to \
 be overriden, along with many other cases that contribute to Java being a secure and robust platform.
-:jbake-og_img: articles/2024/images/02/the-final-keyword-in-java_social.jpg
-:jbake-image_src: articles/2024/images/02/the-final-keyword-in-java.jpg
+:jbake-og_img: articles/2024/images/02/the-final-keyword-in-java_social.webp
+:jbake-image_src: articles/2024/images/02/the-final-keyword-in-java.webp
 :jbake-image_alt: Image of a small chick coming out of a broken hatched egg
 :jbake-og_author: Asiel Leal Celdeiro
 :jbake-author_handle: lealceldeiro
