@@ -1,0 +1,129 @@
+= Everything you need to know about the static keyword in Java
+Asiel Leal_Celdeiro
+2024-02-23
+:docinfo: shared-footer
+:icons: font
+:toc-title: In this article
+:toc: left
+:jbake-document_info: shared-footer
+:jbake-table_of_content: left
+:jbake-fontawesome: true
+:jbake-type: post
+:jbake-status: draft
+:jbake-tags: java, java-classes, java-methods, access-modifiers, static
+:jbake-summary: static is a keyword in Java that allows us to ...
+:jbake-og_img: articles/2024/images/02/the-static-kyword-in-java_social.webp
+:jbake-image_src: articles/2024/images/02/the-static-kyword-in-java.webp
+:jbake-image_alt: Image of a lighthouse
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
+
+The `static` keyword in Java ...
+
+== What's the `static` keyword in Java?
+
+[quote,Oxford English Dictionary]
+____
+*static*
+
+[Computing] (of a process or variable) not able to be changed during a set period,
+for example, while a program is running.
+____
+
+That's how the Oxford English Dictionary defines _static_ as a word in the field of computing.
+_Not able to change;_ that's the most important part.
+
+Ok, we didn't have to check the dictionary to know that: when something is static, it doesn't change.
+For example, a https://en.wikipedia.org/wiki/Lighthouse[lighthouse^] is static in the sense that it doesn't move
+from one place to another, like an animal can do.
+Although the lantern(s) and related components move, the tower structure _doesn't change its position_ on the soil.
+
+How much does this meaning relate to the `static` keyword in Java?
+
+Very much!
+
+The `static` keyword in Java can be used to modify the definition of
+link:/articles/2024/java-oop-classes-and-objects.html#what-are-java-classes[classes^],
+link:/articles/2024/java-oop-classes-and-objects.html#fields[fields^],
+link:/articles/2024/java-oop-classes-and-objects.html#methods[methods^],
+initializers and more.
+It's always used to reflect a sense of _not changing its [the component's] behavior_ depending on other factors,
+such as an object state.
+
+Let's see some use cases along with some meaningful examples.
+
+== Use cases for the `static` keyword
+
+=== Static classes and interfaces
+
+As we link:/articles/2024/java-oop-classes-and-objects.html#nested-classes[saw previously^],
+we can declare inner classes and interfaces, that's it, classes and interfaces as members of
+other classes and interfaces.
+For example:
+
+[source,java]
+----
+class A {
+    class B {
+    }
+}
+----
+
+In the previous code, `B` is an inner (or nested) class.
+It's a member of `A` (see https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html[tutorial^] for a full example).
+This is a code smell, because, to create an instance of `B` we must create first an instance of `A`:
+
+[source,java]
+----
+var a = new A();
+var b = a.new B();
+----
+
+or the shorter version:
+
+[source,java]
+----
+var b = new A().new B();
+----
+
+That code is almost never correct or justified.
+
+Just to mention some of the many flaws of this code, we can say:
+
+- To create an instance of `B`, we must allocate first memory to create an instance of `A`.
+- If a declaration of some type (i.e.: a member variable) in a particular scope (i.e.: the inner class)
+has the same name as another declaration in the enclosing scope,
+then the declaration shadows the declaration of the enclosing scope.
+
+In such cases, the correct approach is to declare a static inner class:
+
+[source,java]
+----
+class A {
+    static class B {
+    }
+}
+----
+
+Now `B` no longer "lives within" `A`, and we can simply use it like this:
+
+[source,java]
+----
+var b = new A.B();
+----
+
+=== Static fields
+
+=== Static methods
+
+=== Static initializers
+
+=== Static imports
+
+[NOTE]
+====
+We can't declare `static` variables
+====
+
+== Final thoughts
