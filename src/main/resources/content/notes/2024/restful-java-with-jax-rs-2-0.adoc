@@ -814,6 +814,56 @@ If these conditions aren't met, the server will return an error response code of
 
 == Chapter 12: Filters and Interceptors
 
+On the server side there are two different types of filters: request filters and response filters.
+Request filters execute before a JAX-RS method is invoked.
+Response filters are executed after the JAX-RS method is finished.
+
+Request filters are implementations of the
+https://jakarta.ee/specifications/platform/9/apidocs/jakarta/ws/rs/container/containerrequestfilter[`ContainerRequestFilter`^, role=link-underline link-underline-opacity-0]
+interface.
+Example:
+
+[source,java]
+----
+import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.container.ContainerRequestContext;
+
+@Provider
+@PreMatching
+public class HttpMethodOverride implements ContainerRequestFilter {
+    public void filter(ContainerRequestContext ctx) throws IOException {
+        String methodOverride = ctx.getHeaderString("X-Http-Method-Override");
+        if (methodOverride != null) {
+            ctx.setMethod(methodOverride);
+        }
+    }
+}
+----
+
+On the server side, filters and interceptors are deployed the same way any other `@Provider` is deployed.
+We either annotate it with `@Provider` and let it be scanned and automatically registered,
+or we add the filter or interceptor to the Application class's classes or singleton list.
+
+On the client side, we register filters and interceptors the same way we'd register any other provider.
+There are a few components in the Client API that implement the `Configurable` interface.
+This interface has a `register()` method that allows us to pass in the filter or interceptor class
+or singleton instance.
+`ClientBuilder`, `Client`, and `WebTarget` all implement the `Configurable` interface.
+
+[TIP]
+====
+Interestingly, we can have different filters and interceptors per `WebTarget`.
+
+For example, we may have different security requirements for different HTTP resources.
+For one `WebTarget` instance, we might register a Basic Auth filter.
+For another, we might register a token filter.
+====
+
+In JAX-RS, filters and interceptors are assigned a numeric priority either through the `@Priority` annotation
+or via a programmatic interface defined by `Configurable`.
+The JAX-RS runtime sorts filters and interceptors based on this numeric priority,
+where smaller numbers are first in the chain.
+
 == Chapter 13: Asynchronous JAX-RS
 
 == Chapter 14: Deployment and Integration
