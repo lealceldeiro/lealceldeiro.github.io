@@ -866,6 +866,38 @@ where smaller numbers are first in the chain.
 
 == Chapter 13: Asynchronous JAX-RS
 
+The asynchronous request and response processing feature was introduced in JAX-RS 2.0.
+
+The client asynchronous API allows us to spin off several HTTP requests in the background
+and then either poll for a response, or register a callback to be invoked when the HTTP response is available.
+
+Example:
+
+[source,java]
+----
+// imports omitted for brevity
+
+class Service {
+    public void fetchResources() {
+        Client client = ClientBuilder.newClient();
+
+        Future<Response> fruitsFuture = client.target("https://fruitsite.com/fruits/333").request().async().get();
+        Future<Order> colorsFuture = client.target("https://colorsite.com/colors/111").request().async().get(Color.class);
+
+        // block until complete
+        Response fruitsRes = fruitsFuture.get();
+        Fruit fruit = fruitsRes.readEntity(Fruit.class);
+
+        // wait max 5 seconds
+        try {
+            Color result2 = colorsFuture.get(5, TimeUnit.SECONDS);
+        } catch (TimeoutException timeout) {
+            // exception handling omitted for brevity
+        }
+    }
+}
+----
+
 == Chapter 14: Deployment and Integration
 
 == Chapter 15: Securing JAX-RS
