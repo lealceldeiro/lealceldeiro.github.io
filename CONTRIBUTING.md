@@ -161,3 +161,25 @@ file name as the thread id.
 2. Run `docker build -t com.lealceldeiro.local .`
 3. Run `docker run  --name com.lealceldeiro.local -d -p 8080:80 local.lealceldeiro.com`
 4. The site is now available at `http://localhost:8181/`
+
+#### GitHubPages
+
+Currently, the site is hosted through [GitHub Pages](https://docs.github.com/en/pages/quickstart).
+This means when the resources are built, they're pushed to the GitHub Pages server by making use of:
+
+- https://github.com/actions/upload-pages-artifact
+- https://github.com/actions/deploy-pages
+
+This deployment happens automatically when there are pushed to the `main` branch and some resource under
+`src/main/resources/**` has been modified.
+This is because this option is the main hosting solution being used.
+One way to prevent the deployment from happening is to append to the commit message the text `[skip-ci]`.
+
+#### Fly.io
+
+There's also a configuration in place to deploy the application to a fly.io application named `com-lealceldeiro`,
+by leveraging the existing `Dockerfile` and `.dockerignore` files.
+
+By default, this build step doesn't run unless the commit message contains the text `[deploy-to-fly]`
+and it doesn't end with the text `[skip-ci]`.
+This is because this is a backup hosting solution being used at the moment and for experimentation purposes.
