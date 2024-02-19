@@ -159,7 +159,7 @@ file name as the thread id.
 
 1. Run `jbake -b src/main/resources target`
 2. Run `docker build -t com.lealceldeiro.local .`
-3. Run `docker run  --name com.lealceldeiro.local -d -p 8080:80 local.lealceldeiro.com`
+3. Run `docker run --name com.lealceldeiro.local -d -p 8181:80 com.lealceldeiro.local`
 4. The site is now available at `http://localhost:8181/`
 
 #### GitHubPages
