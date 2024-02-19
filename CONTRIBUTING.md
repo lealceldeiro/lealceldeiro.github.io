@@ -183,3 +183,10 @@ by leveraging the existing `Dockerfile` and `.dockerignore` files.
 By default, this build step doesn't run unless the commit message contains the text `[deploy-to-fly]`
 and it doesn't end with the text `[skip-ci]`.
 This is because this is a backup hosting solution being used at the moment and for experimentation purposes.
+
+If we need to switch to Fly.io hosting, we must:
+
+- Get a certificate for the Fly.io app, see https://fly.io/docs/networking/custom-domain/
+- Configure our Registrar service to not route the traffic sent to lealceldeiro.com to the GitHub Pages server
+- Start routing traffic sent to lealceldeiro.com to Fly.io, see https://fly.io/docs/networking/custom-domains-with-fly/#main-content-start
+- Make sure the Registrar service is now routing requests sent to lealceldeiro.com to the Fly.io app
