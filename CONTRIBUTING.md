@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-This project is build on top of [Java](https://www.java.com/en/) and [Maven](https://maven.apache.org/).
+This project is built on top of [Java](https://www.java.com/en/) and [Maven](https://maven.apache.org/).
 
 It uses [jBake](https://jbake.org/) to generate the final content. See [jBake documentation](https://jbake.org/docs/)
 for more information on how to use it.
@@ -27,7 +27,7 @@ Example: `jbake -b -s src/main/resources target`
 
 ## Usage from the jBake Maven Plugin
 
-Simply run the plugin goal, either from the command line or from you IDE. The input and out directories have already
+Run the plugin goal, either from the command line or from you IDE. The input and out directories have already
 been configured.
 
 Example `./mvnw jbake:inline`
@@ -152,3 +152,12 @@ of the commit message.
 IMPORTANT: Once an article is published, if it has received any interactions through the Disqus integration, the
 article file name mustn't be updated, so the comments, reactions, etc. aren’t lost. This is because we're using the
 file name as the thread id.
+
+### CI/CD
+
+#### Run the website locally using Docker
+
+1. Run `jbake -b src/main/resources target`
+2. Run `docker build -t com.lealceldeiro.local .`
+3. Run `docker run  --name com.lealceldeiro.local -d -p 8080:80 local.lealceldeiro.com`
+4. The site is now available at `http://localhost:8181/`
