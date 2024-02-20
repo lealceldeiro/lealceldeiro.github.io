@@ -970,6 +970,51 @@ class Service {
 }
 ----
 
+Given, there are two options to execute/handle asynchronoys requests it might be advisable to use `Future`s when
+we need to _join_ several requests/responses.
+This could be for example, execute all sync requests and do another task after _all_ of them have completed.
+
+The callback approach could be used when each async request is an independent unit of work and no other task depends
+on the overall execution of the group of independent async tasks.
+This means there's no need to do any coordination work among the async tasks.
+
+To use server-side async response processing, we interact with the `AsyncResponse` interface. Example:
+
+[source,java]
+----
+import jakarta.ws.rs.container.AsyncResponse;
+import jakarta.ws.rs.container.Suspended;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+// other imports omitted for brevity
+
+@Path("/colors")
+public class ColorResource {
+    private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
+
+    @POST
+    @Consumes("application/json")
+    public void submit(final Color color, final @Suspended AsyncResponse response) {
+        EXECUTOR.submit(() -> {
+            Color color = colorProcessor.process(color);
+            response.resume(color);
+            // alternatively, we can pass resume() a Response object to send the client a more specific response
+        });
+    }
+}
+----
+
+When we inject an instance of `AsyncResponse` using the `@Suspended` annotation,
+the HTTP request becomes suspended from the current thread of execution.
+
+=== Use Cases for AsyncResponse
+
+. Server-side push
+ - i.e.: to send events back to the client, like stock quotes
+. Publish and subscribe
+ - i.e.: a chat service
+. Priority scheduling
+ - i.e.: to schedule CPU-intensive tasks in a separate pool, to make sure other tasks don't starve
 
 == Chapter 14: Deployment and Integration
 
