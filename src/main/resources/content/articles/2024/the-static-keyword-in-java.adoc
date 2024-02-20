@@ -227,11 +227,38 @@ not when class instances are constructed, so there's no way to access those inst
 
 === Static initializers
 
+Static initializers are almost the same as instance initializers from a syntax perspective.
+For example, building on top of the previous example, we could initialize the `MAX` variable like this:
+
+[source,java]
+----
+class Payment {
+    static int MAX;
+
+    static {
+        MAX = 1000;
+    }
+}
+----
+
+This construct is useful when the initialization of a static variable is not simple enough to fit in one line.
+It should be used carefully because sometimes it's not easy to reason about the logic being implemented.
+That's because the field declaration and the actual initialization are separated.
+
+The same rules about accessing constructs that refer to the current object apply here.
+
 === Static imports
 
 [NOTE]
 ====
 We can't declare `static` variables
 ====
+
+== Additional considerations
+
+The declaration of a static field (also known as _class variable_) introduces a static context,
+which limits the use of constructs that refer to the current object
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1[&sect;8.3.1.1^]).
+For example a static field can't be accessed from an instance method, or the `this` or `super` keywords.
 
 == Final thoughts
