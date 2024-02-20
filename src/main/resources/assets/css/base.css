@@ -205,7 +205,8 @@ pre code.hljs {
 }
 
 .admonitionblock > table td.content, .admonitionblock > table td.icon, blockquote, blockquote p,
-#preamble > .sectionbody > [class=paragraph]:first-of-type p, .paragraph.lead > p, table tr td, table tr th, #toctitle {
+#preamble > .sectionbody > [class=paragraph]:first-of-type p, .paragraph.lead > p, table tr td, table tr th, #toctitle,
+.quoteblock blockquote, .quoteblock p {
     color: inherit;
 }
 
