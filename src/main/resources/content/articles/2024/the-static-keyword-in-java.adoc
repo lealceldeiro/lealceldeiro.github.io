@@ -188,6 +188,43 @@ to know that this object is of type `Order` and get the value of the static fiel
 
 === Static methods
 
+Static methods, just like static fields, are regular
+link:/articles/2024/java-oop-classes-and-objects.html#methods[methods^] to which the `static` modifier
+have been applied to.
+Let's build on top of our previous example:
+
+[source,java]
+----
+class Payment {
+    static int MAX = 1000;
+
+    static boolean isValidTransactionAmount(int amount) {
+        return amount > 0 && amount <= MAX;
+    }
+}
+----
+
+Here we've declared a method `isValidTransactionAmount` which is static,
+that's it, we don't need an object of type `Payment` to use it.
+For example, this is how we'd call it:
+
+[source,java]
+----
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Payment.isValidTransactionAmount(20));   // prints true
+    }
+}
+----
+
+Again, static methods involve a static context
+from where we don't have access to constructs that refer to the current object,
+such as instance fields, the `this` keyword, or the `super` keyword.
+That's only expected.
+
+Static fields and methods are constructed when the class is initialized,
+not when class instances are constructed, so there's no way to access those instance constructs.
+
 === Static initializers
 
 === Static imports
