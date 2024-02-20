@@ -36,7 +36,7 @@ _Not able to change;_ that's the most important part.
 
 Ok, we didn't have to check the dictionary to know that: when something is static, it doesn't change.
 For example, a https://en.wikipedia.org/wiki/Lighthouse[lighthouse^] is static in the sense that it doesn't move
-from one place to another, like an animal can do.
+from one place to another, like animals do.
 Although the lantern(s) and related components move, the tower structure _doesn't change its position_ on the soil.
 
 How much does this meaning relate to the `static` keyword in Java?
@@ -94,11 +94,9 @@ That code is almost never correct or justified. Just to mention some of its many
 has the same name as another declaration in the enclosing scope,
 then the declaration shadows the declaration of the enclosing scope.
 
-In such cases, the correct approach is to declare a static nested class
-(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.1.4[&sect;8.1.1.4^]),
-or a
-https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.1.3[static nested interface^],
-as it fits our needs:
+In such cases, the correct approach is to declare a static nested class or interface
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.1.4[&sect;8.1.1.4^],
+https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.1.1.3[&sect;9.1.1.3^]):
 
 [source,java]
 ----
@@ -124,6 +122,69 @@ For example, in the previous code snippet, we can't declare the class `A` as `st
 ====
 
 === Static fields
+
+In a previous article, we saw how to declare link:/articles/2024/java-oop-classes-and-objects.html#fields[fields^].
+To make them _static_ we just need to add the `static` modifier.
+Let's see an example:
+
+[source,java]
+----
+class Payment {
+    static int MAX = 1000;
+}
+----
+
+In the previous snippet, `MAX` is a static field.
+This means it's not related to any specific instance of `Payment`.
+Instead, it is associated with the class where it's declared.
+
+For example, assuming `Payment` is located in the same package the following `Main` class is located,
+then the `MAX` field could be used like this:
+
+[source,java]
+----
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Payment.MAX);
+    }
+}
+----
+
+Notice here, how we didn't have to link:/articles/2024/java-oop-classes-and-objects.html#constructors[instantiate^]
+`Payment` to access the static field.
+
+[TIP]
+====
+If we use an object of type `Payment` to access the static field,
+Java ignores the object and accesses the static field through the class,
+that's it, the instance of the class is only used to know what's the type that declares the field.
+
+A long time ago, I answered a https://stackoverflow.com/a/43126188/5640649[question on StackOverflow^]
+where the original poster asked about this, and, despite I learned about it at the time, 6 years later it came back
+to bite me in a job interview.
+
+When I was asked what the following code would print/do, I hesitated to answer correctly and without any doubts:
+
+[source,java]
+----
+class Order {
+    static int basicPackage = 1;
+}
+
+public class Main {
+    public static void main(String args) {
+        Order order = new Order();
+        System.out.println(order.basicPackage); // prints 1
+
+        order = null;
+        System.out.println(order.basicPackage); // prints 1 too
+    }
+}
+----
+
+I hope you came to the conclusion it prints 1 twice because the object `order` is only used in this context by Java
+to know that this object is of type `Order` and get the value of the static field from there.
+====
 
 === Static methods
 
