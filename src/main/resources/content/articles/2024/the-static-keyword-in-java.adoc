@@ -70,9 +70,9 @@ class A {
 }
 ----
 
-In the previous code, `B` is an inner (or nested) class.
+In the previous code, `B` is an inner class.
 It's a member of `A` (see https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html[tutorial^] for a full example).
-This is a code smell, because, to create an instance of `B` we must create first an instance of `A`:
+This is a code smell, because to create an instance of `B`, we must create first an instance of `A`:
 
 [source,java]
 ----
@@ -87,16 +87,15 @@ or the shorter version:
 var b = new A().new B();
 ----
 
-That code is almost never correct or justified.
-
-Just to mention some of the many flaws of this code, we can say:
+That code is almost never correct or justified. Just to mention some of its many flaws, we can say:
 
 - To create an instance of `B`, we must allocate first memory to create an instance of `A`.
 - If a declaration of some type (i.e.: a member variable) in a particular scope (i.e.: the inner class)
 has the same name as another declaration in the enclosing scope,
 then the declaration shadows the declaration of the enclosing scope.
 
-In such cases, the correct approach is to declare a static inner class:
+In such cases, the correct approach is to declare a static nested class
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.1.1.4[&sect;8.1.1.4^]):
 
 [source,java]
 ----
@@ -112,6 +111,13 @@ Now `B` no longer "lives within" `A`, and we can simply use it like this:
 ----
 var b = new A.B();
 ----
+
+[CAUTION]
+====
+Notice we can't use `static` as a class/interface modifier if the class is not a member of another class or interface.
+
+For example, in the previous code snippet, we can't declare the class `A` as `static` or it causes a compilation error.
+====
 
 === Static fields
 
