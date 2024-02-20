@@ -323,7 +323,7 @@ interface OrderProcessor {
 </p>
 <pre><code class="language-java">
 interface OrderProcessor {
-    // inner class declaration
+    // nested class declaration
     class BillCalculator {
     }
     // ... rest of the code omitted for brevity
@@ -332,7 +332,7 @@ interface OrderProcessor {
 
 <h5 id="interface-inner-interface-declaration">Interface Declaration</h5>
 <p>
-    Nested (or inner) interface declarations (
+    Nested interface declarations (
     <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-InterfaceDeclaration" target="_blank"
        class="link-underline link-underline-opacity-0">
         <code>InterfaceDeclaration</code>
@@ -551,7 +551,7 @@ public interface OrderProcessor {
 }
 </code></pre>
 
-<h4 id="example3">A package-private interface with one public static inner interface</h4>
+<h4 id="example3">A package-private interface with one public static nested interface</h4>
 <pre><code class="language-java">
 interface OrderProcessor {
     public static interface Calculator {
