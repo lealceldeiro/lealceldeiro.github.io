@@ -871,7 +871,7 @@ The asynchronous request and response processing feature was introduced in JAX-R
 The client asynchronous API allows us to spin off several HTTP requests in the background
 and then either poll for a response, or register a callback to be invoked when the HTTP response is available.
 
-Example:
+Example that "waits" for a response:
 
 [source,java]
 ----
@@ -882,21 +882,94 @@ class Service {
         Client client = ClientBuilder.newClient();
 
         Future<Response> fruitsFuture = client.target("https://fruitsite.com/fruits/333").request().async().get();
-        Future<Order> colorsFuture = client.target("https://colorsite.com/colors/111").request().async().get(Color.class);
-
         // block until complete
         Response fruitsRes = fruitsFuture.get();
-        Fruit fruit = fruitsRes.readEntity(Fruit.class);
-
-        // wait max 5 seconds
         try {
-            Color result2 = colorsFuture.get(5, TimeUnit.SECONDS);
-        } catch (TimeoutException timeout) {
+            Fruit fruit = fruitsRes.readEntity(Fruit.class);
+        } catch (Throwable e) {
             // exception handling omitted for brevity
+        } finally{
+            fruitsRes.close();
+        }
+
+        Future<Color> colorsFuture = null;
+        try {
+            colorsFuture = client.target("https://colorsite.com/colors/111").request().async().get(Color.class);
+        } catch (Throwable e) {
+            // exception handling omitted for brevity
+        }
+
+        if (colorsFuture != null) {
+            // wait max 5 seconds
+            try {
+                Color color = colorsFuture.get(5, TimeUnit.SECONDS);
+            } catch (TimeoutException timeout) {
+                // TimeoutException handling omitted for brevity
+            } catch (InterruptedException interruptedException) {
+                // InterruptedException handling omitted for brevity
+            } catch (ExecutionException executionException) {
+                // ExecutionException handling omitted for brevity
+            }
         }
     }
 }
 ----
+
+Example that registers a callback to be executed when a response is available:
+
+[source,java]
+----
+// imports omitted for brevity
+
+class FruitCallback implements InvocationCallback<Response> {
+    @Override
+    public void completed(Response response) {
+        if (response.getStatus() == 200) {
+            Fruit fruit = response.readEntity(Fruit.class);
+        } else {
+            log.error("Request error: " + response.getStatus());
+        }
+    }
+
+    @Override
+    public void failed(Throwable throwable) {
+        log.error(throwable);
+    }
+}
+
+class ColorCallback implements InvocationCallback<Color> {
+    @Override
+    public void completed(Color color) {
+        // process order, code omitted for brevity
+    }
+
+    @Override
+    public void failed(Throwable throwable) {
+        if (throwable instanceof WebApplicationException wae) {
+            log.error("Failed with status: " + wae.getResponse().getStatus());
+        } else if (throwable instanceof ResponseProcessingException rpe) {
+            log.error("Failed with status: " + rpe.getResponse().getStatus());
+        } else {
+            // code omitted for brevity: handle other eceptions
+        }
+    }
+}
+
+class Service {
+    public void fetchResources() {
+        Client client = ClientBuilder.newClient();
+        Future<Response> fruitsFuture = client.target("https://fruitsite.com/fruits/333")
+                                              .request()
+                                              .async()
+                                              .get(new FruitCallback());
+        Future<Color> colorsFuture = client.target("https://colorsite.com/colors/111")
+                                           .request()
+                                           .async()
+                                           .get(new ColorCallback());
+    }
+}
+----
+
 
 == Chapter 14: Deployment and Integration
 
