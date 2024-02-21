@@ -268,7 +268,9 @@ https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.3[definiti
 
 === Static imports
 
-Static imports are used to import static-accessible members from other types, such as classes,
+Static imports
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html#jls-7.5.3[&sect;7.5.3^])
+are used to import static-accessible members from other types, such as classes,
 into a given type, for example, another class.
 
 It works by specifying the `static` keyword after the `import` keyword.
@@ -322,3 +324,16 @@ class Service {
 ----
 
 == Final thoughts
+
+Static constructs offer us the flexibility to go beyond simple object-oriented programming (OOP) designs.
+With it, we can implement our solutions following a different approach in many cases, including some
+functional-programming style.
+
+From declaring simple constant fields to building https://en.wikipedia.org/wiki/Pure_function[pure functions^],
+the `static` keyword brings to the Java world the necessary power to be more than just an OOP language.
+This may seems superfluous, but given the wide adoption Java has had, it's important to keep the language and
+platform flexible enough to meet different use cases.
+
+Hopefully, the insights and links shared here are a good reference and a starting point for you to dig deeper
+into the intricacies and use cases of the `static` keyword and its constructs, to bring their benefits to your
+daily coding job; and, as always, be aware of possible pitfalls while using it.
