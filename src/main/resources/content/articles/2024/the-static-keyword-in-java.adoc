@@ -268,4 +268,57 @@ https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.3[definiti
 
 === Static imports
 
+Static imports are used to import static-accessible members from other types, such as classes,
+into a given type, for example, another class.
+
+It works by specifying the `static` keyword after the `import` keyword.
+For example, let's suppose we have the following `Payment` class, located in a package named `com.payment`.
+
+[source,java]
+----
+package com.payment;
+
+public class Payment {
+    public static int MAX = 1000;
+}
+----
+
+If we have another class called `Service` in a package called `com.services` and we want to import statically,
+the `MAX` static field from `Payment`, we could do so like this:
+
+[source,java]
+----
+package com.services;
+
+import static com.payment.Payment.MAX;
+
+class Service {
+    static {
+        System.out.println(MAX);
+    }
+}
+----
+
+It also works for the wildcard (`*`) import. This one would import _all_ static members of `Payment`.
+
+[source,java]
+----
+import static com.payment.Payment.*;
+----
+
+The alternative to this import is the regular import:
+
+[source,java]
+----
+package com.services;
+
+import com.payment.Payment;
+
+class Service {
+    static {
+        System.out.println(Payment.MAX);
+    }
+}
+----
+
 == Final thoughts
