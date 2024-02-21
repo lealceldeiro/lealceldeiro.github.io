@@ -11,7 +11,8 @@ Asiel Leal_Celdeiro
 :jbake-type: post
 :jbake-status: draft
 :jbake-tags: java, java-classes, java-methods, access-modifiers, static
-:jbake-summary: static is a keyword in Java that allows us to ...
+:jbake-summary: Static constructs are a powerful way in Java to go beyond simple object-oriented programming \
+solutions and enhance our programs with more flexible implementations to meet our needs.
 :jbake-og_img: articles/2024/images/02/the-static-kyword-in-java_social.webp
 :jbake-image_src: articles/2024/images/02/the-static-kyword-in-java.webp
 :jbake-image_alt: Image of a lighthouse
@@ -19,7 +20,10 @@ Asiel Leal_Celdeiro
 :jbake-author_handle: lealceldeiro
 :jbake-author_profile_image: /img/author/lealceldeiro.webp
 
-The `static` keyword in Java ...
+In the world of Java programming, the `static` keyword plays a significant role,
+often thought of as a fundamental concept to grasp.
+However, its nuances can sometimes be elusive, especially for those new to the language.
+In this article we'll go over this construct and some of the details to have in mind when using it in our code.
 
 == What's the `static` keyword in Java?
 
@@ -121,6 +125,7 @@ if the class or interface is not a member of another class or interface.
 For example, in the previous code snippet, we can't declare the class `A` as `static` or it causes a compilation error.
 ====
 
+[#_static_fields]
 === Static fields
 
 In a previous article, we saw how to declare link:/articles/2024/java-oop-classes-and-objects.html#fields[fields^].
@@ -187,11 +192,29 @@ to know that this object is of type `Order` and get the value of the static fiel
 instead of getting it from the instance.
 ====
 
-
 The declaration of a static field (also known as _class variable_) introduces a static context,
 which limits the use of constructs that refer to the current object
 (https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1[&sect;8.3.1.1^]).
 For example, a static field can't be accessed from an instance method, or the `this` or `super` keywords.
+
+This type of construct is useful when declaring constants or variables shared across all instances of a class.
+That's because the values of such fields are not associated to a specific instance of a class
+but rather to the class itself &mdash; hence they're also called _class variables_.
+
+Because of this behavior, any change made to a static field is reflected everywhere it's used,
+regardless whether it's being accessed from one or another instance of the class that declares it,
+or even by other classes.
+
+The most common scenario where static fields are used is when combined with the
+link:/articles/2024/the-final-keyword-in-java.html#_final_fields[final keyword^] to create inmutable constants
+that we can use throughout our code. For example:
+
+[source,java]
+----
+public class Order {
+    public static final int BASIC_PACKAGE = 1;
+}
+----
 
 === Static methods
 
@@ -322,6 +345,15 @@ class Service {
     }
 }
 ----
+
+== Additional considerations
+
+While static fields and methods allow us to share common attributed and behaviors defined in a class,
+if not used properly they could cause concurrency issues in multithreaded environments.
+
+For that reason we must use them judiciously
+and take the appropriate measure to make our data structure thread-safe to avoid data corruption, race conditions,
+deadlocks and many of the other well-known concurrency challenges we face in software programming.
 
 == Final thoughts
 
