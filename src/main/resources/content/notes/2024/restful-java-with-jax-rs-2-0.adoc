@@ -14,7 +14,7 @@ Asiel Leal_Celdeiro
 :jbake-read: progress
 :jbake-summary: Recommended by the official docs from https://resteasy.dev/books, "RESTful Java with JAX-RS 2.0" is \
 an excellent guide to start building RESTful services in Java.
-:jbake-authors: Bill Burke
+:jbake-book_authors: Bill Burke
 :jbake-publisher: O'Reilly Media, Inc.
 :jbake-published: November 2013
 :jbake-amazon_link: https://a.co/d/15qvYGA
