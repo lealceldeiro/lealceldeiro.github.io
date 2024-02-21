@@ -1,6 +1,6 @@
 = Everything you need to know about the static keyword in Java
 Asiel Leal_Celdeiro
-2024-02-23
+2024-02-22
 :docinfo: shared-footer
 :icons: font
 :toc-title: In this article
@@ -9,7 +9,7 @@ Asiel Leal_Celdeiro
 :jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: post
-:jbake-status: draft
+:jbake-status: published-date
 :jbake-tags: java, java-classes, java-methods, access-modifiers, static
 :jbake-summary: Static constructs are a powerful way in Java to go beyond simple object-oriented programming \
 solutions and enhance our programs with more flexible implementations to meet our needs.
