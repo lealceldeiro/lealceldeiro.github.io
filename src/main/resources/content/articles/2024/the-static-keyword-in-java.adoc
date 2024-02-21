@@ -182,9 +182,16 @@ public class Main {
 }
 ----
 
-I hope you came to the conclusion it prints 1 twice because the object `order` is only used in this context by Java
-to know that this object is of type `Order` and get the value of the static field from there.
+I hope you came to the conclusion it prints `1` twice because the object `order` is only used in this context by Java
+to know that this object is of type `Order` and get the value of the static field from the type itself,
+instead of getting it from the instance.
 ====
+
+
+The declaration of a static field (also known as _class variable_) introduces a static context,
+which limits the use of constructs that refer to the current object
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1[&sect;8.3.1.1^]).
+For example, a static field can't be accessed from an instance method, or the `this` or `super` keywords.
 
 === Static methods
 
@@ -242,23 +249,23 @@ class Payment {
 ----
 
 This construct is useful when the initialization of a static variable is not simple enough to fit in one line.
-It should be used carefully because sometimes it's not easy to reason about the logic being implemented.
+In this example, it's not worth it, but there are real-world scenarios where there's some complex logic we want to
+execute when the class is constructed.
+
+However, this construct should be used carefully because sometimes it's not easy to reason about the logic being
+implemented.
 That's because the field declaration and the actual initialization are separated.
 
 The same rules about accessing constructs that refer to the current object apply here.
 
+Additionally, there are a few notes we should remember about static initializers
+(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.7[&sect;8.7^]):
+
+. It's a compile-time error if a static initializer can't complete normally.
+. It's a compile-time error if a `return` statement appears anywhere within a static initializer.
+. For more complex use cases, there are also some exhaustive
+https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.3[definitions^] that you should be aware of.
+
 === Static imports
-
-[NOTE]
-====
-We can't declare `static` variables
-====
-
-== Additional considerations
-
-The declaration of a static field (also known as _class variable_) introduces a static context,
-which limits the use of constructs that refer to the current object
-(https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.1[&sect;8.3.1.1^]).
-For example a static field can't be accessed from an instance method, or the `this` or `super` keywords.
 
 == Final thoughts
