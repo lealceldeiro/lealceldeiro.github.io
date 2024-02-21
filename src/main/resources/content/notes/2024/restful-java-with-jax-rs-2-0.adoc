@@ -1018,6 +1018,18 @@ the HTTP request becomes suspended from the current thread of execution.
 
 == Chapter 14: Deployment and Integration
 
+The
+https://jakarta.ee/specifications/restful-ws/3.0/apidocs/jakarta/ws/rs/core/application[`jakarta.ws.rs.code.Application`^, role=link-underline link-underline-opacity-0]
+class is the only portable way of telling JAX-RS which web services (`@Path` annotated classes) as well as which
+filters, interceptors, `MessageBodyReaders`, `MessageBodyWriters`, and `ContextResolvers` (providers) you want deployed.
+
+Java EE stands for Java Enterprise Edition.
+It's the umbrella specification of JAX-RS and defines a complete enterprise platform that includes services like
+a servlet container, EJB, transaction manager (JTA), messaging (JMS), connection pooling (JCA), database
+persistence (JPA), web framework (JSF), and a multitude of other services.
+
+In 2022, Java EE was https://jakarta.ee/news/jakarta-ee-9-released/[superseded^] by Jakarta EE.
+
 == Chapter 15: Securing JAX-RS
 
 == Chapter 16: Alternative Java Clients
