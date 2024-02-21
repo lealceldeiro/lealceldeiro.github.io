@@ -63,6 +63,7 @@ This is useful in situations where we want to limit the inheritance of our type 
 for example, for security reasons.
 It enforces the intended design and prevents unintended modifications through inheritance.
 
+[#_final_fields]
 === Final fields
 
 To declare a field _final_, again we use the same keyword.
@@ -142,6 +143,10 @@ but it's one of the actions we can take towards that goal, and it's a simple one
 
 It brings also with it more predictable and easy-to-reason-about code and the JVM can also perform low-level
 optimization over those fields because of their final nature.
+
+One common scenario where final fields are used is when combined with the
+link:/articles/2024/the-static-keyword-in-java.html#_static_fields[static keyword^] to create inmutable constants
+that we can use throughout our code.
 
 === Final methods
 
