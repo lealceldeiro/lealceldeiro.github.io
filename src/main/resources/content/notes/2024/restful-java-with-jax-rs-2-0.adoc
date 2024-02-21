@@ -1032,4 +1032,7 @@ In 2022, Java EE was https://jakarta.ee/news/jakarta-ee-9-released/[superseded^]
 
 == Chapter 15: Securing JAX-RS
 
+The https://jakarta.ee/specifications/platform/9/apidocs/jakarta/ws/rs/core/securitycontext[`jakarta.ws.rs.core.SecurityContext`^, role=link-underline link-underline-opacity-0]
+interface has a method for determining the identity of the user making the secured HTTP invocation.
+
 == Chapter 16: Alternative Java Clients
