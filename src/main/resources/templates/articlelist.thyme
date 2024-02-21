@@ -36,11 +36,11 @@
                                         <h6 class="card-subtitle mb-2 text-body-secondary"
                                             th:text='${#dates.format(post.date, "MMMM d, yyyy")}'>
                                         </h6>
-                                        <p class="card-text text-body-secondary"
+                                        <p class="mb-3 card-text text-body-secondary"
                                            th:if="${post.summary != null}"
                                            th:text="${#strings.abbreviate(post.summary, 350)}">
                                         </p>
-                                        <p class="card-text text-truncate text-body-secondary"
+                                        <p class="mb-3 card-text text-truncate text-body-secondary"
                                            th:if="${post.summary == null}"
                                            th:utext="${post.body}">
                                         </p>
