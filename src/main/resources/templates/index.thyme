@@ -117,7 +117,7 @@
                                             <a th:href="*{content.rootpath + iNote.uri}"
                                                class="link-underline link-underline-opacity-0 text-body-secondary">
                                                 <h5 class="card-title" th:text="${iNote.title}"></h5>
-                                                <p class="card-text" th:text="${iNote.authors}"></p>
+                                                <p class="card-text" th:text="${iNote.book_authors}"></p>
                                                 <p class="card-text">
                                                     <small th:text="'Published: ' + ${iNote.published}"></small>
                                                 </p>
