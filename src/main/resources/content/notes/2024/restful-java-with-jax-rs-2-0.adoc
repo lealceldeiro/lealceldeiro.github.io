@@ -1035,4 +1035,36 @@ In 2022, Java EE was https://jakarta.ee/news/jakarta-ee-9-released/[superseded^]
 The https://jakarta.ee/specifications/platform/9/apidocs/jakarta/ws/rs/core/securitycontext[`jakarta.ws.rs.core.SecurityContext`^, role=link-underline link-underline-opacity-0]
 interface has a method for determining the identity of the user making the secured HTTP invocation.
 
+DomainKeys Identified Mail (DKIM) is a digital signature protocol that was designed for email.
+It's simply a request or response header that contains a digital signature
+of one or more headers of the message and the content.
+
+Example:
+
+[source,console]
+----
+DKIM-Signature: v=1;
+                a=rsa-sha256;
+                d=example.com;
+                s=burke;
+                c=simple/simple;
+                h=Content-Type;
+                x=0023423111111;
+                bh=2342322111;
+                b=M232234=
+----
+
+Where,
+
+- `v`: Protocol version.
+- `a`: Algorithm used to hash and sign the message.
+- `b`: Domain of the signer.
+- `s`: Selector of the domain.
+- `c`: Canonical algorithm.
+- `h`: Semicolon-delimited list of headers that are included in the signature calculation.
+- `x`: When the signature expires.
+- `t`: Timestamp of signature.
+- `bh`: Base 64–encoded hash of the message body
+- `b`: Base 64–encoded signature
+
 == Chapter 16: Alternative Java Clients
