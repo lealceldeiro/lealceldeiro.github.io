@@ -190,3 +190,15 @@ If we need to switch to Fly.io hosting, we must:
 - Configure our Registrar service to not route the traffic sent to lealceldeiro.com to the GitHub Pages server
 - Start routing traffic sent to lealceldeiro.com to Fly.io, see https://fly.io/docs/networking/custom-domains-with-fly/#main-content-start
 - Make sure the Registrar service is now routing requests sent to lealceldeiro.com to the Fly.io app
+
+##### Server
+
+When the site is deployed to Fly.io, the static content is running on [NGINX](https://nginx.org/en/docs/).
+
+See [the starter guide](https://nginx.org/en/docs/beginners_guide.html#conf_structure) to know more about it.
+
+###### Configuration
+
+To update the nginx instance running on docker, update the file `nginx.conf` file and commit the changes.
+
+This file will be automatically mounted on the container image creation and nginx will use use at runtime.
