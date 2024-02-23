@@ -2,5 +2,6 @@
 *
 
 # Allow files and directories
+!custom_nginx.conf
 !/target
 !/target/**
