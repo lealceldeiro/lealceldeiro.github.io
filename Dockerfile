@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:1.25-alpine
 LABEL authors="Asiel Leal Celdeiro"
 EXPOSE "8181"
 
