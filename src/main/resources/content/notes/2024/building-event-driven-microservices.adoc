@@ -1,0 +1,61 @@
+= Building Event-Driven Microservices
+Asiel Leal_Celdeiro
+2024-02-24
+:docinfo: shared-footer
+:icons: font
+:toc-title: In this book
+:toc: left
+:jbake-document_info: shared-footer
+:jbake-table_of_content: left
+:jbake-fontawesome: true
+:jbake-type: booknote
+:jbake-status: published
+:jbake-tags: java, microservices
+:jbake-read: progress
+:jbake-summary: "Building Event-Driven Microservices is an invaluable source of knowledge to those interested in \
+event-driven systems".
+:jbake-book_authors: Adam Bellemare
+:jbake-publisher: O'Reilly Media, Inc.
+:jbake-published: August 2020
+:jbake-amazon_link: https://a.co/d/7LHAqFH
+:jbake-orreilly_link: https://www.oreilly.com/library/view/building-event-driven-microservices/9781492057888/
+:jbake-og_img: notes/2024/images/building-event-driven-microservices.webp
+:jbake-image_src: notes/2024/images/building-event-driven-microservices.webp
+:jbake-image_alt: Image of the book cover: Building Event-Driven Microservices
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
+
+== Chapter 1: Why Event-Driven Microservices
+
+== Chapter 2: Event-Driven Microservice Fundamentals
+
+== Chapter 3: Communication and Data Contracts
+
+== Chapter 4: Integrating Event-Driven Architectures with Existing Systems
+
+== Chapter 5: Event-Driven Processing Basics
+
+== Chapter 6: Deterministic Stream Processing
+
+== Chapter 7: Stateful Streaming
+
+== Chapter 8: Building Workflows with Microservices
+
+== Chapter 9: Microservices Using Function-as-a-Service
+
+== Chapter 10: Basic Producer and Consumer Microservices
+
+== Chapter 11: Heavyweight Framework Microservices
+
+== Chapter 12: Lightweight Framework Microservices
+
+== Chapter 13: Integrating Event-Driven and Request-Response Microservices
+
+== Chapter 14: Supportive Tooling
+
+== Chapter 15: Testing Event-Driven Microservices
+
+== Chapter 16: Deploying Event-Driven Microservices
+
+== Chapter 17: Conclusion
