@@ -11,7 +11,7 @@ Asiel Leal_Celdeiro
 :jbake-type: booknote
 :jbake-status: published
 :jbake-tags: java, jax-rs, webservice
-:jbake-read: progress
+:jbake-read: done
 :jbake-summary: Recommended by the official docs from https://resteasy.dev/books, "RESTful Java with JAX-RS 2.0" is \
 an excellent guide to start building RESTful services in Java.
 :jbake-book_authors: Bill Burke
@@ -1068,3 +1068,7 @@ Where,
 - `b`: Base 64–encoded signature
 
 == Chapter 16: Alternative Java Clients
+
+- java.net.URL
+- Apache HttpClient
+- RESTEasy Client Proxies
