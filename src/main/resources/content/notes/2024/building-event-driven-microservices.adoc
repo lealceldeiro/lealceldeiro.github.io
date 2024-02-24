@@ -19,6 +19,7 @@ event-driven systems".
 :jbake-published: August 2020
 :jbake-amazon_link: https://a.co/d/7LHAqFH
 :jbake-orreilly_link: https://www.oreilly.com/library/view/building-event-driven-microservices/9781492057888/
+:jbake-appendix_to_title_text: by Adam Bellemare
 :jbake-og_img: notes/2024/images/building-event-driven-microservices.webp
 :jbake-image_src: notes/2024/images/building-event-driven-microservices.webp
 :jbake-image_alt: Image of the book cover: Building Event-Driven Microservices
