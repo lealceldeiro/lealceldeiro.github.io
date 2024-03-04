@@ -8,7 +8,7 @@
         <nav id="menuNav" class="navbar fixed-top navbar-expand-lg">
             <div class="container container-fluid">
                 <a class="navbar-brand" th:href="${config.site_host}">
-                    <img src="/img/logo500x500_transparent.png" alt="Logo" width="30" height="30" id="logo"
+                    <img src="/img/logo500x500_transparent.svg" alt="Logo" width="30" height="30" id="logo"
                          class="d-inline-block align-text-bottom text-body-secondary"><span class="fs-3">Home</span>
                 </a>
 

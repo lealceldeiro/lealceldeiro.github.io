@@ -118,7 +118,7 @@ function isDark() {
 }
 
 function setNavbarLogo() {
-    const logoImg = isDark() ? 'logo500x500_dark_transparent.png' : 'logo500x500_transparent.png';
+    const logoImg = isDark() ? 'logo500x500_dark_transparent.svg' : 'logo500x500_transparent.svg';
     document.querySelector('img#logo').setAttribute('src', '/img/' + logoImg);
 }
 
