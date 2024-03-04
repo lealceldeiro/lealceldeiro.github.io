@@ -29,6 +29,17 @@ event-driven systems".
 
 == Chapter 1: Why Event-Driven Microservices
 
+Domain: The problem space that a business occupies and provides solutions to.
+This encompasses everything that the business must contend with, including rules, processes, ideas,
+business-specific terminology, and anything related to its problem space,
+regardless of whether or not the business concerns itself with it.
+The domain exists regardless of the existence of the business.
+
+Domain (and subdomain) model: An abstraction of the actual domain useful for business purposes.
+The main domain model of ana business is discernible through the products the business provides its customers,
+the interfaces by which customers interact with the products, and the various other processes and functions by
+which the business fulfills its stated goals.
+
 == Chapter 2: Event-Driven Microservice Fundamentals
 
 == Chapter 3: Communication and Data Contracts
