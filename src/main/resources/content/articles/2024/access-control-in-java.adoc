@@ -1,0 +1,21 @@
+= Understanding access control in Java
+Asiel Leal_Celdeiro
+2024-03-15
+:docinfo: shared-footer
+:icons: font
+:toc-title: In this article
+:toc: left
+:jbake-document_info: shared-footer
+:jbake-table_of_content: left
+:jbake-fontawesome: true
+:jbake-type: post
+:jbake-status: draft
+:jbake-tags: java, java-access-control
+:jbake-summary: Access control.
+:jbake-og_img: articles/2024/images/03/access-control-in-java_social.webp
+:jbake-image_src: articles/2024/images/03/access-control-in-java.webp
+:jbake-image_alt: Image of a vault
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
+
