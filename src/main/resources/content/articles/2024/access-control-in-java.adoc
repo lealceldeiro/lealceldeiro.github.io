@@ -76,7 +76,7 @@ is accessible only if (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.
   . Otherwise, if the member or constructor is declared `protected`,
     then access is permitted only when:
     * the access occurs from
-      within the package containing the class in which the protected member or constructor is declared,
+      within the package containing the class in which the protected member or constructor is declared
     * or the code that tries to access the protected member or constructor of an object
       is responsible for the implementation of that object
       (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.html#jls-6.6.2[§6.6.2^]).
@@ -99,3 +99,43 @@ TIP: All members of interfaces lacking access modifiers are implicitly `public`.
 === Array types
 
 An array type is accessible if, and only if, its element type is accessible.
+
+== Wrap up
+
+In the next two tables, you can see, respectively,
+the different access levels for top level classes, and for members and constructor.
+If you're just starting to learn or practice this content, it may be useful to keep them at hand.
+
+.Access levels for members and constructors. `√` means accessible, blank means not accessible
+[%autowidth]
+|===
+| |Declaring class |Package containing the compilation unit |Subclass in the same package |Subclass in a different package | Anywhere
+
+|`public`
+|`√`
+|`√`
+|`√`
+|`√`
+|`√`
+
+|`protected`
+|`√`
+|`√`
+|`√`
+|`√`
+|
+
+|_package private_
+|`√`
+|`√`
+|`√`
+|
+|
+
+|`private`
+|`√`
+|
+|
+|
+|
+|===
