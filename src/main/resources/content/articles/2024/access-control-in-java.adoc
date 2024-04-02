@@ -90,12 +90,12 @@ is accessible only if (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.
       the member or constructor
     * or, the access occurs in the `permits` clause of the top level class or interface that enclose the declaration of
       the member
-    * or the access occurs in the record component list of the top level record class that encloses
-      the declaration of the member
+    * or the access occurs in the
+      https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.10.1[record component list^]
+      of the top level record class that encloses the declaration of the member
 
 TIP: All members of interfaces lacking access modifiers are implicitly `public`.
 
-
 === Array types
 
-
+An array type is accessible if, and only if, its element type is accessible.
