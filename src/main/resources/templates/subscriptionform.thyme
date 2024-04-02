@@ -9,6 +9,7 @@
     </div>
     <div class="col-12">
         <form class="row row-cols-lg-auto g-3 align-items-center" th:action="${formActionUrl} ?: ''" method="post">
+            <input type="hidden" name="$source" value="subscription">
             <!-- Required -->
             <input type="hidden" name="accessKey" th:value="${accessKey}">
             <!--Spam protection-->

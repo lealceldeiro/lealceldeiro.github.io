@@ -1,6 +1,7 @@
 <div th:fragment="contactform" class="border rounded border-opacity-10 container mt-4 p-4 pb-2">
     <div class="col-12">
         <form th:action="${config.staticform_url}" method="post">
+            <input type="hidden" name="$source" value="contact">
             <!-- Required -->
             <input type="hidden" name="accessKey" th:value="${config.staticform_key}">
             <!--Spam protection-->
