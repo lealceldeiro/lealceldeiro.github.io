@@ -157,7 +157,7 @@
                                         <i class="bi bi-blockquote-left"></i> Testimonial
                                     </span>
                                     <textarea class="form-control" aria-label="Testimonial" name="message"
-                                              required></textarea>
+                                              required rows="8"></textarea>
                                 </div>
                             </div>
 
