@@ -50,21 +50,13 @@
         <div class="container text-center">
             <div class="row justify-content-between">
                 <div class="col-7 text-start">
-                    <th:block th:with="postTags = ${#strings.arraySplit(content.tags,',')}">
+                    <th:block th:with="postTags = ${content.tags}">
                         <div th:if="*{#arrays.length(postTags) > 0}">
-
-                            <th:block th:each="pTag, itStat : *{postTags}">
-                                <th:block th:with="tagVal = (*{itStat.first} ? *{#strings.trim(#strings.substring(pTag, 1))}
-                                                                 : (*{!itStat.last} ? *{#strings.trim(pTag)}
-                                                                    : *{#strings.trim(#strings.substring(pTag, 0, #strings.length(pTag) - 1))}))">
-                                    <a class="btn btn-light"
-                                       th:href="*{content.rootpath + 'tags/' + #strings.trim(tagVal) + '.html'}">
+                                <a  class="btn btn-light"
+                                    th:each="pTag : *{postTags}" th:href="*{content.rootpath + 'tags/' + pTag + '.html'}">
                                         <i class="bi bi-tag-fill"></i>
-                                        <span th:text="*{#strings.trim(tagVal)}"></span>
-                                    </a>
-                                </th:block>
-                            </th:block>
-
+                                        <span th:text="*{#strings.trim(pTag)}"></span>
+                                </a>
                         </div>
                     </th:block>
                 </div>
