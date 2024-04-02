@@ -64,7 +64,37 @@ the same package.
 
 NOTE: _package access_ is the implicit (default) access given when no modifier (`public` or `private`) is specified.
 
-=== Members
+=== Members and constructors
+
+A member (class, interface, field, or method) of a
+class, interface, type parameter, or reference type, or a constructor of a class,
+is accessible only if (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.html#jls-6.6.1[§6.6.1^]):
+
+- the class, interface, type parameter, or reference type is accessible, and
+- the member or constructor is declared to permit access:
+  . If the member of constructor is declared `public`, then access is permitted
+  . Otherwise, if the member or constructor is declared `protected`,
+    then access is permitted only when:
+    * the access occurs from
+      within the package containing the class in which the protected member or constructor is declared,
+    * or the code that tries to access the protected member or constructor of an object
+      is responsible for the implementation of that object
+      (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.html#jls-6.6.2[§6.6.2^]).
+  . Otherwise, if  the member or constructor is declared with package access,
+    then access is permitted only when
+    the access occurs from
+    within the package in which the class, interface, type parameter, or reference type is declared.
+  . Otherwise, when the member or constructor is declared `private`,
+    then access is permitted only when:
+    * the access occurs from within the body of the top level class or interface that encloses the declaration of
+      the member or constructor
+    * or, the access occurs in the `permits` clause of the top level class or interface that enclose the declaration of
+      the member
+    * or the access occurs in the record component list of the top level record class that encloses
+      the declaration of the member
+
+TIP: All members of interfaces lacking access modifiers are implicitly `public`.
+
 
 === Array types
 
