@@ -127,6 +127,29 @@ If you're just starting to learn or practice this content, it may be useful to k
 However, make sure you understand all the details and nuances previously explained and, ideally, the content from the
 linked resources.
 
+.Access levels for top level classes, interfaces, etc. `√` means accessible, blank means not accessible
+[%autowidth]
+|===
+| |Type (class, interface, etc.) |Unrelated type within the package containing the accessed type |Subtype in the same package |Subtype in a different package | Any other code that tries to access it
+
+|`public`
+|`√`
+|`√`
+|`√`
+|`√`
+|`√`
+
+|_package private_
+|`√`
+|`√`
+|`√`
+|
+|
+|===
+
+NOTE: As you may have already noticed, we can't declare a top level class, interface, etc. as `private` or `protected`,
+otherwise the code won't compile.
+
 .Access levels for members and constructors. `√` means accessible, blank means not accessible
 [%autowidth]
 |===
