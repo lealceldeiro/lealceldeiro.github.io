@@ -77,7 +77,7 @@ is accessible only if (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.
     then access is permitted only when:
     * the access occurs from
       within the package containing the class in which the protected member or constructor is declared
-    * or the code that tries to access the protected member or constructor of an object
+    * or, the code that tries to access the protected member or constructor of an object
       is responsible for the implementation of that object
       (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.html#jls-6.6.2[§6.6.2^]).
   . Otherwise, if  the member or constructor is declared with package access,
@@ -90,7 +90,7 @@ is accessible only if (https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.
       the member or constructor
     * or, the access occurs in the `permits` clause of the top level class or interface that enclose the declaration of
       the member
-    * or the access occurs in the
+    * or, the access occurs in the
       https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.10.1[record component list^]
       of the top level record class that encloses the declaration of the member
 
@@ -102,14 +102,35 @@ An array type is accessible if, and only if, its element type is accessible.
 
 == Wrap up
 
+=== Compilation units located in different modules
+
+When two compilation units (source files), let's say class `A` and `B` are located in different modules,
+let's say `moduleA` and `moduleB` respectively,
+if class `A` is exported by `moduleA` to `moduleB`,
+then class `A` and its members and constructor(s) might be accessible to class `B`,
+following the previously explained rules and summarized in the
+<<compilation_units_within_the_same_module_or_exported_to_another_modules,next section>>.
+
+Otherwise, if class `A` is not exported from `moduleA` to `moduleB`,
+it won't be accessible by class `B`, regardless of the access modifier specified (and the next section doesn't apply),
+period.
+
+[#compilation_units_within_the_same_module_or_exported_to_another_modules]
+=== Compilation units within the same module or exported to another module(s)
+
+Given we have some compilation units (source files) accessible to one another,
+from a module visibility point of view, then we can summarize their accessibility as follows.
+
 In the next two tables, you can see, respectively,
 the different access levels for top level classes, and for members and constructor.
-If you're just starting to learn or practice this content, it may be useful to keep them at hand.
+If you're just starting to learn or practice this content, it may be useful to keep them at hand—kind of cheat sheet.
+However, make sure you understand all the details and nuances previously explained and, ideally, the content from the
+linked resources.
 
 .Access levels for members and constructors. `√` means accessible, blank means not accessible
 [%autowidth]
 |===
-| |Declaring class |Package containing the compilation unit |Subclass in the same package |Subclass in a different package | Anywhere
+| |Enclosing type (class/interface, etc.) |Unrelated type within the package containing the enclosing type |Subtype in the same package |Subtype in a different package | Any other code that tries to access it
 
 |`public`
 |`√`
