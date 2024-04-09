@@ -21,7 +21,7 @@ Asiel Leal_Celdeiro
 
 Kanban is a tool that aims to improve efficiency by reducing waste of time and doing things more efficiently.
 In this article, you'll see a quick introduction to this tool, what it is, how to use it,
-and whether it can be applied and how to your work process. The views and knowledge expressed here are those from
+and whether it can be applied and how to our work process. The views and knowledge expressed here are those from
  the perspective of a software developer—not an expert in agile methodologies.
 
 == Getting started
@@ -33,7 +33,7 @@ They were born in manufacturing environments but can be applied to almost any ki
 They can be seen as a set of tools that can be adapted or modified to any environment,
 according to the problem being solved.
 
-One of these tools is Kanban.
+One of these tools is *Kanban*.
 
 == What is Kanban?
 
@@ -69,10 +69,89 @@ We simply adapt the Kanban tool to our processes, to start measuring, adjusting 
 maximum efficiency.
 
 Put in another way: we use Kanban in our existing business to identify ways to improve our already existing processes;
-we don't need to change our process at once and "implement Kanban—"we don't lose the good things we're doing already.
+we don't need to change our processes at once and "implement Kanban"—we don't lose the good things we're doing already.
 
 == Using Kanban
 
+=== Can we apply it?
+Whenever we consider using some new tool, framework, process, etc. we immediately think: can we apply this?,
+will it work for me?
+
+It's no different with Kanban. Can we apply it in the software development processes?
+
+Yes.
+Many would agree with me.
+Many others would say "yes, but some Scrum-like" methodology would fit better for my use case—and
+that may be completely right as well.
+As always, the answer is "it depends".
+
+Software development teams use Kanban to organize their work.
+That is, (roughly speaking,) defining a backlog of tasks,
+prioritizing them, doing some analysis work,
+"moving" them to "development", "review", "done", and the list goes on and on, as long as the teams see it fit.
+
+That's the interesting thing about it: it's not a restrictive framework that dictates "what must be done", instead it
+offers guides on how things could improve, rather than specific actions, so it can be easily adopted
+by different businesses.
+
+=== How could it help us?
+
+Kanban should not be "enforced".
+As with any other tool, we must be able to identify pai points we have in our teams
+(or solo-team) and check if the tool can really help us.
+
+For example, if we feel we're always busy, and yet we can't get anything done/completed.
+Or, if we feel the process, as a whole, is not as efficient as it could be.
+Or maybe we simply don't have an answer to common questions like "where are we at now?",
+"when will task XYZ be completed?", "who's working on feature ABC?", or "what should I work on now?".
+
+In such cases, it may be worth taking some time and consider something like Kanban; something that could lead
+to improve our efficiency and remove waste of time and resources.
+
+=== What changes are required to use Kanban
+
+Good news!
+There's no need to overhaul the whole business practices in order for us to adopt Kanban.
+It provides the means to visualize what we're already doing and which parts could be tweaked to be more efficient.
+On top of that, the changes required to make things better
+can be implemented gradually—no need to throw everything away and start from scratch!
+
 == How to get started with it
 
+That's the most challenging part of almost anything: getting started.
+Once we get that little first step, things start to turn smoother.
+
+So it's important to know how to take that first step.
+
+One approach is to make something like a map or visual representation of our current workflow.
+This means identifying major processes in our organization/business, department, area, etc.
+It's here where we also identify (mentioned in no particular order):
+
+- which are the steps/tasks we currently have in our process?
+- where are they coming from?
+- how are they defined, assigned and prioritized?
+
+With answers to questions like this, we create one column for the Kanban board.
+So, for a software development team, we could have the following columns:
+
+- Backlog
+- Analysis
+- Design
+- Review
+- Development
+- Code Review
+- Testing
+- Release
+- Support
+
+It's after we do this step that we can identify improvements in our current workflow, so it's normal if some of the
+things we're doing are not as efficient as we'd like them to be.
+That's expected: it's from this point from where we start to see areas of improvements and form where we can start to
+enhance our flow; so it's important to not try to "beatify" the current state of our processes:
+we need to see our flaws, so we can tackle them.
+
 == Other considerations
+
+=== Can we use practices from other agile methodologies, like Scrum?
+
+Yes.
