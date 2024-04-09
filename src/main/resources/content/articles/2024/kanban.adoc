@@ -1,0 +1,71 @@
+= Quick introduction to Kanban
+Asiel Leal_Celdeiro
+2024-04-10
+:docinfo: shared-footer
+:icons: font
+:toc-title: In this article
+:toc: left
+:jbake-document_info: shared-footer
+:jbake-table_of_content: left
+:jbake-fontawesome: true
+:jbake-type: post
+:jbake-status: draft
+:jbake-tags: kanban, agile, methodologies
+:jbake-summary: .
+:jbake-og_img: articles/2024/images/04/kanban_social.webp
+:jbake-image_src: articles/2024/images/04/kanban.webp
+:jbake-image_alt: Image of : todo
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
+
+Kanban is a tool that aims to improve efficiency by reducing waste of time and doing things more efficiently.
+In this article, you'll see a quick introduction to this tool, what it is, how to use it,
+and whether it can be applied and how to your work process. The views and knowledge expressed here are those from
+ the perspective of a software developer—not an expert in agile methodologies.
+
+== Getting started
+
+No matter what business we're in, we're always finding ways to make things more efficiently.
+Lean methodologies were introduced with the purpose of making our business processes more efficiently.
+They were born in manufacturing environments but can be applied to almost any kind of business activity or process.
+
+They can be seen as a set of tools that can be adapted or modified to any environment,
+according to the problem being solved.
+
+One of these tools is Kanban.
+
+== What is Kanban?
+
+In every business, there's always a desired result that's preceded by a series of steps or tasks.
+These steps or tasks almost always carry some form of result, let it be a document, a piece of information,
+or any other output that is also used as the input for another step or task.
+
+Not having these results (and on time) can cause delays for the final customer and, consequently, lost in our business.
+On the flip side, having too many results (documents, deliverables, etc.) can become cumbersome to manage and can
+also have the same undesired effects.
+
+This is where Kanban comes in: it helps us in learning and managing an optimal flow of work within the process.
+
+Some basic rules to implement Kanban are:
+
+. Visualize the workflow: A visual representation of the workflow lets us see how tasks move from being "not done" to
+"done right".
+. Limit work in process/progress (WIP):
+https://www.youtube.com/watch?v=hGJpez7rvc0[Get more done by doing less^] (at the same time). There's a limit in the
+tasks we can do at the same time, going beyond that limit will only decrease our productivity. This is the same
+principle we apply in programming: https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm[divide and conquer^]:
+we should decompose "bigger" tasks into smaller ones, and do them one at the time to get them done correctly.
+Kanban metrics allow us to find that "optimal" number.
+. Measure and improve the flow: Improvements should always be a result of decisions made in an informed way. Kanban
+is no different. In order for us to improve those areas where we're not being as productive as possible, we need to
+first measure the steps, tasks. How much is this task taking and why? How much did we take to release feature XYZ?
+How many hours did we spend in the analysis of feature ABC? Finding a good tool that allows us to measure our
+tasks/steps properly is very important to enhance our processes. Some examples are
+https://kanbantool.com/[Kanbantool^] and https://www.atlassian.com/software/jira/features/kanban-boards[Jira^].
+
+== Using Kanban
+
+== How to get started with it
+
+== Other considerations
