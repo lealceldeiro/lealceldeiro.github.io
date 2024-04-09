@@ -64,6 +64,13 @@ How many hours did we spend in the analysis of feature ABC? Finding a good tool 
 tasks/steps properly is very important to enhance our processes. Some examples are
 https://kanbantool.com/[Kanbantool^] and https://www.atlassian.com/software/jira/features/kanban-boards[Jira^].
 
+One good thing about Kanban is that we don't have to change what we may already be doing in our business.
+We simply adapt the Kanban tool to our processes, to start measuring, adjusting and optimizing our tasks for
+maximum efficiency.
+
+Put in another way: we use Kanban in our existing business to identify ways to improve our already existing processes;
+we don't need to change our process at once and "implement Kanban—"we don't lose the good things we're doing already.
+
 == Using Kanban
 
 == How to get started with it
