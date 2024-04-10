@@ -82,7 +82,7 @@ It's no different with Kanban. Can we apply it in the software development proce
 
 Yes.
 Many would agree with me.
-Many others would say "yes, but some Scrum-like" methodology would fit better for my use case—and
+Many others would say "yes, but some Scrum-like methodology would fit better for my use case"—and
 that may be completely right as well.
 As always, the answer is "it depends".
 
@@ -98,7 +98,7 @@ by different businesses.
 === How could it help us?
 
 Kanban should not be "enforced".
-As with any other tool, we must be able to identify pai points we have in our teams
+As with any other tool, we must be able to identify pain points we have in our teams
 (or solo-team) and check if the tool can really help us.
 
 For example, if we feel we're always busy, and yet we can't get anything done/completed.
@@ -109,7 +109,7 @@ Or maybe we simply don't have an answer to common questions like "where are we a
 In such cases, it may be worth taking some time and consider something like Kanban; something that could lead
 to improve our efficiency and remove waste of time and resources.
 
-=== What changes are required to use Kanban
+=== What changes are required to use Kanban?
 
 Good news!
 There's no need to overhaul the whole business practices in order for us to adopt Kanban.
@@ -117,7 +117,9 @@ It provides the means to visualize what we're already doing and which parts coul
 On top of that, the changes required to make things better
 can be implemented gradually—no need to throw everything away and start from scratch!
 
-== How to get started with it
+== How to get started with it?
+
+=== Map the workflow
 
 That's the most challenging part of almost anything: getting started.
 Once we get that little first step, things start to turn smoother.
