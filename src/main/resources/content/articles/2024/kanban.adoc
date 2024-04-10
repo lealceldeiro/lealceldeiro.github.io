@@ -255,4 +255,8 @@ the workflow has changed since the last iteration.
 
 === Can we use practices from other agile methodologies, like Scrum?
 
-Yes.
+Yes, we can.
+Kanban doesn't define what steps, rituals, meetings, or similar team practices are used in the
+team's workflow.
+It is a tool to be used to improve our workflow, in general, but there's no hard rule that stops us from
+experimenting and implementing other tools or framework that could also help us.
