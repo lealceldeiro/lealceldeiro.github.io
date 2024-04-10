@@ -20,7 +20,7 @@ Asiel Leal_Celdeiro
 :jbake-author_profile_image: /img/author/lealceldeiro.webp
 
 Kanban is a tool that aims to improve efficiency by reducing waste of time and doing things more efficiently.
-In this article, you'll see a quick introduction to this tool, what it is, how to use it,
+In this article, we'll see a quick introduction to this tool, what it is, how to use it,
 and whether it can be applied (and how) to our work process.
 The views and knowledge expressed here are those from
  the perspective of a Software Engineer focused on backend development—not an expert in agile methodologies.
