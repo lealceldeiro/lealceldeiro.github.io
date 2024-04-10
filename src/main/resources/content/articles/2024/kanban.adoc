@@ -234,6 +234,23 @@ from task to task: this is when clarify is lost because of so many context switc
 
 === Monitor the workflow and adapt
 
+Kanban doesn't force us to monitor, adapt or learn from mistakes; but it's generally a good idea to do so.
+Otherwise, we're not benefitting completely from having a well-defined process structure and WIP limits.
+
+Two tools that are really useful for tracking improvements are _lead time_ and _cycle time_.
+// TODO: review what's lead time and cycle time
+Lead time is basically the total time it takes to get something done from the moment someone asks for it until
+it's completed.
+Cycle time is the amount of time spent on a work item by a person or a team up until it's ready to be delivered.
+
+It's also generally a good idea for the team to review the metrics and reflect on what's being done right and what
+could be improved.
+This is how, iteration after iteration, the team can reach a point of "optimal" flow in the process.
+The space and format of this is different for each team.
+Some things that I've seen work in the pass is to have regular meetings, let it be weekly, bi-weekly,
+or with any other schedule, where everyone is free to express their ideas and observation of how
+the workflow has changed since the last iteration.
+
 == Other considerations
 
 === Can we use practices from other agile methodologies, like Scrum?
