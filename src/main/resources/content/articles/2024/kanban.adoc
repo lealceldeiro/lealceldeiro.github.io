@@ -153,6 +153,87 @@ That's expected: it's from this point from where we start to see areas of improv
 enhance our flow; so it's important to not try to "beatify" the current state of our processes:
 we need to see our flaws, so we can tackle them.
 
+Also, at this point, it's a good idea to define how many work in progress (WIP) we're willing to keep.
+For example,
+a developer shouldn't have more than one feature ticket in state "Development" at the same time;
+but probably a marketing specialist can handle three or more tickets with the goal to define different marketing
+strategies associated with different partners.
+These limits can then be changed gradually as the team monitors their speed and results in each of the steps.
+
+Once we have our workflow steps defined, it's time to draw those as columns in a board.
+It can be done in almost anything we want: a physical whiteboard, a table, a piece of paper, a corkboard,
+a Kanban board on Jira.
+
+=== Visualize the work in progress
+
+It's time to visualize the work in progress the team is doing.
+It's now when we start adding the tasks to the board and track how they move from one column (step) to another.
+Also, it's a good idea to display for each task some meta-data such as
+creation date, deadline, priority, type, priority, description, notes, definition of "done", history and any other
+piece of data that helps in monitoring each task.
+It's good to display on the board as well who's working on each task, unless it's a solo-team.
+
+Nowadays, tools like Jira, make this part trivial, as its boards already bring all these fields really easy to edit.
+
+=== Set initial WIP limits
+
+As mentioned before, it's important to define some initials WIP limits.
+Sometimes this is challenging to do: how do we know the ideal amount of work in progress we can handle?
+But we must start somewhere, right?
+
+Two approaches can be applied here:
+
+- Start with low limits and increase them later as the workflow is monitored: this one can be painful because
+we may feel tempted to take more work than the one permitted by the limits,
+but it usually gives better results.
+- Start intentionally with high limits and lower them later as the workflow is monitored: this one may have slower results,
+but it could easy the adoption within the team.
+
+During this time, it's good to involve the whole team in documenting the process and setting realistic WIP limits
+everyone is willing to enforce.
+
+==== Why is it so important to respect the WIP limits?
+
+By working on as many tasks as we can really handle has two major benefits:
+
+. It reduces the time we take to get anything done (_lead time_)
+. It improves quality by giving greater focus to fewer tasks
+
+Once these limits have been defined, it's good to somehow show them on the board for each of the columns.
+This helps in having a visual representation of how many tasks a given team member can be working on simultaneously.
+It's also important to always keep an eye on everyone's' current capacity
+and beware of anyone wanting to go beyond the limits.
+In such cases, the team could call a meeting to understand what's the rationale behind it and discuss it further
+if needed.
+
+=== Kanban is a "pull" system
+
+The idea of Kanban is that each phase/column "pulls" the work from the previous stage/column, signaling the previous
+stage "to make another one" (terms from the manufacturing days).
+This is intentional: the idea is that each stage pulls new work only when it's possible to complete it.
+This way, the WIP limits are enforced for each stage.
+
+This mechanism is opposed to a "push system" where each stage would complete the work on it and would "push" it
+to the next stage, regardless of workload there and without having in mind the WIP limits.
+
+Put in another way: each team member takes (pull) new tasks only when they're ready to do the work,
+and it becomes his/her responsibility until the task is completed for that stage.
+This doesn't mean one person can't complete the tasks associated to the same concept in different stages,
+quite the opposite.
+Sometimes it's the same person who "moves" a task from one state (column/stage) to another, until it's "done".
+Again, Kanban is very flexible, and it's here to help us with our flow, not to put restrictions.
+
+=== Bottlenecks
+
+Once we have a visual representation of our process(es), ideally in a Kanban board,
+we can see at a glance where in the workflow each task is, and it's really easy to spot bottlenecks early.
+When the WIP limits are set appropriately, we usually hit a limit as soon as a bottleneck starts to form.
+That's why, in part, the power of Kanban comes from the fact that everyone can see when a problem (like bottleneck)
+is forming and take action early in the workflow, before more work is piled up and everyone needs to start jumping
+from task to task: this is when clarify is lost because of so many context switches.
+
+=== Monitor the workflow and adapt
+
 == Other considerations
 
 === Can we use practices from other agile methodologies, like Scrum?
