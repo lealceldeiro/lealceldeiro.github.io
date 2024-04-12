@@ -1,6 +1,6 @@
 = Quick introduction to Kanban
 Asiel Leal_Celdeiro
-2024-04-10
+2024-04-12
 :docinfo: shared-footer
 :icons: font
 :toc-title: In this article
@@ -9,7 +9,7 @@ Asiel Leal_Celdeiro
 :jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: post
-:jbake-status: draft
+:jbake-status: published
 :jbake-tags: kanban, agile, methodologies
 :jbake-summary: .
 :jbake-og_img: articles/2024/images/04/kanban_social.webp
