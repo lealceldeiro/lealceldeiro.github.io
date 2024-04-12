@@ -28,8 +28,8 @@ The views and knowledge expressed here are those from
 == Getting started
 
 No matter what business we're in, we're always finding ways to make things more efficiently.
-Lean methodologies were introduced with the purpose of making our business processes more efficiently.
-They were born in manufacturing environments but can be applied to almost any kind of business activity or process.
+Lean methodologies were introduced with that purpose,
+and they were born in manufacturing environments but can be applied to almost any kind of business activity or process.
 
 They can be seen as a set of tools that can be adapted or modified to any environment,
 according to the problem being solved.
@@ -57,7 +57,7 @@ https://www.youtube.com/watch?v=hGJpez7rvc0[Get more done by doing less^] (at th
 tasks we can do at the same time, going beyond that limit will only decrease our productivity. This is the same
 principle we apply in programming: https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm[divide and conquer^]:
 we should decompose "bigger" tasks into smaller ones, and do them one at the time to get them done correctly.
-Kanban metrics allow us to find that "optimal" number.
+Kanban metrics allow us to find that "optimal" number of tasks.
 . Measure and improve the flow: Improvements should always be a result of decisions made in an informed way. Kanban
 is no different. In order for us to improve those areas where we're not being as productive as possible, we need to
 first measure the steps, tasks. How much is this task taking and why? How much did we take to release feature XYZ?
@@ -173,7 +173,7 @@ creation date, deadline, priority, type, priority, description, notes, definitio
 piece of data that helps in monitoring each task.
 It's good to display on the board as well who's working on each task, unless it's a solo-team.
 
-Nowadays, tools like Jira, make this part trivial, as its boards already bring all these fields really easy to edit.
+Nowadays, tools like Jira, make this part trivial, as its boards already bring all these fields really easy to be edited.
 
 === Set initial WIP limits
 
@@ -214,7 +214,7 @@ This is intentional: the idea is that each stage pulls new work only when it's p
 This way, the WIP limits are enforced for each stage.
 
 This mechanism is opposed to a "push system" where each stage would complete the work on it and would "push" it
-to the next stage, regardless of workload there and without having in mind the WIP limits.
+to the next stage, regardless of the workload there and without having in mind the WIP limits.
 
 Put in another way: each team member takes (pull) new tasks only when they're ready to do the work,
 and it becomes his/her responsibility until the task is completed for that stage.
@@ -230,7 +230,7 @@ we can see at a glance where in the workflow each task is, and it's really easy 
 When the WIP limits are set appropriately, we usually hit a limit as soon as a bottleneck starts to form.
 That's why, in part, the power of Kanban comes from the fact that everyone can see when a problem (like bottleneck)
 is forming and take action early in the workflow, before more work is piled up and everyone needs to start jumping
-from task to task: this is when clarify is lost because of so many context switches.
+from task to task: this is when clarity is lost because of so many context switches.
 
 === Monitor the workflow and adapt
 
@@ -268,7 +268,7 @@ The following "rules" would apply:
 - it can break WIP limits
 - it can skip the steps: Design, Review, and Support
 - it can be released without a product owner approval
-- it has associated a labels "deliver ASAP"
+- it has associated a label "deliver ASAP"
 
 Class of service is a powerful tool that can be implemented and adapted in a variety of ways to optimize the value
 delivered by the team.
