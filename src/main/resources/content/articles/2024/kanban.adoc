@@ -253,6 +253,26 @@ the workflow has changed since the last iteration.
 
 == Other considerations
 
+=== Classes of services
+
+Different tasks have different intrinsic value to customers, different risks, different priorities, etc.
+By defining "classes of services", policies, and "rules" associated with them,
+we can change the value that's delivered and improve the overall workflow.
+
+For example, in a software development team, there could be a class of service called "production bug", which would
+describe a ticket whose result impacts the customers and the organization directly.
+Because of this, resolving it is a top priority
+The following "rules" would apply:
+
+- it's a top-priority task
+- it can break WIP limits
+- it can skip the steps: Design, Review, and Support
+- it can be released without a product owner approval
+- it has associated a labels "deliver ASAP"
+
+Class of service is a powerful tool that can be implemented and adapted in a variety of ways to optimize the value
+delivered by the team.
+
 === Can we use practices from other agile methodologies, like Scrum?
 
 Yes, we can.
@@ -260,3 +280,15 @@ Kanban doesn't define what steps, rituals, meetings, or similar team practices a
 team's workflow.
 It is a tool to be used to improve our workflow, in general, but there's no hard rule that stops us from
 experimenting and implementing other tools or framework that could also help us.
+
+== Final thoughts
+
+After the processes are defined and Kanban is implemented, we must make sure the procedures are explicit.
+This way, we make sure everyone understands it as much as possible; and, in case there are doubts, they must
+be addressed as soon as possible to make sure the whole team is aligned.
+
+This means, the established policies must be clear, specific, readily available and reviewed/revised regularly.
+
+We must always keep in mind what's the goal of implementing Kanban: to keep improving our processes through
+reflection, refinement, experimentation, and creating and managing metrics.
+Tools like Jira can help a lot in this sense.
