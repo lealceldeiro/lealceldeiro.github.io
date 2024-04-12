@@ -1,6 +1,6 @@
 = Understanding access control in Java
 Asiel Leal_Celdeiro
-2024-03-15
+2024-04-17
 :docinfo: shared-footer
 :icons: font
 :toc-title: In this article
@@ -9,8 +9,8 @@ Asiel Leal_Celdeiro
 :jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: post
-:jbake-status: draft
-:jbake-tags: java, java-access-control
+:jbake-status: published-date
+:jbake-tags: java, java-access-control, access-modifiers
 :jbake-summary: The access control mechanisms in Java allow us to have a more secure way of building our \
 applications, libraries, and code in general. It's also an effective way to implement encapsulation and have more \
 reliable code.
@@ -43,8 +43,12 @@ In short, if access to an entity is permitted, that entity is said to be _access
 
 === Top level classes
 
-==== `public`
+Top level class can be declared only either `public` or _package private_, any other attempt to specify an access
+modifier would result in a compilation error.
 
+==== Public classes
+
+Let's start with the most permissive one.
 If a top level class or interface is declared `public`,
 then it may be accessed by any code declared within the same module.
 
@@ -147,7 +151,7 @@ linked resources.
 |
 |===
 
-NOTE: As you may have already noticed, we can't declare a top level class, interface, etc. as `private` or `protected`,
+WARNING: Remember, we can't declare a top level class, interface, etc. as `private` or `protected`,
 otherwise the code won't compile.
 
 .Access levels for members and constructors. `√` means accessible, blank means not accessible
