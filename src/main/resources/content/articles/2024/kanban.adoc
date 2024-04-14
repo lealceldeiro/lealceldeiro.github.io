@@ -12,7 +12,7 @@ Asiel Leal_Celdeiro
 :jbake-status: published
 :jbake-tags: kanban, agile, methodologies
 :jbake-summary: Kanban is a tool that aims to improve efficiency by reducing waste of time and doing things more \
-efficiently. Understanding it can help us in spoting areas of improvements within our team and increase our \
+efficiently. Understanding it can help us in spotting areas of improvements within our team and increase our \
 overall productivity.
 :jbake-og_img: articles/2024/images/04/kanban_social.webp
 :jbake-image_src: articles/2024/images/04/kanban.webp
