@@ -40,6 +40,10 @@ The main domain model of ana business is discernible through the products the bu
 the interfaces by which customers interact with the products, and the various other processes and functions by
 which the business fulfills its stated goals.
 
+By keeping loose coupling between bounded contexts, and focusing on minimizing inter-context dependencies,
+we allow bounded context implementations to change as necessary,
+without subsequently breaking many (or any) other systems.
+
 == Chapter 2: Event-Driven Microservice Fundamentals
 
 == Chapter 3: Communication and Data Contracts
