@@ -44,6 +44,12 @@ By keeping loose coupling between bounded contexts, and focusing on minimizing i
 we allow bounded context implementations to change as necessary,
 without subsequently breaking many (or any) other systems.
 
+Teams that find it too hard to access data in their organization,
+or find their products are scope-creeping because all the data is located in a single implementation,
+are likely experiencing the effects of poor data communication structures.
+This problem will be magnified as the organization grows, develops new products,
+and increasingly needs to access commonly used domain data.
+
 == Chapter 2: Event-Driven Microservice Fundamentals
 
 == Chapter 3: Communication and Data Contracts
