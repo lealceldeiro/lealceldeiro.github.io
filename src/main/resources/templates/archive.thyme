@@ -1,11 +1,11 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="header.thyme::head('Archive', 'Explore our archive of articles about software development, professional experiences and more, ordered by date, in descending order.')"></head>
+<head th:replace="~{header.thyme::head('Archive', 'Explore our archive of articles about software development, professional experiences and more, ordered by date, in descending order.')}"></head>
 <body>
 
 <div id="wrap">
-    <div th:replace="menu.thyme::menu"></div>
+    <div th:replace="~{menu.thyme::menu}"></div>
 
     <div class="container">
 
@@ -16,7 +16,7 @@
                     <h1>Archive</h1>
                 </div>
 
-                <div th:replace="postsarchive.thyme::postsarchive(${published_posts})"></div>
+                <div th:replace="~{postsarchive.thyme::postsarchive(${published_posts})}"></div>
 
             </th:block>
 
@@ -27,9 +27,9 @@
     </div>
 </div>
 
-<button th:replace="backtopbutton.thyme::backtopbutton"></button>
+<button th:replace="~{backtopbutton.thyme::backtopbutton}"></button>
 
-<div th:replace="footer.thyme::footer"></div>
+<div th:replace="~{footer.thyme::footer}"></div>
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
         th:src="${rootpath} + 'js/base.js'"></script>

@@ -1,11 +1,11 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="header.thyme::head(null, null)"></head>
+<head th:replace="~{header.thyme::head(null, null)}"></head>
 <body>
 
 <div id="wrap">
-    <div th:replace="menu.thyme::menu"></div>
+    <div th:replace="~{menu.thyme::menu}"></div>
 
     <div class="container">
         <th:block th:with="postsCount = ${#lists.size(published_posts)}">
@@ -79,7 +79,7 @@
     </div>
 </div>
 
-<div th:replace="footer.thyme::footer"></div>
+<div th:replace="~{footer.thyme::footer}"></div>
 
 <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')"
         th:src="${rootpath} + 'js/base.js'"></script>

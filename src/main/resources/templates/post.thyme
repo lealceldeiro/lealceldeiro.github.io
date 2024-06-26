@@ -1,11 +1,11 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="header.thyme::head(null, null)"></head>
+<head th:replace="~{header.thyme::head(null, null)}"></head>
 <body th:class="(${#strings.equals(content.document_info, 'shared-footer')} ? 'doc ' : '')
                  + (${content.table_of_content} != null ? ('toc2 toc-left') : '')">
 <div id="wrap" class="content-justify">
-    <div th:replace="menu.thyme::menu"></div>
+    <div th:replace="~{menu.thyme::menu}"></div>
     <div class="container">
 
         <div class="page-header mt-4">
@@ -92,7 +92,7 @@
 
         <!-- Subscriptions -->
         <div th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}"
-             th:replace="mailerlitesubscriptionform.thyme::form"></div>
+             th:replace="~{mailerlitesubscriptionform.thyme::form}"></div>
         <!-- End subscriptions -->
 
         <hr th:if="*{!#strings.startsWith(config.site_host, config.site_localhost)}"/>
@@ -133,9 +133,9 @@
 
 </div>
 
-<button th:replace="backtopbutton.thyme::backtopbutton"></button>
+<button th:replace="~{backtopbutton.thyme::backtopbutton}"></button>
 
-<div th:replace="footer.thyme::footer"></div>
+<div th:replace="~{footer.thyme::footer}"></div>
 
 <!-- https://highlightjs.org/ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
