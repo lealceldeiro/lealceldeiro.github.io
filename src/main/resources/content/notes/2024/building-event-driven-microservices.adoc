@@ -50,6 +50,11 @@ are likely experiencing the effects of poor data communication structures.
 This problem will be magnified as the organization grows, develops new products,
 and increasingly needs to access commonly used domain data.
 
+One of the tenets of event-driven microservices is that core business data should be easy to obtain
+and usable by any service that requires it.
+This replaces the ad hoc data communication structure in this scenario with a formalized data communication structure.
+Such a data communication structure could remove most of the difficulties of collecting data from other systems.
+
 == Chapter 2: Event-Driven Microservice Fundamentals
 
 == Chapter 3: Communication and Data Contracts
