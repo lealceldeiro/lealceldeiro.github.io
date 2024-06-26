@@ -49,6 +49,8 @@ including generating a table of content for the rendered html.
 - Define:
     * `title`
     * `type=post`
+    * `fileExtension`: optionally, if the file format is not an Asciidoc file (`.adoc` extension) you must set the
+    correct extension; for example `html`
     * `date` (it can be a future date to keep the article in draft mode, if `status` is not `published`)
     * `tags` (separated by comma -- `,`)
     * `status` (it can be `published`, `draft` for work in progress, or `published-date`.
@@ -201,4 +203,4 @@ See [the starter guide](https://nginx.org/en/docs/beginners_guide.html#conf_stru
 
 To update the nginx instance running on docker, update the file `nginx.conf` file and commit the changes.
 
-This file will be automatically mounted on the container image creation and nginx will use use at runtime.
+This file will be automatically mounted on the container image creation and nginx will use it at runtime.
