@@ -168,7 +168,7 @@
                         </form>
                     </div>
                     <div class="col-12">
-                        <p th:replace="termsacceptance.thyme::termsacceptance('By submitting this form, you accept our')"></p>
+                        <p th:replace="~{termsacceptance.thyme::termsacceptance('By submitting this form, you accept our')}"></p>
                     </div>
                 </div>
 

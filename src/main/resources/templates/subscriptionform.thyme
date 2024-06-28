@@ -60,6 +60,6 @@
         </form>
     </div>
     <div class="col-12 mt-2">
-        <p th:replace="termsacceptance.thyme::termsacceptance('When you subscribe, you accept our')"></p>
+        <p th:replace="~{termsacceptance.thyme::termsacceptance('When you subscribe, you accept our')}"></p>
     </div>
 </div>

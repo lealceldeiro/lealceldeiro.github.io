@@ -45,6 +45,6 @@
         </form>
     </div>
     <div class="col-12 mt-2">
-        <p th:replace="termsacceptance.thyme::termsacceptance('By contacting us through this form, you accept our')"></p>
+        <p th:replace="~{termsacceptance.thyme::termsacceptance('By contacting us through this form, you accept our')}"></p>
     </div>
 </div>
