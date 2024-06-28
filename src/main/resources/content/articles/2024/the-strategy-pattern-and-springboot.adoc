@@ -107,13 +107,13 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST[`POST`^] payload 
 The endpoint will receive in the payload the following attributes.
 To keep it simple, there will be no validations or security checks performed and only one recipient can be emailed.
 .. `to` (string): recipient's email address
-.. `from` (string): sender's email address
 .. `subject` (string): email subject
 .. `body` (string): email body
 - The application needs to be deployed in different environments where the internal email provider can be different.
 
 === Creating the Spring Boot application
 
+==== Project boilerplate
 The first thing we need to do is to create the boilerplate for our Spring Boot application.
 To do that, we can use many alternatives, being the https://start.spring.io/[Spring initializer] one of the most
 commonly used among the community.
@@ -125,6 +125,94 @@ Regardless of which option you choose, the final result should be the same.
 Here's what it'd look like from IntelliJ IDEA:
 
 image::images/07/spring-boot-idea-project-wizard.webp[IntelliJ IDEA Spring Boot project wizard, 650, 650]
+
+After the project is created, it'll look like this:
+
+image::images/07/spring-boot-app-structure.webp[Spring Boot app project structure, 650, 650]
+
+==== The endpoint implementation
+That's all the boilerplate code needed. Now let's focus on our business logic.
+
+The first thing we need to implement is the endpoint that accepts the request with the email information and sends it
+to the recipient.
+
+This is going to be as simple as adding the _Spring Boot Web_ starter.
+To do it, I'll add the corresponding Maven dependency in the pom.xml file.
+
+[source,xml]
+----
+  <dependencies>
+    <!-- ... -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- ... -->
+  </dependencies>
+----
+
+Now we're ready to add the controller class. It's as simple as this:
+
+[source,java]
+----
+@RestController("email")
+public class EmailController {
+  @PostMapping("/send")
+  public String sendEmail(@RequestBody EmailRequestDto body) {
+    // TODO: actually send the email
+    return "Email sent";
+  }
+}
+----
+
+And when we call the endpoint `email/send` it returns `Email sent`, as you can see in the image below.
+
+image::images/07/spring-boot-controller-endpoint.webp[Rest Controller, 850, 750]
+
+But so far, there's no actual email being sent.
+It just returns that fancy message.
+
+Up to here this has been straightforward.
+Now comes the interesting part.
+We need to add a _component_ that does the
+actual job of sending the email message.
+But we face a challenge here: one of the requirements says the application needs to run in different environments
+and work with different email providers.
+
+Let's solve the problems one by one. First, let's create the component. `EmailSender`, I'll call it.
+
+[source,java]
+----
+@Component
+public class EmailSender {
+  public boolean send(String to, String subject, String body) {
+      // TODO: implement
+      return false;
+  }
+}
+----
+
+Then we can add it to the controller and update the endpoint logic as follows:
+
+[source,java]
+----
+@RestController("email")
+public class EmailController {
+  private final EmailSender emailSender;
+
+  public EmailController(EmailSender emailSender) {
+    this.emailSender = emailSender;
+  }
+
+  @PostMapping("/send")
+  public String sendEmail(@RequestBody EmailRequestDto request) {
+    boolean success = emailSender.send(request.to(), request.subject(), request.body());
+    return success ? "Email sent" : "Error sending email";
+  }
+}
+----
+
+Now, let's make it work with one provider: let's say https://www.mailersend.com/[Mailersend].
 
 === Interchangeable beans based on profiles
 
