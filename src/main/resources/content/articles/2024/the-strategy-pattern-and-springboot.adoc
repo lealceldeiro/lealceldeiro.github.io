@@ -176,6 +176,7 @@ image::images/07/spring-boot-controller-endpoint.webp[Rest Controller, 850, 750]
 But so far, there's no actual email being sent.
 It just returns that fancy message.
 
+==== Creating the first email sender component
 Up to here this has been straightforward.
 Now comes the interesting part.
 We need to add a _component_ that does the
@@ -217,7 +218,61 @@ public class EmailController {
 }
 ----
 
+
+==== Integrating with the first email provider
 Now, let's make it work with one provider: let's say Mailersend.
+To do that, we'll follow their
+https://github.com/mailersend/mailersend-java?tab=readme-ov-file[documentation^].
+
+We add the new Maven dependency:
+
+[source,xml]
+----
+<dependency>
+  <groupId>com.mailersend</groupId>
+  <artifactId>java-sdk</artifactId>
+  <version>1.0.0</version>
+</dependency>
+----
+
+And we update the sender class as follows:
+
+[source, java]
+----
+@Component
+public class EmailSender {
+  private static final Logger LOGGER = Logger.getLogger(EmailSender.class.getName());
+
+  @Value("${integration.mailersend.token}")
+  private String token;
+
+  public boolean send(String to, String subject, String body) {
+    Email email = new Email();
+    email.setFrom("Strategy Pattern In Spring Boot", "comlealceldeiro@strategy.com");
+
+    email.addRecipient(to, to);
+    email.setSubject(subject);
+    email.setPlain(body);
+
+    MailerSend ms = new MailerSend();
+    ms.setToken(token);
+
+    try {
+      MailerSendResponse response = ms.emails().send(email);
+      LOGGER.info("Attempting to send email " + response.messageId);
+    } catch (MailerSendException e) {
+      LOGGER.warning("Email not sent");
+      return false;
+    }
+
+    return true;
+  }
+}
+----
+
+Hurray, our first email is on its way!
+
+==== The real challenge
 
 === Interchangeable beans based on profiles
 
