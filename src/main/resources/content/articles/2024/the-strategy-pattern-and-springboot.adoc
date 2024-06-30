@@ -43,9 +43,9 @@ ____
 What does this mean exactly?
 
 In simple terms, this means that for a given task, code routine, procedure, any algorithm in general, we can have
-several different implementations of *how* to do it.
-Now, we don't need to expose the _how_ to the clients that consume that algorithm. Notice, by client I mean any code
-that calls the algorithm.
+several different implementations.
+Now, we don't need to expose the _how_ to the clients that consume that algorithm.
+Notice, by clients I mean any code that calls the algorithm.
 
 By following this approach, we ensure our logic is not exposed unnecessarily, and we can evolve it without breaking
 any client.
@@ -54,7 +54,7 @@ link:/articles/2024/java-oop-classes-and-objects.html#what-are-java-classes[Obje
 
 For more details about this pattern, you can check my notes about it in this
 https://github.com/lealceldeiro/gems/tree/master/DesignPatternsElementsOfReusableObjectOrientesSoftware/Chapter05/Strategy[GitHub repository],
-or you can read it directly from the mentioned book—this is the https://amzn.to/3RIAiAY[Amazon link].
+or you can read it directly from the mentioned book—this is the https://amzn.to/3RIAiAY[Amazon link^].
 
 == What's Spring Boot
 
@@ -84,7 +84,7 @@ all the XML configuration files and code required to only run the application
 (to later on start coding the business logic).
 Instead, with Spring Boot, we add its dependencies (Maven, Gradle, etc.), some
 https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot-starters/README.adoc[starters^],
-as needed, and we're ready to go and focus on our business logic.
+as needed, and we're ready to go by focusing on our business logic.
 
 For a more in-depth look at how Spring and Spring Boot work, I'd recommend visiting their official websites
 or reading https://amzn.to/3VHWA74[Spring Boot 3 and Spring Framework 6^].
@@ -94,11 +94,11 @@ or reading https://amzn.to/3VHWA74[Spring Boot 3 and Spring Framework 6^].
 It's clear that the strategy pattern has many applications, and it's not the intention of this article to go through
 all of them; instead I'll talk about some of the ones I find interesting while using Spring Boot.
 
-To do that, let's take an example use case, so what we build here makes some sense.
+To do that, let's take an example scenario, so what we build here makes some sense.
 
 The code repository is at the end of the article, so you can check it out locally.
 
-=== The use case
+=== The example scenario
 
 The requirements are as follows:
 
@@ -109,7 +109,11 @@ To keep it simple, there will be no validations or security checks performed and
 .. `to` (string): recipient's email address
 .. `subject` (string): email subject
 .. `body` (string): email body
-- The application needs to be deployed in different environments where the internal email provider can be different.
+- The application needs to be deployed in different organizations where the internal email provider can be different.
+The providers that we'll support are: https://developers.mailersend.com/[Mailersend^],
+https://www.twilio.com/en-us/sendgrid/email-api[Twilio^],
+https://www.mailgun.com/products/send/email-api/[Mailgun^],
+and https://www.mailjet.com/products/email-api/[Mailjet^].
 
 === Creating the Spring Boot application
 
@@ -176,7 +180,8 @@ Up to here this has been straightforward.
 Now comes the interesting part.
 We need to add a _component_ that does the
 actual job of sending the email message.
-But we face a challenge here: one of the requirements says the application needs to run in different environments
+But we face a challenge here:
+one of the requirements says the application must be able to run in different organization
 and work with different email providers.
 
 Let's solve the problems one by one. First, let's create the component. `EmailSender`, I'll call it.
@@ -212,7 +217,7 @@ public class EmailController {
 }
 ----
 
-Now, let's make it work with one provider: let's say https://www.mailersend.com/[Mailersend].
+Now, let's make it work with one provider: let's say Mailersend.
 
 === Interchangeable beans based on profiles
 
