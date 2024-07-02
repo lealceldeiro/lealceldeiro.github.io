@@ -39,7 +39,7 @@
                                          style="width: 70px;">
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <div class="d-flex flex-row align-items-center mb-2"
+                                    <div class="d-none d-xl-flex flex-row align-items-center mb-2 "
                                          th:if="${content.user_github_username || content.user_stackoverflow_id}">
                                         <ul class="text-body-secondary mb-0 mx-2 list-unstyled d-flex flex-row">
                                             <li class="mx-1">
