@@ -1,6 +1,6 @@
 = The strategy pattern in Spring Boot
 Asiel Leal_Celdeiro
-2024-07-03
+2024-07-05
 :docinfo: shared-footer
 :icons: font
 :toc-title: In this article
@@ -98,7 +98,8 @@ To do that, let's take an example scenario, so what we build here makes some sen
 
 The code repository is at the end of the article, so you can check it out locally.
 
-=== The example scenario
+=== Interchangeable beans based on profiles
+==== The example scenario
 
 The requirements are as follows:
 
@@ -115,9 +116,9 @@ https://www.twilio.com/en-us/sendgrid/email-api[Twilio^],
 https://www.mailgun.com/products/send/email-api/[Mailgun^],
 and https://www.mailjet.com/products/email-api/[Mailjet^].
 
-=== Creating the Spring Boot application
+==== Creating the Spring Boot application
 
-==== Project boilerplate
+===== Project boilerplate
 The first thing we need to do is to create the boilerplate for our Spring Boot application.
 To do that, we can use many alternatives, being the https://start.spring.io/[Spring initializer] one of the most
 commonly used among the community.
@@ -134,7 +135,7 @@ After the project is created, it'll look like this:
 
 image::images/07/spring-boot-app-structure.webp[Spring Boot app project structure, 650, 650]
 
-==== The endpoint implementation
+===== The endpoint implementation
 That's all the boilerplate code needed. Now let's focus on our business logic.
 
 The first thing we need to implement is the endpoint that accepts the request with the email information and sends it
@@ -176,14 +177,11 @@ image::images/07/spring-boot-controller-endpoint.webp[Rest Controller, 850, 750]
 But so far, there's no actual email being sent.
 It just returns that fancy message.
 
-==== Creating the first email sender component
+===== Creating the first email sender component
 Up to here this has been straightforward.
 Now comes the interesting part.
 We need to add a _component_ that does the
 actual job of sending the email message.
-But we face a challenge here:
-one of the requirements says the application must be able to run in different organization
-and work with different email providers.
 
 Let's solve the problems one by one. First, let's create the component. `EmailSender`, I'll call it.
 
@@ -218,8 +216,7 @@ public class EmailController {
 }
 ----
 
-
-==== Integrating with the first email provider
+===== Integrating with the first email provider
 Now, let's make it work with one provider: let's say Mailersend.
 To do that, we'll follow their
 https://github.com/mailersend/mailersend-java?tab=readme-ov-file[documentation^].
@@ -247,19 +244,33 @@ public class EmailSender {
   private String token;
 
   public boolean send(String to, String subject, String body) {
+    Email email = createEmail(to, subject, body);
+    MailerSend sender = createSender();
+
+    return sendEmailUsingSender(sender, email);
+  }
+
+  private static Email createEmail(String to, String subject, String body) {
     Email email = new Email();
     email.setFrom("Strategy Pattern In Spring Boot", "comlealceldeiro@strategy.com");
 
     email.addRecipient(to, to);
     email.setSubject(subject);
     email.setPlain(body);
+    return email;
+  }
 
+  private MailerSend createSender() {
     MailerSend ms = new MailerSend();
     ms.setToken(token);
+    return ms;
+  }
 
+  private static boolean sendEmailUsingSender(MailerSend sender, Email email) {
+    LOGGER.info("Attempting to send email ");
     try {
-      MailerSendResponse response = ms.emails().send(email);
-      LOGGER.info("Attempting to send email " + response.messageId);
+      MailerSendResponse response = sender.emails().send(email);
+      LOGGER.info("Sent email with id " + response.messageId);
     } catch (MailerSendException e) {
       LOGGER.warning("Email not sent");
       return false;
@@ -270,11 +281,41 @@ public class EmailSender {
 }
 ----
 
+Notice how we added the field `token` to be bound to the Spring Boot property `integration.mailersend.token`.
+This property can be set in the `application.properties` (or yml) file as follows:
+
+[source,properties]
+----
+integration.mailersend.token=eyJhbGciOiJIUzI1NiIsInR0Q8AOZ6RWm_rqbj9tYr8-J4
+----
+
+[TIP]
+====
+In an actual production code, it's safer to set the token through the cloud provider cli or secrets configuration.
+But it's never safe to store it in plain text, except (maybe) for local development.
+====
+
 Hurray, our first email is on its way!
 
-==== The real challenge
+===== The real challenge
 
-=== Interchangeable beans based on profiles
+But we face a challenge here:
+one of the requirements says the application must be able to run in different organization
+and work with different email providers, but if this application is deployed in an environment where the email
+provider is different from Mailersend, it'll fail.
+
+The most "simple" solution anyone, with the most basic knowledge of Spring Boot, could think of,
+is to add a "flag property" in the `application.properties` file and store the environment there.
+Then depending on that variable, we would use a different logic inside our `EmailSender#send` to connect to a different
+email API provider.
+
+That is not that bad, but it'll become harder to maintain as the class grows bigger over time and new
+provider integrations are added.
+
+A better solution would be creating a different `EmailSender` component for each integration we want to support,
+and "load the correct one" at deployment time instead of having a fixed instance in `EmailController`.
+
+===== Creating a Bean for each strategy
 
 A https://docs.spring.io/spring-framework/reference/core/beans/definition.html[spring bean^]
 is any component we define whose life-cycle is managed by the spring
@@ -282,6 +323,12 @@ https://docs.spring.io/spring-framework/reference/core/beans.html#page-title[con
 One of the most common ways to declare a bean is by using the
 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html[`@Bean`
 annotation^].
+
+We're going to use this feature to have one Bean per strategy.
+Then, when the application is deployed in a given environment,
+the Bean with the strategy that corresponds to the integration for that environment will be loaded.
+
+We're also going to use profiles (`@Profiles`).
 
 == GitHub repository
 
