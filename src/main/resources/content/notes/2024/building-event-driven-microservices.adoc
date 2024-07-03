@@ -55,6 +55,28 @@ and usable by any service that requires it.
 This replaces the ad hoc data communication structure in this scenario with a formalized data communication structure.
 Such a data communication structure could remove most of the difficulties of collecting data from other systems.
 
+The event-driven data communication approach offers an alternative
+to the traditional behavior of implementation and data communication structures.
+It's not a replacement, but rather a different solution to the tradition request-response approach used
+by many systems until now.
+
+An event-streaming data communication structure decouples the production and ownership of data from the access to it.
+
+In this paradigm, events are the basis of communication.
+
+Some benefits of using event-driven microservices:
+
+- Granularity: Services map neatly to bounded contexts and can be easily rewritten when business requirements change.
+- Scalability: Individual services can be scaled up and down as needed.
+- Technological flexibility: Services use the most appropriate languages and technologies.
+This also allows for easy prototyping using pioneering technology.
+- Business requirement flexibility: Ownership of granular microservices is easy to reorganize.
+There are fewer cross-team dependencies compared to large services,
+and the organization can react more quickly to changes in business requirements.
+- Continuous delivery support: It's easy to ship a small, modular microservice, and roll it back if needed.
+- High testability: Microservices tend to have fewer dependencies than large monoliths,
+making it easier to mock out the required testing endpoints and ensure proper code coverage.
+
 == Chapter 2: Event-Driven Microservice Fundamentals
 
 == Chapter 3: Communication and Data Contracts
