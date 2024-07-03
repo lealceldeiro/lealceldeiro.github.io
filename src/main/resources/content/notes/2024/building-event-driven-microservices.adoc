@@ -79,6 +79,15 @@ making it easier to mock out the required testing endpoints and ensure proper co
 
 == Chapter 2: Event-Driven Microservice Fundamentals
 
+An event-driven microservice is a small application built to fulfill a specific bounded context.
+
+Consumer microservices consume and process events from one or more input event streams.
+Producer microservices produce events to event streams for other services to consume.
+
+A microservice topology is the event-driven topology internal to a single microservice.
+
+A business topology is the set of microservices, event streams, and APIs that fulfill complex business functions.
+
 == Chapter 3: Communication and Data Contracts
 
 == Chapter 4: Integrating Event-Driven Architectures with Existing Systems
