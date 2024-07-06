@@ -58,7 +58,7 @@ or you can read it directly from the mentioned book—this is the https://amzn.t
 
 == What's Spring Boot
 
-It's almost impossible to find a Java developer nowadays who doesn't know what
+It's challenging to find a Java developer nowadays who doesn't know what
 https://spring.io/projects/spring-boot[Spring Boot^] is.
 Nevertheless, I once didn't know what it was either.
 So, let's give it a brief intro.
@@ -76,7 +76,7 @@ but just to make sure new developers understand it,
 let's put it another way:
 
 Spring Boot builds on top of the Spring framework and its ecosystem as well as Java's.
-It contains all the capabilities provided by Spring and, on top of that, most of the boilerplate code and configuration
+It contains all the capabilities provided by Spring and, additionally, most of the boilerplate code and configuration
 needed to run a traditional Spring application.
 
 This way we can use Spring and many other libraries in our projects without having to worry about
@@ -305,8 +305,9 @@ and work with different email providers, but if this application is deployed in 
 provider is different from Mailersend, it'll fail.
 
 The most "simple" solution anyone, with the most basic knowledge of Spring Boot, could think of,
-is to add a "flag property" in the `application.properties` file and store the environment there.
-Then depending on that variable, we would use a different logic inside our `EmailSender#send` to connect to a different
+is to add a "flag property" in the `application.properties` corresponding to each environment.
+Then depending on the value of that variable at runtime--which will be different in each environment--,
+we would use a different logic inside our `EmailSender#send` to connect to a different
 email API provider.
 
 That is not that bad, but it'll become harder to maintain as the class grows bigger over time and new
