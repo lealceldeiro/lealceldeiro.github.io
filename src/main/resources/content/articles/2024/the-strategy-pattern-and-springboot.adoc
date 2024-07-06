@@ -5,6 +5,7 @@ Asiel Leal_Celdeiro
 :icons: font
 :toc-title: In this article
 :toc: left
+:toclevels: 3
 :jbake-document_info: shared-footer
 :jbake-table_of_content: left
 :jbake-fontawesome: true
@@ -89,7 +90,7 @@ as needed, and we're ready to go by focusing on our business logic.
 For a more in-depth look at how Spring and Spring Boot work, I'd recommend visiting their official websites
 or reading https://amzn.to/3VHWA74[Spring Boot 3 and Spring Framework 6^].
 
-== Some use cases for the Strategy pattern in Spring Boot
+== The Strategy pattern with Spring Boot
 
 It's clear that the strategy pattern has many applications, and it's not the intention of this article to go through
 all of them; instead I'll talk about some of the ones I find interesting while using Spring Boot.
@@ -135,7 +136,7 @@ After the project is created, it'll look like this:
 
 image::images/07/spring-boot-app-structure.webp[Spring Boot app project structure, 650, 650]
 
-===== The endpoint implementation
+==== The endpoint implementation
 That's all the boilerplate code needed. Now let's focus on our business logic.
 
 The first thing we need to implement is the endpoint that accepts the request with the email information and sends it
@@ -177,7 +178,7 @@ image::images/07/spring-boot-controller-endpoint.webp[Rest Controller, 850, 750]
 But so far, there's no actual email being sent.
 It just returns that fancy message.
 
-===== Creating the first email sender component
+==== Creating the first email sender component
 Up to here this has been straightforward.
 Now comes the interesting part.
 We need to add a _component_ that does the
@@ -216,7 +217,7 @@ public class EmailController {
 }
 ----
 
-===== Integrating with the first email provider
+==== Integrating with the first email provider
 Now, let's make it work with one provider: let's say Mailersend.
 To do that, we'll follow their
 https://github.com/mailersend/mailersend-java?tab=readme-ov-file[documentation^].
@@ -297,7 +298,7 @@ But it's never safe to store it in plain text, except (maybe) for local developm
 
 Hurray, our first email is on its way!
 
-===== The real challenge
+==== The real challenge
 
 But we face a challenge here:
 one of the requirements says the application must be able to run in different organization
@@ -320,7 +321,7 @@ It'll get to the point that it'll hinder the development itself.
 A better solution would be creating a different `EmailSender` component for each integration we want to support,
 and "load the correct one" at deployment time instead of having a fixed instance in `EmailController`.
 
-===== Spring profiles to the rescue
+==== Spring profiles to the rescue
 
 Spring https://docs.spring.io/spring-boot/reference/features/profiles.html[profiles^] provide a way for us
 to segregate parts of an application configuration and make it be available only in certain environment(s).
