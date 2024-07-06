@@ -1,6 +1,6 @@
 = The strategy pattern in Spring Boot
 Asiel Leal_Celdeiro
-2024-07-05
+2024-07-08
 :docinfo: shared-footer
 :icons: font
 :toc-title: In this article
