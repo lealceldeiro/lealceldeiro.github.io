@@ -90,7 +90,7 @@ as needed, and we're ready to go by focusing on our business logic.
 For a more in-depth look at how Spring and Spring Boot work, I'd recommend visiting their official websites
 or reading https://amzn.to/3VHWA74[Spring Boot 3 and Spring Framework 6^].
 
-== The Strategy pattern with Spring Boot
+== The Strategy pattern in Spring Boot
 
 It's clear that the strategy pattern has many applications, and it's not the intention of this article to go through
 all of them; instead I'll talk about some of the ones I find interesting while using Spring Boot.
@@ -99,7 +99,8 @@ To do that, let's take an example scenario, so what we build here makes some sen
 
 The code repository is at the end of the article, so you can check it out locally.
 
-=== Interchangeable beans based on profiles
+=== Interchangeable beans
+
 ==== The example scenario
 
 The requirements are as follows:
@@ -117,7 +118,7 @@ https://www.twilio.com/en-us/sendgrid/email-api[Twilio^],
 https://www.mailgun.com/products/send/email-api/[Mailgun^],
 and https://www.mailjet.com/products/email-api/[Mailjet^].
 
-==== Creating the Spring Boot application
+==== Creating the application
 
 ===== Project boilerplate
 The first thing we need to do is to create the boilerplate for our Spring Boot application.
@@ -178,7 +179,7 @@ image::images/07/spring-boot-controller-endpoint.webp[Rest Controller, 850, 750]
 But so far, there's no actual email being sent.
 It just returns that fancy message.
 
-==== Creating the first email sender component
+==== The first email sender
 Up to here this has been straightforward.
 Now comes the interesting part.
 We need to add a _component_ that does the
@@ -307,10 +308,10 @@ provider is different from Mailersend, it'll fail.
 
 The most "simple" solution anyone, with the most basic knowledge of Spring Boot, could think of,
 is to add a "flag property" in the `application.properties` corresponding to each environment.
-Then depending on the value of that variable at runtime--which will be different in each environment--,
+Then depending on the value of that variable at runtime&mdash;which will be different in each environment&mdash;,
 we would use a different logic inside our `EmailSender#send` to connect to a different
 email API provider.
-That's it through some `if`/`swtich` checks or similar.
+That's it, through some `if`/`swtich` checks or similar.
 Some other alternatives along these lines would work too.
 
 That's not an incorrect solution.
@@ -340,7 +341,7 @@ One of the most common ways to declare a bean is by using the
 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html[`@Bean`
 annotation^].
 
-Scoping a component to specific profile is usually done by using the `@Profiles` annotation on the component.
+Scoping a component to a specific profile is usually done by using the `@Profiles` annotation on the component.
 ====
 
 So, we're going to use this feature to have one bean per strategy.
@@ -350,7 +351,7 @@ the bean (Java class component)
 with the strategy that corresponds to the integration for that environment
 will be https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html[wired^],
 that is it https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html[injected^]
-into the component that required it.
+into the component that requires it.
 
 Let's code it:
 
