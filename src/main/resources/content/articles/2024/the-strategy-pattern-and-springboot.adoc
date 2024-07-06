@@ -309,15 +309,29 @@ is to add a "flag property" in the `application.properties` corresponding to eac
 Then depending on the value of that variable at runtime--which will be different in each environment--,
 we would use a different logic inside our `EmailSender#send` to connect to a different
 email API provider.
+That's it through some `if`/`swtich` checks or similar.
+Some other alternatives along these lines would work too.
 
-That is not that bad, but it'll become harder to maintain as the class grows bigger over time and new
+That's not an incorrect solution.
+However, in the long term, it'll become harder to maintain as the class grows bigger over time and new
 provider integrations are added.
+It'll get to the point that it'll hinder the development itself.
 
 A better solution would be creating a different `EmailSender` component for each integration we want to support,
 and "load the correct one" at deployment time instead of having a fixed instance in `EmailController`.
 
-===== Creating a Bean for each strategy
+===== Spring profiles to the rescue
 
+Spring https://docs.spring.io/spring-boot/reference/features/profiles.html[profiles^] provide a way for us
+to segregate parts of an application configuration and make it be available only in certain environment(s).
+
+This feature,
+together with configuration components
+and spring beans,
+is a powerful tool at our disposal here.
+
+[NOTE]
+====
 A https://docs.spring.io/spring-framework/reference/core/beans/definition.html[spring bean^]
 is any component we define whose life-cycle is managed by the spring
 https://docs.spring.io/spring-framework/reference/core/beans.html#page-title[container^].
@@ -325,11 +339,19 @@ One of the most common ways to declare a bean is by using the
 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html[`@Bean`
 annotation^].
 
-We're going to use this feature to have one Bean per strategy.
-Then, when the application is deployed in a given environment,
-the Bean with the strategy that corresponds to the integration for that environment will be loaded.
+Scoping a component to specific profile is usually done by using the `@Profiles` annotation on the component.
+====
 
-We're also going to use profiles (`@Profiles`).
+So, we're going to use this feature to have one bean per strategy.
+Each strategy will correspond to the logic to send the email to each email provider.
+Then, when the application is deployed in a given environment,
+the bean (Java class component)
+with the strategy that corresponds to the integration for that environment
+will be https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html[wired^],
+that is it https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html[injected^]
+into the component that required it.
+
+Let's code it:
 
 == GitHub repository
 
