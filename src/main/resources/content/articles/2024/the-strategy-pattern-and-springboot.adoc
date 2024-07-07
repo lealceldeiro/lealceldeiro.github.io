@@ -93,7 +93,7 @@ or reading https://amzn.to/3VHWA74[Spring Boot 3 and Spring Framework 6^].
 == The Strategy pattern in Spring Boot
 
 It's clear that the strategy pattern has many applications, and it's not the intention of this article to go through
-all of them; instead I'll talk about some of the ones I find interesting while using Spring Boot.
+all of them; instead I'll talk about one I find very interesting while using Spring Boot.
 
 To do that, let's take an example scenario, so what we build here makes some sense.
 
@@ -535,7 +535,24 @@ But when we implement something like this out of many years of practice,
 how many times do we stop and think for a second we're using the "Strategy" pattern?
 Sometimes it's useful to do it ;)
 
+=== Other applications
+
+What's shown in the previous example is just that: ONE example.
+The number of use cases where we can apply it is humongous:
+in integration with third party services, sorting algorithms, notification services, file compression,
+authentication mechanisms, and much more.
+
+=== Strategy in Spring Boot itself
+
+Aside from using this pattern in our applications to fulfil specific use cases, it's also widely used
+in many frameworks, including Spring Boot.
+
+For example, https://spring.io/projects/spring-data[Spring Data^]
+provides a flexible way to interact with databases.
+Depending on the application's requirements, different data access strategies can be used,
+such as JDBC, JPA, or any other of the many available.
+
 == GitHub repository
 
-The example code can be found in this
+The example code posted in this article can be found in this
 https://github.com/lealceldeiro/com-lealceldeiro-strategy-sb[public GitHub repository].
