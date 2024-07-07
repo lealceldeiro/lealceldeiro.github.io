@@ -350,10 +350,190 @@ Then, when the application is deployed in a given environment,
 the bean (Java class component)
 with the strategy that corresponds to the integration for that environment
 will be https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html[wired^],
-that is it https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html[injected^]
+that is it https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html[injected^],
 into the component that requires it.
 
-Let's code it:
+===== Support to all providers
+
+Let's code it.
+
+First, we need to find a way to keep a single dependency in our controller.
+We don't want to declare one dependency per strategy.
+To achieve this, we'll use an interface: `EmailSender` (we'll rename the class with that name, don't worry).
+
+[source,java]
+----
+public interface EmailSender {
+  boolean send(String to, String subject, String body);
+}
+----
+
+Next, let's update our previous `EmailSender` class. We'll make it implement `EmailSender`
+and override the `send` method.
+The rest of the code stays the same.
+
+[source,java]
+----
+@Component
+public class MailerSendEmailSender implements EmailSender {
+  // ... rest of the code unchanged
+
+  @Override
+  public boolean send(String to, String subject, String body) {
+    // ... rest of the code unchanged
+  }
+}
+----
+
+By doing this, Spring Boot we'll manage the dependency injection for us automatically.
+That is, at runtime it will locate a bean that implements `EmailSender`
+and inject it in the `EmailController` class.
+
+So far this has been a code refactor, we're still not giving support to other providers.
+
+Let's implement the rest of them—I'll leave the details out, but the gist should be clear from this example.
+
+Twilio.
+
+[source,java]
+----
+@Component
+public class TwilioEmailSender implements EmailSender {
+
+  @Override
+  public boolean send(String to, String subject, String body) {
+    // ... logic to send emails through the Twilio API
+  }
+}
+----
+
+Mailgun.
+
+[source,java]
+----
+@Component
+public class MailgunEmailSender implements EmailSender {
+
+  @Override
+  public boolean send(String to, String subject, String body) {
+    // ... logic to send emails through the Mailgun API
+  }
+}
+----
+
+Mailjet.
+
+[source,java]
+----
+@Component
+public class MailjetEmailSender implements EmailSender {
+
+  @Override
+  public boolean send(String to, String subject, String body) {
+    // ... logic to send emails through the Mailjet API
+  }
+}
+----
+
+At this point, if we try to run the application, we'll get an error like this one:
+
+[source,console]
+----
+Parameter 0 of constructor in com.lealceldeiro.strategysb.EmailController required a single bean, but 4 were found:
+	- mailerSendEmailSender: defined in file [~/MailerSendEmailSender.class]
+	- mailgunEmailSender: defined in file [~/MailgunEmailSender.class]
+	- mailjetEmailSender: defined in file [~/MailjetEmailSender.class]
+	- twilioEmailSender: defined in file [~/TwilioEmailSender.class]
+
+This may be due to missing parameter name information
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+----
+
+The framework message is pretty clear: we're asking for one bean in `EmailController` but Spring found 4!
+
+The options to fix this are also available in the message itself:
+
+- Define one of the beans as __primary__: annotate one of the implementations as `@Primary`
+- Accept multiple beans in the controller instead of one:
+in the controller, receive in the constructor the argument as
+`List<EmailSender> senders` instead of `EmailSender emailSender`
+- Use `@Qualifier` in the controller constructor argument: i.e.: `@Qualifier("mailerSendEmailSender") EmailSender emailSender`
+
+When we face this situation, we must always evaluate what our use case is and what option makes the most sense.
+For example, for this particular case using `@Primary` for one of the providers would be enough.
+
+However, remember that our primary goal here was to have one bean/component or the other based on the environment
+the application is running on.
+This gives us another option to "fix" the previous error and, at the same time,
+give a solution to our initial requirement.
+We'll declare for each component for which profile they'll be available.
+
+To do this, we'll use the mentioned
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Profile.html[`@Profile`^]
+annotation.
+
+Mailersend.
+
+[source,java]
+----
+@Profile("mailersend")
+@Component
+public class MailerSendEmailSender implements EmailSender {
+  // ...
+}
+----
+
+Twilio.
+
+[source,java]
+----
+@Profile("twilio")
+@Component
+public class TwilioEmailSender implements EmailSender {
+  // ...
+}
+----
+
+Mailgun.
+
+[source,java]
+----
+@Profile("mailgun")
+@Component
+public class MailgunEmailSender implements EmailSender {
+  // ...
+}
+----
+
+Mailjet.
+
+[source,java]
+----
+@Profile("mailjet")
+@Component
+public class MailjetEmailSender implements EmailSender {
+  // ...
+}
+----
+
+Have in mind that now, we must specify a profile for our application to start,
+otherwise Spring won't find the correct bean associated with the profile and will fail.
+
+From IntelliJ IDEA, you can do it from the
+https://www.jetbrains.com/help/idea/run-debug-configuration-spring-boot.html[Spring Boot Run Configuration^],
+like this:
+
+image::images/07/run-debug-configuration-spring-boot.webp[Spring Boot Run Configuration in IntelliJ IDEA, 650, 650]
+
+That's it for this use case.
+
+For experienced Spring Boot developers, this might look like a trivial example.
+But when we implement something like this out of many years of practice,
+how many times do we stop and think for a second we're using the "Strategy" pattern?
+Sometimes it's useful to do it ;)
 
 == GitHub repository
 
