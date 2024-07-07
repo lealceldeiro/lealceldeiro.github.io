@@ -75,14 +75,14 @@ including generating a table of content for the rendered html.
 
 Images used to be displayed in the article thumbnail (`image_src`) should be:
 
-- located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks
+- located under articles{year}/images/{month}/{image-name} (see current examples to get an idea in practice how it looks
   like)
 - _width_: 500px
 - _height_: 120px
 
 Images used to be displayed on social media (`og_img`) should be:
 
-- located under articles{year}/images/{month}{image-name} (see current examples to get an idea in practice how it looks
+- located under articles{year}/images/{month}/{image-name} (see current examples to get an idea in practice how it looks
   like)
 - _width_: 1024px
 - _height_: 512px
