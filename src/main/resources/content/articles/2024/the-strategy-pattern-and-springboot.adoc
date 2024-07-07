@@ -1,6 +1,6 @@
 = The strategy pattern in Spring Boot
 Asiel Leal_Celdeiro
-2024-07-08
+2024-07-09
 :docinfo: shared-footer
 :icons: font
 :toc-title: In this article
@@ -10,12 +10,10 @@ Asiel Leal_Celdeiro
 :jbake-table_of_content: left
 :jbake-fontawesome: true
 :jbake-type: post
-:jbake-status: draft
+:jbake-status: published-date
 :jbake-tags: java, strategy-pattern, design-pattern, behavioral-pattern, springboot
-:jbake-summary: The strategy pattern is one of the well-known software design patterns described in the famous book \
-"Design Patterns: Elements of Reusable Object-Oriented Software". Its usage in Spring Boot offers a clean way to \
-encapsulate different algorithms and behaviors that makes our applications more maintainable and performant in the \
-long term.
+:jbake-summary: When the strategy pattern is used in Spring Boot, it offers a clean way to encapsulate different \
+algorithms and behaviors that makes applications more maintainable, felxible and loosely coupled.
 :jbake-og_img: articles/2024/images/07/the-strategy_pattern-and-springboot_social.webp
 :jbake-image_src: articles/2024/images/07/the-strategy_pattern-and-springboot.webp
 :jbake-image_alt: Image of a strategy
@@ -27,7 +25,7 @@ The strategy pattern is one of the well-known software design patterns described
 "Design Patterns: Elements of Reusable Object-Oriented Software".
 Its usage in Spring Boot offers a clean way to
 encapsulate different algorithms and behaviors that makes our applications
-more maintainable and performant in the long term.
+more maintainable, flexible, and composed of loosely coupled components.
 In this article we'll explore what this pattern is about and how to use it effectively in Spring Boot.
 
 == The Strategy Pattern
@@ -45,7 +43,7 @@ What does this mean exactly?
 
 In simple terms, this means that for a given task, code routine, procedure, any algorithm in general, we can have
 several different implementations.
-Now, we don't need to expose the _how_ to the clients that consume that algorithm.
+Now, we don't need to expose __the how__ to the clients that consume that algorithm.
 Notice, by clients I mean any code that calls the algorithm.
 
 By following this approach, we ensure our logic is not exposed unnecessarily, and we can evolve it without breaking
@@ -64,7 +62,7 @@ https://spring.io/projects/spring-boot[Spring Boot^] is.
 Nevertheless, I once didn't know what it was either.
 So, let's give it a brief intro.
 
-[quote,Spring Boot website]
+[quote,Spring Boot documentation]
 ____
 Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".
 
@@ -94,6 +92,9 @@ or reading https://amzn.to/3VHWA74[Spring Boot 3 and Spring Framework 6^].
 
 It's clear that the strategy pattern has many applications, and it's not the intention of this article to go through
 all of them; instead I'll talk about one I find very interesting while using Spring Boot.
+
+I'm referring to the capability to declare several components that achieve the same task in different ways,
+and use the best fit for a particular task at runtime--I'll call it "Interchangeable beans".
 
 To do that, let's take an example scenario, so what we build here makes some sense.
 
@@ -320,7 +321,7 @@ provider integrations are added.
 It'll get to the point that it'll hinder the development itself.
 
 A better solution would be creating a different `EmailSender` component for each integration we want to support,
-and "load the correct one" at deployment time instead of having a fixed instance in `EmailController`.
+and "load the correct one" at runtime time instead of having a fixed instance in `EmailController`.
 
 ==== Spring profiles to the rescue
 
@@ -345,7 +346,7 @@ Scoping a component to a specific profile is usually done by using the `@Profile
 ====
 
 So, we're going to use this feature to have one bean per strategy.
-Each strategy will correspond to the logic to send the email to each email provider.
+Each strategy will correspond to the logic to send the email through each email provider.
 Then, when the application is deployed in a given environment,
 the bean (Java class component)
 with the strategy that corresponds to the integration for that environment
@@ -368,7 +369,8 @@ public interface EmailSender {
 }
 ----
 
-Next, let's update our previous `EmailSender` class. We'll make it implement `EmailSender`
+Next, let's update our previous `EmailSender` class.
+We'll rename it to `MailerSendEmailSender` and make it implement `EmailSender`
 and override the `send` method.
 The rest of the code stays the same.
 
@@ -452,7 +454,8 @@ Action:
 Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
 ----
 
-The framework message is pretty clear: we're asking for one bean in `EmailController` but Spring found 4!
+The framework message is pretty clear: we're asking for one bean in `EmailController` but Spring found four of them
+and there's no information that tells it which one to pick over the others.
 
 The options to fix this are also available in the message itself:
 
@@ -462,7 +465,7 @@ in the controller, receive in the constructor the argument as
 `List<EmailSender> senders` instead of `EmailSender emailSender`
 - Use `@Qualifier` in the controller constructor argument: i.e.: `@Qualifier("mailerSendEmailSender") EmailSender emailSender`
 
-When we face this situation, we must always evaluate what our use case is and what option makes the most sense.
+When we face situations like this, we must always evaluate what our use case is and what option makes the most sense.
 For example, for this particular case using `@Primary` for one of the providers would be enough.
 
 However, remember that our primary goal here was to have one bean/component or the other based on the environment
@@ -529,6 +532,8 @@ like this:
 image::images/07/run-debug-configuration-spring-boot.webp[Spring Boot Run Configuration in IntelliJ IDEA, 650, 650]
 
 That's it for this use case.
+From now on, when we start this application by using one of the four available profiles, Spring Boot will locate for us
+the component that's defined for that given profile and inject it into the `EmailController`.
 
 For experienced Spring Boot developers, this might look like a trivial example.
 But when we implement something like this out of many years of practice,
@@ -551,6 +556,9 @@ For example, https://spring.io/projects/spring-data[Spring Data^]
 provides a flexible way to interact with databases.
 Depending on the application's requirements, different data access strategies can be used,
 such as JDBC, JPA, or any other of the many available.
+
+The same remains true for other techniques related to transaction management, view resolution in Spring MVC,
+Spring Security, caching abstractions, message converters, and more.
 
 == GitHub repository
 
