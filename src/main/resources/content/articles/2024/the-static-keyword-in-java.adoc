@@ -51,7 +51,7 @@ The `static` keyword in Java can be used to modify the definition of
 link:/articles/2024/java-oop-classes-and-objects.html#what-are-java-classes[classes^],
 link:/articles/2024/java-oop-classes-and-objects.html#fields[fields^],
 link:/articles/2024/java-oop-classes-and-objects.html#methods[methods^],
-initializers and more.
+initializers, and more.
 It's always used to reflect a sense of _not changing its [the component's] behavior_ depending on other factors,
 such as an object state.
 
