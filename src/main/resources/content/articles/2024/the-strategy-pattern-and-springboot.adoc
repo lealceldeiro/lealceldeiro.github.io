@@ -11,7 +11,7 @@ Asiel Leal_Celdeiro
 :jbake-fontawesome: true
 :jbake-type: post
 :jbake-status: published-date
-:jbake-tags: java, strategy-pattern, design-pattern, behavioral-pattern, springboot
+:jbake-tags: java, strategy-pattern, design-pattern, behavioral-pattern, springboot, spring-profiles
 :jbake-summary: When the strategy pattern is used in Spring Boot, it offers a clean way to encapsulate different \
 algorithms and behaviors that makes applications more maintainable, felxible and loosely coupled.
 :jbake-og_img: articles/2024/images/07/the-strategy_pattern-and-springboot_social.webp
@@ -465,7 +465,7 @@ in the controller, receive in the constructor the argument as
 `List<EmailSender> senders` instead of `EmailSender emailSender`
 - Use `@Qualifier` in the controller constructor argument: i.e.: `@Qualifier("mailerSendEmailSender") EmailSender emailSender`
 
-When we face situations like this, we must always evaluate what our use case is and what option makes the most sense.
+When we face situations like this one, we must always evaluate what our use case is and what option makes the most sense.
 For example, for this particular case using `@Primary` for one of the providers would be enough.
 
 However, remember that our primary goal here was to have one bean/component or the other based on the environment
