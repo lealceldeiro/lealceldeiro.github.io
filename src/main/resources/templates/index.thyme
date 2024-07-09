@@ -48,9 +48,13 @@
                                                  th:alt="*{iPost.image_alt}"
                                                  class="d-block w-100 rounded">
                                             <div class="carousel-caption d-block">
-                                                <h1 th:text="${iPost.title}" class="text-carousel"></h1>
+                                                <h1 th:text="${iPost.title}" class="text-carousel d-none d-lg-block"></h1>
+                                                <h3 th:text="${iPost.title}" class="text-carousel d-lg-none"></h3>
+
                                                 <h3 th:text='${#dates.format(iPost.date, "MMMM d, yyyy")}'
-                                                    class="text-carousel"></h3>
+                                                    class="text-carousel d-none d-lg-block"></h3>
+                                                <h5 th:text='${#dates.format(iPost.date, "MMMM d, yyyy")}'
+                                                    class="text-carousel d-lg-none"></h5>
                                             </div>
                                         </div>
                                     </a>
