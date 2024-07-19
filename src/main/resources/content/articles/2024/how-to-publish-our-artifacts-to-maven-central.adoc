@@ -1,0 +1,122 @@
+= How to publish our artifacts to (the new) Maven Central Repository
+Asiel Leal_Celdeiro
+2024-07-25
+:docinfo: shared-footer
+:icons: font
+:toc-title: In this article
+:toc: left
+:toclevels: 3
+:jbake-document_info: shared-footer
+:jbake-table_of_content: left
+:jbake-fontawesome: true
+:jbake-type: post
+:jbake-status: draft
+:jbake-tags: java, maven, artifact, jfrog, bintray, jcenter, repository
+:jbake-summary:
+:jbake-og_img: articles/2024/images/09/how-to-publish-our-artifacts-to-maven-central_social.webp
+:jbake-image_src: articles/2024/images/09/how-to-publish-our-artifacts-to-maven-central.webp
+:jbake-image_alt: Image of Maven Central Repository
+:jbake-og_author: Asiel Leal Celdeiro
+:jbake-author_handle: lealceldeiro
+:jbake-author_profile_image: /img/author/lealceldeiro.webp
+
+Publishing our artifacts to Maven Central can be useful sometimes, especially if it's a utility library or
+some code that can be re-utilized by the community.
+In this article we'll go over the steps to publish such artifacts to the new Maven Central Repository.
+
+== Is there a new Maven Central Repository?
+
+When we were looking for a project dependency, we used to go to https://mvnrepository.com/[mvnrepository.com^].
+Likewise, when we wanted to register ourselves as a publisher for the OSS Repository Hosting (OSSRH), we would do it
+via the Sonatype OSSRH
+(https://www.sonatype.com/blog/what-publishers-need-to-know-about-migrating-from-jcenter-/-bintray-to-the-central-repository[ref^]).
+
+But after
+https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/[JFrog sunsetting Bintray/JCenter^],
+there was a
+https://www.sonatype.com/blog/what-publishers-need-to-know-about-migrating-from-jcenter-/-bintray-to-the-central-repository[migration to the Central Repository^].
+
+This means that starting on March 12th, 2024
+https://central.sonatype.org/register/central-portal/[new users registration will be possible through the new portal^].
+And new artifacts published this way will be available at https://central.sonatype.com/[central.sonatype.com^]
+
+This doesn't mean if we're using a dependency available at https://mvnrepository.com/[mvnrepository.com^]
+it'll stop working for us.
+The team making all this possible has been
+https://www.sonatype.com/blog/dear-bintray-and-jcenter-users-heres-what-you-need-to-know-about-the-central-repository[very committed^]
+to keeping the developer experience as good as possible, and we can use any dependency published in either repository,
+and it will be resolved for us transparently.
+
+== Requirements
+
+So, that being said, how can we register ourselves as publishers?
+
+How do we start publishing our artifacts to the Maven Central Repository?
+
+At a high level, you need to meet these minimum requirements:
+
+- Have an account in a version control system (VCS) and the source code hosted in such a VCS
+- Have an account in Maven Central
+- Being able to prove domain ownership, OR your personal domain from a code hosting service
+- Have a GPG key (or similar) to sign the artifacts
+
+The actual list of detailed/low-level requirements is being kept up to date at the
+https://central.sonatype.org/publish/requirements/[Maven Central Repository requirements^].
+
+== Preparatory work
+
+Let's use as an example this project of mine:
+https://github.com/lealceldeiro/com.lealceldeiro.asciidoc-extensions[`com.lealceldeiro.asciidoc-extensions`^].
+
+=== Host the source code in a VCS
+
+There are several options out there for us to host our source code, being GitHub and GitLab two popular ones.
+
+For the time being, let's go with GitHub and https://github.com/signup[create an account^] if not already created.
+Then, the code can be
+https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github[pushed^]
+to a newly created repository for that account.
+The repository for the example project for this article can be checked
+https://github.com/lealceldeiro/com.lealceldeiro.asciidoc-extensions[here^].
+
+[TIP]
+====
+For people without experience hosting the source code in a VCS there are plenty of useful articles out there that
+could be of use.
+For the sake of conciseness, we'll focus on this article in the publication to the Maven Central Repository part.
+====
+
+=== Account in Maven Central
+
+Now, let's go and https://central.sonatype.org/register/central-portal/#create-an-account[create an account^] in
+Maven Central Repository if not already created.
+
+After this, the next step is to validate our domain to be able to create a namespace and choose our artifact
+https://central.sonatype.org/publish/requirements/coordinates/#sufficient-metadata[coordinates^].
+
+[TIP]
+====
+If you don't own a domain, don't worry, "personal domains" provided by Code Hosting Services
+https://central.sonatype.org/publish/requirements/coordinates/#supported-code-hosting-services-for-personal-groupid[can be used as well^].
+
+For example: `lealceldeiro.github.io` could be used for the coordinate `io.github.lealceldeiro`.
+====
+
+Next, let's create a namespace.
+To do this, go to https://central.sonatype.com/[central.sonatype.com^] and hit the "Sign" button
+(notice this URL ends in `.com`, not `.org`)
+and follow the https://central.sonatype.org/register/namespace/#choose-your-coordinates[official instructions^] to
+create it and https://central.sonatype.org/register/namespace/#verifying-a-namespace[verify it^].
+
+It will take some time for the validation to be completed. But once it's done, we're almost ready to get to the fun part.
+
+== Options
+
+Once the namespace is verified, we have some different options to publish the actual artifact(s). Some of them are:
+
+-
+
+== Tips
+
+If you wish to change the email for an older account, you need to contact Central Support as described here:
+https://central.sonatype.org/publish-ea/publish-ea-guide/
