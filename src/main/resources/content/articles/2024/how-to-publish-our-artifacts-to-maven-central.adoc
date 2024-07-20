@@ -49,7 +49,7 @@ and it will be resolved for us transparently.
 
 == Requirements
 
-So, that being said, how can we register ourselves as publishers?
+That being said, how can we register ourselves as publishers?
 
 How do we start publishing our artifacts to the Maven Central Repository?
 
@@ -108,13 +108,23 @@ To do this, go to https://central.sonatype.com/[central.sonatype.com^] and hit t
 and follow the https://central.sonatype.org/register/namespace/#choose-your-coordinates[official instructions^] to
 create it and https://central.sonatype.org/register/namespace/#verifying-a-namespace[verify it^].
 
-It will take some time for the validation to be completed. But once it's done, we're almost ready to get to the fun part.
+It will take some time for the verification to be completed. But once it's done, we're almost ready to get to the fun part.
 
 == Options
 
-Once the namespace is verified, we have some different options to publish the actual artifact(s). Some of them are:
+Once the namespace is verified, we have these options to publish the actual artifact(s):
 
--
+- By using the Maven Central https://central.sonatype.org/publish/publish-portal-upload/#introduction[web interface^]
+- By using the https://central.sonatype.org/publish/publish-portal-api/[Portal Publisher API^]
+- By using the Maven Central https://central.sonatype.org/publish/publish-portal-maven/[Maven Plugin^]
+- By using a https://central.sonatype.org/publish/publish-portal-gradle/#introduction[Gradle plugin^]
+
+Depending on each case, we may choose one or the other.
+For example, if we want to do some quick tests, or we don't
+plan to make many releases of the artifact, we may go with the web interface approach.
+For developers who use Gradle already in their projects, the Gradle bluing would make perfect sense.
+
+
 
 == Tips
 
