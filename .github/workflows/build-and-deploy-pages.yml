@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build site and conditionally deploy to Fly.io
+    name: Build site
     if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') }}
 
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs
