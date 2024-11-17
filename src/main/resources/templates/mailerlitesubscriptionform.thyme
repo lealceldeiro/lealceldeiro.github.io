@@ -1,3 +1,0 @@
-<div th:if="${(content.mailerlite_on == null || #strings.equals(content.mailerlite_on, 'true'))
-              && (config.mailerlite_on == null || #strings.equals(config.mailerlite_on, 'true'))}"
-     th:fragment="form" class="mt-4 ml-embedded" data-form="HwdlTj"></div>

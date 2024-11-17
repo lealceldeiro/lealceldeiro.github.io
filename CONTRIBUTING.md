@@ -176,31 +176,3 @@ This deployment happens automatically when there are pushed to the `main` branch
 `src/main/resources/**` has been modified.
 This is because this option is the main hosting solution being used.
 One way to prevent the deployment from happening is to append to the commit message the text `[skip-ci]`.
-
-#### Fly.io
-
-There's also a configuration in place to deploy the application to a fly.io application named `com-lealceldeiro`,
-by leveraging the existing `Dockerfile` and `.dockerignore` files.
-
-By default, this build step doesn't run unless the commit message contains the text `[deploy-to-fly]`
-and it doesn't end with the text `[skip-ci]`.
-This is because this is a backup hosting solution being used at the moment and for experimentation purposes.
-
-If we need to switch to Fly.io hosting, we must:
-
-- Get a certificate for the Fly.io app, see https://fly.io/docs/networking/custom-domain/
-- Configure our Registrar service to not route the traffic sent to lealceldeiro.com to the GitHub Pages server
-- Start routing traffic sent to lealceldeiro.com to Fly.io, see https://fly.io/docs/networking/custom-domains-with-fly/#main-content-start
-- Make sure the Registrar service is now routing requests sent to lealceldeiro.com to the Fly.io app
-
-##### Server
-
-When the site is deployed to Fly.io, the static content is running on [NGINX](https://nginx.org/en/docs/).
-
-See [the starter guide](https://nginx.org/en/docs/beginners_guide.html#conf_structure) to know more about it.
-
-###### Configuration
-
-To update the nginx instance running on docker, update the file `nginx.conf` file and commit the changes.
-
-This file will be automatically mounted on the container image creation, and nginx will use it at runtime.

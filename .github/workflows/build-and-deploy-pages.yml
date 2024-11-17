@@ -6,9 +6,6 @@ on:
     branches: ["main"]
     paths:
       - "src/main/resources/**"
-  # Run schedule to publish any "future" post, ref: https://crontab.cronhub.io/
-  schedule:
-    - cron: '0 08 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -62,19 +59,9 @@ jobs:
         with:
           path: ./target
 
-      - name: Prepare to deploy to Fly.io
-        if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') && contains(github.event.head_commit.message, '[deploy-to-fly]') }}
-        uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: Deploy to Fly.io
-        if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') && contains(github.event.head_commit.message, '[deploy-to-fly]') }}
-        run: flyctl deploy --config fly.toml --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
   deploy:
     name: Deploy to GitHub Pages Server
-    if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') && !contains(github.event.head_commit.message, '[deploy-to-fly]') }}
+    if: ${{ !endsWith(github.event.head_commit.message, '[skip-ci]') }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

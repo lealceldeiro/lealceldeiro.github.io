@@ -1,5 +1,0 @@
-<span th:fragment="booknotestatus(status)" th:if="*{status != null}" class="float-end">
-    <i class="text-success bi bi-check-circle-fill" th:if="*{#strings.equals(status, 'done')}"></i>
-    <i class="text-primary bi bi-gear-wide-connected" th:if="*{#strings.equals(status, 'progress')}"></i>
-    <i class="text-warning bi bi-hourglass-top" th:if="*{#strings.equals(status, 'future')}"></i>
-</span>
