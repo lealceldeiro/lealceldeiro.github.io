@@ -203,4 +203,4 @@ See [the starter guide](https://nginx.org/en/docs/beginners_guide.html#conf_stru
 
 To update the nginx instance running on docker, update the file `nginx.conf` file and commit the changes.
 
-This file will be automatically mounted on the container image creation and nginx will use it at runtime.
+This file will be automatically mounted on the container image creation, and nginx will use it at runtime.

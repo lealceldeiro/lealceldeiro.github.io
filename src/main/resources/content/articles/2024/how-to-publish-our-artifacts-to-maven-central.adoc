@@ -65,7 +65,7 @@ https://central.sonatype.org/publish/requirements/[Maven Central Repository requ
 
 == Preparatory work
 
-Let's use as an example this project of mine:
+Let's use as an example this project:
 https://github.com/lealceldeiro/com.lealceldeiro.asciidoc-extensions[`com.lealceldeiro.asciidoc-extensions`^].
 
 === Host the source code in a VCS
@@ -135,7 +135,7 @@ of our artifacts.
 That's why it's described as one of the https://central.sonatype.org/publish/requirements/#sign-files-with-gpgpgp[requirements^].
 ====
 
-== Options
+== Publishing Options
 
 Once the namespace is verified and the rest of the pre-requisites are ready,
 we have these options to publish the actual artifact(s):
@@ -150,8 +150,39 @@ For example, if we want to do some quick tests, or we don't
 plan to make many releases of the artifact, we may go with the web interface approach.
 For developers who use Gradle already in their projects, the Gradle plugin would make perfect sense.
 
-In this case we're going to use the Maven Plugin.
+In this case we're going to use the https://central.sonatype.org/publish/publish-portal-maven/[Maven Plugin^].
+To do it we just need to add this to our project's `pom.xml` file:
 
+[source,xml]
+----
+<build>
+    <plugins>
+        <plugin>
+          <groupId>org.sonatype.central</groupId>
+          <artifactId>central-publishing-maven-plugin</artifactId>
+          <version>${central-publishing-maven-plugin.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <publishingServerId>central</publishingServerId>
+          </configuration>
+        </plugin>
+    </plugins>
+</build>
+----
+
+We could add some
+https://central.sonatype.org/publish/publish-portal-maven/#plugin-configuration-options[more configuration options^]
+to the previous snippet, depending on our needs.
+For example, https://central.sonatype.org/publish/publish-portal-maven/#automatic-publishing[_Automatic Publishing_^]
+and https://central.sonatype.org/publish/publish-portal-maven/#wait-for-publishing[_Wait for Publishing_^].
+
+== Finishing up our Publishing Set up
+
+There are two more steps we need to complete before our artifacts can be accepted by Maven Central:
+
+- Generate our artifact's
+https://central.sonatype.org/publish/publish-maven/#javadoc-and-sources-attachments[Javadoc and Sources Attachments^]
+- https://central.sonatype.org/publish/publish-maven/#gpg-signed-components[Sign our artifacts^ale] with a GPG key
 
 == Tips
 
